@@ -7,6 +7,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "bun test",
+    "validate": "bun run scripts/validate.ts",
     "lint": "bunx @biomejs/biome check . --files-ignore-unknown=true",
     "format": "bunx @biomejs/biome format --write .",
     "check": "bun run typecheck && bun run lint && bun run test"

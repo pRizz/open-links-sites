@@ -48,6 +48,7 @@ scripts can stay close to the upstream `open-links` toolchain.
 bun install
 bun run typecheck
 bun test
+bun run validate
 ```
 
 ## Source Of Truth
@@ -55,6 +56,7 @@ bun test
 The Phase 1 contract is defined in:
 
 - `schemas/person.schema.json`
+- `schemas/upstream/*.schema.json`
 - `templates/default/*.json`
 - `scripts/lib/person-contract.ts`
 
