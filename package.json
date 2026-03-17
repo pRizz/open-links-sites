@@ -1,0 +1,22 @@
+{
+  "name": "open-links-sites",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.3.9",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "lint": "bunx @biomejs/biome check . --files-ignore-unknown=true",
+    "format": "bunx @biomejs/biome format --write .",
+    "check": "bun run typecheck && bun run lint && bun run test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^25.3.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "bun-types": "^1.3.9",
+    "typescript": "^5.9.3"
+  }
+}
