@@ -8,6 +8,7 @@
     "typecheck": "tsc --noEmit",
     "test": "bun test",
     "validate": "bun run scripts/validate.ts",
+    "manage:person": "bun run scripts/manage-person.ts",
     "scaffold:person": "bun run scripts/scaffold-person.ts",
     "materialize:person": "bun run scripts/materialize-person.ts",
     "lint": "bunx @biomejs/biome check . --files-ignore-unknown=true",
