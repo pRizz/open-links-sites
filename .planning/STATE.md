@@ -5,20 +5,20 @@
 See: .planning/PROJECT.md (updated 2026-03-17)
 
 **Core value:** I can onboard or update a person's OpenLinks site with minimal manual editing, and the repo reliably handles extraction, generation, and centralized deployment for me.
-**Current focus:** Phase 2 - Guided Operator CRUD
+**Current focus:** Phase 3 - Import and Enrichment Pipeline
 
 ## Current Position
 
-Phase: 2 of 5 (Guided Operator CRUD)
+Phase: 3 of 5 (Import and Enrichment Pipeline)
 Plan: 0 of 3 in current phase
-Status: Ready to plan
-Last activity: 2026-03-17 — Captured Phase 2 context decisions for planning
+Status: Ready to discuss
+Last activity: 2026-03-17 — Completed and verified Phase 2 guided CRUD execution
 
-Progress: [██░░░░░░░░] 20%
+Progress: [████░░░░░░] 40%
 
 ## Performance Metrics
 
-- Total plans completed: 3
+- Total plans completed: 6
 - Average duration: 30s
 - Total execution time: 0.0 hours
 
@@ -40,6 +40,7 @@ Recent decisions affecting current work:
 - Phase 2: Keep create low-friction and write-first, then show validation-backed remediation summaries instead of forcing pre-write confirmation.
 - Phase 2: Keep update flows task-based and scoped tightly to the requested change.
 - Phase 2: Treat disable/archive as metadata state changes that preserve source folders, with archived people hidden by default.
+- Phase 2: Require one explicit confirmation for status-changing lifecycle writes while keeping create/update write-first.
 
 ### Pending Todos
 
@@ -51,6 +52,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17 03:09
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-guided-operator-crud/02-CONTEXT.md
+Last session: 2026-03-17 04:07
+Stopped at: Phase 2 completed and verified
+Resume file: .planning/phases/02-guided-operator-crud/02-VERIFICATION.md

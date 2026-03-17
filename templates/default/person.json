@@ -3,6 +3,9 @@
   "id": "__PERSON_ID__",
   "displayName": "__PERSON_NAME__",
   "enabled": true,
+  "lifecycle": {
+    "status": "active"
+  },
   "source": {
     "kind": "manual",
     "seedUrls": ["__PRIMARY_LINK_URL__"]

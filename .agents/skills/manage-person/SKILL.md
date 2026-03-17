@@ -47,6 +47,8 @@ bun run manage:person -- create --name "Alice Example"
 bun run manage:person -- create --name "Bob Example" --seed-url "https://linktr.ee/bob"
 bun run manage:person -- update --person "alice-example" --headline "Builder and operator"
 bun run manage:person -- update --person "Alice Example" --site-title "Alice Example | Links"
+bun run manage:person -- disable --person "alice-example" --confirm
+bun run manage:person -- archive --person "alice-example" --confirm --reason "Offboarded"
 ```
 
 The action contract is defined in `scripts/lib/manage-person/action-contract.ts`.

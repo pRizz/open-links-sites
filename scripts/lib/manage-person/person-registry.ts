@@ -37,6 +37,10 @@ const inferLifecycleStatus = (manifest: PersonManifest): PersonLifecycleStatus =
     return "archived";
   }
 
+  if (lifecycleStatus === "disabled") {
+    return "disabled";
+  }
+
   return manifest.enabled === false ? "disabled" : "active";
 };
 

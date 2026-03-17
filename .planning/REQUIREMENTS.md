@@ -7,10 +7,10 @@
 
 ### Operator Workflows
 
-- [ ] **OPER-01**: Operator can create a new person with one repo-local skill or command by supplying only basic identity and source inputs.
+- [x] **OPER-01**: Operator can create a new person with one repo-local skill or command by supplying only basic identity and source inputs.
 - [x] **OPER-02**: Operator can scaffold a new person from reusable defaults so repeated setup stays consistent without hand-authoring JSON.
-- [ ] **OPER-03**: Operator can update an existing person's core profile, links, or site settings through a guided skill or script instead of editing repo files manually.
-- [ ] **OPER-04**: Operator can disable or archive a person through orchestration metadata without deleting that person's source data.
+- [x] **OPER-03**: Operator can update an existing person's core profile, links, or site settings through a guided skill or script instead of editing repo files manually.
+- [x] **OPER-04**: Operator can disable or archive a person through orchestration metadata without deleting that person's source data.
 
 ### Import and Enrichment
 
@@ -66,10 +66,10 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| OPER-01 | Phase 2 | Pending |
+| OPER-01 | Phase 2 | Complete |
 | OPER-02 | Phase 1 | Complete |
-| OPER-03 | Phase 2 | Pending |
-| OPER-04 | Phase 2 | Pending |
+| OPER-03 | Phase 2 | Complete |
+| OPER-04 | Phase 2 | Complete |
 | IMPT-01 | Phase 3 | Pending |
 | IMPT-02 | Phase 3 | Pending |
 | IMPT-03 | Phase 3 | Pending |
@@ -90,4 +90,4 @@
 
 ---
 *Requirements defined: 2026-03-17*
-*Last updated: 2026-03-17 after Phase 1 completion*
+*Last updated: 2026-03-17 after Phase 2 completion*

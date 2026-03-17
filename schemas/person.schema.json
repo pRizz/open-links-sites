@@ -16,6 +16,31 @@
     "enabled": {
       "type": "boolean"
     },
+    "lifecycle": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["active", "disabled", "archived"]
+        },
+        "changedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "disabledAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "archivedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
     "source": {
       "type": "object",
       "properties": {

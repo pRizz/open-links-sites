@@ -7,7 +7,7 @@
 ## Phases
 
 - [x] **Phase 1: Foundation and Data Contracts** - Define the person folder structure, schemas, defaults, and validation rules that every later workflow depends on.
-- [ ] **Phase 2: Guided Operator CRUD** - Add the top-level skill/CLI flows that let the operator create, update, disable, and scaffold people without manual JSON editing.
+- [x] **Phase 2: Guided Operator CRUD** - Add the top-level skill/CLI flows that let the operator create, update, disable, and scaffold people without manual JSON editing.
 - [ ] **Phase 3: Import and Enrichment Pipeline** - Bootstrap people from Linktree-like sources or manual links, then enrich and cache data through upstream `open-links` extraction flows.
 - [ ] **Phase 4: Selective Multi-Site Build and Deploy** - Generate path-based output for enabled people and deploy only changed sites through centralized CI.
 - [ ] **Phase 5: Autonomous Upstream Sync and Release Ops** - Automate daily upstream updates, nightly deployment checks, and fail-fast operational feedback on `main`.
@@ -40,9 +40,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: Design the operator-facing command and skill surface for create/update/disable flows.
-- [ ] 02-02: Implement create and update workflows on top of the validated person model.
-- [ ] 02-03: Implement disable/archive handling and regression checks for operator flows.
+- [x] 02-01: Design the operator-facing command and skill surface for create/update/disable flows.
+- [x] 02-02: Implement create and update workflows on top of the validated person model.
+- [x] 02-03: Implement disable/archive handling and regression checks for operator flows.
 
 ### Phase 3: Import and Enrichment Pipeline
 **Goal**: Support low-touch onboarding by importing public link pages or manual links, then enriching the results through upstream `open-links` extractors and cache flows.
@@ -95,7 +95,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation and Data Contracts | 3/3 | Complete | 2026-03-17 |
-| 2. Guided Operator CRUD | 0/3 | Not started | - |
+| 2. Guided Operator CRUD | 3/3 | Complete | 2026-03-17 |
 | 3. Import and Enrichment Pipeline | 0/3 | Not started | - |
 | 4. Selective Multi-Site Build and Deploy | 0/3 | Not started | - |
 | 5. Autonomous Upstream Sync and Release Ops | 0/3 | Not started | - |

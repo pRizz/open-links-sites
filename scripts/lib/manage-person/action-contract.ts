@@ -120,6 +120,8 @@ export const buildManagePersonHelpText = (): string => {
     "Examples:",
     '  bun run manage:person -- create --name "Alice Example"',
     '  bun run manage:person -- update --person "alice-example" --headline "Builder and operator"',
+    '  bun run manage:person -- disable --person "alice-example" --confirm',
+    '  bun run manage:person -- archive --person "alice-example" --confirm --reason "Offboarded"',
     "",
     "The repo-local skill lives at .agents/skills/manage-person/SKILL.md.",
   ].join("\n");

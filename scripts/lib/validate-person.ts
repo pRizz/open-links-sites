@@ -34,6 +34,12 @@ const siteValidator = ajv.compile(siteSchema);
 type PersonManifest = {
   id?: unknown;
   enabled?: unknown;
+  lifecycle?: {
+    status?: unknown;
+    changedAt?: unknown;
+    disabledAt?: unknown;
+    archivedAt?: unknown;
+  };
 };
 
 type JsonReadResult = {
@@ -287,6 +293,81 @@ const validateStringPaths = (
   return issues;
 };
 
+const validateLifecycleMetadata = (
+  personId: string,
+  manifest: PersonManifest,
+): ValidationIssue[] => {
+  const lifecycleStatus = manifest.lifecycle?.status;
+  if (
+    lifecycleStatus !== "active" &&
+    lifecycleStatus !== "disabled" &&
+    lifecycleStatus !== "archived"
+  ) {
+    return [];
+  }
+
+  const issues: ValidationIssue[] = [];
+  const enabled = manifest.enabled;
+  const lifecycle = manifest.lifecycle;
+
+  if (lifecycleStatus === "active" && enabled !== true) {
+    issues.push({
+      severity: "problem",
+      code: "lifecycle_enabled_mismatch",
+      message: "person.enabled must stay true when lifecycle.status is active.",
+      personId,
+      file: "person.json",
+      path: "person.json.lifecycle.status",
+    });
+  }
+
+  if (lifecycleStatus !== "active" && enabled !== false) {
+    issues.push({
+      severity: "problem",
+      code: "lifecycle_enabled_mismatch",
+      message: "person.enabled must be false when lifecycle.status is disabled or archived.",
+      personId,
+      file: "person.json",
+      path: "person.json.lifecycle.status",
+    });
+  }
+
+  if (lifecycleStatus !== "active" && typeof lifecycle?.changedAt !== "string") {
+    issues.push({
+      severity: "problem",
+      code: "lifecycle_changed_at_missing",
+      message: "Lifecycle status changes must record lifecycle.changedAt.",
+      personId,
+      file: "person.json",
+      path: "person.json.lifecycle.changedAt",
+    });
+  }
+
+  if (lifecycleStatus === "disabled" && typeof lifecycle?.disabledAt !== "string") {
+    issues.push({
+      severity: "problem",
+      code: "lifecycle_disabled_at_missing",
+      message: "Disabled people must record lifecycle.disabledAt.",
+      personId,
+      file: "person.json",
+      path: "person.json.lifecycle.disabledAt",
+    });
+  }
+
+  if (lifecycleStatus === "archived" && typeof lifecycle?.archivedAt !== "string") {
+    issues.push({
+      severity: "problem",
+      code: "lifecycle_archived_at_missing",
+      message: "Archived people must record lifecycle.archivedAt.",
+      personId,
+      file: "person.json",
+      path: "person.json.lifecycle.archivedAt",
+    });
+  }
+
+  return issues;
+};
+
 export const validateDiscoveredPerson = async (
   person: DiscoveredPerson,
 ): Promise<PersonValidationResult> => {
@@ -348,6 +429,8 @@ export const validateDiscoveredPerson = async (
       path: "person.json.id",
     });
   }
+
+  issues.push(...validateLifecycleMetadata(personId, personManifest));
 
   for (const [fileName, value] of knownValues.entries()) {
     if (!Object.hasOwn(REQUIRED_SCHEMA_FILES, fileName)) {

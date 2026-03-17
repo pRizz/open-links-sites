@@ -105,6 +105,11 @@ describe("validateRepository", () => {
     const manifestPath = join(rootDir, "people", "fixture-user", "person.json");
     const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as Record<string, unknown>;
     manifest.enabled = false;
+    manifest.lifecycle = {
+      status: "disabled",
+      changedAt: "2026-03-17T12:00:00.000Z",
+      disabledAt: "2026-03-17T12:00:00.000Z",
+    };
     writeJson(manifestPath, manifest);
 
     let result = await validateRepository(rootDir);
