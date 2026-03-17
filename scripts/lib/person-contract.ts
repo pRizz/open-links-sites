@@ -17,6 +17,8 @@ export const PERSON_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 export const LOCAL_ASSET_PATH_PREFIX = "assets/";
 export const TEMPLATE_ROOT = "templates/default";
 export const DEFAULT_THEME_IDS = ["sleek", "daybreak", "sleek-emerald", "sleek-mono"] as const;
+export const DEFAULT_AVATAR_ASSET = "assets/avatar-placeholder.svg";
+export const LOCAL_ASSET_URI_BASE = "https://local-assets.open-links.invalid/";
 
 export const TEMPLATE_VARIABLES = {
   personId: "__PERSON_ID__",
@@ -54,7 +56,7 @@ export const TEMPLATE_FILE_MAP = {
 
 export type TemplateFileKind = keyof typeof TEMPLATE_FILE_MAP;
 
-const repoPathFromLib = (relativePath: string): string =>
+export const resolveRepoPath = (relativePath: string): string =>
   fileURLToPath(new URL(`../../${relativePath}`, import.meta.url));
 
 export const getPersonDirectory = (personId: string): string => posix.join(PEOPLE_ROOT, personId);
@@ -82,16 +84,22 @@ export const folderMatchesPersonId = (folderName: string, personId: string): boo
 export const isLocalAssetReference = (value: string): boolean =>
   value.startsWith(LOCAL_ASSET_PATH_PREFIX) && !value.includes("..");
 
+export const looksLikeLocalAssetPath = (value: string): boolean =>
+  !/^[a-z][a-z0-9+.-]*:/iu.test(value) && value.includes("assets/");
+
+export const normalizeLocalAssetToUri = (value: string): string =>
+  new URL(value, LOCAL_ASSET_URI_BASE).toString();
+
 export const getTemplatePath = (fileName: PersonRequiredFile): string =>
-  repoPathFromLib(posix.join(TEMPLATE_ROOT, fileName));
+  resolveRepoPath(posix.join(TEMPLATE_ROOT, fileName));
 
 export const getTemplateAssetPath = (assetName: string): string =>
-  repoPathFromLib(posix.join(TEMPLATE_ROOT, "assets", assetName));
+  resolveRepoPath(posix.join(TEMPLATE_ROOT, "assets", assetName));
 
 export const listTemplateFiles = (): string[] =>
   PERSON_REQUIRED_FILES.map((fileName) => posix.join(TEMPLATE_ROOT, fileName));
 
-export const listTemplateAssets = (): string[] => [posix.join(TEMPLATE_ROOT, "assets/avatar-placeholder.svg")];
+export const listTemplateAssets = (): string[] => [posix.join(TEMPLATE_ROOT, DEFAULT_AVATAR_ASSET)];
 
 export const readTemplate = (fileName: PersonRequiredFile): string =>
   readFileSync(getTemplatePath(fileName), "utf8");

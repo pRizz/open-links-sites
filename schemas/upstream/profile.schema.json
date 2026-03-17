@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-links.dev/schema/profile.schema.json",
+  "title": "OpenLinks Profile",
+  "type": "object",
+  "required": ["name", "headline", "avatar", "bio"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "headline": {
+      "type": "string",
+      "minLength": 1
+    },
+    "avatar": {
+      "type": "string",
+      "format": "uri"
+    },
+    "bio": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "location": {
+      "type": "string"
+    },
+    "pronouns": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "profileLinks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "url"],
+        "properties": {
+          "label": { "type": "string", "minLength": 1 },
+          "url": { "type": "string", "format": "uri" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "website": { "type": "string", "format": "uri" }
+      },
+      "additionalProperties": true
+    },
+    "custom": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

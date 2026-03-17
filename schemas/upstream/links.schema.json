@@ -1,0 +1,318 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-links.dev/schema/links.schema.json",
+  "title": "OpenLinks Links",
+  "type": "object",
+  "$defs": {
+    "paymentRailType": {
+      "type": "string",
+      "enum": [
+        "patreon",
+        "kofi",
+        "paypal",
+        "cashapp",
+        "stripe",
+        "coinbase",
+        "bitcoin",
+        "lightning",
+        "ethereum",
+        "solana",
+        "custom-crypto"
+      ]
+    },
+    "paymentQrDisplayMode": {
+      "type": "string",
+      "enum": ["always", "toggle", "hidden"]
+    },
+    "paymentQrStyle": {
+      "type": "string",
+      "enum": ["square", "rounded", "dots"]
+    },
+    "paymentQrLogoMode": {
+      "type": "string",
+      "enum": ["rail-default", "custom", "none"]
+    },
+    "paymentQrFullscreenMode": {
+      "type": "string",
+      "enum": ["enabled", "disabled"]
+    },
+    "paymentQrConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "fullscreen": { "$ref": "#/$defs/paymentQrFullscreenMode" },
+        "style": { "$ref": "#/$defs/paymentQrStyle" },
+        "foregroundColor": { "type": "string", "minLength": 1 },
+        "backgroundColor": { "type": "string", "minLength": 1 },
+        "logoMode": { "$ref": "#/$defs/paymentQrLogoMode" },
+        "logoUrl": { "type": "string", "minLength": 1 },
+        "logoSize": { "type": "number", "minimum": 0.05, "maximum": 0.5 },
+        "payload": { "type": "string", "minLength": 1 },
+        "custom": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": ["logoMode"],
+            "properties": {
+              "logoMode": { "const": "custom" }
+            }
+          },
+          "then": {
+            "required": ["logoUrl"]
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "paymentAppLink": {
+      "type": "object",
+      "required": ["appId", "label", "url"],
+      "properties": {
+        "appId": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "custom": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "paymentRail": {
+      "type": "object",
+      "required": ["id", "rail"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "rail": { "$ref": "#/$defs/paymentRailType" },
+        "label": { "type": "string" },
+        "enabled": { "type": "boolean" },
+        "icon": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "uri": { "type": "string", "minLength": 1 },
+        "address": { "type": "string", "minLength": 1 },
+        "scheme": { "type": "string", "minLength": 1 },
+        "network": { "type": "string", "minLength": 1 },
+        "amount": { "type": "string", "minLength": 1 },
+        "message": { "type": "string", "minLength": 1 },
+        "memo": { "type": "string", "minLength": 1 },
+        "chainId": {
+          "oneOf": [{ "type": "string", "minLength": 1 }, { "type": "number" }]
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "query": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "minLength": 1
+          },
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "qr": { "$ref": "#/$defs/paymentQrConfig" },
+        "appLinks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/paymentAppLink" }
+        },
+        "custom": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "linkPaymentConfig": {
+      "type": "object",
+      "properties": {
+        "qrDisplay": { "$ref": "#/$defs/paymentQrDisplayMode" },
+        "primaryRailId": { "type": "string", "minLength": 1 },
+        "rails": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/paymentRail" }
+        },
+        "custom": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "linkItem": {
+      "type": "object",
+      "required": ["id", "label", "type"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "type": { "type": "string", "enum": ["simple", "rich", "payment"] },
+        "icon": { "type": "string" },
+        "description": { "type": "string" },
+        "group": { "type": "string" },
+        "order": { "type": "integer", "minimum": 0 },
+        "enabled": { "type": "boolean" },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "description": { "type": "string" },
+            "profileDescription": { "type": "string" },
+            "descriptionSource": {
+              "type": "string",
+              "enum": ["fetched", "manual"]
+            },
+            "image": { "type": "string", "format": "uri" },
+            "ogImage": { "type": "string", "format": "uri" },
+            "twitterImage": { "type": "string", "format": "uri" },
+            "profileImage": { "type": "string", "minLength": 1 },
+            "handle": { "type": "string" },
+            "followersCount": { "type": "integer", "minimum": 0 },
+            "followersCountRaw": { "type": "string", "minLength": 1 },
+            "followingCount": { "type": "integer", "minimum": 0 },
+            "followingCountRaw": { "type": "string", "minLength": 1 },
+            "subscribersCount": { "type": "integer", "minimum": 0 },
+            "subscribersCountRaw": { "type": "string", "minLength": 1 },
+            "imageFit": {
+              "type": "string",
+              "enum": ["cover", "contain"]
+            },
+            "mobileImageLayout": {
+              "type": "string",
+              "enum": ["inline", "full-width"]
+            },
+            "sourceLabel": { "type": "string" },
+            "sourceLabelVisible": { "type": "boolean" },
+            "enrichmentStatus": {
+              "type": "string",
+              "enum": ["fetched", "partial", "failed", "skipped"]
+            },
+            "enrichmentReason": {
+              "type": "string",
+              "enum": [
+                "metadata_complete",
+                "metadata_partial",
+                "metadata_missing",
+                "fetch_failed",
+                "public_cache",
+                "authenticated_cache",
+                "authenticated_cache_missing",
+                "known_blocker",
+                "enrichment_disabled"
+              ]
+            },
+            "enrichedAt": { "type": "string", "format": "date-time" },
+            "custom": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        },
+        "enrichment": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "allowKnownBlocker": { "type": "boolean" },
+            "authenticatedExtractor": { "type": "string", "minLength": 1 },
+            "authenticatedCacheKey": { "type": "string", "minLength": 1 },
+            "sourceLabel": { "type": "string" },
+            "sourceLabelVisible": { "type": "boolean" },
+            "custom": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        },
+        "payment": { "$ref": "#/$defs/linkPaymentConfig" },
+        "custom": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "enum": ["simple", "rich"]
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["url"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": { "const": "payment" }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "anyOf": [
+              {
+                "required": ["url"]
+              },
+              {
+                "required": ["payment"],
+                "properties": {
+                  "payment": {
+                    "required": ["rails"]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "additionalProperties": true
+    }
+  },
+  "required": ["links"],
+  "properties": {
+    "links": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/linkItem" }
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "label": { "type": "string", "minLength": 1 },
+          "order": { "type": "integer", "minimum": 0 }
+        },
+        "additionalProperties": true
+      }
+    },
+    "order": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "custom": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

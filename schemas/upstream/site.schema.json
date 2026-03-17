@@ -1,0 +1,510 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-links.dev/schema/site.schema.json",
+  "title": "OpenLinks Site Config",
+  "type": "object",
+  "required": ["title", "description", "theme"],
+  "$defs": {
+    "seoMetadataFields": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "canonical": { "type": "string", "minLength": 1 },
+        "ogTitle": { "type": "string", "minLength": 1 },
+        "ogDescription": { "type": "string", "minLength": 1 },
+        "ogType": { "type": "string", "minLength": 1 },
+        "ogImage": { "type": "string", "minLength": 1 },
+        "ogUrl": { "type": "string", "minLength": 1 },
+        "twitterCard": { "type": "string", "minLength": 1 },
+        "twitterTitle": { "type": "string", "minLength": 1 },
+        "twitterDescription": { "type": "string", "minLength": 1 },
+        "twitterImage": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    },
+    "budgetThreshold": {
+      "oneOf": [
+        { "type": "number", "minimum": 1 },
+        {
+          "type": "object",
+          "required": ["warn", "fail"],
+          "properties": {
+            "warn": { "type": "number", "minimum": 1 },
+            "fail": { "type": "number", "minimum": 1 }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "performanceProfileBudget": {
+      "type": "object",
+      "properties": {
+        "totalBytes": { "$ref": "#/$defs/budgetThreshold" },
+        "jsBytes": { "$ref": "#/$defs/budgetThreshold" },
+        "cssBytes": { "$ref": "#/$defs/budgetThreshold" },
+        "htmlBytes": { "$ref": "#/$defs/budgetThreshold" },
+        "largestAssetBytes": { "$ref": "#/$defs/budgetThreshold" },
+        "minimumScore": { "$ref": "#/$defs/budgetThreshold" }
+      },
+      "additionalProperties": true
+    },
+    "typographyTokenValue": {
+      "oneOf": [{ "type": "string", "minLength": 1 }, { "type": "number" }]
+    },
+    "typographyOverrides": {
+      "type": "object",
+      "properties": {
+        "fontDisplay": { "type": "string", "minLength": 1 },
+        "fontBody": { "type": "string", "minLength": 1 },
+        "sizeTitle": { "$ref": "#/$defs/typographyTokenValue" },
+        "sizeHeadline": { "$ref": "#/$defs/typographyTokenValue" },
+        "sizeBody": { "$ref": "#/$defs/typographyTokenValue" },
+        "sizeCaption": { "$ref": "#/$defs/typographyTokenValue" },
+        "sizeCardTitle": { "$ref": "#/$defs/typographyTokenValue" },
+        "sizeLinkTitle": { "$ref": "#/$defs/typographyTokenValue" },
+        "sizeIcon": { "$ref": "#/$defs/typographyTokenValue" },
+        "lineHeightTitle": { "$ref": "#/$defs/typographyTokenValue" },
+        "lineHeightBody": { "$ref": "#/$defs/typographyTokenValue" },
+        "lineHeightCardTitle": { "$ref": "#/$defs/typographyTokenValue" },
+        "lineHeightCardDescription": { "$ref": "#/$defs/typographyTokenValue" },
+        "weightCardTitle": { "$ref": "#/$defs/typographyTokenValue" },
+        "weightLinkTitle": { "$ref": "#/$defs/typographyTokenValue" },
+        "weightIcon": { "$ref": "#/$defs/typographyTokenValue" },
+        "trackingUtilityTitle": { "$ref": "#/$defs/typographyTokenValue" },
+        "trackingSectionHeading": { "$ref": "#/$defs/typographyTokenValue" },
+        "trackingCardSource": { "$ref": "#/$defs/typographyTokenValue" },
+        "trackingIcon": { "$ref": "#/$defs/typographyTokenValue" },
+        "transformUtilityTitle": {
+          "type": "string",
+          "enum": ["none", "uppercase", "lowercase", "capitalize"]
+        },
+        "transformSectionHeading": {
+          "type": "string",
+          "enum": ["none", "uppercase", "lowercase", "capitalize"]
+        },
+        "transformContactLabel": {
+          "type": "string",
+          "enum": ["none", "uppercase", "lowercase", "capitalize"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "typographyConfig": {
+      "type": "object",
+      "properties": {
+        "global": { "$ref": "#/$defs/typographyOverrides" },
+        "themes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/typographyOverrides"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "siteFooterConfig": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ctaLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ctaUrl": {
+          "type": "string",
+          "minLength": 1,
+          "format": "uri"
+        },
+        "showLastUpdated": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "paymentQrDisplayMode": {
+      "type": "string",
+      "enum": ["always", "toggle", "hidden"]
+    },
+    "paymentQrStyle": {
+      "type": "string",
+      "enum": ["square", "rounded", "dots"]
+    },
+    "paymentQrLogoMode": {
+      "type": "string",
+      "enum": ["rail-default", "custom", "none"]
+    },
+    "paymentQrFullscreenMode": {
+      "type": "string",
+      "enum": ["enabled", "disabled"]
+    },
+    "sitePaymentQrDefaults": {
+      "type": "object",
+      "properties": {
+        "displayDefault": { "$ref": "#/$defs/paymentQrDisplayMode" },
+        "styleDefault": { "$ref": "#/$defs/paymentQrStyle" },
+        "foregroundColorDefault": {
+          "type": "string",
+          "minLength": 1
+        },
+        "backgroundColorDefault": {
+          "type": "string",
+          "minLength": 1
+        },
+        "logoModeDefault": { "$ref": "#/$defs/paymentQrLogoMode" },
+        "logoSizeDefault": {
+          "type": "number",
+          "minimum": 0.05,
+          "maximum": 0.5
+        },
+        "fullscreenDefault": { "$ref": "#/$defs/paymentQrFullscreenMode" }
+      },
+      "additionalProperties": true
+    },
+    "sitePaymentsConfig": {
+      "type": "object",
+      "properties": {
+        "qr": { "$ref": "#/$defs/sitePaymentQrDefaults" },
+        "custom": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseUrl": {
+      "type": "string",
+      "minLength": 1
+    },
+    "theme": {
+      "type": "object",
+      "required": ["active", "available"],
+      "properties": {
+        "active": {
+          "type": "string",
+          "minLength": 1
+        },
+        "available": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "ui": {
+      "type": "object",
+      "properties": {
+        "compositionMode": {
+          "type": "string",
+          "enum": ["balanced", "identity-first", "links-first", "links-only"]
+        },
+        "groupingStyle": {
+          "type": "string",
+          "enum": ["subtle", "none", "bands"]
+        },
+        "profileRichness": {
+          "type": "string",
+          "enum": ["minimal", "standard", "rich"]
+        },
+        "density": {
+          "type": "string",
+          "enum": ["compact", "medium", "spacious"]
+        },
+        "modePolicy": {
+          "type": "string",
+          "enum": ["dark-toggle", "static-dark", "static-light"]
+        },
+        "linkTarget": {
+          "type": "string",
+          "enum": ["new-tab-external", "same-tab", "new-tab-all"]
+        },
+        "desktopColumns": {
+          "type": "string",
+          "enum": ["one", "two"]
+        },
+        "typographyScale": {
+          "type": "string",
+          "enum": ["fixed", "compact", "expressive"]
+        },
+        "typography": {
+          "$ref": "#/$defs/typographyConfig"
+        },
+        "targetSize": {
+          "type": "string",
+          "enum": ["comfortable", "compact", "large"]
+        },
+        "brandIcons": {
+          "type": "object",
+          "properties": {
+            "colorMode": {
+              "type": "string",
+              "enum": ["brand", "theme"]
+            },
+            "contrastMode": {
+              "type": "string",
+              "enum": ["auto", "always-theme", "always-brand"]
+            },
+            "minContrastRatio": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 21
+            },
+            "sizeMode": {
+              "type": "string",
+              "enum": ["normal", "large"]
+            },
+            "iconOverrides": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "minLength": 1
+              },
+              "additionalProperties": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": true
+        },
+        "richCards": {
+          "type": "object",
+          "properties": {
+            "renderMode": {
+              "type": "string",
+              "enum": ["auto", "simple"]
+            },
+            "sourceLabelDefault": {
+              "type": "string",
+              "enum": ["show", "hide"]
+            },
+            "descriptionSource": {
+              "type": "string",
+              "enum": ["fetched", "manual"],
+              "default": "fetched"
+            },
+            "imageTreatment": {
+              "type": "string",
+              "enum": ["cover", "thumbnail", "off"]
+            },
+            "imageFit": {
+              "type": "string",
+              "enum": ["cover", "contain"],
+              "default": "contain"
+            },
+            "descriptionImageRow": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string",
+                  "enum": ["auto", "off"],
+                  "default": "auto"
+                },
+                "sites": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "additionalProperties": {
+                    "type": "string",
+                    "enum": ["auto", "off"]
+                  }
+                }
+              },
+              "additionalProperties": true
+            },
+            "mobile": {
+              "type": "object",
+              "properties": {
+                "imageLayout": {
+                  "type": "string",
+                  "enum": ["inline", "full-width"]
+                }
+              },
+              "additionalProperties": true
+            },
+            "enrichment": {
+              "type": "object",
+              "properties": {
+                "enabledByDefault": {
+                  "type": "boolean"
+                },
+                "timeoutMs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "retries": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "metadataPath": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reportPath": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "publicCachePath": {
+                  "type": "string",
+                  "minLength": 1,
+                  "default": "data/cache/rich-public-cache.json"
+                },
+                "authenticatedCachePath": {
+                  "type": "string",
+                  "minLength": 1,
+                  "default": "data/cache/rich-authenticated-cache.json"
+                },
+                "authenticatedCacheWarnAgeDays": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "default": 30
+                },
+                "failureMode": {
+                  "type": "string",
+                  "enum": ["immediate", "aggregate"],
+                  "default": "immediate"
+                },
+                "failOn": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["fetch_failed", "metadata_missing"]
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "default": ["fetch_failed", "metadata_missing"]
+                },
+                "allowManualMetadataFallback": {
+                  "type": "boolean",
+                  "default": true
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        },
+        "payments": {
+          "$ref": "#/$defs/sitePaymentsConfig"
+        },
+        "footer": {
+          "$ref": "#/$defs/siteFooterConfig"
+        }
+      },
+      "additionalProperties": true
+    },
+    "quality": {
+      "type": "object",
+      "properties": {
+        "reportPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summaryPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "blockingDomains": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": ["seo", "accessibility", "performance", "manual-smoke"]
+          }
+        },
+        "seo": {
+          "type": "object",
+          "properties": {
+            "canonicalBaseUrl": {
+              "type": "string",
+              "minLength": 1
+            },
+            "socialImageFallback": {
+              "type": "string",
+              "minLength": 1
+            },
+            "defaults": {
+              "$ref": "#/$defs/seoMetadataFields"
+            },
+            "overrides": {
+              "type": "object",
+              "properties": {
+                "profile": {
+                  "$ref": "#/$defs/seoMetadataFields"
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        },
+        "accessibility": {
+          "type": "object",
+          "properties": {
+            "focusContrastStrict": {
+              "type": "boolean"
+            },
+            "manualSmokeChecks": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": true
+        },
+        "performance": {
+          "type": "object",
+          "properties": {
+            "routes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "profiles": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "$ref": "#/$defs/performanceProfileBudget"
+                },
+                "desktop": {
+                  "$ref": "#/$defs/performanceProfileBudget"
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "custom": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
