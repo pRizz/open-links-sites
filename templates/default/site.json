@@ -1,0 +1,24 @@
+{
+  "$schema": "https://open-links.dev/schema/site.schema.json",
+  "title": "__SITE_TITLE__",
+  "description": "__SITE_DESCRIPTION__",
+  "baseUrl": "/__PERSON_ID__/",
+  "theme": {
+    "active": "sleek",
+    "available": ["sleek", "daybreak", "sleek-emerald", "sleek-mono"]
+  },
+  "ui": {
+    "compositionMode": "balanced",
+    "groupingStyle": "subtle",
+    "profileRichness": "standard",
+    "density": "medium",
+    "modePolicy": "dark-toggle",
+    "linkTarget": "new-tab-external",
+    "desktopColumns": "one",
+    "typographyScale": "fixed",
+    "targetSize": "comfortable"
+  },
+  "custom": {
+    "preset": "default"
+  }
+}

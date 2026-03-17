@@ -1,0 +1,19 @@
+{
+  "$schema": "https://open-links.dev/schema/links.schema.json",
+  "links": [
+    {
+      "id": "primary-link",
+      "label": "Primary Link",
+      "url": "__PRIMARY_LINK_URL__",
+      "type": "simple",
+      "description": "TODO: replace with the first migrated link",
+      "enabled": true,
+      "custom": {
+        "bootstrap": true
+      }
+    }
+  ],
+  "groups": [],
+  "order": ["primary-link"],
+  "custom": {}
+}

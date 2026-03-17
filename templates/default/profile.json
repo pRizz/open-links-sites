@@ -1,0 +1,17 @@
+{
+  "$schema": "https://open-links.dev/schema/profile.schema.json",
+  "name": "__PERSON_NAME__",
+  "headline": "__PROFILE_HEADLINE__",
+  "avatar": "assets/avatar-placeholder.svg",
+  "bio": "__PROFILE_BIO__",
+  "location": "__PROFILE_LOCATION__",
+  "profileLinks": [
+    {
+      "label": "Primary Link",
+      "url": "__PRIMARY_LINK_URL__"
+    }
+  ],
+  "custom": {
+    "bootstrapStatus": "placeholder"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/person.schema.json",
+  "id": "__PERSON_ID__",
+  "displayName": "__PERSON_NAME__",
+  "enabled": true,
+  "source": {
+    "kind": "manual",
+    "seedUrls": ["__PRIMARY_LINK_URL__"]
+  },
+  "custom": {}
+}
