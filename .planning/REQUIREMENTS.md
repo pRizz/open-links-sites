@@ -8,7 +8,7 @@
 ### Operator Workflows
 
 - [ ] **OPER-01**: Operator can create a new person with one repo-local skill or command by supplying only basic identity and source inputs.
-- [ ] **OPER-02**: Operator can scaffold a new person from reusable defaults so repeated setup stays consistent without hand-authoring JSON.
+- [x] **OPER-02**: Operator can scaffold a new person from reusable defaults so repeated setup stays consistent without hand-authoring JSON.
 - [ ] **OPER-03**: Operator can update an existing person's core profile, links, or site settings through a guided skill or script instead of editing repo files manually.
 - [ ] **OPER-04**: Operator can disable or archive a person through orchestration metadata without deleting that person's source data.
 
@@ -21,9 +21,9 @@
 
 ### Person Data Model
 
-- [ ] **DATA-01**: Operator can store each person in `people/<id>/` with `person.json`, `profile.json`, `links.json`, and `site.json`.
-- [ ] **DATA-02**: Operator can validate that every required person file exists and that `people/<id>/` matches schema and naming rules.
-- [ ] **DATA-03**: Operator can keep each person's assets isolated under `people/<id>/assets/`.
+- [x] **DATA-01**: Operator can store each person in `people/<id>/` with `person.json`, `profile.json`, `links.json`, and `site.json`.
+- [x] **DATA-02**: Operator can validate that every required person file exists and that `people/<id>/` matches schema and naming rules.
+- [x] **DATA-03**: Operator can keep each person's assets isolated under `people/<id>/assets/`.
 
 ### Build and Deployment
 
@@ -67,16 +67,16 @@
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | OPER-01 | Phase 2 | Pending |
-| OPER-02 | Phase 1 | Pending |
+| OPER-02 | Phase 1 | Complete |
 | OPER-03 | Phase 2 | Pending |
 | OPER-04 | Phase 2 | Pending |
 | IMPT-01 | Phase 3 | Pending |
 | IMPT-02 | Phase 3 | Pending |
 | IMPT-03 | Phase 3 | Pending |
 | IMPT-04 | Phase 3 | Pending |
-| DATA-01 | Phase 1 | Pending |
-| DATA-02 | Phase 1 | Pending |
-| DATA-03 | Phase 1 | Pending |
+| DATA-01 | Phase 1 | Complete |
+| DATA-02 | Phase 1 | Complete |
+| DATA-03 | Phase 1 | Complete |
 | DEPL-01 | Phase 4 | Pending |
 | DEPL-02 | Phase 4 | Pending |
 | DEPL-03 | Phase 5 | Pending |
@@ -90,4 +90,4 @@
 
 ---
 *Requirements defined: 2026-03-17*
-*Last updated: 2026-03-17 after initial definition*
+*Last updated: 2026-03-17 after Phase 1 completion*
