@@ -1,0 +1,7 @@
+interface:
+  display_name: "Manage Person"
+  short_description: "Guided CRUD for people in open-links-sites"
+  default_prompt: "Use $manage-person to create, update, disable, or archive a person in this repo."
+
+policy:
+  allow_implicit_invocation: true

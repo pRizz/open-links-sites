@@ -30,6 +30,7 @@ people/
 
 ```text
 .
+├── .agents/
 ├── generated/
 ├── people/
 ├── schemas/
@@ -49,6 +50,7 @@ bun install
 bun run typecheck
 bun test
 bun run validate
+bun run manage:person -- --help
 bun run scaffold:person -- --id alice-example --name "Alice Example"
 bun run materialize:person -- --id alice-example
 ```
@@ -64,6 +66,18 @@ The Phase 1 contract is defined in:
 
 Later phases will add validation, scaffold flows, and generated per-person
 workspaces on top of this contract.
+
+## Preferred CRUD Surface
+
+The preferred operator workflow is the repo-local `manage-person` skill at:
+
+- `.agents/skills/manage-person/SKILL.md`
+
+That skill drives the underlying CLI surface:
+
+```bash
+bun run manage:person -- <action> [options]
+```
 
 ## Foundation Flow
 
