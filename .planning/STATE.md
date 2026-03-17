@@ -5,20 +5,20 @@
 See: .planning/PROJECT.md (updated 2026-03-17)
 
 **Core value:** I can onboard or update a person's OpenLinks site with minimal manual editing, and the repo reliably handles extraction, generation, and centralized deployment for me.
-**Current focus:** Phase 4 - Selective Multi-Site Build and Deploy
+**Current focus:** Phase 5 - Autonomous Upstream Sync and Release Ops
 
 ## Current Position
 
-Phase: 4 of 5 (Selective Multi-Site Build and Deploy)
+Phase: 5 of 5 (Autonomous Upstream Sync and Release Ops)
 Plan: 0 of 3 in current phase
-Status: Ready to plan
-Last activity: 2026-03-17 — Captured Phase 4 selective build/deploy decisions for planning
+Status: Ready for context
+Last activity: 2026-03-17 — Completed Phase 4 selective build/deploy implementation and verification
 
-Progress: [██████░░░░] 60%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
-- Total plans completed: 9
+- Total plans completed: 12
 - Average duration: 30s
 - Total execution time: 0.0 hours
 
@@ -47,6 +47,10 @@ Recent decisions affecting current work:
 - Phase 3: Keep useful partial imports and enrichment outputs when possible, and reserve hard failure for fully blocked runs.
 - Phase 3: Persist per-person helper cache and import artifacts under `people/<id>/cache/` and `people/<id>/imports/`, then replay them into `generated/<id>/` for upstream reruns.
 - Phase 3: Keep the upstream integration thin by invoking upstream script files against generated workspaces instead of reimplementing enrichment locally.
+- Phase 4: Build person pages by staging each materialized workspace into a temporary upstream `open-links` build root, keeping upstream rendering canonical without patching upstream source imports.
+- Phase 4: Keep the root landing page local to this repo with isolated `landing-assets/` output under `generated/site/`.
+- Phase 4: Detect changed people from git paths, restore the current live Pages artifact before targeted overlays, and fail open to a full rebuild when selection confidence is low.
+- Phase 4: Finalize `generated/site/` with `deploy-manifest.json` and skip Pages deploys cleanly when the live manifest already matches the built artifact.
 
 ### Pending Todos
 
@@ -54,10 +58,10 @@ None yet.
 
 ### Blockers/Concerns
 
-- Phase 4 should build on the new helper-artifact contract instead of bypassing it when generating centralized multi-site output.
+- Phase 5 needs a safe direct-to-main upstream sync flow that keeps the new selective Pages build/deploy path predictable in CI.
 
 ## Session Continuity
 
 Last session: 2026-03-17 10:02
-Stopped at: Phase 4 context gathered
-Resume file: .planning/phases/04-selective-multi-site-build-and-deploy/04-CONTEXT.md
+Stopped at: Phase 5 ready for context
+Resume file: .planning/phases/04-selective-multi-site-build-and-deploy/04-VERIFICATION.md

@@ -27,8 +27,8 @@
 
 ### Build and Deployment
 
-- [ ] **DEPL-01**: Operator can generate centralized path-based static output for every enabled person from one repo using upstream `open-links`.
-- [ ] **DEPL-02**: Operator can have CI rebuild and deploy only changed people when person data changes.
+- [x] **DEPL-01**: Operator can generate centralized path-based static output for every enabled person from one repo using upstream `open-links`.
+- [x] **DEPL-02**: Operator can have CI rebuild and deploy only changed people when person data changes.
 - [ ] **DEPL-03**: Operator can have nightly automation deploy site deltas to GitHub Pages when upstream or person data changes require it.
 
 ### Automation and Reliability
@@ -77,8 +77,8 @@
 | DATA-01 | Phase 1 | Complete |
 | DATA-02 | Phase 1 | Complete |
 | DATA-03 | Phase 1 | Complete |
-| DEPL-01 | Phase 4 | Pending |
-| DEPL-02 | Phase 4 | Pending |
+| DEPL-01 | Phase 4 | Complete |
+| DEPL-02 | Phase 4 | Complete |
 | DEPL-03 | Phase 5 | Pending |
 | AUTO-01 | Phase 5 | Pending |
 | AUTO-02 | Phase 5 | Pending |
@@ -90,4 +90,4 @@
 
 ---
 *Requirements defined: 2026-03-17*
-*Last updated: 2026-03-17 after Phase 3 completion*
+*Last updated: 2026-03-17 after Phase 4 completion*

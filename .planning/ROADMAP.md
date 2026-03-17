@@ -9,7 +9,7 @@
 - [x] **Phase 1: Foundation and Data Contracts** - Define the person folder structure, schemas, defaults, and validation rules that every later workflow depends on.
 - [x] **Phase 2: Guided Operator CRUD** - Add the top-level skill/CLI flows that let the operator create, update, disable, and scaffold people without manual JSON editing.
 - [x] **Phase 3: Import and Enrichment Pipeline** - Bootstrap people from Linktree-like sources or manual links, then enrich and cache data through upstream `open-links` extraction flows.
-- [ ] **Phase 4: Selective Multi-Site Build and Deploy** - Generate path-based output for enabled people and deploy only changed sites through centralized CI.
+- [x] **Phase 4: Selective Multi-Site Build and Deploy** - Generate path-based output for enabled people and deploy only changed sites through centralized CI.
 - [ ] **Phase 5: Autonomous Upstream Sync and Release Ops** - Automate daily upstream updates, nightly deployment checks, and fail-fast operational feedback on `main`.
 
 ## Phase Details
@@ -71,9 +71,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: Implement the person-to-output generation flow on top of upstream `open-links`.
-- [ ] 04-02: Add changed-person detection and selective CI build logic.
-- [ ] 04-03: Wire centralized GitHub Pages deployment for generated path-based sites.
+- [x] 04-01: Implement the person-to-output generation flow on top of upstream `open-links`.
+- [x] 04-02: Add changed-person detection and selective CI build logic.
+- [x] 04-03: Wire centralized GitHub Pages deployment for generated path-based sites.
 
 ### Phase 5: Autonomous Upstream Sync and Release Ops
 **Goal**: Keep the repo current with upstream `open-links` and deploy site deltas automatically with fast operational feedback when anything breaks.
@@ -97,5 +97,5 @@ Plans:
 | 1. Foundation and Data Contracts | 3/3 | Complete | 2026-03-17 |
 | 2. Guided Operator CRUD | 3/3 | Complete | 2026-03-17 |
 | 3. Import and Enrichment Pipeline | 3/3 | Complete | 2026-03-17 |
-| 4. Selective Multi-Site Build and Deploy | 0/3 | Not started | - |
+| 4. Selective Multi-Site Build and Deploy | 3/3 | Complete | 2026-03-17 |
 | 5. Autonomous Upstream Sync and Release Ops | 0/3 | Not started | - |
