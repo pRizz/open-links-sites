@@ -66,27 +66,27 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| OPER-01 | — | Pending |
-| OPER-02 | — | Pending |
-| OPER-03 | — | Pending |
-| OPER-04 | — | Pending |
-| IMPT-01 | — | Pending |
-| IMPT-02 | — | Pending |
-| IMPT-03 | — | Pending |
-| IMPT-04 | — | Pending |
-| DATA-01 | — | Pending |
-| DATA-02 | — | Pending |
-| DATA-03 | — | Pending |
-| DEPL-01 | — | Pending |
-| DEPL-02 | — | Pending |
-| DEPL-03 | — | Pending |
-| AUTO-01 | — | Pending |
-| AUTO-02 | — | Pending |
+| OPER-01 | Phase 2 | Pending |
+| OPER-02 | Phase 1 | Pending |
+| OPER-03 | Phase 2 | Pending |
+| OPER-04 | Phase 2 | Pending |
+| IMPT-01 | Phase 3 | Pending |
+| IMPT-02 | Phase 3 | Pending |
+| IMPT-03 | Phase 3 | Pending |
+| IMPT-04 | Phase 3 | Pending |
+| DATA-01 | Phase 1 | Pending |
+| DATA-02 | Phase 1 | Pending |
+| DATA-03 | Phase 1 | Pending |
+| DEPL-01 | Phase 4 | Pending |
+| DEPL-02 | Phase 4 | Pending |
+| DEPL-03 | Phase 5 | Pending |
+| AUTO-01 | Phase 5 | Pending |
+| AUTO-02 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 16 total
-- Mapped to phases: 0
-- Unmapped: 16 ⚠️
+- Mapped to phases: 16
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-17*

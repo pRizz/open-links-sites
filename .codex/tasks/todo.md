@@ -8,13 +8,14 @@
 - [x] Capture workflow preferences in `.planning/config.json` and commit
 - [x] Decide whether to research before requirements and document the result
 - [x] Define `.planning/REQUIREMENTS.md` and commit
-- [ ] Create `.planning/ROADMAP.md`, `.planning/STATE.md`, and traceability updates, then commit
+- [x] Create `.planning/ROADMAP.md`, `.planning/STATE.md`, and traceability updates, then commit
 
 ## Verification
 
 - Confirm the required `.planning/` artifacts exist
 - Confirm each initialization phase is preserved in git history with separate commits
 - Review generated docs for scope drift or missing v1 boundaries
+- Confirm every v1 requirement maps to exactly one roadmap phase
 
 ## Notes
 
