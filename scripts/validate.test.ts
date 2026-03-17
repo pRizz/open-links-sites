@@ -1,10 +1,22 @@
 import { afterEach, describe, expect, test } from "bun:test";
-import { cpSync, mkdtempSync, mkdirSync, readFileSync, rmSync, unlinkSync, writeFileSync } from "node:fs";
+import {
+  cpSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  unlinkSync,
+  writeFileSync,
+} from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import process from "node:process";
-import { tmpdir } from "node:os";
 
-import { getTemplateAssetPath, loadHydratedDefaultTemplates, resolveRepoPath } from "./lib/person-contract";
+import {
+  getTemplateAssetPath,
+  loadHydratedDefaultTemplates,
+  resolveRepoPath,
+} from "./lib/person-contract";
 import { validateRepository } from "./validate";
 
 const tempRoots: string[] = [];
@@ -34,7 +46,10 @@ const createFixtureRoot = (personId = "fixture-user"): string => {
   writeJson(join(personDir, "profile.json"), templates.profile);
   writeJson(join(personDir, "links.json"), templates.links);
   writeJson(join(personDir, "site.json"), templates.site);
-  cpSync(getTemplateAssetPath("avatar-placeholder.svg"), join(personDir, "assets", "avatar-placeholder.svg"));
+  cpSync(
+    getTemplateAssetPath("avatar-placeholder.svg"),
+    join(personDir, "assets", "avatar-placeholder.svg"),
+  );
 
   return rootDir;
 };
@@ -68,9 +83,9 @@ describe("validateRepository", () => {
     const result = await validateRepository(rootDir);
 
     expect(result.valid).toBe(false);
-    expect(result.people[0]?.issues.some((issue) => issue.code === "person_id_folder_mismatch")).toBe(
-      true,
-    );
+    expect(
+      result.people[0]?.issues.some((issue) => issue.code === "person_id_folder_mismatch"),
+    ).toBe(true);
   });
 
   test("structure: fails when a required file is missing", async () => {
@@ -115,14 +130,24 @@ describe("validateRepository", () => {
 
     expect(result.valid).toBe(false);
     expect(
-      result.people[0]?.issues.some((issue) => issue.code === "asset_reference_outside_person_assets"),
+      result.people[0]?.issues.some(
+        (issue) => issue.code === "asset_reference_outside_person_assets",
+      ),
     ).toBe(true);
   });
 
   test("cli: emits machine-readable json", async () => {
     const rootDir = createFixtureRoot();
     const cliResult = Bun.spawnSync({
-      cmd: [process.execPath, "run", resolveRepoPath("scripts/validate.ts"), "--root", rootDir, "--format", "json"],
+      cmd: [
+        process.execPath,
+        "run",
+        resolveRepoPath("scripts/validate.ts"),
+        "--root",
+        rootDir,
+        "--format",
+        "json",
+      ],
       cwd: resolveRepoPath("."),
       stdout: "pipe",
       stderr: "pipe",

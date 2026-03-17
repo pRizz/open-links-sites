@@ -1,20 +1,13 @@
 import process from "node:process";
 
 import {
+  type ManagePersonAction,
+  type ManagePersonActionResult,
   buildManagePersonHelpText,
   parseManagePersonInvocation,
-  type ManagePersonAction,
 } from "./lib/manage-person/action-contract";
-
-type OutputWriter = {
-  write(text: string): void;
-};
-
-type ActionResult = {
-  exitCode: number;
-  stdout?: string;
-  stderr?: string;
-};
+import { runCreatePersonAction } from "./lib/manage-person/create-person";
+import { runUpdatePersonAction } from "./lib/manage-person/update-person";
 
 type ActionHandlerInput = {
   action: ManagePersonAction;
@@ -22,7 +15,11 @@ type ActionHandlerInput = {
   args: string[];
 };
 
-type ActionHandler = (input: ActionHandlerInput) => Promise<ActionResult>;
+type OutputWriter = {
+  write(text: string): void;
+};
+
+type ActionHandler = (input: ActionHandlerInput) => Promise<ManagePersonActionResult>;
 
 const notImplementedHandler: ActionHandler = async ({ action }) => ({
   exitCode: 1,
@@ -30,8 +27,8 @@ const notImplementedHandler: ActionHandler = async ({ action }) => ({
 });
 
 export const ACTION_HANDLERS: Record<ManagePersonAction, ActionHandler> = {
-  create: notImplementedHandler,
-  update: notImplementedHandler,
+  create: ({ args, rootDir }) => runCreatePersonAction(args, rootDir),
+  update: ({ args, rootDir }) => runUpdatePersonAction(args, rootDir),
   disable: notImplementedHandler,
   archive: notImplementedHandler,
 };

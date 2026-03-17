@@ -38,9 +38,7 @@ const groupIssues = (issues: ValidationIssue[]): Record<ValidationSeverity, Vali
   suggestion: issues.filter((issue) => issue.severity === "suggestion"),
 });
 
-export const buildValidationTotals = (
-  results: PersonValidationResult[],
-): ValidationTotals => {
+export const buildValidationTotals = (results: PersonValidationResult[]): ValidationTotals => {
   const allIssues = results.flatMap((result) => result.issues);
   const problems = allIssues.filter((issue) => issue.severity === "problem").length;
   const warnings = allIssues.filter((issue) => issue.severity === "warning").length;

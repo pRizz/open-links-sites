@@ -2,11 +2,12 @@ import { existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import process from "node:process";
 
-import { renderDefaultTemplates, loadDefaultAssetPayloads } from "./lib/fill-templates";
-import { getPersonDirectory, isPersonId, resolveRepoPath } from "./lib/person-contract";
+import { loadDefaultAssetPayloads, renderDefaultTemplates } from "./lib/fill-templates";
+import { getPersonDirectory, isPersonId } from "./lib/person-contract";
+import type { PersonValidationResult, ValidationRunResult } from "./lib/validation-output";
 import { validateRepository } from "./validate";
 
-interface ParsedArgs {
+export interface ScaffoldPersonInput {
   personId: string;
   personName: string;
   rootDir: string;
@@ -18,7 +19,14 @@ interface ParsedArgs {
   siteDescription?: string;
 }
 
-const parseArgs = (): ParsedArgs => {
+export interface ScaffoldPersonResult {
+  personId: string;
+  personDirectory: string;
+  validation: PersonValidationResult;
+  validationRun: ValidationRunResult;
+}
+
+const parseArgs = (): ScaffoldPersonInput => {
   const args = process.argv.slice(2);
 
   const getFlagValue = (name: string): string | undefined => {
@@ -49,26 +57,25 @@ const parseArgs = (): ParsedArgs => {
   };
 };
 
-const main = async (): Promise<void> => {
-  const args = parseArgs();
-  if (!isPersonId(args.personId)) {
-    throw new Error(`Invalid person id '${args.personId}'. Use lowercase kebab-case.`);
+export const scaffoldPerson = async (input: ScaffoldPersonInput): Promise<ScaffoldPersonResult> => {
+  if (!isPersonId(input.personId)) {
+    throw new Error(`Invalid person id '${input.personId}'. Use lowercase kebab-case.`);
   }
 
-  const personDirectory = join(args.rootDir, getPersonDirectory(args.personId));
+  const personDirectory = join(input.rootDir, getPersonDirectory(input.personId));
   if (existsSync(personDirectory)) {
     throw new Error(`Person directory already exists: ${personDirectory}`);
   }
 
   const renderedTemplates = renderDefaultTemplates({
-    personId: args.personId,
-    personName: args.personName,
-    primaryLinkUrl: args.primaryLinkUrl,
-    profileHeadline: args.profileHeadline,
-    profileBio: args.profileBio,
-    profileLocation: args.profileLocation,
-    siteTitle: args.siteTitle,
-    siteDescription: args.siteDescription,
+    personId: input.personId,
+    personName: input.personName,
+    primaryLinkUrl: input.primaryLinkUrl,
+    profileHeadline: input.profileHeadline,
+    profileBio: input.profileBio,
+    profileLocation: input.profileLocation,
+    siteTitle: input.siteTitle,
+    siteDescription: input.siteDescription,
   });
 
   mkdirSync(join(personDirectory, "assets"), { recursive: true });
@@ -82,8 +89,8 @@ const main = async (): Promise<void> => {
       writeFileSync(join(personDirectory, "assets", assetName), assetPayload);
     }
 
-    const validation = await validateRepository(args.rootDir);
-    const scaffoldedPerson = validation.people.find((person) => person.personId === args.personId);
+    const validation = await validateRepository(input.rootDir);
+    const scaffoldedPerson = validation.people.find((person) => person.personId === input.personId);
     const blockingIssues =
       scaffoldedPerson?.issues.filter((issue) => issue.severity === "problem") ?? [];
 
@@ -93,13 +100,29 @@ const main = async (): Promise<void> => {
       );
     }
 
-    process.stdout.write(
-      `Scaffolded ${getPersonDirectory(args.personId)} with ${scaffoldedPerson?.issues.length ?? 0} non-blocking issue(s).\n`,
-    );
+    if (!scaffoldedPerson) {
+      throw new Error(`Scaffolded person '${input.personId}' was not found during validation.`);
+    }
+
+    return {
+      personId: input.personId,
+      personDirectory,
+      validation: scaffoldedPerson,
+      validationRun: validation,
+    };
   } catch (error) {
     rmSync(personDirectory, { recursive: true, force: true });
     throw error;
   }
+};
+
+const main = async (): Promise<void> => {
+  const args = parseArgs();
+  const result = await scaffoldPerson(args);
+
+  process.stdout.write(
+    `Scaffolded ${getPersonDirectory(result.personId)} with ${result.validation.issues.length} non-blocking issue(s).\n`,
+  );
 };
 
 if (import.meta.main) {

@@ -40,4 +40,13 @@ Use the repo CLI underneath this skill:
 bun run manage:person -- <action> [options]
 ```
 
+Common Phase 2 calls:
+
+```bash
+bun run manage:person -- create --name "Alice Example"
+bun run manage:person -- create --name "Bob Example" --seed-url "https://linktr.ee/bob"
+bun run manage:person -- update --person "alice-example" --headline "Builder and operator"
+bun run manage:person -- update --person "Alice Example" --site-title "Alice Example | Links"
+```
+
 The action contract is defined in `scripts/lib/manage-person/action-contract.ts`.

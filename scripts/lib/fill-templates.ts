@@ -2,8 +2,8 @@ import { readFileSync } from "node:fs";
 
 import {
   DEFAULT_TEMPLATE_REPLACEMENTS,
-  TEMPLATE_FILE_MAP,
   type PersonRequiredFile,
+  TEMPLATE_FILE_MAP,
   type TemplateReplacementMap,
   applyTemplateReplacements,
   getTemplateAssetPath,
@@ -25,8 +25,7 @@ const resolveReplacements = (input: ScaffoldInput): TemplateReplacementMap => ({
   ...DEFAULT_TEMPLATE_REPLACEMENTS,
   personId: input.personId,
   personName: input.personName,
-  primaryLinkUrl:
-    input.primaryLinkUrl ?? `https://example.com/${input.personId}`,
+  primaryLinkUrl: input.primaryLinkUrl ?? `https://example.com/${input.personId}`,
   profileHeadline: input.profileHeadline ?? DEFAULT_TEMPLATE_REPLACEMENTS.profileHeadline,
   profileBio: input.profileBio ?? DEFAULT_TEMPLATE_REPLACEMENTS.profileBio,
   profileLocation: input.profileLocation ?? DEFAULT_TEMPLATE_REPLACEMENTS.profileLocation,

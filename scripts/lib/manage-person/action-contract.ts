@@ -17,9 +17,7 @@ export const MANAGE_PERSON_ACTION_DETAILS = [
   },
 ] as const;
 
-export const MANAGE_PERSON_ACTIONS = MANAGE_PERSON_ACTION_DETAILS.map(
-  (entry) => entry.action,
-);
+export const MANAGE_PERSON_ACTIONS = MANAGE_PERSON_ACTION_DETAILS.map((entry) => entry.action);
 
 export type ManagePersonAction = (typeof MANAGE_PERSON_ACTIONS)[number];
 
@@ -29,6 +27,18 @@ export interface ManagePersonInvocation {
   remainingArgs: string[];
   showHelp: boolean;
   invalidAction?: string;
+}
+
+export interface ManagePersonActionResult {
+  exitCode: number;
+  stdout?: string;
+  stderr?: string;
+}
+
+export interface ParsedActionArgs {
+  options: Map<string, string[]>;
+  flags: Set<string>;
+  positionals: string[];
 }
 
 const HELP_FLAGS = new Set(["--help", "-h"]);
@@ -109,8 +119,66 @@ export const buildManagePersonHelpText = (): string => {
     "",
     "Examples:",
     '  bun run manage:person -- create --name "Alice Example"',
-    '  bun run manage:person -- update --person "alice-example" --task rename --value "Alice Example"',
+    '  bun run manage:person -- update --person "alice-example" --headline "Builder and operator"',
     "",
     "The repo-local skill lives at .agents/skills/manage-person/SKILL.md.",
   ].join("\n");
 };
+
+const pushOptionValue = (options: Map<string, string[]>, flag: string, value: string): void => {
+  const existing = options.get(flag) ?? [];
+  existing.push(value);
+  options.set(flag, existing);
+};
+
+export const parseActionArgs = (args: string[]): ParsedActionArgs => {
+  const options = new Map<string, string[]>();
+  const flags = new Set<string>();
+  const positionals: string[] = [];
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+    if (!arg) {
+      continue;
+    }
+
+    if (arg === "--") {
+      positionals.push(...args.slice(index + 1));
+      break;
+    }
+
+    if (!arg.startsWith("--")) {
+      positionals.push(arg);
+      continue;
+    }
+
+    const equalsIndex = arg.indexOf("=");
+    if (equalsIndex >= 0) {
+      pushOptionValue(options, arg.slice(0, equalsIndex), arg.slice(equalsIndex + 1));
+      continue;
+    }
+
+    const maybeValue = args[index + 1];
+    if (maybeValue && !maybeValue.startsWith("--")) {
+      pushOptionValue(options, arg, maybeValue);
+      index += 1;
+      continue;
+    }
+
+    flags.add(arg);
+  }
+
+  return {
+    options,
+    flags,
+    positionals,
+  };
+};
+
+export const readSingleActionOption = (
+  parsedArgs: ParsedActionArgs,
+  flag: string,
+): string | undefined => parsedArgs.options.get(flag)?.at(-1);
+
+export const hasActionFlag = (parsedArgs: ParsedActionArgs, flag: string): boolean =>
+  parsedArgs.flags.has(flag);

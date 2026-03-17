@@ -8,7 +8,6 @@ import personSchema from "../../schemas/person.schema.json";
 import linksSchema from "../../schemas/upstream/links.schema.json";
 import profileSchema from "../../schemas/upstream/profile.schema.json";
 import siteSchema from "../../schemas/upstream/site.schema.json";
-import type { DiscoveredPerson } from "./person-discovery";
 import {
   PERSON_REQUIRED_DIRECTORIES,
   PERSON_REQUIRED_FILES,
@@ -17,6 +16,7 @@ import {
   looksLikeLocalAssetPath,
   normalizeLocalAssetToUri,
 } from "./person-contract";
+import type { DiscoveredPerson } from "./person-discovery";
 import type { PersonValidationResult, ValidationIssue } from "./validation-output";
 
 const ajv = new Ajv2020({
@@ -51,7 +51,11 @@ const REQUIRED_SCHEMA_FILES = {
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 
-const formatIssuePath = (fileName: string, instancePath: string, missingProperty?: string): string => {
+const formatIssuePath = (
+  fileName: string,
+  instancePath: string,
+  missingProperty?: string,
+): string => {
   const normalizedSegments = instancePath
     .split("/")
     .filter((segment) => segment.length > 0)
@@ -111,7 +115,10 @@ const normalizeForSchemaValidation = (value: unknown): unknown => {
 
   if (isRecord(value)) {
     return Object.fromEntries(
-      Object.entries(value).map(([key, entryValue]) => [key, normalizeForSchemaValidation(entryValue)]),
+      Object.entries(value).map(([key, entryValue]) => [
+        key,
+        normalizeForSchemaValidation(entryValue),
+      ]),
     );
   }
 
@@ -128,7 +135,9 @@ const collectStringEntries = (
   }
 
   if (Array.isArray(value)) {
-    return value.flatMap((entry, index) => collectStringEntries(entry, fileName, `${path}.${index}`));
+    return value.flatMap((entry, index) =>
+      collectStringEntries(entry, fileName, `${path}.${index}`),
+    );
   }
 
   if (isRecord(value)) {
@@ -270,7 +279,9 @@ const validateStringPaths = (
       }
     }
 
-    issues.push(...collectPlaceholderIssues(personId, fileName, stringEntry.path, stringEntry.value));
+    issues.push(
+      ...collectPlaceholderIssues(personId, fileName, stringEntry.path, stringEntry.value),
+    );
   }
 
   return issues;
@@ -324,7 +335,10 @@ export const validateDiscoveredPerson = async (
       : person.directoryName;
   const enabled = typeof personManifest.enabled === "boolean" ? personManifest.enabled : null;
 
-  if (typeof personManifest.id === "string" && !folderMatchesPersonId(person.directoryName, personManifest.id)) {
+  if (
+    typeof personManifest.id === "string" &&
+    !folderMatchesPersonId(person.directoryName, personManifest.id)
+  ) {
     issues.push({
       severity: "problem",
       code: "person_id_folder_mismatch",

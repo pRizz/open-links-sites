@@ -86,6 +86,15 @@ Supported actions:
 - `disable`
 - `archive`
 
+Phase 2 create/update examples:
+
+```bash
+bun run manage:person -- create --name "Alice Example"
+bun run manage:person -- create --name "Bob Example" --seed-url "https://linktr.ee/bob"
+bun run manage:person -- update --person "alice-example" --headline "Builder and operator"
+bun run manage:person -- update --person "Alice Example" --site-title "Alice Example | Links"
+```
+
 Direct JSON editing remains the low-level fallback, not the preferred CRUD path.
 
 ## Foundation Flow

@@ -2,8 +2,8 @@ import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { discoverPeople } from "./person-discovery";
 import { GENERATED_ROOT, PERSON_REQUIRED_FILES, isLocalAssetReference } from "./person-contract";
+import { discoverPeople } from "./person-discovery";
 import { validateDiscoveredPerson } from "./validate-person";
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -79,7 +79,11 @@ export const materializePerson = async (
     const sourcePath = join(person.directoryPath, fileName);
     const sourceValue = JSON.parse(readFileSync(sourcePath, "utf8")) as unknown;
     const materializedValue = translateLocalAssetReferences(sourceValue, publicDir);
-    writeFileSync(join(dataDir, fileName), `${JSON.stringify(materializedValue, null, 2)}\n`, "utf8");
+    writeFileSync(
+      join(dataDir, fileName),
+      `${JSON.stringify(materializedValue, null, 2)}\n`,
+      "utf8",
+    );
   }
 
   cpSync(join(person.directoryPath, "assets"), join(publicDir, "assets"), {

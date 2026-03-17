@@ -1,13 +1,13 @@
 import process from "node:process";
 
-import { discoverPeople } from "./lib/person-discovery";
 import { resolveRepoPath } from "./lib/person-contract";
+import { discoverPeople } from "./lib/person-discovery";
 import { validateDiscoveredPerson } from "./lib/validate-person";
 import {
+  type ValidationRunResult,
   buildValidationTotals,
   formatValidationRunHuman,
   formatValidationRunJson,
-  type ValidationRunResult,
 } from "./lib/validation-output";
 
 type OutputFormat = "human" | "json";
@@ -38,7 +38,9 @@ const parseArgs = (): ParsedArgs => {
   };
 };
 
-export const validateRepository = async (rootDir = resolveRepoPath(".")): Promise<ValidationRunResult> => {
+export const validateRepository = async (
+  rootDir = resolveRepoPath("."),
+): Promise<ValidationRunResult> => {
   const people = await discoverPeople(rootDir);
   const results = await Promise.all(people.map((person) => validateDiscoveredPerson(person)));
   const totals = buildValidationTotals(results);
