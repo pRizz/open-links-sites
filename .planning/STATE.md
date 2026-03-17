@@ -11,8 +11,8 @@ See: .planning/PROJECT.md (updated 2026-03-17)
 
 Phase: 3 of 5 (Import and Enrichment Pipeline)
 Plan: 0 of 3 in current phase
-Status: Ready to discuss
-Last activity: 2026-03-17 — Completed and verified Phase 2 guided CRUD execution
+Status: Ready to plan
+Last activity: 2026-03-17 — Captured Phase 3 import and enrichment decisions for planning
 
 Progress: [████░░░░░░] 40%
 
@@ -41,6 +41,10 @@ Recent decisions affecting current work:
 - Phase 2: Keep update flows task-based and scoped tightly to the requested change.
 - Phase 2: Treat disable/archive as metadata state changes that preserve source folders, with archived people hidden by default.
 - Phase 2: Require one explicit confirmation for status-changing lifecycle writes while keeping create/update write-first.
+- Phase 3: Extend `manage-person` with import/bootstrap actions instead of creating a separate primary surface.
+- Phase 3: Import should fill blanks, preserve source order, and avoid overwriting curated existing data by default.
+- Phase 3: Run full upstream person-level enrichment automatically after intake, but skip unsupported domains with remediation instead of failing the whole import.
+- Phase 3: Keep useful partial imports and enrichment outputs when possible, and reserve hard failure for fully blocked runs.
 
 ### Pending Todos
 
@@ -52,6 +56,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17 04:07
-Stopped at: Phase 2 completed and verified
-Resume file: .planning/phases/02-guided-operator-crud/02-VERIFICATION.md
+Last session: 2026-03-17 04:27
+Stopped at: Phase 3 context gathered
+Resume file: .planning/phases/03-import-and-enrichment-pipeline/03-CONTEXT.md
