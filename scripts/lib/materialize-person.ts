@@ -2,6 +2,7 @@ import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
+import { getGeneratedWorkspaceLayout, getPersonHelperLayout } from "./import/cache-layout";
 import { GENERATED_ROOT, PERSON_REQUIRED_FILES, isLocalAssetReference } from "./person-contract";
 import { discoverPeople } from "./person-discovery";
 import { validateDiscoveredPerson } from "./validate-person";
@@ -41,6 +42,7 @@ export interface MaterializedWorkspace {
   outputDir: string;
   dataDir: string;
   publicDir: string;
+  layout: ReturnType<typeof getGeneratedWorkspaceLayout>;
 }
 
 export const materializePerson = async (
@@ -64,12 +66,19 @@ export const materializePerson = async (
   }
 
   const outputDir = join(input.rootDir, GENERATED_ROOT, input.personId);
-  const dataDir = join(outputDir, "data");
-  const publicDir = join(outputDir, "public");
+  const layout = getGeneratedWorkspaceLayout(input.rootDir, input.personId);
+  const helperLayout = getPersonHelperLayout(input.rootDir, input.personId);
+  const dataDir = layout.dataDir;
+  const publicDir = layout.publicDir;
 
   rmSync(outputDir, { recursive: true, force: true });
   mkdirSync(dataDir, { recursive: true });
   mkdirSync(publicDir, { recursive: true });
+  mkdirSync(layout.dataCacheDir, { recursive: true });
+  mkdirSync(layout.dataGeneratedDir, { recursive: true });
+  mkdirSync(layout.dirs.profileAvatar, { recursive: true });
+  mkdirSync(layout.dirs.contentImages, { recursive: true });
+  mkdirSync(layout.dirs.richAuthenticated, { recursive: true });
 
   for (const fileName of PERSON_REQUIRED_FILES) {
     if (fileName === "person.json") {
@@ -90,11 +99,53 @@ export const materializePerson = async (
     recursive: true,
   });
 
+  const helperFileMappings: Array<[string, string]> = [
+    [helperLayout.files.profileAvatarManifest, layout.files.profileAvatarManifest],
+    [helperLayout.files.profileAvatarRuntimeManifest, layout.files.profileAvatarRuntimeManifest],
+    [helperLayout.files.contentImagesManifest, layout.files.contentImagesManifest],
+    [helperLayout.files.contentImagesRuntimeManifest, layout.files.contentImagesRuntimeManifest],
+    [helperLayout.files.richPublicCache, layout.files.richPublicCache],
+    [helperLayout.files.richAuthenticatedCache, layout.files.richAuthenticatedCache],
+    [helperLayout.files.generatedRichMetadata, layout.files.generatedRichMetadata],
+    [helperLayout.files.richEnrichmentReport, layout.files.richEnrichmentReport],
+  ];
+
+  for (const [sourcePath, targetPath] of helperFileMappings) {
+    try {
+      cpSync(sourcePath, targetPath);
+    } catch (error) {
+      const maybeError = error as NodeJS.ErrnoException;
+      if (maybeError.code !== "ENOENT") {
+        throw error;
+      }
+    }
+  }
+
+  const helperDirectoryMappings: Array<[string, string]> = [
+    [helperLayout.dirs.profileAvatar, layout.dirs.profileAvatar],
+    [helperLayout.dirs.contentImages, layout.dirs.contentImages],
+    [helperLayout.dirs.richAuthenticated, layout.dirs.richAuthenticated],
+  ];
+
+  for (const [sourcePath, targetPath] of helperDirectoryMappings) {
+    try {
+      cpSync(sourcePath, targetPath, {
+        recursive: true,
+      });
+    } catch (error) {
+      const maybeError = error as NodeJS.ErrnoException;
+      if (maybeError.code !== "ENOENT") {
+        throw error;
+      }
+    }
+  }
+
   return {
     personId: input.personId,
     sourceDir: person.directoryPath,
     outputDir,
     dataDir,
     publicDir,
+    layout,
   };
 };

@@ -4,6 +4,10 @@ export const MANAGE_PERSON_ACTION_DETAILS = [
     summary: "Create a new person from a name and optional seed URL.",
   },
   {
+    action: "import",
+    summary: "Bootstrap or refresh a person from a source URL or pasted manual links.",
+  },
+  {
     action: "update",
     summary: "Update one existing person's profile, site, or orchestration fields.",
   },
@@ -119,6 +123,8 @@ export const buildManagePersonHelpText = (): string => {
     "",
     "Examples:",
     '  bun run manage:person -- create --name "Alice Example"',
+    '  bun run manage:person -- import --source-url "https://linktr.ee/alice"',
+    '  bun run manage:person -- import --person "alice-example" --manual-links "GitHub https://github.com/alice"',
     '  bun run manage:person -- update --person "alice-example" --headline "Builder and operator"',
     '  bun run manage:person -- disable --person "alice-example" --confirm',
     '  bun run manage:person -- archive --person "alice-example" --confirm --reason "Offboarded"',

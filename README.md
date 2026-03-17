@@ -82,15 +82,19 @@ bun run manage:person -- <action> [options]
 Supported actions:
 
 - `create`
+- `import`
 - `update`
 - `disable`
 - `archive`
 
-Phase 2 create/update examples:
+Phase 2/3 examples:
 
 ```bash
 bun run manage:person -- create --name "Alice Example"
 bun run manage:person -- create --name "Bob Example" --seed-url "https://linktr.ee/bob"
+bun run manage:person -- import --source-url "https://linktr.ee/alice"
+bun run manage:person -- import --person "alice-example" --manual-links $'GitHub https://github.com/alice\nWebsite https://alice.dev'
+bun run manage:person -- import --person "alice-example" --source-url "https://linktr.ee/alice" --full-refresh
 bun run manage:person -- update --person "alice-example" --headline "Builder and operator"
 bun run manage:person -- update --person "Alice Example" --site-title "Alice Example | Links"
 bun run manage:person -- disable --person "alice-example" --confirm
@@ -109,3 +113,35 @@ Phase 1 establishes a deterministic low-level flow:
    and placeholder guidance.
 3. `bun run materialize:person -- --id <id>` writes a disposable
    `generated/<id>/` workspace with `data/*.json` and staged public assets.
+
+## Import And Enrichment
+
+Phase 3 extends `manage-person` into the migration/bootstrap path:
+
+1. `bun run manage:person -- import --source-url "<linktree-like-url>"` crawls a source page and extracts profile/link candidates.
+2. `bun run manage:person -- import --manual-links "<freeform text>"` normalizes pasted URLs when there is no crawlable source.
+3. Imported data merges conservatively: curated source-of-truth data wins, placeholder scaffold content is replaced, source order is preserved, and obvious duplicate URLs are skipped.
+4. After source write, the repo materializes `generated/<id>/`, runs upstream `open-links` enrichment/cache scripts there, then syncs stable artifacts back into `people/<id>/cache/`.
+
+Per-person helper artifacts now live alongside the canonical files:
+
+```text
+people/
+  <id>/
+    cache/
+      rich-metadata.json
+      rich-enrichment-report.json
+      rich-public-cache.json
+      profile-avatar.json
+      profile-avatar.runtime.json
+      content-images.json
+      content-images.runtime.json
+      profile-avatar/
+      content-images/
+      rich-authenticated/
+    imports/
+      source-snapshot.json
+      last-import.json
+```
+
+These helper artifacts support incremental reruns. They do not replace the canonical required files under `people/<id>/`.

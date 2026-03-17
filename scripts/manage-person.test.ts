@@ -11,11 +11,16 @@ import {
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
+import { getPersonHelperLayout } from "./lib/import/cache-layout";
 import {
   MANAGE_PERSON_ACTIONS,
   buildManagePersonHelpText,
   parseManagePersonInvocation,
 } from "./lib/manage-person/action-contract";
+import {
+  type ImportPersonDependencies,
+  runImportPersonAction,
+} from "./lib/manage-person/import-person";
 import { findPersonMatches, loadPersonRegistry } from "./lib/manage-person/person-registry";
 import { getTemplateAssetPath, loadHydratedDefaultTemplates } from "./lib/person-contract";
 import { runManagePerson } from "./manage-person";
@@ -85,11 +90,20 @@ const createCapturedWriters = (): {
   };
 };
 
+const createImportActionHandler =
+  (dependencies: ImportPersonDependencies) =>
+  ({ args, rootDir }: { args: string[]; rootDir: string }) =>
+    runImportPersonAction(args, rootDir, {
+      nowIso: () => "2026-03-17T12:00:00.000Z",
+      ...dependencies,
+    });
+
 describe("manage-person surface", () => {
   test("surface: exposes the explicit CRUD action set", () => {
-    expect(MANAGE_PERSON_ACTIONS).toEqual(["create", "update", "disable", "archive"]);
+    expect(MANAGE_PERSON_ACTIONS).toEqual(["create", "import", "update", "disable", "archive"]);
     expect(buildManagePersonHelpText()).toContain("bun run manage:person -- <action> [options]");
     expect(buildManagePersonHelpText()).toContain("create");
+    expect(buildManagePersonHelpText()).toContain("import");
     expect(buildManagePersonHelpText()).toContain("archive");
   });
 
@@ -206,6 +220,189 @@ describe("manage-person surface", () => {
     expect(manifest.source.seedUrls).toEqual(["https://linktr.ee/dana-example"]);
   });
 
+  test("import-action: bootstraps a new person from only a source url through manage-person", async () => {
+    const rootDir = createFixtureRoot();
+    const { stdout, stderr, stdoutWriter, stderrWriter } = createCapturedWriters();
+    const sourceUrl = "https://linktr.ee/charlie-example";
+    const html = `
+      <html>
+        <head>
+          <title>Charlie Example | Linktree</title>
+          <meta name="description" content="Builder, operator, and writer." />
+          <meta property="og:image" content="https://cdn.example.com/charlie.jpg" />
+        </head>
+        <body>
+          <h1>Charlie Example</h1>
+          <a href="https://github.com/charlie-example">GitHub</a>
+          <a href="https://charlie.example.com">Website</a>
+          <a href="https://github.com/charlie-example/">GitHub Duplicate</a>
+          <a href="https://linktr.ee/charlie-example">Internal Linktree Link</a>
+        </body>
+      </html>
+    `;
+
+    const exitCode = await runManagePerson(["import", "--source-url", sourceUrl], {
+      cwd: rootDir,
+      stdout: stdoutWriter,
+      stderr: stderrWriter,
+      actionHandlers: {
+        import: createImportActionHandler({
+          importIntake: {
+            fetchSourceHtml: async () => ({
+              finalUrl: sourceUrl,
+              html,
+            }),
+          },
+          runUpstreamOpenLinks: async () => ({
+            steps: [
+              { key: "enrich-rich-links", status: "ran", blocking: false },
+              { key: "sync-profile-avatar", status: "ran", blocking: false },
+              { key: "sync-content-images", status: "ran", blocking: false },
+              { key: "public-rich-sync", status: "ran", blocking: false },
+              { key: "validate-data", status: "ran", blocking: false },
+            ],
+          }),
+        }),
+      },
+    });
+
+    expect(exitCode).toBe(0);
+    expect(stderr.join("")).toBe("");
+    expect(stdout.join("")).toContain("Import complete: charlie-example.");
+    expect(stdout.join("")).toContain("Created: yes");
+
+    const manifest = JSON.parse(
+      readFileSync(join(rootDir, "people", "charlie-example", "person.json"), "utf8"),
+    ) as {
+      id: string;
+      source: { kind: string; url: string; seedUrls: string[] };
+    };
+    const profile = JSON.parse(
+      readFileSync(join(rootDir, "people", "charlie-example", "profile.json"), "utf8"),
+    ) as {
+      name: string;
+      bio: string;
+      avatar: string;
+    };
+    const links = JSON.parse(
+      readFileSync(join(rootDir, "people", "charlie-example", "links.json"), "utf8"),
+    ) as { links: Array<{ label: string; url: string }>; order: string[] };
+
+    expect(manifest.id).toBe("charlie-example");
+    expect(manifest.source.kind).toBe("linktree");
+    expect(manifest.source.url).toBe(sourceUrl);
+    expect(manifest.source.seedUrls).toContain(sourceUrl);
+    expect(profile.name).toBe("Charlie Example");
+    expect(profile.bio).toBe("Builder, operator, and writer.");
+    expect(profile.avatar).toBe("https://cdn.example.com/charlie.jpg");
+    expect(links.links.map((entry) => entry.label)).toEqual(["GitHub", "Website"]);
+    expect(links.links.map((entry) => entry.url)).toEqual([
+      "https://github.com/charlie-example",
+      "https://charlie.example.com/",
+    ]);
+    expect(links.order).toEqual(["github", "website"]);
+  });
+
+  test("import-merge: imports into an existing person conservatively and preserves curated order", async () => {
+    const rootDir = createFixtureRoot();
+    const personDir = join(rootDir, "people", "alice-example");
+    writeJson(join(personDir, "links.json"), {
+      $schema: "https://open-links.dev/schema/links.schema.json",
+      links: [
+        {
+          id: "github",
+          label: "GitHub",
+          url: "https://github.com/alice-example",
+          type: "rich",
+          enabled: true,
+        },
+      ],
+      groups: [],
+      order: ["github"],
+      custom: {},
+    });
+    writeJson(join(personDir, "profile.json"), {
+      $schema: "https://open-links.dev/schema/profile.schema.json",
+      name: "Alice Example",
+      headline: "Curated headline",
+      avatar: "assets/avatar-placeholder.svg",
+      bio: "Curated bio",
+      location: "Chicago",
+      profileLinks: [{ label: "GitHub", url: "https://github.com/alice-example" }],
+      custom: {},
+    });
+
+    const { stdout, stderr, stdoutWriter, stderrWriter } = createCapturedWriters();
+    const exitCode = await runManagePerson(
+      [
+        "import",
+        "--person",
+        "alice-example",
+        "--manual-links",
+        [
+          "GitHub https://github.com/alice-example/",
+          "LinkedIn https://www.linkedin.com/in/alice-example",
+          "Website https://alice.example.com",
+        ].join("\n"),
+      ],
+      {
+        cwd: rootDir,
+        stdout: stdoutWriter,
+        stderr: stderrWriter,
+        actionHandlers: {
+          import: createImportActionHandler({
+            runUpstreamOpenLinks: async () => ({
+              steps: [
+                { key: "enrich-rich-links", status: "ran", blocking: false },
+                {
+                  key: "sync-profile-avatar",
+                  status: "skipped",
+                  blocking: false,
+                  reason: "profile.avatar is not a remote http/https URL",
+                },
+                { key: "sync-content-images", status: "ran", blocking: false },
+                { key: "public-rich-sync", status: "ran", blocking: false },
+                { key: "validate-data", status: "ran", blocking: false },
+              ],
+            }),
+          }),
+        },
+      },
+    );
+
+    expect(exitCode).toBe(0);
+    expect(stderr.join("")).toBe("");
+    expect(stdout.join("")).toContain("Skipped duplicates:");
+    expect(stdout.join("")).toContain("https://github.com/alice-example/");
+
+    const profile = JSON.parse(readFileSync(join(personDir, "profile.json"), "utf8")) as {
+      headline: string;
+      bio: string;
+      profileLinks: Array<{ url: string }>;
+    };
+    const links = JSON.parse(readFileSync(join(personDir, "links.json"), "utf8")) as {
+      links: Array<{ id: string; url: string }>;
+      order: string[];
+    };
+    const manifest = JSON.parse(readFileSync(join(personDir, "person.json"), "utf8")) as {
+      source: { kind: string };
+    };
+
+    expect(profile.headline).toBe("Curated headline");
+    expect(profile.bio).toBe("Curated bio");
+    expect(profile.profileLinks.map((entry) => entry.url)).toEqual([
+      "https://github.com/alice-example",
+      "https://www.linkedin.com/in/alice-example",
+    ]);
+    expect(links.links.map((entry) => entry.url)).toEqual([
+      "https://github.com/alice-example",
+      "https://www.linkedin.com/in/alice-example",
+      "https://alice.example.com/",
+    ]);
+    expect(links.order).toEqual(["github", "linkedin", "website"]);
+    expect(manifest.source.kind).toBe("links-list");
+  });
+
   test("update: applies task-based changes after matching a person by name", async () => {
     const rootDir = createFixtureRoot();
     const { stdout, stderr, stdoutWriter, stderrWriter } = createCapturedWriters();
@@ -268,6 +465,183 @@ describe("manage-person surface", () => {
     expect(stdout.join("")).toBe("");
     expect(stderr.join("")).toContain("Restored prior state");
     expect(readFileSync(personPath, "utf8")).toBe(before);
+  });
+
+  test("enrichment-bridge: passes the full-refresh flag into the upstream bridge and syncs helper caches", async () => {
+    const rootDir = createFixtureRoot();
+    const { stdout, stderr, stdoutWriter, stderrWriter } = createCapturedWriters();
+    let receivedFullRefresh = false;
+
+    const exitCode = await runManagePerson(
+      [
+        "import",
+        "--person",
+        "alice-example",
+        "--manual-links",
+        "Website https://alice.example.com",
+        "--full-refresh",
+      ],
+      {
+        cwd: rootDir,
+        stdout: stdoutWriter,
+        stderr: stderrWriter,
+        actionHandlers: {
+          import: createImportActionHandler({
+            runUpstreamOpenLinks: async ({ workspace, fullRefresh }) => {
+              receivedFullRefresh = fullRefresh;
+              mkdirSync(workspace.dirs.profileAvatar, { recursive: true });
+              writeJson(workspace.files.generatedRichMetadata, {
+                generatedAt: "2026-03-17T12:00:00.000Z",
+                links: {},
+              });
+              writeJson(workspace.files.richEnrichmentReport, {
+                generatedAt: "2026-03-17T12:00:00.000Z",
+                strict: false,
+                summary: { total: 0, fetched: 0, partial: 0, failed: 0, skipped: 0 },
+                entries: [],
+              });
+              writeJson(workspace.files.profileAvatarManifest, {
+                sourceUrl: "https://cdn.example.com/alice.jpg",
+                resolvedPath: "cache/profile-avatar/profile-avatar.jpg",
+                updatedAt: "2026-03-17T12:00:00.000Z",
+              });
+              writeFileSync(join(workspace.dirs.profileAvatar, "profile-avatar.jpg"), "avatar");
+
+              return {
+                steps: [
+                  { key: "enrich-rich-links", status: "ran", blocking: false },
+                  { key: "sync-profile-avatar", status: "ran", blocking: false },
+                  { key: "sync-content-images", status: "ran", blocking: false },
+                  { key: "public-rich-sync", status: "ran", blocking: false },
+                  { key: "validate-data", status: "ran", blocking: false },
+                ],
+              };
+            },
+          }),
+        },
+      },
+    );
+
+    expect(exitCode).toBe(0);
+    expect(stderr.join("")).toBe("");
+    expect(receivedFullRefresh).toBe(true);
+
+    const helperLayout = getPersonHelperLayout(rootDir, "alice-example");
+    expect(existsSync(helperLayout.files.generatedRichMetadata)).toBe(true);
+    expect(existsSync(helperLayout.files.richEnrichmentReport)).toBe(true);
+    expect(existsSync(helperLayout.files.profileAvatarManifest)).toBe(true);
+    expect(existsSync(join(helperLayout.dirs.profileAvatar, "profile-avatar.jpg"))).toBe(true);
+  });
+
+  test("import-report: keeps useful source data when upstream enrichment later fails", async () => {
+    const rootDir = createFixtureRoot();
+    const { stdout, stderr, stdoutWriter, stderrWriter } = createCapturedWriters();
+
+    const exitCode = await runManagePerson(
+      [
+        "import",
+        "--person",
+        "alice-example",
+        "--manual-links",
+        "Website https://alice.example.com",
+      ],
+      {
+        cwd: rootDir,
+        stdout: stdoutWriter,
+        stderr: stderrWriter,
+        actionHandlers: {
+          import: createImportActionHandler({
+            runUpstreamOpenLinks: async () => ({
+              steps: [
+                {
+                  key: "enrich-rich-links",
+                  status: "failed",
+                  blocking: true,
+                  stderr: "metadata fetch failed",
+                },
+              ],
+              blockingFailure: {
+                key: "enrich-rich-links",
+                status: "failed",
+                blocking: true,
+                stderr: "metadata fetch failed",
+              },
+            }),
+          }),
+        },
+      },
+    );
+
+    expect(exitCode).toBe(1);
+    expect(stderr.join("")).toContain("blocking upstream step failed");
+    expect(stdout.join("")).toContain("Blocking upstream failures:");
+    expect(stdout.join("")).toContain("enrich-rich-links: metadata fetch failed");
+
+    const links = JSON.parse(
+      readFileSync(join(rootDir, "people", "alice-example", "links.json"), "utf8"),
+    ) as { links: Array<{ url: string }> };
+    expect(links.links.some((entry) => entry.url === "https://alice.example.com/")).toBe(true);
+
+    const helperLayout = getPersonHelperLayout(rootDir, "alice-example");
+    const report = JSON.parse(readFileSync(helperLayout.files.lastImportReport, "utf8")) as {
+      outcome: string;
+      exitCode: number;
+    };
+    expect(report.outcome).toBe("partial");
+    expect(report.exitCode).toBe(1);
+  });
+
+  test("import-summary: surfaces skipped upstream steps and remediation guidance", async () => {
+    const rootDir = createFixtureRoot();
+    const { stdout, stderr, stdoutWriter, stderrWriter } = createCapturedWriters();
+
+    const exitCode = await runManagePerson(
+      [
+        "import",
+        "--person",
+        "alice-example",
+        "--manual-links",
+        "Website https://alice.example.com",
+      ],
+      {
+        cwd: rootDir,
+        stdout: stdoutWriter,
+        stderr: stderrWriter,
+        actionHandlers: {
+          import: createImportActionHandler({
+            runUpstreamOpenLinks: async () => ({
+              steps: [
+                { key: "enrich-rich-links", status: "ran", blocking: false },
+                {
+                  key: "sync-profile-avatar",
+                  status: "skipped",
+                  blocking: false,
+                  reason: "profile.avatar is not a remote http/https URL",
+                },
+                { key: "sync-content-images", status: "ran", blocking: false },
+                {
+                  key: "public-rich-sync",
+                  status: "skipped",
+                  blocking: false,
+                  reason: "no eligible x, medium, or primal rich links were present",
+                },
+                { key: "validate-data", status: "ran", blocking: false },
+              ],
+            }),
+          }),
+        },
+      },
+    );
+
+    expect(exitCode).toBe(0);
+    expect(stderr.join("")).toBe("");
+    expect(stdout.join("")).toContain("Skipped upstream steps:");
+    expect(stdout.join("")).toContain(
+      "sync-profile-avatar: profile.avatar is not a remote http/https URL",
+    );
+    expect(stdout.join("")).toContain(
+      "Use --full-refresh to force a fresh upstream cache rebuild on the next rerun.",
+    );
   });
 
   test("lifecycle-schema: scaffolding templates default to active lifecycle metadata", () => {

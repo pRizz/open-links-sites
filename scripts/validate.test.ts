@@ -13,6 +13,7 @@ import { join } from "node:path";
 import process from "node:process";
 
 import {
+  getOptionalPersonDirectoryPath,
   getTemplateAssetPath,
   loadHydratedDefaultTemplates,
   resolveRepoPath,
@@ -139,6 +140,42 @@ describe("validateRepository", () => {
         (issue) => issue.code === "asset_reference_outside_person_assets",
       ),
     ).toBe(true);
+  });
+
+  test("helpers: cache and import helper artifacts stay outside the required source contract", async () => {
+    const rootDir = createFixtureRoot();
+    const profileAvatarDir = join(
+      rootDir,
+      getOptionalPersonDirectoryPath("fixture-user", "cache"),
+      "profile-avatar",
+    );
+    const importsDir = join(rootDir, getOptionalPersonDirectoryPath("fixture-user", "imports"));
+
+    mkdirSync(profileAvatarDir, { recursive: true });
+    mkdirSync(importsDir, { recursive: true });
+    writeJson(
+      join(rootDir, getOptionalPersonDirectoryPath("fixture-user", "cache"), "profile-avatar.json"),
+      {
+        sourceUrl: "https://cdn.example.com/avatar.jpg",
+        resolvedPath: "cache/profile-avatar/profile-avatar.jpg",
+        updatedAt: "2026-03-17T12:00:00.000Z",
+      },
+    );
+    writeJson(join(importsDir, "source-snapshot.json"), {
+      kind: "linktree",
+      sourceUrl: "https://linktr.ee/fixture-user",
+      linkCount: 1,
+      links: [{ label: "Website", url: "https://fixture.example.com" }],
+      warnings: [],
+    });
+    writeFileSync(join(profileAvatarDir, "profile-avatar.jpg"), "avatar");
+
+    const result = await validateRepository(rootDir);
+
+    expect(result.valid).toBe(true);
+    expect(result.people[0]?.issues.some((issue) => issue.code === "missing_required_file")).toBe(
+      false,
+    );
   });
 
   test("cli: emits machine-readable json", async () => {

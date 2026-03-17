@@ -7,6 +7,7 @@ import {
   parseManagePersonInvocation,
 } from "./lib/manage-person/action-contract";
 import { runCreatePersonAction } from "./lib/manage-person/create-person";
+import { runImportPersonAction } from "./lib/manage-person/import-person";
 import { runStatusPersonAction } from "./lib/manage-person/status-person";
 import { runUpdatePersonAction } from "./lib/manage-person/update-person";
 
@@ -29,6 +30,7 @@ const notImplementedHandler: ActionHandler = async ({ action }) => ({
 
 export const ACTION_HANDLERS: Record<ManagePersonAction, ActionHandler> = {
   create: ({ args, rootDir }) => runCreatePersonAction(args, rootDir),
+  import: ({ args, rootDir }) => runImportPersonAction(args, rootDir),
   update: ({ args, rootDir }) => runUpdatePersonAction(args, rootDir),
   disable: ({ args, rootDir }) => runStatusPersonAction("disable", args, rootDir),
   archive: ({ args, rootDir }) => runStatusPersonAction("archive", args, rootDir),
@@ -38,6 +40,7 @@ export interface RunManagePersonOptions {
   cwd?: string;
   stdout?: OutputWriter;
   stderr?: OutputWriter;
+  actionHandlers?: Partial<Record<ManagePersonAction, ActionHandler>>;
 }
 
 export const runManagePerson = async (
@@ -60,7 +63,7 @@ export const runManagePerson = async (
     return 0;
   }
 
-  const handler = ACTION_HANDLERS[invocation.action];
+  const handler = options.actionHandlers?.[invocation.action] ?? ACTION_HANDLERS[invocation.action];
   const result = await handler({
     action: invocation.action,
     rootDir: invocation.rootDir,

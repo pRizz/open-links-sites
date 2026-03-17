@@ -14,10 +14,10 @@
 
 ### Import and Enrichment
 
-- [ ] **IMPT-01**: Operator can seed a new person from a Linktree-style URL and have the repo crawl public data to collect links and basic profile metadata.
-- [ ] **IMPT-02**: Operator can seed a new person from a manual list of links when no source page is available.
-- [ ] **IMPT-03**: Operator can run upstream `open-links` extractors for a person to enrich imported links and profile data.
-- [ ] **IMPT-04**: Operator can cache extracted and enriched person data using the same general approach as upstream `open-links`.
+- [x] **IMPT-01**: Operator can seed a new person from a Linktree-style URL and have the repo crawl public data to collect links and basic profile metadata.
+- [x] **IMPT-02**: Operator can seed a new person from a manual list of links when no source page is available.
+- [x] **IMPT-03**: Operator can run upstream `open-links` extractors for a person to enrich imported links and profile data.
+- [x] **IMPT-04**: Operator can cache extracted and enriched person data using the same general approach as upstream `open-links`.
 
 ### Person Data Model
 
@@ -70,10 +70,10 @@
 | OPER-02 | Phase 1 | Complete |
 | OPER-03 | Phase 2 | Complete |
 | OPER-04 | Phase 2 | Complete |
-| IMPT-01 | Phase 3 | Pending |
-| IMPT-02 | Phase 3 | Pending |
-| IMPT-03 | Phase 3 | Pending |
-| IMPT-04 | Phase 3 | Pending |
+| IMPT-01 | Phase 3 | Complete |
+| IMPT-02 | Phase 3 | Complete |
+| IMPT-03 | Phase 3 | Complete |
+| IMPT-04 | Phase 3 | Complete |
 | DATA-01 | Phase 1 | Complete |
 | DATA-02 | Phase 1 | Complete |
 | DATA-03 | Phase 1 | Complete |
@@ -90,4 +90,4 @@
 
 ---
 *Requirements defined: 2026-03-17*
-*Last updated: 2026-03-17 after Phase 2 completion*
+*Last updated: 2026-03-17 after Phase 3 completion*

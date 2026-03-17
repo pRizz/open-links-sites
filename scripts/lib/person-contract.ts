@@ -12,6 +12,7 @@ export const PERSON_REQUIRED_FILES = [
   "site.json",
 ] as const;
 export const PERSON_REQUIRED_DIRECTORIES = ["assets"] as const;
+export const PERSON_OPTIONAL_DIRECTORIES = ["cache", "imports"] as const;
 export const PERSON_DISCOVERY_PATTERN = `${PEOPLE_ROOT}/*/${PERSON_METADATA_FILE}`;
 export const PERSON_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 export const LOCAL_ASSET_PATH_PREFIX = "assets/";
@@ -33,6 +34,7 @@ export const TEMPLATE_VARIABLES = {
 
 export type PersonRequiredFile = (typeof PERSON_REQUIRED_FILES)[number];
 export type PersonRequiredDirectory = (typeof PERSON_REQUIRED_DIRECTORIES)[number];
+export type PersonOptionalDirectory = (typeof PERSON_OPTIONAL_DIRECTORIES)[number];
 export type TemplateVariableName = keyof typeof TEMPLATE_VARIABLES;
 export type TemplateReplacementMap = Record<TemplateVariableName, string>;
 
@@ -67,6 +69,11 @@ export const getPersonFilePath = (personId: string, fileName: PersonRequiredFile
 export const getPersonDirectoryPath = (
   personId: string,
   directoryName: PersonRequiredDirectory,
+): string => posix.join(getPersonDirectory(personId), directoryName);
+
+export const getOptionalPersonDirectoryPath = (
+  personId: string,
+  directoryName: PersonOptionalDirectory,
 ): string => posix.join(getPersonDirectory(personId), directoryName);
 
 export const getRequiredPersonPaths = (personId: string): string[] => [

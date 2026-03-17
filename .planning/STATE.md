@@ -5,20 +5,20 @@
 See: .planning/PROJECT.md (updated 2026-03-17)
 
 **Core value:** I can onboard or update a person's OpenLinks site with minimal manual editing, and the repo reliably handles extraction, generation, and centralized deployment for me.
-**Current focus:** Phase 3 - Import and Enrichment Pipeline
+**Current focus:** Phase 4 - Selective Multi-Site Build and Deploy
 
 ## Current Position
 
-Phase: 3 of 5 (Import and Enrichment Pipeline)
+Phase: 4 of 5 (Selective Multi-Site Build and Deploy)
 Plan: 0 of 3 in current phase
-Status: Ready to plan
-Last activity: 2026-03-17 — Captured Phase 3 import and enrichment decisions for planning
+Status: Ready to discuss
+Last activity: 2026-03-17 — Completed Phase 3 import and enrichment pipeline implementation and verification
 
-Progress: [████░░░░░░] 40%
+Progress: [██████░░░░] 60%
 
 ## Performance Metrics
 
-- Total plans completed: 6
+- Total plans completed: 9
 - Average duration: 30s
 - Total execution time: 0.0 hours
 
@@ -45,6 +45,8 @@ Recent decisions affecting current work:
 - Phase 3: Import should fill blanks, preserve source order, and avoid overwriting curated existing data by default.
 - Phase 3: Run full upstream person-level enrichment automatically after intake, but skip unsupported domains with remediation instead of failing the whole import.
 - Phase 3: Keep useful partial imports and enrichment outputs when possible, and reserve hard failure for fully blocked runs.
+- Phase 3: Persist per-person helper cache and import artifacts under `people/<id>/cache/` and `people/<id>/imports/`, then replay them into `generated/<id>/` for upstream reruns.
+- Phase 3: Keep the upstream integration thin by invoking upstream script files against generated workspaces instead of reimplementing enrichment locally.
 
 ### Pending Todos
 
@@ -52,10 +54,10 @@ None yet.
 
 ### Blockers/Concerns
 
-- Upstream still expects URI-shaped avatar and media fields; later phases should preserve or remove the current explicit materialization-time translation boundary intentionally.
+- Phase 4 should build on the new helper-artifact contract instead of bypassing it when generating centralized multi-site output.
 
 ## Session Continuity
 
-Last session: 2026-03-17 04:27
-Stopped at: Phase 3 context gathered
-Resume file: .planning/phases/03-import-and-enrichment-pipeline/03-CONTEXT.md
+Last session: 2026-03-17 09:31
+Stopped at: Phase 3 complete
+Resume file: .planning/phases/03-import-and-enrichment-pipeline/03-VERIFICATION.md
