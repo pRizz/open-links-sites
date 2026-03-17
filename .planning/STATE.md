@@ -11,8 +11,8 @@ See: .planning/PROJECT.md (updated 2026-03-17)
 
 Phase: 2 of 5 (Guided Operator CRUD)
 Plan: 0 of 3 in current phase
-Status: Ready for phase discussion
-Last activity: 2026-03-17 — Completed and verified Phase 1 foundation flow
+Status: Ready to plan
+Last activity: 2026-03-17 — Captured Phase 2 context decisions for planning
 
 Progress: [██░░░░░░░░] 20%
 
@@ -36,6 +36,10 @@ Recent decisions affecting current work:
 - Phase 1: Keep starter JSON tokenized under `templates/default/` and route all later file creation through the shared contract module.
 - Phase 1: Validate against vendored upstream content schemas while preserving local `assets/...` source references through explicit normalization.
 - Phase 1: Use `generated/<id>/` as the disposable workspace boundary for translated `data/*.json` and staged public assets.
+- Phase 2: Use one primary guided skill as the operator surface, with CLI commands underneath it.
+- Phase 2: Keep create low-friction and write-first, then show validation-backed remediation summaries instead of forcing pre-write confirmation.
+- Phase 2: Keep update flows task-based and scoped tightly to the requested change.
+- Phase 2: Treat disable/archive as metadata state changes that preserve source folders, with archived people hidden by default.
 
 ### Pending Todos
 
@@ -47,6 +51,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17 02:55
-Stopped at: Completed Phase 1 foundation and data contracts
-Resume file: .planning/phases/01-foundation-and-data-contracts/01-VERIFICATION.md
+Last session: 2026-03-17 03:09
+Stopped at: Phase 2 context gathered
+Resume file: .planning/phases/02-guided-operator-crud/02-CONTEXT.md
