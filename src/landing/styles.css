@@ -1,0 +1,129 @@
+:root {
+  color: #13231e;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, rgba(229, 162, 94, 0.22), transparent 32rem),
+    linear-gradient(180deg, #fbf5eb 0%, #eef3ec 100%);
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+.shell {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 4rem;
+}
+
+.hero {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.hero-copy h1 {
+  margin: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  font-size: clamp(2.8rem, 6vw, 5.6rem);
+  line-height: 0.94;
+  letter-spacing: -0.05em;
+  max-width: 12ch;
+}
+
+.eyebrow,
+.panel-title,
+.card-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.eyebrow,
+.card-kicker {
+  color: #3d6a5b;
+}
+
+.lede,
+.card-body,
+.panel p,
+.steps {
+  font-size: 1.05rem;
+}
+
+.lede {
+  max-width: 38rem;
+  margin: 1.5rem 0 0;
+}
+
+.hero-card,
+.panel {
+  border: 1px solid rgba(19, 35, 30, 0.12);
+  border-radius: 1.5rem;
+  padding: 1.4rem;
+  background: rgba(255, 252, 246, 0.74);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1.2rem 3rem rgba(19, 35, 30, 0.08);
+}
+
+.hero-card {
+  max-width: 22rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.panel-title {
+  margin: 0 0 1rem;
+}
+
+.panel.accent {
+  background: linear-gradient(135deg, rgba(22, 71, 60, 0.95), rgba(41, 105, 84, 0.9));
+  color: #f5f7f2;
+}
+
+.steps {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.steps li + li {
+  margin-top: 0.8rem;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.18rem;
+}
+
+@media (min-width: 52rem) {
+  .hero {
+    grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.8fr);
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shell {
+    padding-top: 4rem;
+  }
+}

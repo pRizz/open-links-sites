@@ -1,0 +1,116 @@
+name: Deploy Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "people/**"
+      - "schemas/**"
+      - "scripts/**"
+      - "src/**"
+      - "templates/**"
+      - "bun.lock"
+      - "landing.html"
+      - "package.json"
+      - "tsconfig.json"
+      - "vite.landing.config.ts"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      pages_changed: ${{ steps.pages_plan.outputs.pages_changed }}
+    steps:
+      - name: Checkout open-links-sites
+        uses: actions/checkout@v5
+
+      - name: Checkout upstream open-links
+        uses: actions/checkout@v5
+        with:
+          repository: pRizz/open-links
+          path: upstream/open-links
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.9
+
+      - name: Install open-links-sites dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Install upstream open-links dependencies
+        working-directory: upstream/open-links
+        run: bun install --frozen-lockfile
+
+      - name: Resolve changed paths
+        shell: bash
+        run: |
+          mkdir -p .cache
+          if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+            git ls-files > .cache/changed-paths.txt
+          else
+            git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" > .cache/changed-paths.txt
+          fi
+
+      - name: Build multi-site output
+        id: site_build
+        env:
+          OPEN_LINKS_REPO_DIR: ${{ github.workspace }}/upstream/open-links
+          OPEN_LINKS_SITES_PUBLIC_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: |
+          bun run build:site -- --root "$GITHUB_WORKSPACE" --changed-paths-file .cache/changed-paths.txt --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" | tee .cache/build-summary.txt
+
+      - name: Finalize and plan Pages artifact
+        id: pages_plan
+        env:
+          OPEN_LINKS_SITES_PUBLIC_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: |
+          bun run scripts/deploy-pages-plan.ts --site-dir generated/site --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" | tee .cache/pages-plan-summary.txt
+
+      - name: Write workflow summary
+        shell: bash
+        run: |
+          cat .cache/build-summary.txt >> "$GITHUB_STEP_SUMMARY"
+          printf '\n' >> "$GITHUB_STEP_SUMMARY"
+          cat .cache/pages-plan-summary.txt >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Pages artifact
+        if: steps.pages_plan.outputs.pages_changed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: generated/site
+
+      - name: Upload diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy-pages-diagnostics
+          path: |
+            .cache
+            generated/site
+          if-no-files-found: ignore
+          retention-days: 7
+
+  deploy:
+    if: needs.build.outputs.pages_changed == 'true'
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

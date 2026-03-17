@@ -11,6 +11,10 @@
     "manage:person": "bun run scripts/manage-person.ts",
     "scaffold:person": "bun run scripts/scaffold-person.ts",
     "materialize:person": "bun run scripts/materialize-person.ts",
+    "build:person:site": "bun run scripts/build-person-site.ts",
+    "build:site": "bun run scripts/build-site.ts",
+    "changed:people": "bun run scripts/changed-people.ts",
+    "deploy:pages:plan": "bun run scripts/deploy-pages-plan.ts",
     "lint": "bunx @biomejs/biome check . --files-ignore-unknown=true",
     "format": "bunx @biomejs/biome format --write .",
     "check": "bun run typecheck && bun run lint && bun run test"
@@ -21,6 +25,9 @@
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "bun-types": "^1.3.9",
-    "typescript": "^5.9.3"
+    "solid-js": "^1.9.11",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vite-plugin-solid": "^2.11.10"
   }
 }

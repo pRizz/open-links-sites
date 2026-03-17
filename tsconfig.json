@@ -1,15 +1,21 @@
 {
   "compilerOptions": {
     "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "moduleDetection": "force",
     "resolveJsonModule": true,
     "strict": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "types": ["bun-types", "node"],
+    "types": ["bun-types", "node", "vite/client"],
     "verbatimModuleSyntax": true
   },
-  "include": ["scripts", "schemas", "templates"]
+  "include": ["scripts", "schemas", "src", "templates", "vite.landing.config.ts"]
 }

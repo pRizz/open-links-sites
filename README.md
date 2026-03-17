@@ -53,6 +53,8 @@ bun run validate
 bun run manage:person -- --help
 bun run scaffold:person -- --id alice-example --name "Alice Example"
 bun run materialize:person -- --id alice-example
+bun run build:person:site -- --id alice-example
+bun run build:site
 ```
 
 ## Source Of Truth
@@ -145,3 +147,26 @@ people/
 ```
 
 These helper artifacts support incremental reruns. They do not replace the canonical required files under `people/<id>/`.
+
+## Multi-Site Build Foundation
+
+Phase 4 adds the first centralized site-generation layer on top of the existing
+materialize/import contract:
+
+1. `bun run build:person:site -- --id <id>` materializes one active person and
+   asks the upstream `open-links` repo to build a self-contained site under
+   `generated/site/<id>/`.
+2. `bun run build:site` builds every active person into `generated/site/<id>/`
+   and also generates the root landing page at `generated/site/index.html`.
+3. Disabled or archived people are omitted from generated output.
+
+The upstream renderer stays canonical for person pages. This repo owns the thin
+orchestration layer around it plus the root landing page.
+
+Selective-build helpers are now available too:
+
+```bash
+bun run changed:people -- --base-ref HEAD~1
+bun run build:site -- --changed-paths-file .cache/changed-paths.txt --public-origin "https://USER.github.io/open-links-sites"
+bun run deploy:pages:plan -- --site-dir generated/site --public-origin "https://USER.github.io/open-links-sites"
+```
