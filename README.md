@@ -49,6 +49,8 @@ bun install
 bun run typecheck
 bun test
 bun run validate
+bun run scaffold:person -- --id alice-example --name "Alice Example"
+bun run materialize:person -- --id alice-example
 ```
 
 ## Source Of Truth
@@ -62,3 +64,14 @@ The Phase 1 contract is defined in:
 
 Later phases will add validation, scaffold flows, and generated per-person
 workspaces on top of this contract.
+
+## Foundation Flow
+
+Phase 1 establishes a deterministic low-level flow:
+
+1. `bun run scaffold:person -- --id <id> --name "<Name>"` creates `people/<id>/`
+   from the default templates and copies placeholder assets.
+2. `bun run validate` checks structure, schema compatibility, asset isolation,
+   and placeholder guidance.
+3. `bun run materialize:person -- --id <id>` writes a disposable
+   `generated/<id>/` workspace with `data/*.json` and staged public assets.
