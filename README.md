@@ -79,6 +79,15 @@ That skill drives the underlying CLI surface:
 bun run manage:person -- <action> [options]
 ```
 
+Supported actions:
+
+- `create`
+- `update`
+- `disable`
+- `archive`
+
+Direct JSON editing remains the low-level fallback, not the preferred CRUD path.
+
 ## Foundation Flow
 
 Phase 1 establishes a deterministic low-level flow:

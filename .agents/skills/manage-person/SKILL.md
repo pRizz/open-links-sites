@@ -17,6 +17,13 @@ Use this skill as the primary operator workflow for person CRUD in this repo.
 3. Drive the repo scripts instead of hand-editing JSON.
 4. After writing, show a short summary and include validation warnings or suggestions when present.
 
+## Action Menu
+
+- `create`: bootstrap a new person from only a name plus optional seed URL
+- `update`: apply one scoped profile, site, or orchestration change to an existing person
+- `disable`: mark a person excluded from future build/deploy flows
+- `archive`: mark a person archived and hidden by default in normal operator flows
+
 ## Required Behavior
 
 - Treat this skill as the preferred CRUD surface over raw file editing.
