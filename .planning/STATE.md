@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-03-17)
 Phase: 1 of 5 (Foundation and Data Contracts)
 Plan: 0 of 3 in current phase
 Status: Ready to plan
-Last activity: 2026-03-17 — Initial roadmap and state created from approved project scope
+Last activity: 2026-03-17 — Captured Phase 1 context decisions for planning
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -31,6 +31,8 @@ Recent decisions affecting current work:
 
 - Initialization: Keep this repo as a thin orchestrator around upstream `open-links`.
 - Initialization: Optimize v1 for a single engineer managing many people through guided automation.
+- Phase 1: Use `people/*/person.json` discovery with required canonical files and per-person asset isolation.
+- Phase 1: Keep public content files upstream-compatible and push shared content validation upstream over time.
 
 ### Pending Todos
 
@@ -42,6 +44,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17 01:40
-Stopped at: Created the initial roadmap and queued Phase 1 for planning
-Resume file: None
+Last session: 2026-03-17 02:29
+Stopped at: Phase 1 context gathered
+Resume file: .planning/phases/01-foundation-and-data-contracts/01-CONTEXT.md
