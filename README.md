@@ -203,3 +203,26 @@ The main deploy workflow now also treats that file as build-relevant input:
 
 - push-triggered deploys build against the pinned upstream commit from `config/upstream-open-links.json`
 - nightly scheduled deploys rebuild current `main` against that same pinned upstream commit and only deploy when `deploy-manifest.json` differs from the live Pages site
+
+## Release Verification
+
+Phase 5 also adds one shared release gate:
+
+```bash
+bun run release:verify -- --root "$PWD" --public-origin "https://USER.github.io/open-links-sites"
+```
+
+That command is now reused by both scheduled upstream sync and the deploy
+workflow. It runs:
+
+1. `bun run check`
+2. `bun run validate`
+3. a Pages-ready site build for the current mode
+4. Pages artifact planning
+5. lightweight smoke checks against `generated/site/`
+
+Operational posture for v1:
+
+- relevant release workflows share the same non-overlap concurrency group
+- failures stop before publish and surface in concise stage-based summaries
+- recovery is fix-forward on `main`; no automatic rollback is attempted

@@ -9,6 +9,7 @@
     "test": "bun test",
     "validate": "bun run scripts/validate.ts",
     "sync:upstream": "bun run scripts/sync-upstream.ts",
+    "release:verify": "bun run scripts/release-verify.ts",
     "manage:person": "bun run scripts/manage-person.ts",
     "scaffold:person": "bun run scripts/scaffold-person.ts",
     "materialize:person": "bun run scripts/materialize-person.ts",

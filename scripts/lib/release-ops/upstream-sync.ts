@@ -1,4 +1,3 @@
-import { formatStageSummary } from "./release-summary";
 import {
   type OpenLinksUpstreamState,
   getOpenLinksUpstreamStatePath,
@@ -7,6 +6,7 @@ import {
   shortCommit,
   writeOpenLinksUpstreamState,
 } from "./upstream-state";
+import { formatWorkflowSummary } from "./workflow-summary";
 
 export type UpstreamSyncResultType = "no-op" | "changed" | "blocked";
 
@@ -45,16 +45,31 @@ const buildSyncSummary = (result: SyncUpstreamResult): string => {
   const trackedCommit = result.trackedState ? shortCommit(result.trackedState.commit) : undefined;
   const latestCommit = result.latestState ? shortCommit(result.latestState.commit) : undefined;
 
-  return formatStageSummary("## Upstream Sync", [
-    `- Result: \`${result.result}\``,
-    result.trackedState ? `- Repository: \`${result.trackedState.repository}\`` : undefined,
-    result.trackedState ? `- Branch: \`${result.trackedState.branch}\`` : undefined,
-    trackedCommit ? `- Tracked commit: \`${trackedCommit}\`` : undefined,
-    latestCommit ? `- Latest commit: \`${latestCommit}\`` : undefined,
-    `- State file: \`${result.statePath}\``,
-    `- Verification required: \`${result.verificationRequired}\``,
-    result.reason ? `- Reason: ${result.reason}` : undefined,
-  ]);
+  return formatWorkflowSummary(
+    "Upstream Sync",
+    result.result,
+    [
+      result.trackedState ? `- Repository: \`${result.trackedState.repository}\`` : undefined,
+      result.trackedState ? `- Branch: \`${result.trackedState.branch}\`` : undefined,
+      trackedCommit ? `- Tracked commit: \`${trackedCommit}\`` : undefined,
+      latestCommit ? `- Latest commit: \`${latestCommit}\`` : undefined,
+      `- State file: \`${result.statePath}\``,
+      `- Verification required: \`${result.verificationRequired}\``,
+    ],
+    [
+      {
+        key: "sync-state",
+        status: result.result === "blocked" ? "failed" : result.result,
+        detail: result.reason,
+        remediation:
+          result.result === "blocked"
+            ? "inspect the tracked state file or upstream open-links checkout"
+            : result.result === "changed"
+              ? "run release verification before publishing to main"
+              : undefined,
+      },
+    ],
+  );
 };
 
 export const syncUpstreamState = async (

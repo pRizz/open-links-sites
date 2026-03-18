@@ -52,9 +52,11 @@ jobs:
 
       - name: Verify releasable state
         if: steps.sync.outputs.sync_result == 'changed'
+        env:
+          OPEN_LINKS_REPO_DIR: ${{ github.workspace }}/upstream/open-links
+          OPEN_LINKS_SITES_PUBLIC_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: |
-          bun run check
-          bun run validate
+          bun run release:verify -- --root "$GITHUB_WORKSPACE" --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" --event-name "$GITHUB_EVENT_NAME" | tee .cache/release-verify-summary.txt
 
       - name: Commit and push synced upstream state
         if: steps.sync.outputs.sync_result == 'changed'
@@ -76,6 +78,10 @@ jobs:
           if [[ -f .cache/upstream-sync-summary.txt ]]; then
             cat .cache/upstream-sync-summary.txt >> "$GITHUB_STEP_SUMMARY"
           fi
+          if [[ -f .cache/release-verify-summary.txt ]]; then
+            printf '\n' >> "$GITHUB_STEP_SUMMARY"
+            cat .cache/release-verify-summary.txt >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: Upload diagnostics on failure
         if: failure()
@@ -85,5 +91,6 @@ jobs:
           path: |
             .cache
             config/upstream-open-links.json
+            generated/site
           if-no-files-found: ignore
           retention-days: 7

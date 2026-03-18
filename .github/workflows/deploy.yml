@@ -26,15 +26,15 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-${{ github.ref_name }}
-  cancel-in-progress: true
+  group: release-main
+  cancel-in-progress: false
 
 jobs:
   build:
     if: github.ref_name == '' || github.ref_name == 'main'
     runs-on: ubuntu-latest
     outputs:
-      pages_changed: ${{ steps.pages_plan.outputs.pages_changed }}
+      pages_changed: ${{ steps.release_verify.outputs.pages_changed }}
     steps:
       - name: Checkout open-links-sites
         uses: actions/checkout@v5
@@ -77,37 +77,28 @@ jobs:
             git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" > .cache/changed-paths.txt
           fi
 
-      - name: Build multi-site output
-        id: site_build
+      - name: Run release verification
+        id: release_verify
         shell: bash
         env:
           OPEN_LINKS_REPO_DIR: ${{ github.workspace }}/upstream/open-links
           OPEN_LINKS_SITES_PUBLIC_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: |
           if [[ "${{ steps.context.outputs.use_changed_paths }}" == "true" ]]; then
-            bun run build:site -- --root "$GITHUB_WORKSPACE" --changed-paths-file .cache/changed-paths.txt --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" | tee .cache/build-summary.txt
+            bun run release:verify -- --root "$GITHUB_WORKSPACE" --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" --event-name "$GITHUB_EVENT_NAME" --changed-paths-file .cache/changed-paths.txt | tee .cache/release-verify-summary.txt
           else
-            bun run build:site -- --root "$GITHUB_WORKSPACE" --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" | tee .cache/build-summary.txt
+            bun run release:verify -- --root "$GITHUB_WORKSPACE" --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" --event-name "$GITHUB_EVENT_NAME" | tee .cache/release-verify-summary.txt
           fi
-
-      - name: Finalize and plan Pages artifact
-        id: pages_plan
-        env:
-          OPEN_LINKS_SITES_PUBLIC_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
-        run: |
-          bun run scripts/deploy-pages-plan.ts --site-dir generated/site --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" --deploy-mode "${{ steps.context.outputs.deploy_mode }}" --upstream-commit "${{ steps.context.outputs.upstream_commit }}" --upstream-repository "${{ steps.context.outputs.upstream_repository }}" | tee .cache/pages-plan-summary.txt
 
       - name: Write workflow summary
         shell: bash
         run: |
           cat .cache/deploy-context-summary.txt >> "$GITHUB_STEP_SUMMARY"
           printf '\n' >> "$GITHUB_STEP_SUMMARY"
-          cat .cache/build-summary.txt >> "$GITHUB_STEP_SUMMARY"
-          printf '\n' >> "$GITHUB_STEP_SUMMARY"
-          cat .cache/pages-plan-summary.txt >> "$GITHUB_STEP_SUMMARY"
+          cat .cache/release-verify-summary.txt >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload Pages artifact
-        if: steps.pages_plan.outputs.pages_changed == 'true'
+        if: steps.release_verify.outputs.pages_changed == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: generated/site
