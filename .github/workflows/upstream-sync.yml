@@ -1,0 +1,89 @@
+name: Upstream Sync
+
+on:
+  schedule:
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.ref_name == '' || github.ref_name == 'main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout open-links-sites
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Checkout upstream open-links
+        uses: actions/checkout@v5
+        with:
+          repository: pRizz/open-links
+          path: upstream/open-links
+          ref: main
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.9
+
+      - name: Install open-links-sites dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Install upstream open-links dependencies
+        working-directory: upstream/open-links
+        run: bun install --frozen-lockfile
+
+      - name: Sync pinned upstream state
+        id: sync
+        env:
+          OPEN_LINKS_REPO_DIR: ${{ github.workspace }}/upstream/open-links
+        run: |
+          mkdir -p .cache
+          bun run sync:upstream -- --root "$GITHUB_WORKSPACE" --upstream-repo-dir "$OPEN_LINKS_REPO_DIR" | tee .cache/upstream-sync-summary.txt
+
+      - name: Verify releasable state
+        if: steps.sync.outputs.sync_result == 'changed'
+        run: |
+          bun run check
+          bun run validate
+
+      - name: Commit and push synced upstream state
+        if: steps.sync.outputs.sync_result == 'changed'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/upstream-open-links.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "chore(upstream): sync open-links to ${{ steps.sync.outputs.sync_latest_commit }}"
+          git push origin HEAD:main
+
+      - name: Publish workflow summary
+        if: always()
+        shell: bash
+        run: |
+          if [[ -f .cache/upstream-sync-summary.txt ]]; then
+            cat .cache/upstream-sync-summary.txt >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: upstream-sync-diagnostics
+          path: |
+            .cache
+            config/upstream-open-links.json
+          if-no-files-found: ignore
+          retention-days: 7

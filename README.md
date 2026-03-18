@@ -170,3 +170,31 @@ bun run changed:people -- --base-ref HEAD~1
 bun run build:site -- --changed-paths-file .cache/changed-paths.txt --public-origin "https://USER.github.io/open-links-sites"
 bun run deploy:pages:plan -- --site-dir generated/site --public-origin "https://USER.github.io/open-links-sites"
 ```
+
+## Autonomous Upstream Sync
+
+Phase 5 starts tracking the upstream `open-links` revision explicitly in:
+
+- `config/upstream-open-links.json`
+
+That file is the pinned upstream contract for release operations. The first
+automation entrypoint is:
+
+```bash
+bun run sync:upstream -- --root "$PWD"
+```
+
+By default it compares the tracked upstream commit to the currently resolved
+`open-links` checkout, updates the tracked state file when upstream has moved,
+and prints a stage-based summary. It never pushes by itself.
+
+The scheduled workflow for this lives at:
+
+- `.github/workflows/upstream-sync.yml`
+
+That workflow:
+
+1. checks out this repo plus upstream `open-links`
+2. refreshes `config/upstream-open-links.json` when upstream has moved
+3. runs `bun run check` and `bun run validate`
+4. commits and pushes one consolidated sync commit to `main` only if verification passed
