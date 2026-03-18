@@ -1,8 +1,15 @@
 import type { BuildSiteResult } from "../build/build-site";
 import type { ExecuteBuildSelectionResult } from "../build/selective-build";
+import { shortCommit } from "../release-ops/upstream-state";
 import type { PlanPagesDeploymentResult } from "./pages-plan";
 
 type BuildSummaryInput = BuildSiteResult | ExecuteBuildSelectionResult;
+
+export interface PagesPlanSummaryContext {
+  deployMode?: string;
+  upstreamCommit?: string;
+  upstreamRepository?: string;
+}
 
 export const formatBuildSummary = (result: BuildSummaryInput): string =>
   [
@@ -18,11 +25,22 @@ export const formatBuildSummary = (result: BuildSummaryInput): string =>
     .filter((entry): entry is string => Boolean(entry))
     .join("\n");
 
-export const formatPagesPlanSummary = (result: PlanPagesDeploymentResult): string =>
+export const formatPagesPlanSummary = (
+  result: PlanPagesDeploymentResult,
+  context: PagesPlanSummaryContext = {},
+): string =>
   [
     "## GitHub Pages",
+    context.deployMode ? `- Trigger mode: \`${context.deployMode}\`` : undefined,
+    context.upstreamCommit
+      ? `- Pinned upstream: \`${context.upstreamRepository ?? "pRizz/open-links"}@${shortCommit(
+          context.upstreamCommit,
+        )}\``
+      : undefined,
     `- Changed: \`${result.changed}\``,
     `- Artifact hash: \`${result.artifactHash}\``,
     `- Uploads: \`${result.diff.uploads.length}\``,
     `- Deletes: \`${result.diff.deletes.length}\``,
-  ].join("\n");
+  ]
+    .filter((entry): entry is string => Boolean(entry))
+    .join("\n");

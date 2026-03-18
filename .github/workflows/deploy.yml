@@ -5,6 +5,7 @@ on:
     branches:
       - main
     paths:
+      - "config/**"
       - "people/**"
       - "schemas/**"
       - "scripts/**"
@@ -15,6 +16,8 @@ on:
       - "package.json"
       - "tsconfig.json"
       - "vite.landing.config.ts"
+  schedule:
+    - cron: "0 9 * * *"
   workflow_dispatch:
 
 permissions:
@@ -28,23 +31,34 @@ concurrency:
 
 jobs:
   build:
+    if: github.ref_name == '' || github.ref_name == 'main'
     runs-on: ubuntu-latest
     outputs:
       pages_changed: ${{ steps.pages_plan.outputs.pages_changed }}
     steps:
       - name: Checkout open-links-sites
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.9
+
+      - name: Resolve deploy context
+        id: context
+        shell: bash
+        run: |
+          mkdir -p .cache
+          bun run scripts/resolve-deploy-context.ts -- --root "$GITHUB_WORKSPACE" --event-name "$GITHUB_EVENT_NAME" | tee .cache/deploy-context-summary.txt
 
       - name: Checkout upstream open-links
         uses: actions/checkout@v5
         with:
           repository: pRizz/open-links
           path: upstream/open-links
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.3.9
+          ref: ${{ steps.context.outputs.upstream_commit }}
 
       - name: Install open-links-sites dependencies
         run: bun install --frozen-lockfile
@@ -54,9 +68,9 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Resolve changed paths
+        if: steps.context.outputs.use_changed_paths == 'true'
         shell: bash
         run: |
-          mkdir -p .cache
           if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
             git ls-files > .cache/changed-paths.txt
           else
@@ -65,22 +79,29 @@ jobs:
 
       - name: Build multi-site output
         id: site_build
+        shell: bash
         env:
           OPEN_LINKS_REPO_DIR: ${{ github.workspace }}/upstream/open-links
           OPEN_LINKS_SITES_PUBLIC_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: |
-          bun run build:site -- --root "$GITHUB_WORKSPACE" --changed-paths-file .cache/changed-paths.txt --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" | tee .cache/build-summary.txt
+          if [[ "${{ steps.context.outputs.use_changed_paths }}" == "true" ]]; then
+            bun run build:site -- --root "$GITHUB_WORKSPACE" --changed-paths-file .cache/changed-paths.txt --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" | tee .cache/build-summary.txt
+          else
+            bun run build:site -- --root "$GITHUB_WORKSPACE" --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" | tee .cache/build-summary.txt
+          fi
 
       - name: Finalize and plan Pages artifact
         id: pages_plan
         env:
           OPEN_LINKS_SITES_PUBLIC_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: |
-          bun run scripts/deploy-pages-plan.ts --site-dir generated/site --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" | tee .cache/pages-plan-summary.txt
+          bun run scripts/deploy-pages-plan.ts --site-dir generated/site --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" --deploy-mode "${{ steps.context.outputs.deploy_mode }}" --upstream-commit "${{ steps.context.outputs.upstream_commit }}" --upstream-repository "${{ steps.context.outputs.upstream_repository }}" | tee .cache/pages-plan-summary.txt
 
       - name: Write workflow summary
         shell: bash
         run: |
+          cat .cache/deploy-context-summary.txt >> "$GITHUB_STEP_SUMMARY"
+          printf '\n' >> "$GITHUB_STEP_SUMMARY"
           cat .cache/build-summary.txt >> "$GITHUB_STEP_SUMMARY"
           printf '\n' >> "$GITHUB_STEP_SUMMARY"
           cat .cache/pages-plan-summary.txt >> "$GITHUB_STEP_SUMMARY"

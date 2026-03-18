@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 import { planPagesDeployment } from "./lib/deploy/pages-plan";
+import { formatPagesPlanSummary } from "./lib/deploy/pages-summary";
 
 const tempDirs: string[] = [];
 
@@ -74,5 +75,29 @@ describe("deploy-pages-plan", () => {
     expect(secondPlan.changed).toBe(false);
     expect(secondPlan.diff.uploads).toHaveLength(0);
     expect(secondPlan.diff.deletes).toHaveLength(0);
+  });
+
+  test("formats a nightly summary with pinned upstream details", async () => {
+    const siteDir = createTempSiteDir();
+    writeFileSync(join(siteDir, "index.html"), "<html></html>\n", "utf8");
+
+    const result = await planPagesDeployment(
+      {
+        siteDir,
+        publicOrigin: "https://example.com/open-links-sites",
+      },
+      {
+        fetch: async () => new Response(null, { status: 404 }),
+      },
+    );
+
+    const summary = formatPagesPlanSummary(result, {
+      deployMode: "nightly",
+      upstreamCommit: "1234567890abcdef",
+      upstreamRepository: "pRizz/open-links",
+    });
+
+    expect(summary).toContain("Trigger mode: `nightly`");
+    expect(summary).toContain("Pinned upstream: `pRizz/open-links@1234567890ab`");
   });
 });

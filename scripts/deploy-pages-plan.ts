@@ -3,6 +3,7 @@ import process from "node:process";
 
 import { getGeneratedSiteLayout } from "./lib/build/site-layout";
 import { planPagesDeployment } from "./lib/deploy/pages-plan";
+import { formatPagesPlanSummary } from "./lib/deploy/pages-summary";
 
 type OutputFormat = "human" | "json";
 
@@ -10,6 +11,9 @@ interface ParsedArgs {
   siteDir: string;
   publicOrigin: string;
   format: OutputFormat;
+  deployMode?: string;
+  upstreamCommit?: string;
+  upstreamRepository?: string;
 }
 
 const parseArgs = (): ParsedArgs => {
@@ -38,6 +42,9 @@ const parseArgs = (): ParsedArgs => {
     siteDir,
     publicOrigin,
     format: readFlag("--format") === "json" ? "json" : "human",
+    deployMode: readFlag("--deploy-mode"),
+    upstreamCommit: readFlag("--upstream-commit"),
+    upstreamRepository: readFlag("--upstream-repository"),
   };
 };
 
@@ -59,13 +66,11 @@ const main = async (): Promise<void> => {
   const output =
     args.format === "json"
       ? JSON.stringify(result, null, 2)
-      : [
-          `Changed: ${result.changed}`,
-          `Artifact: ${result.artifactDir}`,
-          `Artifact hash: ${result.artifactHash}`,
-          `Uploads: ${result.diff.uploads.length}`,
-          `Deletes: ${result.diff.deletes.length}`,
-        ].join("\n");
+      : formatPagesPlanSummary(result, {
+          deployMode: args.deployMode,
+          upstreamCommit: args.upstreamCommit,
+          upstreamRepository: args.upstreamRepository,
+        });
 
   process.stdout.write(`${output}\n`);
 };

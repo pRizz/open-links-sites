@@ -198,3 +198,8 @@ That workflow:
 2. refreshes `config/upstream-open-links.json` when upstream has moved
 3. runs `bun run check` and `bun run validate`
 4. commits and pushes one consolidated sync commit to `main` only if verification passed
+
+The main deploy workflow now also treats that file as build-relevant input:
+
+- push-triggered deploys build against the pinned upstream commit from `config/upstream-open-links.json`
+- nightly scheduled deploys rebuild current `main` against that same pinned upstream commit and only deploy when `deploy-manifest.json` differs from the live Pages site
