@@ -1,5 +1,13 @@
 import { afterEach, describe, expect, test } from "bun:test";
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import process from "node:process";
@@ -10,6 +18,8 @@ import { buildSite } from "./lib/build/build-site";
 import { detectBuildSelection } from "./lib/build/change-detection";
 import { executeBuildSelection } from "./lib/build/selective-build";
 import { getGeneratedPersonSiteDir, getGeneratedSiteLayout } from "./lib/build/site-layout";
+import { resolveOpenLinksRepoDir } from "./lib/build/upstream-site-builder";
+import { getPersonHelperLayout } from "./lib/import/cache-layout";
 
 const tempRoots: string[] = [];
 
@@ -52,6 +62,67 @@ const disableFixture = (rootDir: string, personId: string): void => {
   writeFileSync(personPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
 };
 
+const writeJson = (filePath: string, value: unknown): void => {
+  writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
+};
+
+const seedHermeticFixture = (rootDir: string, personId: string): void => {
+  writeJson(join(rootDir, "people", personId, "profile.json"), {
+    $schema: "https://open-links.dev/schema/profile.schema.json",
+    name: "Hermetic Fixture Person",
+    headline: "Hermetic Fixture Headline",
+    avatar: "assets/avatar-placeholder.svg",
+    bio: "Hermetic fixture bio",
+    location: "Fixture City",
+    profileLinks: [
+      {
+        label: "Fixture Link",
+        url: "https://fixture.example/profile",
+      },
+    ],
+    custom: {
+      bootstrapStatus: "ready",
+    },
+  });
+  writeJson(join(rootDir, "people", personId, "links.json"), {
+    $schema: "https://open-links.dev/schema/links.schema.json",
+    links: [
+      {
+        id: "fixture-link",
+        label: "Fixture Link",
+        url: "https://fixture.example/profile",
+        type: "simple",
+        description: "Fixture profile link",
+        enabled: true,
+      },
+      {
+        id: "fixture-social",
+        label: "Fixture Social",
+        url: "https://social.fixture.example/@fixture",
+        type: "simple",
+        description: "Fixture social link",
+        enabled: true,
+      },
+    ],
+    groups: [],
+    order: ["fixture-link", "fixture-social"],
+    custom: {},
+  });
+
+  const helperLayout = getPersonHelperLayout(rootDir, personId);
+  mkdirSync(helperLayout.dirs.contentImages, { recursive: true });
+  writeJson(helperLayout.files.contentImagesManifest, {
+    generatedAt: "2026-03-17T12:00:00.000Z",
+    bySlot: {
+      "fixture-link:image": {
+        resolvedPath: "cache/content-images/fixture-preview.jpg",
+        updatedAt: "2026-03-17T12:00:00.000Z",
+      },
+    },
+  });
+  writeFileSync(join(helperLayout.dirs.contentImages, "fixture-preview.jpg"), "fixture-image");
+};
+
 afterEach(() => {
   for (const rootDir of tempRoots.splice(0)) {
     rmSync(rootDir, { recursive: true, force: true });
@@ -86,6 +157,66 @@ describe("build-site", () => {
     expect(result.personId).toBe("fixture-user");
     expect(existsSync(join(result.outputDir, "index.html"))).toBe(true);
     expect(existsSync(join(result.outputDir, "assets"))).toBe(true);
+  });
+
+  test("person-build: hermetic wrapper isolates staged person content from upstream repo data", async () => {
+    const rootDir = createTempRoot();
+    scaffoldFixture(rootDir, "fixture-user", "Fixture User");
+    seedHermeticFixture(rootDir, "fixture-user");
+
+    const upstreamRoot = resolveOpenLinksRepoDir();
+    const upstreamProfile = JSON.parse(
+      readFileSync(join(upstreamRoot, "data", "profile.json"), "utf8"),
+    ) as { name?: string };
+    const upstreamLinks = JSON.parse(
+      readFileSync(join(upstreamRoot, "data", "links.json"), "utf8"),
+    ) as { links?: Array<{ url?: string }> };
+    const upstreamName = upstreamProfile.name;
+    const upstreamLinkUrl = upstreamLinks.links?.find((link) => typeof link.url === "string")?.url;
+
+    const result = await buildPersonSite({
+      rootDir,
+      personId: "fixture-user",
+      buildTimestamp: "2026-03-17T12:00:00.000Z",
+    });
+
+    const builtScriptName = readdirSync(join(result.outputDir, "assets")).find(
+      (fileName) => fileName.startsWith("index-") && fileName.endsWith(".js"),
+    );
+    expect(builtScriptName).toBeDefined();
+    if (!builtScriptName) {
+      throw new Error("Expected the person build to emit an index script.");
+    }
+
+    const builtScript = readFileSync(join(result.outputDir, "assets", builtScriptName), "utf8");
+    expect(builtScript).toContain("Hermetic Fixture Person");
+    expect(builtScript).toContain("https://fixture.example/profile");
+    expect(upstreamName).toBeTruthy();
+    expect(upstreamLinkUrl).toBeTruthy();
+    if (!upstreamName || !upstreamLinkUrl) {
+      throw new Error("Expected upstream fixture data to expose a name and primary link URL.");
+    }
+
+    expect(builtScript).not.toContain(upstreamName);
+    expect(builtScript).not.toContain(upstreamLinkUrl);
+
+    const builtContentImageNames = readdirSync(join(result.outputDir, "cache", "content-images"));
+    expect(builtContentImageNames).toEqual(["fixture-preview.jpg"]);
+
+    const upstreamContentImageNames = new Set(
+      readdirSync(join(upstreamRoot, "public", "cache", "content-images")),
+    );
+    expect(builtContentImageNames.some((fileName) => upstreamContentImageNames.has(fileName))).toBe(
+      false,
+    );
+
+    const historyIndex = JSON.parse(
+      readFileSync(join(result.outputDir, "history", "followers", "index.json"), "utf8"),
+    ) as { entries?: Array<{ linkId?: string }> };
+    expect(historyIndex.entries ?? []).toEqual([]);
+    expect(readdirSync(join(result.outputDir, "history", "followers")).sort()).toEqual([
+      "index.json",
+    ]);
   });
 
   test("full-build: only active people are built while landing output stays at root", async () => {
