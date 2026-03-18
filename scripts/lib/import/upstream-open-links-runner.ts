@@ -6,11 +6,11 @@ import process from "node:process";
 
 import type { GeneratedWorkspaceLayout } from "./cache-layout";
 
-const DEFAULT_OPEN_LINKS_CANDIDATES = [
-  process.env.OPEN_LINKS_REPO_DIR,
+const getDefaultOpenLinksCandidates = (): string[] => [
+  process.env.OPEN_LINKS_REPO_DIR ?? "",
   join(homedir(), "Repos", "open-links"),
   join(homedir(), "open-links"),
-] as const;
+];
 
 const PUBLIC_RICH_HOSTS = new Set(["medium.com", "primal.net", "twitter.com", "x.com"]);
 
@@ -43,7 +43,7 @@ export interface RunUpstreamOpenLinksInput {
 }
 
 const resolveOpenLinksRepoDir = (): string => {
-  for (const candidate of DEFAULT_OPEN_LINKS_CANDIDATES) {
+  for (const candidate of getDefaultOpenLinksCandidates()) {
     if (!candidate) {
       continue;
     }

@@ -5,10 +5,38 @@ import { pathToFileURL } from "node:url";
 import { getGeneratedWorkspaceLayout, getPersonHelperLayout } from "./import/cache-layout";
 import { GENERATED_ROOT, PERSON_REQUIRED_FILES, isLocalAssetReference } from "./person-contract";
 import { discoverPeople } from "./person-discovery";
+import { resolveOpenLinksRepoDir } from "./release-ops/upstream-state";
 import { validateDiscoveredPerson } from "./validate-person";
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
+
+const syncUpstreamWorkspaceSupportFiles = (outputDir: string): void => {
+  let upstreamRepoDir: string;
+  try {
+    upstreamRepoDir = resolveOpenLinksRepoDir();
+  } catch {
+    return;
+  }
+
+  cpSync(join(upstreamRepoDir, "schema"), join(outputDir, "schema"), {
+    recursive: true,
+  });
+  cpSync(join(upstreamRepoDir, "data", "policy"), join(outputDir, "data", "policy"), {
+    recursive: true,
+  });
+  cpSync(
+    join(upstreamRepoDir, "data", "cache", "rich-authenticated-cache.json"),
+    join(outputDir, "data", "cache", "rich-authenticated-cache.json"),
+  );
+  cpSync(
+    join(upstreamRepoDir, "public", "history", "followers"),
+    join(outputDir, "public", "history", "followers"),
+    {
+      recursive: true,
+    },
+  );
+};
 
 const translateLocalAssetReferences = (value: unknown, publicRoot: string): unknown => {
   if (typeof value === "string") {
@@ -79,6 +107,7 @@ export const materializePerson = async (
   mkdirSync(layout.dirs.profileAvatar, { recursive: true });
   mkdirSync(layout.dirs.contentImages, { recursive: true });
   mkdirSync(layout.dirs.richAuthenticated, { recursive: true });
+  syncUpstreamWorkspaceSupportFiles(outputDir);
 
   for (const fileName of PERSON_REQUIRED_FILES) {
     if (fileName === "person.json") {

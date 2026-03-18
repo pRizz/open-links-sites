@@ -1,0 +1,81 @@
+{
+  "$schema": "../../schema/rich-authenticated-cache.schema.json",
+  "version": 1,
+  "updatedAt": "2026-03-09T09:33:35.738Z",
+  "entries": {
+    "linkedin": {
+      "extractorId": "linkedin-auth-browser",
+      "linkId": "linkedin",
+      "sourceUrl": "https://www.linkedin.com/in/peter-ryszkiewicz/",
+      "capturedAt": "2026-02-25T10:17:17.267Z",
+      "metadata": {
+        "title": "Peter Ryszkiewicz | LinkedIn",
+        "description": "Talented software engineer, excited to work on new and challenging problems.",
+        "image": "cache/rich-authenticated/ba084a969cc2c5cdf91ef15cdc66611f8bcfeb914cb62d812970766c1a9361ec.jpg",
+        "sourceLabel": "linkedin.com"
+      },
+      "assets": {
+        "image": {
+          "path": "cache/rich-authenticated/ba084a969cc2c5cdf91ef15cdc66611f8bcfeb914cb62d812970766c1a9361ec.jpg",
+          "sourceUrl": "https://media.licdn.com/dms/image/v2/C5603AQEYNo0rQlIviQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1517464087773?e=1773878400&v=beta&t=M_0TDR4fSQ5tT83Ore-wWExsvRMKWKLQD3S4FTOMlb8",
+          "contentType": "image/jpeg",
+          "bytes": 10973,
+          "sha256": "ba084a969cc2c5cdf91ef15cdc66611f8bcfeb914cb62d812970766c1a9361ec"
+        }
+      },
+      "diagnostics": {
+        "extractorVersion": "2026-02-25.1",
+        "selectorProfile": "linkedin-profile-v1",
+        "placeholderSignals": [],
+        "capturedFromUrl": "https://www.linkedin.com/in/peter-ryszkiewicz/",
+        "notes": [
+          "session=openlinks-linkedin-cache-validate",
+          "sessionName=openlinks-linkedin-cache-validate",
+          "cacheKey=linkedin"
+        ]
+      }
+    },
+    "facebook": {
+      "extractorId": "facebook-auth-browser",
+      "linkId": "facebook",
+      "sourceUrl": "https://www.facebook.com/peter.ryszkiewicz",
+      "capturedAt": "2026-03-09T09:33:35.004Z",
+      "metadata": {
+        "title": "Peter Ryszkiewicz on Facebook",
+        "description": "Profile and updates from Peter Ryszkiewicz on Facebook.",
+        "image": "cache/rich-authenticated/907f849213ad603ab737606ac6a5ced5e58b0e4e969ff9a67517d47c0e9e1230.jpg",
+        "profileImage": "cache/rich-authenticated/907f849213ad603ab737606ac6a5ced5e58b0e4e969ff9a67517d47c0e9e1230.jpg",
+        "sourceLabel": "facebook.com"
+      },
+      "assets": {
+        "image": {
+          "path": "cache/rich-authenticated/907f849213ad603ab737606ac6a5ced5e58b0e4e969ff9a67517d47c0e9e1230.jpg",
+          "sourceUrl": "https://scontent-ord5-2.xx.fbcdn.net/v/t39.30808-1/596895069_10240990652012377_7291841355833992522_n.jpg?stp=c523.224.1304.1304a_dst-jpg_s480x480_tt6&_nc_cat=104&ccb=1-7&_nc_sid=1d2534&_nc_ohc=Z_G9qij4CZkQ7kNvwFHBd_a&_nc_oc=AdkwkjYgDPyOnHg3gbL9AYgxXQ-vuymCUP_29BJeHXi67O91gGE91-jPGQ-rA9CenD0&_nc_zt=24&_nc_ht=scontent-ord5-2.xx&_nc_gid=d4dD0YbwkNH_68nKPOsB2Q&_nc_ss=8&oh=00_AfxZRMYW8awjQwzzg8u0zFrSVfIEoBZWTHfc4TpMBHZAnQ&oe=69B47A59",
+          "contentType": "image/jpeg",
+          "bytes": 53016,
+          "sha256": "907f849213ad603ab737606ac6a5ced5e58b0e4e969ff9a67517d47c0e9e1230"
+        },
+        "profileImage": {
+          "path": "cache/rich-authenticated/907f849213ad603ab737606ac6a5ced5e58b0e4e969ff9a67517d47c0e9e1230.jpg",
+          "sourceUrl": "https://scontent-ord5-2.xx.fbcdn.net/v/t39.30808-1/596895069_10240990652012377_7291841355833992522_n.jpg?stp=c523.224.1304.1304a_dst-jpg_s480x480_tt6&_nc_cat=104&ccb=1-7&_nc_sid=1d2534&_nc_ohc=Z_G9qij4CZkQ7kNvwFHBd_a&_nc_oc=AdkwkjYgDPyOnHg3gbL9AYgxXQ-vuymCUP_29BJeHXi67O91gGE91-jPGQ-rA9CenD0&_nc_zt=24&_nc_ht=scontent-ord5-2.xx&_nc_gid=d4dD0YbwkNH_68nKPOsB2Q&_nc_ss=8&oh=00_AfxZRMYW8awjQwzzg8u0zFrSVfIEoBZWTHfc4TpMBHZAnQ&oe=69B47A59",
+          "contentType": "image/jpeg",
+          "bytes": 53016,
+          "sha256": "907f849213ad603ab737606ac6a5ced5e58b0e4e969ff9a67517d47c0e9e1230"
+        }
+      },
+      "diagnostics": {
+        "extractorVersion": "2026-02-28.3",
+        "selectorProfile": "facebook-profile-auth-v5",
+        "placeholderSignals": [],
+        "capturedFromUrl": "https://www.facebook.com/peter.ryszkiewicz",
+        "notes": [
+          "cacheKey=facebook",
+          "identifier=peter.ryszkiewicz",
+          "authState=authenticated",
+          "session=openlinks-facebook-auth",
+          "sessionName=openlinks-facebook-auth"
+        ]
+      }
+    }
+  }
+}

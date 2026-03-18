@@ -303,6 +303,75 @@ describe("manage-person surface", () => {
     expect(links.order).toEqual(["github", "website"]);
   });
 
+  test("import-action: classifies X community urls as simple links during bootstrap", async () => {
+    const rootDir = createFixtureRoot();
+    const { stdout, stderr, stdoutWriter, stderrWriter } = createCapturedWriters();
+    const sourceUrl = "https://linktr.ee/community-example";
+    const html = `
+      <html>
+        <head>
+          <title>Community Example | Linktree</title>
+        </head>
+        <body>
+          <h1>Community Example</h1>
+          <a href="https://x.com/i/communities/1871996451812769951">Community</a>
+          <a href="https://community.example.com">Website</a>
+        </body>
+      </html>
+    `;
+
+    const exitCode = await runManagePerson(["import", "--source-url", sourceUrl], {
+      cwd: rootDir,
+      stdout: stdoutWriter,
+      stderr: stderrWriter,
+      actionHandlers: {
+        import: createImportActionHandler({
+          importIntake: {
+            fetchSourceHtml: async () => ({
+              finalUrl: sourceUrl,
+              html,
+            }),
+          },
+          runUpstreamOpenLinks: async () => ({
+            steps: [
+              { key: "enrich-rich-links", status: "ran", blocking: false },
+              { key: "sync-profile-avatar", status: "ran", blocking: false },
+              { key: "sync-content-images", status: "ran", blocking: false },
+              { key: "public-rich-sync", status: "ran", blocking: false },
+              { key: "validate-data", status: "ran", blocking: false },
+            ],
+          }),
+        }),
+      },
+    });
+
+    expect(exitCode).toBe(0);
+    expect(stderr.join("")).toBe("");
+    expect(stdout.join("")).toContain("Import complete: community-example.");
+
+    const links = JSON.parse(
+      readFileSync(join(rootDir, "people", "community-example", "links.json"), "utf8"),
+    ) as {
+      links: Array<{ id: string; type: string }>;
+    };
+
+    expect(
+      links.links.map((entry) => ({
+        id: entry.id,
+        type: entry.type,
+      })),
+    ).toEqual([
+      {
+        id: "community",
+        type: "simple",
+      },
+      {
+        id: "website",
+        type: "rich",
+      },
+    ]);
+  });
+
   test("import-merge: imports into an existing person conservatively and preserves curated order", async () => {
     const rootDir = createFixtureRoot();
     const personDir = join(rootDir, "people", "alice-example");

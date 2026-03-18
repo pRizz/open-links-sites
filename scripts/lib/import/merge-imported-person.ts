@@ -132,6 +132,32 @@ const normalizeLinkCandidate = (candidate: ImportedLinkCandidate): ImportedLinkC
   label: normalizeWhitespace(candidate.label) || deriveDefaultLinkLabel(candidate.url),
 });
 
+const isXCommunityUrl = (value: string): boolean => {
+  if (!isRemoteHttpUrl(value)) {
+    return false;
+  }
+
+  try {
+    const parsed = new URL(value);
+    const host = parsed.hostname.replace(/^www\./u, "").toLowerCase();
+    const normalizedPath = parsed.pathname.replace(/\/+$/u, "");
+    return (
+      (host === "x.com" || host === "twitter.com") && normalizedPath.startsWith("/i/communities")
+    );
+  } catch {
+    return false;
+  }
+};
+
+const resolveImportedLinkType = (url: string): "rich" | "simple" => {
+  // X community pages are a known direct-fetch blocker upstream, so import them as simple links.
+  if (!isRemoteHttpUrl(url) || isXCommunityUrl(url)) {
+    return "simple";
+  }
+
+  return "rich";
+};
+
 const createLinkRecord = (
   linkId: string,
   candidate: ImportedLinkCandidate,
@@ -152,7 +178,7 @@ const createLinkRecord = (
     id: linkId,
     label: candidate.label,
     url: candidate.url,
-    type: isRemoteHttpUrl(candidate.url) ? "rich" : "simple",
+    type: resolveImportedLinkType(candidate.url),
     enabled: true,
     custom,
   };

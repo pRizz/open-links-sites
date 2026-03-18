@@ -22,11 +22,11 @@ export interface ResolveLatestUpstreamStateInput {
 const DEFAULT_UPSTREAM_REPOSITORY = "pRizz/open-links";
 const DEFAULT_UPSTREAM_BRANCH = "main";
 const UPSTREAM_STATE_RELATIVE_PATH = ["config", "upstream-open-links.json"] as const;
-const DEFAULT_OPEN_LINKS_CANDIDATES = [
-  process.env.OPEN_LINKS_REPO_DIR,
+const getDefaultOpenLinksCandidates = (): string[] => [
+  process.env.OPEN_LINKS_REPO_DIR ?? "",
   join(homedir(), "Repos", "open-links"),
   join(homedir(), "open-links"),
-] as const;
+];
 
 const isNonEmptyString = (value: unknown): value is string =>
   typeof value === "string" && value.trim().length > 0;
@@ -112,7 +112,7 @@ export const writeOpenLinksUpstreamState = async (
 };
 
 export const resolveOpenLinksRepoDir = (explicitRepoDir?: string): string => {
-  const candidates = [explicitRepoDir, ...DEFAULT_OPEN_LINKS_CANDIDATES];
+  const candidates = [explicitRepoDir, ...getDefaultOpenLinksCandidates()];
 
   for (const candidate of candidates) {
     if (!candidate) {

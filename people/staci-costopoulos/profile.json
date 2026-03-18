@@ -1,0 +1,25 @@
+{
+  "$schema": "https://open-links.dev/schema/profile.schema.json",
+  "name": "Staci Costopoulos",
+  "headline": "TODO: add a short headline",
+  "avatar": "https://linktr.ee/og/image/XSTACI.jpg",
+  "bio": "Host of Bitcoin Nova Podcast | X Community Leader",
+  "location": "TODO: add location",
+  "profileLinks": [
+    {
+      "label": "Primary Link",
+      "url": "https://bitcoinblacksheep.com/"
+    },
+    {
+      "label": "Live with the Hive Podcast",
+      "url": "https://youtube.com/@livewiththehive?si=tQizrqZ7AVqSBimH&amp;sub_confirmation=1"
+    },
+    {
+      "label": "Paranoid Bitcoin Anarchists",
+      "url": "https://x.com/i/communities/1871996451812769951"
+    }
+  ],
+  "custom": {
+    "bootstrapStatus": "placeholder"
+  }
+}

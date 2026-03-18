@@ -1,0 +1,32 @@
+{
+  "$schema": "../../schemas/person.schema.json",
+  "id": "staci-costopoulos",
+  "displayName": "Staci Costopoulos",
+  "enabled": true,
+  "lifecycle": {
+    "status": "active"
+  },
+  "source": {
+    "kind": "linktree",
+    "seedUrls": [
+      "https://bitcoinblacksheep.com/",
+      "https://linktr.ee/XSTACI",
+      "https://microseed.io/?ref=XSTACI",
+      "https://chewfugum.com/",
+      "https://satoshoes.co.uk/?ref=xstac1",
+      "https://content.thebitcoinadviser.com/the-bitcoin-nova",
+      "https://bitcoinnova.store/",
+      "mailto:TheBitcoinNova@gmail.com",
+      "https://youtube.com/@livewiththehive?si=tQizrqZ7AVqSBimH&amp;sub_confirmation=1",
+      "https://x.com/i/communities/1871996451812769951",
+      "https://suno.com/playlist/2c53c4e4-e7c0-4772-b2c2-bb1d16c4d2ab",
+      "https://signup.cluborange.org/co/bitcoinnova",
+      "https://www.audible.com/pd/B0DZJV461D?source_code=ASSORAP0511160006&amp;share_location=podcast_show_detail",
+      "https://music.amazon.com/podcasts/9d4d6b00-3b5f-4bfa-93d6-b40bf4e12a69/the-bitcoin-nova-podcast",
+      "https://rumble.com/c/c-7752998"
+    ],
+    "url": "https://linktr.ee/XSTACI",
+    "lastImportedAt": "2026-03-18T08:33:11.712Z"
+  },
+  "custom": {}
+}

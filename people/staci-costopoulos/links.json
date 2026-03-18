@@ -1,0 +1,219 @@
+{
+  "$schema": "https://open-links.dev/schema/links.schema.json",
+  "links": [
+    {
+      "id": "home-bitcoin-black-sheep-25",
+      "label": "Home - Bitcoin Black Sheep $25",
+      "url": "https://bitcoinblacksheep.com/",
+      "type": "rich",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    },
+    {
+      "id": "microseed",
+      "label": "MicroSeed",
+      "url": "https://microseed.io/?ref=XSTACI",
+      "type": "rich",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    },
+    {
+      "id": "home-fugum",
+      "label": "Home - FUGUM",
+      "url": "https://chewfugum.com/",
+      "type": "rich",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    },
+    {
+      "id": "satoshoes-97",
+      "label": "Satoshoes $97",
+      "url": "https://satoshoes.co.uk/?ref=xstac1",
+      "type": "rich",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    },
+    {
+      "id": "the-bitcoin-adviser-the-bitcoin-nova",
+      "label": "The Bitcoin Adviser - The Bitcoin Nova",
+      "url": "https://content.thebitcoinadviser.com/the-bitcoin-nova",
+      "type": "rich",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    },
+    {
+      "id": "the-bitcoin-nova",
+      "label": "The Bitcoin Nova",
+      "url": "https://bitcoinnova.store/",
+      "type": "rich",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    },
+    {
+      "id": "bookings-thebitcoinnova-gmail-com",
+      "label": "bookings.thebitcoinnova@gmail.com",
+      "url": "mailto:TheBitcoinNova@gmail.com",
+      "type": "simple",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    },
+    {
+      "id": "live-with-the-hive-podcast",
+      "label": "Live with the Hive Podcast",
+      "url": "https://youtube.com/@livewiththehive?si=tQizrqZ7AVqSBimH&amp;sub_confirmation=1",
+      "type": "rich",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    },
+    {
+      "id": "paranoid-bitcoin-anarchists",
+      "label": "Paranoid Bitcoin Anarchists",
+      "url": "https://x.com/i/communities/1871996451812769951",
+      "type": "simple",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    },
+    {
+      "id": "xstaci-sweet-biddi-beats-by-thebitcoinnova-suno",
+      "label": "XSTACI Sweet Biddi Beats by @thebitcoinnova | Suno",
+      "url": "https://suno.com/playlist/2c53c4e4-e7c0-4772-b2c2-bb1d16c4d2ab",
+      "type": "rich",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    },
+    {
+      "id": "club-orange",
+      "label": "Club Orange",
+      "url": "https://signup.cluborange.org/co/bitcoinnova",
+      "type": "rich",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    },
+    {
+      "id": "audible-the-bitcoin-nova-podcast",
+      "label": "Audible: The Bitcoin Nova Podcast",
+      "url": "https://www.audible.com/pd/B0DZJV461D?source_code=ASSORAP0511160006&amp;share_location=podcast_show_detail",
+      "type": "rich",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    },
+    {
+      "id": "the-bitcoin-nova-podcast-on-amazon-music",
+      "label": "The Bitcoin Nova Podcast on Amazon Music",
+      "url": "https://music.amazon.com/podcasts/9d4d6b00-3b5f-4bfa-93d6-b40bf4e12a69/the-bitcoin-nova-podcast",
+      "type": "rich",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    },
+    {
+      "id": "rumble",
+      "label": "RUMBLE",
+      "url": "https://rumble.com/c/c-7752998",
+      "type": "rich",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T08:23:23.515Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
+    }
+  ],
+  "groups": [],
+  "order": [
+    "home-bitcoin-black-sheep-25",
+    "microseed",
+    "home-fugum",
+    "satoshoes-97",
+    "the-bitcoin-adviser-the-bitcoin-nova",
+    "the-bitcoin-nova",
+    "bookings-thebitcoinnova-gmail-com",
+    "live-with-the-hive-podcast",
+    "paranoid-bitcoin-anarchists",
+    "xstaci-sweet-biddi-beats-by-thebitcoinnova-suno",
+    "club-orange",
+    "audible-the-bitcoin-nova-podcast",
+    "the-bitcoin-nova-podcast-on-amazon-music",
+    "rumble"
+  ],
+  "custom": {}
+}

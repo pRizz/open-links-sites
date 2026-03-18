@@ -5,11 +5,11 @@ import { homedir, tmpdir } from "node:os";
 import path, { join } from "node:path";
 import process from "node:process";
 
-const DEFAULT_OPEN_LINKS_CANDIDATES = [
-  process.env.OPEN_LINKS_REPO_DIR,
+const getDefaultOpenLinksCandidates = (): string[] => [
+  process.env.OPEN_LINKS_REPO_DIR ?? "",
   join(homedir(), "Repos", "open-links"),
   join(homedir(), "open-links"),
-] as const;
+];
 const ROOT_FILE_NAMES = ["index.html", "package.json", "tsconfig.json", "vite.config.ts"] as const;
 const ROOT_DIRECTORY_NAMES = ["node_modules", "scripts", "src"] as const;
 const ROOT_DATA_DIRECTORY = "data";
@@ -29,7 +29,7 @@ export interface UpstreamWorkspaceSiteBuildResult {
 }
 
 export const resolveOpenLinksRepoDir = (): string => {
-  for (const candidate of DEFAULT_OPEN_LINKS_CANDIDATES) {
+  for (const candidate of getDefaultOpenLinksCandidates()) {
     if (!candidate) {
       continue;
     }
