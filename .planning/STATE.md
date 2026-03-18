@@ -5,20 +5,20 @@
 See: .planning/PROJECT.md (updated 2026-03-17)
 
 **Core value:** I can onboard or update a person's OpenLinks site with minimal manual editing, and the repo reliably handles extraction, generation, and centralized deployment for me.
-**Current focus:** Phase 5 - Autonomous Upstream Sync and Release Ops
+**Current focus:** Milestone complete - ready for audit
 
 ## Current Position
 
 Phase: 5 of 5 (Autonomous Upstream Sync and Release Ops)
-Plan: 0 of 3 in current phase
-Status: Ready for planning
-Last activity: 2026-03-17 — Captured Phase 5 context for autonomous sync and release operations
+Plan: 3 of 3 in current phase
+Status: Complete
+Last activity: 2026-03-17 — Completed Phase 5 autonomous sync and release operations
 
-Progress: [████████░░] 80%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
-- Total plans completed: 12
+- Total plans completed: 15
 - Average duration: 30s
 - Total execution time: 0.0 hours
 
@@ -55,6 +55,9 @@ Recent decisions affecting current work:
 - Phase 5: Push-triggered CI remains the primary validation/deploy path, while nightly automation acts as a no-op-capable backstop for missed deploy-relevant deltas.
 - Phase 5: Automation failures should stop before writing unreleasable state, with concise GitHub Actions summaries as the primary operator signal.
 - Phase 5: Recovery posture should be non-overlapping, fail-fast, and fix-forward on `main`, with lightweight operational smoke checks added beyond existing gates.
+- Phase 5: `config/upstream-open-links.json` is now the pinned upstream revision contract used by both sync and deploy automation.
+- Phase 5: `release:verify` is the shared gate for sync and deploy workflows, combining check, validate, build, Pages planning, and smoke checks.
+- Phase 5: Sync and deploy workflows now share the `release-main` concurrency group so release-critical automation does not overlap unpredictably.
 
 ### Pending Todos
 
@@ -62,10 +65,10 @@ None yet.
 
 ### Blockers/Concerns
 
-- Phase 5 planning needs to keep direct-to-`main` sync, nightly deploy backstops, and new smoke checks coordinated without introducing overlapping workflow races.
+- No current blockers. v1 is ready for milestone audit.
 
 ## Session Continuity
 
 Last session: 2026-03-17 10:02
-Stopped at: Phase 5 ready for planning
-Resume file: .planning/phases/05-autonomous-upstream-sync-and-release-ops/05-CONTEXT.md
+Stopped at: Milestone complete, awaiting audit
+Resume file: .planning/phases/05-autonomous-upstream-sync-and-release-ops/05-VERIFICATION.md

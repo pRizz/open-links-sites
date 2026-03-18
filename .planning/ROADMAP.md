@@ -10,7 +10,7 @@
 - [x] **Phase 2: Guided Operator CRUD** - Add the top-level skill/CLI flows that let the operator create, update, disable, and scaffold people without manual JSON editing.
 - [x] **Phase 3: Import and Enrichment Pipeline** - Bootstrap people from Linktree-like sources or manual links, then enrich and cache data through upstream `open-links` extraction flows.
 - [x] **Phase 4: Selective Multi-Site Build and Deploy** - Generate path-based output for enabled people and deploy only changed sites through centralized CI.
-- [ ] **Phase 5: Autonomous Upstream Sync and Release Ops** - Automate daily upstream updates, nightly deployment checks, and fail-fast operational feedback on `main`.
+- [x] **Phase 5: Autonomous Upstream Sync and Release Ops** - Automate daily upstream updates, nightly deployment checks, and fail-fast operational feedback on `main`.
 
 ## Phase Details
 
@@ -86,9 +86,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 05-01: Implement the daily upstream sync workflow and direct-to-main update path.
-- [ ] 05-02: Implement nightly delta detection and deployment orchestration.
-- [ ] 05-03: Harden fail-fast reporting, rollback expectations, and operational checks.
+- [x] 05-01: Implement the daily upstream sync workflow and direct-to-main update path.
+- [x] 05-02: Implement nightly delta detection and deployment orchestration.
+- [x] 05-03: Harden fail-fast reporting, rollback expectations, and operational checks.
 
 ## Progress
 
@@ -98,4 +98,4 @@ Plans:
 | 2. Guided Operator CRUD | 3/3 | Complete | 2026-03-17 |
 | 3. Import and Enrichment Pipeline | 3/3 | Complete | 2026-03-17 |
 | 4. Selective Multi-Site Build and Deploy | 3/3 | Complete | 2026-03-17 |
-| 5. Autonomous Upstream Sync and Release Ops | 0/3 | Not started | - |
+| 5. Autonomous Upstream Sync and Release Ops | 3/3 | Complete | 2026-03-17 |

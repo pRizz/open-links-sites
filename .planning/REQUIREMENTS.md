@@ -29,12 +29,12 @@
 
 - [x] **DEPL-01**: Operator can generate centralized path-based static output for every enabled person from one repo using upstream `open-links`.
 - [x] **DEPL-02**: Operator can have CI rebuild and deploy only changed people when person data changes.
-- [ ] **DEPL-03**: Operator can have nightly automation deploy site deltas to GitHub Pages when upstream or person data changes require it.
+- [x] **DEPL-03**: Operator can have nightly automation deploy site deltas to GitHub Pages when upstream or person data changes require it.
 
 ### Automation and Reliability
 
-- [ ] **AUTO-01**: Operator can run a daily automation that updates this repo against upstream `open-links` directly on `main`.
-- [ ] **AUTO-02**: Operator can see validation, extraction, upstream update, and deployment failures immediately through fail-fast automation.
+- [x] **AUTO-01**: Operator can run a daily automation that updates this repo against upstream `open-links` directly on `main`.
+- [x] **AUTO-02**: Operator can see validation, extraction, upstream update, and deployment failures immediately through fail-fast automation.
 
 ## v2 Requirements
 
@@ -79,9 +79,9 @@
 | DATA-03 | Phase 1 | Complete |
 | DEPL-01 | Phase 4 | Complete |
 | DEPL-02 | Phase 4 | Complete |
-| DEPL-03 | Phase 5 | Pending |
-| AUTO-01 | Phase 5 | Pending |
-| AUTO-02 | Phase 5 | Pending |
+| DEPL-03 | Phase 5 | Complete |
+| AUTO-01 | Phase 5 | Complete |
+| AUTO-02 | Phase 5 | Complete |
 
 **Coverage:**
 - v1 requirements: 16 total
@@ -90,4 +90,4 @@
 
 ---
 *Requirements defined: 2026-03-17*
-*Last updated: 2026-03-17 after Phase 4 completion*
+*Last updated: 2026-03-17 after Phase 5 completion*
