@@ -11,8 +11,8 @@ See: .planning/PROJECT.md (updated 2026-03-17)
 
 Phase: 5 of 5 (Autonomous Upstream Sync and Release Ops)
 Plan: 0 of 3 in current phase
-Status: Ready for context
-Last activity: 2026-03-17 — Completed Phase 4 selective build/deploy implementation and verification
+Status: Ready for planning
+Last activity: 2026-03-17 — Captured Phase 5 context for autonomous sync and release operations
 
 Progress: [████████░░] 80%
 
@@ -51,6 +51,10 @@ Recent decisions affecting current work:
 - Phase 4: Keep the root landing page local to this repo with isolated `landing-assets/` output under `generated/site/`.
 - Phase 4: Detect changed people from git paths, restore the current live Pages artifact before targeted overlays, and fail open to a full rebuild when selection confidence is low.
 - Phase 4: Finalize `generated/site/` with `deploy-manifest.json` and skip Pages deploys cleanly when the live manifest already matches the built artifact.
+- Phase 5: Daily sync should track the latest upstream `open-links` default-branch commit and may land direct-to-`main` compatibility updates when verification passes.
+- Phase 5: Push-triggered CI remains the primary validation/deploy path, while nightly automation acts as a no-op-capable backstop for missed deploy-relevant deltas.
+- Phase 5: Automation failures should stop before writing unreleasable state, with concise GitHub Actions summaries as the primary operator signal.
+- Phase 5: Recovery posture should be non-overlapping, fail-fast, and fix-forward on `main`, with lightweight operational smoke checks added beyond existing gates.
 
 ### Pending Todos
 
@@ -58,10 +62,10 @@ None yet.
 
 ### Blockers/Concerns
 
-- Phase 5 needs a safe direct-to-main upstream sync flow that keeps the new selective Pages build/deploy path predictable in CI.
+- Phase 5 planning needs to keep direct-to-`main` sync, nightly deploy backstops, and new smoke checks coordinated without introducing overlapping workflow races.
 
 ## Session Continuity
 
 Last session: 2026-03-17 10:02
-Stopped at: Phase 5 ready for context
-Resume file: .planning/phases/04-selective-multi-site-build-and-deploy/04-VERIFICATION.md
+Stopped at: Phase 5 ready for planning
+Resume file: .planning/phases/05-autonomous-upstream-sync-and-release-ops/05-CONTEXT.md
