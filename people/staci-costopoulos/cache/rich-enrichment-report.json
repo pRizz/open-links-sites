@@ -1,132 +1,21 @@
 {
-  "generatedAt": "2026-03-18T09:39:15.191Z",
+  "generatedAt": "2026-03-18T11:24:40.263Z",
   "strict": false,
   "summary": {
-    "total": 14,
-    "fetched": 11,
+    "total": 11,
+    "fetched": 8,
     "partial": 3,
     "failed": 0,
     "skipped": 0
   },
   "entries": [
     {
-      "linkId": "home-bitcoin-black-sheep-25",
-      "url": "https://bitcoinblacksheep.com/",
-      "status": "partial",
-      "reason": "metadata_partial",
-      "attempts": 2,
-      "durationMs": 321.940542,
-      "statusCode": 200,
-      "message": "Partial preview metadata found; missing fields will use fallback values.",
-      "remediation": "Fill missing preview fields via link.metadata or improve target-site SEO metadata completeness.",
-      "metadata": {
-        "title": "Home - Bitcoin Black Sheep",
-        "description": "Bitcoin Black Sheep This isn’t fashion for the masses. It’s a uniform for those who refuse to be led. Bitcoin Black Sheep was born for the ones who never fit the mold. The ones who question everything. The ones who refuse to shrink just to make other people comfortable. This isn’t a brand for everyone....",
-        "sourceLabel": "bitcoinblacksheep.com",
-        "enrichmentStatus": "partial",
-        "enrichmentReason": "metadata_partial",
-        "enrichedAt": "2026-03-18T09:39:15.191Z"
-      },
-      "blocking": false
-    },
-    {
-      "linkId": "microseed",
-      "url": "https://microseed.io/?ref=XSTACI",
-      "status": "fetched",
-      "reason": "metadata_complete",
-      "attempts": 2,
-      "durationMs": 2360.705208,
-      "statusCode": 200,
-      "message": "Preview metadata fetched successfully.",
-      "remediation": "No action required.",
-      "metadata": {
-        "title": "Home - MicroSeed",
-        "description": "Premium Seed Phrase Backup MicroSeed engraves your entire Bitcoin seed phrase on fireproof, waterproof steel or titanium the size of a coin Unlock Security",
-        "image": "https://microseed.io/wp-content/uploads/2025/08/IMG_1276-2-rotated.jpg",
-        "ogImage": "https://microseed.io/wp-content/uploads/2025/08/IMG_1276-2-rotated.jpg",
-        "twitterImage": "https://microseed.io/wp-content/uploads/2025/08/IMG_1276-2-rotated.jpg",
-        "sourceLabel": "microseed.io",
-        "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-18T09:39:15.191Z"
-      },
-      "blocking": false
-    },
-    {
-      "linkId": "home-fugum",
-      "url": "https://chewfugum.com/",
-      "status": "fetched",
-      "reason": "metadata_complete",
-      "attempts": 2,
-      "durationMs": 2912.152458,
-      "statusCode": 200,
-      "message": "Preview metadata fetched successfully.",
-      "remediation": "No action required.",
-      "metadata": {
-        "title": "FUgum Home Page",
-        "description": "FUGUM is a chewing gum and lifestyle brand offering gum, apparel, and stickers built around pause, clarity, and calm in a noisy world.",
-        "image": "https://chewfugum.com/wp-content/uploads/2026/02/IMG_6567.jpg",
-        "ogImage": "https://chewfugum.com/wp-content/uploads/2026/02/IMG_6567.jpg",
-        "twitterImage": "https://i0.wp.com/chewfugum.com/wp-content/uploads/2026/02/IMG_6567.jpg?fit=1206%2C899&ssl=1",
-        "sourceLabel": "chewfugum.com",
-        "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-18T09:39:15.191Z"
-      },
-      "blocking": false
-    },
-    {
-      "linkId": "satoshoes-97",
-      "url": "https://satoshoes.co.uk/?ref=xstac1",
-      "status": "fetched",
-      "reason": "metadata_complete",
-      "attempts": 2,
-      "durationMs": 340.73733300000004,
-      "statusCode": 200,
-      "message": "Preview metadata fetched successfully.",
-      "remediation": "No action required.",
-      "metadata": {
-        "title": "Satoshoes",
-        "description": "Discover Satoshoes, your go-to for bold Bitcoin-themed casual sneakers. Shop vibrant, Bitcoin-inspired designs that blend style and passion for Bitcoin. Perfect for enthusiasts and trendsetters alike",
-        "image": "http://satoshoes.co.uk/cdn/shop/files/New_Satoshoes_Logo.png?height=628&pad_color=ffffff&v=1764584362&width=1200",
-        "ogImage": "http://satoshoes.co.uk/cdn/shop/files/New_Satoshoes_Logo.png?height=628&pad_color=ffffff&v=1764584362&width=1200",
-        "sourceLabel": "satoshoes.co.uk",
-        "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-18T09:39:15.191Z"
-      },
-      "blocking": false
-    },
-    {
-      "linkId": "the-bitcoin-adviser-the-bitcoin-nova",
-      "url": "https://content.thebitcoinadviser.com/the-bitcoin-nova",
-      "status": "fetched",
-      "reason": "metadata_complete",
-      "attempts": 2,
-      "durationMs": 247.87520800000038,
-      "statusCode": 200,
-      "message": "Preview metadata fetched successfully.",
-      "remediation": "No action required.",
-      "metadata": {
-        "title": "The Bitcoin Adviser - The Bitcoin Nova",
-        "description": "Secure your Bitcoin with expert guidance at The Bitcoin Adviser. We help you transition off exchanges, focusing on your unique goals and providing peace of mind for your investments.",
-        "image": "https://content.thebitcoinadviser.com/hubfs/block3.png",
-        "ogImage": "https://content.thebitcoinadviser.com/hubfs/block3.png",
-        "twitterImage": "https://content.thebitcoinadviser.com/hubfs/block3.png",
-        "sourceLabel": "content.thebitcoinadviser.com",
-        "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-18T09:39:15.191Z"
-      },
-      "blocking": false
-    },
-    {
       "linkId": "the-bitcoin-nova",
       "url": "https://bitcoinnova.store/",
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 216.6589159999994,
+      "durationMs": 348.62841699999996,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -139,17 +28,37 @@
         "sourceLabel": "bitcoinnova.store",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-18T09:39:15.191Z"
+        "enrichedAt": "2026-03-18T11:24:40.263Z"
+      },
+      "blocking": false
+    },
+    {
+      "linkId": "home-bitcoin-black-sheep",
+      "url": "https://bitcoinblacksheep.com/",
+      "status": "partial",
+      "reason": "metadata_partial",
+      "attempts": 2,
+      "durationMs": 363.96645800000005,
+      "statusCode": 200,
+      "message": "Partial preview metadata found; missing fields will use fallback values.",
+      "remediation": "Fill missing preview fields via link.metadata or improve target-site SEO metadata completeness.",
+      "metadata": {
+        "title": "Home - Bitcoin Black Sheep",
+        "description": "Bitcoin Black Sheep This isn’t fashion for the masses. It’s a uniform for those who refuse to be led. Bitcoin Black Sheep was born for the ones who never fit the mold. The ones who question everything. The ones who refuse to shrink just to make other people comfortable. This isn’t a brand for everyone....",
+        "sourceLabel": "bitcoinblacksheep.com",
+        "enrichmentStatus": "partial",
+        "enrichmentReason": "metadata_partial",
+        "enrichedAt": "2026-03-18T11:24:40.263Z"
       },
       "blocking": false
     },
     {
       "linkId": "live-with-the-hive-podcast",
-      "url": "https://youtube.com/@livewiththehive?si=tQizrqZ7AVqSBimH&amp;sub_confirmation=1",
+      "url": "https://youtube.com/@livewiththehive?si=tQizrqZ7AVqSBimH&sub_confirmation=1",
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 297.56408399999964,
+      "durationMs": 344.8268750000001,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -163,7 +72,7 @@
         "sourceLabel": "youtube.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-18T09:39:15.191Z",
+        "enrichedAt": "2026-03-18T11:24:40.263Z",
         "profileImage": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj"
       },
       "blocking": false,
@@ -171,12 +80,34 @@
       "missingProfileFields": ["subscribersCount"]
     },
     {
+      "linkId": "satoshoes",
+      "url": "https://satoshoes.co.uk/?ref=xstac1",
+      "status": "fetched",
+      "reason": "metadata_complete",
+      "attempts": 2,
+      "durationMs": 771.950333,
+      "statusCode": 200,
+      "message": "Preview metadata fetched successfully.",
+      "remediation": "No action required.",
+      "metadata": {
+        "title": "Satoshoes",
+        "description": "Discover Satoshoes, your go-to for bold Bitcoin-themed casual sneakers. Shop vibrant, Bitcoin-inspired designs that blend style and passion for Bitcoin. Perfect for enthusiasts and trendsetters alike",
+        "image": "http://satoshoes.co.uk/cdn/shop/files/New_Satoshoes_Logo.png?height=628&pad_color=ffffff&v=1764584362&width=1200",
+        "ogImage": "http://satoshoes.co.uk/cdn/shop/files/New_Satoshoes_Logo.png?height=628&pad_color=ffffff&v=1764584362&width=1200",
+        "sourceLabel": "satoshoes.co.uk",
+        "enrichmentStatus": "fetched",
+        "enrichmentReason": "metadata_complete",
+        "enrichedAt": "2026-03-18T11:24:40.263Z"
+      },
+      "blocking": false
+    },
+    {
       "linkId": "xstaci-sweet-biddi-beats-by-thebitcoinnova-suno",
       "url": "https://suno.com/playlist/2c53c4e4-e7c0-4772-b2c2-bb1d16c4d2ab",
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 355.5301669999999,
+      "durationMs": 479.5552080000002,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -189,7 +120,53 @@
         "sourceLabel": "suno.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-18T09:39:15.191Z"
+        "enrichedAt": "2026-03-18T11:24:40.263Z"
+      },
+      "blocking": false
+    },
+    {
+      "linkId": "the-bitcoin-adviser-the-bitcoin-nova",
+      "url": "https://content.thebitcoinadviser.com/the-bitcoin-nova",
+      "status": "fetched",
+      "reason": "metadata_complete",
+      "attempts": 2,
+      "durationMs": 290.68608300000005,
+      "statusCode": 200,
+      "message": "Preview metadata fetched successfully.",
+      "remediation": "No action required.",
+      "metadata": {
+        "title": "The Bitcoin Adviser - The Bitcoin Nova",
+        "description": "Secure your Bitcoin with expert guidance at The Bitcoin Adviser. We help you transition off exchanges, focusing on your unique goals and providing peace of mind for your investments.",
+        "image": "https://content.thebitcoinadviser.com/hubfs/block3.png",
+        "ogImage": "https://content.thebitcoinadviser.com/hubfs/block3.png",
+        "twitterImage": "https://content.thebitcoinadviser.com/hubfs/block3.png",
+        "sourceLabel": "content.thebitcoinadviser.com",
+        "enrichmentStatus": "fetched",
+        "enrichmentReason": "metadata_complete",
+        "enrichedAt": "2026-03-18T11:24:40.263Z"
+      },
+      "blocking": false
+    },
+    {
+      "linkId": "home-microseed",
+      "url": "https://microseed.io/?ref=XSTACI",
+      "status": "fetched",
+      "reason": "metadata_complete",
+      "attempts": 2,
+      "durationMs": 2000.878083,
+      "statusCode": 200,
+      "message": "Preview metadata fetched successfully.",
+      "remediation": "No action required.",
+      "metadata": {
+        "title": "Home - MicroSeed",
+        "description": "Premium Seed Phrase Backup MicroSeed engraves your entire Bitcoin seed phrase on fireproof, waterproof steel or titanium the size of a coin Unlock Security",
+        "image": "https://microseed.io/wp-content/uploads/2025/08/IMG_1276-2-rotated.jpg",
+        "ogImage": "https://microseed.io/wp-content/uploads/2025/08/IMG_1276-2-rotated.jpg",
+        "twitterImage": "https://microseed.io/wp-content/uploads/2025/08/IMG_1276-2-rotated.jpg",
+        "sourceLabel": "microseed.io",
+        "enrichmentStatus": "fetched",
+        "enrichmentReason": "metadata_complete",
+        "enrichedAt": "2026-03-18T11:24:40.263Z"
       },
       "blocking": false
     },
@@ -199,7 +176,7 @@
       "status": "partial",
       "reason": "metadata_partial",
       "attempts": 2,
-      "durationMs": 327.80624999999964,
+      "durationMs": 372.8000410000004,
       "statusCode": 200,
       "message": "Partial preview metadata found; missing fields will use fallback values.",
       "remediation": "Fill missing preview fields via link.metadata or improve target-site SEO metadata completeness.",
@@ -208,17 +185,17 @@
         "sourceLabel": "signup.cluborange.org",
         "enrichmentStatus": "partial",
         "enrichmentReason": "metadata_partial",
-        "enrichedAt": "2026-03-18T09:39:15.191Z"
+        "enrichedAt": "2026-03-18T11:24:40.263Z"
       },
       "blocking": false
     },
     {
       "linkId": "audible-the-bitcoin-nova-podcast",
-      "url": "https://www.audible.com/pd/B0DZJV461D?source_code=ASSORAP0511160006&amp;share_location=podcast_show_detail",
+      "url": "https://www.audible.com/pd/B0DZJV461D?source_code=ASSORAP0511160006&share_location=podcast_show_detail",
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 574.3721249999999,
+      "durationMs": 608.4119579999997,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -231,7 +208,7 @@
         "sourceLabel": "audible.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-18T09:39:15.191Z"
+        "enrichedAt": "2026-03-18T11:24:40.263Z"
       },
       "blocking": false
     },
@@ -241,7 +218,7 @@
       "status": "partial",
       "reason": "metadata_missing",
       "attempts": 2,
-      "durationMs": 196.4507080000003,
+      "durationMs": 237.35458300000028,
       "statusCode": 200,
       "message": "No preview metadata found; rich-card fallback shell will be used.",
       "remediation": "Add Open Graph/Twitter metadata on the target site or set link.metadata fields manually in data/links.json.",
@@ -249,7 +226,7 @@
         "sourceLabel": "music.amazon.com",
         "enrichmentStatus": "partial",
         "enrichmentReason": "metadata_missing",
-        "enrichedAt": "2026-03-18T09:39:15.191Z"
+        "enrichedAt": "2026-03-18T11:24:40.263Z"
       },
       "blocking": true,
       "missingFields": ["title", "description", "image"]
@@ -260,7 +237,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 311.7025829999984,
+      "durationMs": 427.1010409999999,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -272,57 +249,7 @@
         "sourceLabel": "rumble.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-18T09:39:15.191Z"
-      },
-      "blocking": false
-    },
-    {
-      "linkId": "live-with-the-hive-podcast-2",
-      "url": "https://youtube.com/@livewiththehive?si=tQizrqZ7AVqSBimH&sub_confirmation=1",
-      "status": "fetched",
-      "reason": "metadata_complete",
-      "attempts": 2,
-      "durationMs": 183.27883400000064,
-      "statusCode": 200,
-      "message": "Preview metadata fetched successfully.",
-      "remediation": "No action required.",
-      "metadata": {
-        "title": "LIVE WITH THE HIVE",
-        "description": "The Hive Minded is created and hosted by Staci Costopoulos, creator of The Bitcoin Nova.The Hive Minded is a Bitcoin hangout. Real conversations, reactions, ...",
-        "image": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj",
-        "ogImage": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj",
-        "twitterImage": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj",
-        "handle": "livewiththehive",
-        "sourceLabel": "youtube.com",
-        "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-18T09:39:15.191Z",
-        "profileImage": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj"
-      },
-      "blocking": false,
-      "supportedProfilePlatform": "youtube",
-      "missingProfileFields": ["subscribersCount"]
-    },
-    {
-      "linkId": "audible-the-bitcoin-nova-podcast-2",
-      "url": "https://www.audible.com/pd/B0DZJV461D?source_code=ASSORAP0511160006&share_location=podcast_show_detail",
-      "status": "fetched",
-      "reason": "metadata_complete",
-      "attempts": 2,
-      "durationMs": 409.57287499999984,
-      "statusCode": 200,
-      "message": "Preview metadata fetched successfully.",
-      "remediation": "No action required.",
-      "metadata": {
-        "title": "The Bitcoin Nova Podcast",
-        "description": "I&rsquo;m talking everything Bitcoin or any related topics with my 𝕏 communities or anyone that wants to talk Bitcoin! From updates, to speculations, ...",
-        "image": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
-        "ogImage": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
-        "twitterImage": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1024,512_CLa%7C1024,512%7C51kpmcJOswL.jpg%7C0,0,1024,512+67,67,376,376_PJAdblSocialShare-Gradientoverlay-twitter-largeasin-0to60,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Medium,TopLeft,490,223_OU01_ZBLISTENING%20ON,483,152,55,450,AudibleSansMd,32,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,929,45.jpg",
-        "sourceLabel": "audible.com",
-        "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-18T09:39:15.191Z"
+        "enrichedAt": "2026-03-18T11:24:40.263Z"
       },
       "blocking": false
     }
