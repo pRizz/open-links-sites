@@ -78,6 +78,8 @@ const isPlaceholderString = (value: unknown): boolean => {
 
 const isBootstrapLink = (value: Record<string, unknown>): boolean => {
   const url = typeof value.url === "string" ? value.url : undefined;
+  const label =
+    typeof value.label === "string" ? normalizeWhitespace(value.label).toLowerCase() : undefined;
   const custom = value.custom;
   const customRecord =
     typeof custom === "object" && custom !== null && !Array.isArray(custom)
@@ -85,10 +87,37 @@ const isBootstrapLink = (value: Record<string, unknown>): boolean => {
       : undefined;
 
   return (
+    label === "primary link" ||
     (url ? isPlaceholderString(url) : false) ||
     customRecord?.bootstrap === true ||
     customRecord?.bootstrapStatus === "placeholder"
   );
+};
+
+const hasPlaceholderBootstrapStatus = (value: Record<string, unknown>): boolean => {
+  const custom = value.custom;
+  if (typeof custom !== "object" || custom === null || Array.isArray(custom)) {
+    return false;
+  }
+
+  return (custom as Record<string, unknown>).bootstrapStatus === "placeholder";
+};
+
+const isLinktreeAvatarUrl = (value: unknown): boolean => {
+  if (!isRemoteHttpUrl(typeof value === "string" ? value : "")) {
+    return false;
+  }
+
+  try {
+    const parsed = new URL(value as string);
+    const host = parsed.hostname.replace(/^www\./u, "").toLowerCase();
+    return (
+      (host === "linktr.ee" && parsed.pathname.startsWith("/og/image/")) ||
+      host === "ugc.production.linktr.ee"
+    );
+  } catch {
+    return false;
+  }
 };
 
 const replacePlaceholderValue = (
@@ -114,6 +143,33 @@ const replacePlaceholderValue = (
   }
 
   return false;
+};
+
+const replaceLinktreeAvatarValue = (
+  profile: Record<string, unknown>,
+  nextValue: string | undefined,
+  appliedProfileFields: string[],
+): boolean => {
+  if (!nextValue || isPlaceholderString(nextValue) || !hasPlaceholderBootstrapStatus(profile)) {
+    return false;
+  }
+
+  const currentValue = profile.avatar;
+  if (
+    !isPlaceholderString(currentValue) &&
+    !isLinktreeAvatarUrl(currentValue) &&
+    typeof currentValue === "string"
+  ) {
+    return false;
+  }
+
+  if (currentValue === nextValue) {
+    return false;
+  }
+
+  profile.avatar = nextValue;
+  appliedProfileFields.push("avatar");
+  return true;
 };
 
 const resolveSourceRecord = (person: Record<string, unknown>): Record<string, unknown> => {
@@ -208,13 +264,16 @@ const buildUniqueLinkId = (label: string, url: string, existingIds: Set<string>)
 const replaceOrAppendProfileLinks = (
   profile: Record<string, unknown>,
   importedLinks: ImportedLinkCandidate[],
+  options: {
+    replaceExisting: boolean;
+  },
 ): { changed: boolean; addedProfileLinks: string[] } => {
   const existingProfileLinks = ensureObjectArray(profile.profileLinks);
   const hasOnlyPlaceholders =
     existingProfileLinks.length === 0 ||
     existingProfileLinks.every((entry) => isBootstrapLink(entry));
   const comparableExisting = new Set<string>(
-    hasOnlyPlaceholders
+    hasOnlyPlaceholders || options.replaceExisting
       ? []
       : existingProfileLinks
           .map((entry) =>
@@ -223,7 +282,8 @@ const replaceOrAppendProfileLinks = (
           .filter((entry): entry is string => typeof entry === "string"),
   );
 
-  const nextProfileLinks = hasOnlyPlaceholders ? [] : [...existingProfileLinks];
+  const nextProfileLinks =
+    hasOnlyPlaceholders || options.replaceExisting ? [] : [...existingProfileLinks];
   const addedProfileLinks: string[] = [];
 
   for (const candidate of importedLinks.map(normalizeLinkCandidate)) {
@@ -240,10 +300,10 @@ const replaceOrAppendProfileLinks = (
     addedProfileLinks.push(candidate.url);
   }
 
-  if (hasOnlyPlaceholders || addedProfileLinks.length > 0) {
+  if (hasOnlyPlaceholders || options.replaceExisting || addedProfileLinks.length > 0) {
     profile.profileLinks = nextProfileLinks;
     return {
-      changed: hasOnlyPlaceholders || addedProfileLinks.length > 0,
+      changed: hasOnlyPlaceholders || options.replaceExisting || addedProfileLinks.length > 0,
       addedProfileLinks,
     };
   }
@@ -323,6 +383,9 @@ export const mergeImportedPerson = (input: MergeImportedPersonInput): MergeImpor
   ) {
     changed = true;
   }
+  if (replaceLinktreeAvatarValue(profile, input.intake.profile.avatar, appliedProfileFields)) {
+    changed = true;
+  }
 
   if (typeof input.intake.profile.name === "string" && isPlaceholderString(site.title)) {
     site.title = `${input.intake.profile.name} | OpenLinks`;
@@ -352,7 +415,16 @@ export const mergeImportedPerson = (input: MergeImportedPersonInput): MergeImpor
   source.lastImportedAt = input.importedAt;
   changed = true;
 
-  const profileLinkResult = replaceOrAppendProfileLinks(profile, input.intake.profile.profileLinks);
+  const profileLinkResult = replaceOrAppendProfileLinks(
+    profile,
+    input.intake.profile.profileLinks,
+    {
+      replaceExisting:
+        input.intake.kind === "linktree" &&
+        hasPlaceholderBootstrapStatus(profile) &&
+        input.intake.profile.profileLinks.length > 0,
+    },
+  );
   if (profileLinkResult.changed) {
     changed = true;
   }

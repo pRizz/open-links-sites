@@ -2,21 +2,33 @@
   "$schema": "https://open-links.dev/schema/profile.schema.json",
   "name": "Staci Costopoulos",
   "headline": "TODO: add a short headline",
-  "avatar": "https://linktr.ee/og/image/XSTACI.jpg",
+  "avatar": "https://ugc.production.linktr.ee/cb51ef8a-75f5-45d0-b5ee-84930a9a6116_IMG-0031.jpeg?io=true&size=avatar-v3_0",
   "bio": "Host of Bitcoin Nova Podcast | X Community Leader",
   "location": "TODO: add location",
   "profileLinks": [
     {
-      "label": "Primary Link",
-      "url": "https://bitcoinblacksheep.com/"
+      "label": "Website",
+      "url": "https://bitcoinnova.store/"
     },
     {
-      "label": "Live with the Hive Podcast",
-      "url": "https://youtube.com/@livewiththehive?si=tQizrqZ7AVqSBimH&amp;sub_confirmation=1"
+      "label": "YouTube",
+      "url": "https://youtube.com/@thebitcoinnovapodcast?si=bJDvNhG8zklJMv8Q"
     },
     {
-      "label": "Paranoid Bitcoin Anarchists",
-      "url": "https://x.com/i/communities/1871996451812769951"
+      "label": "X",
+      "url": "https://x.com/XSTAC1"
+    },
+    {
+      "label": "Spotify",
+      "url": "https://open.spotify.com/show/TheBitcoinNova"
+    },
+    {
+      "label": "TikTok",
+      "url": "https://tiktok.com/@bitcoinnova"
+    },
+    {
+      "label": "Apple Podcasts",
+      "url": "https://podcasts.apple.com/us/podcast/the-bitcoin-nova-podcast/id1800522855"
     }
   ],
   "custom": {

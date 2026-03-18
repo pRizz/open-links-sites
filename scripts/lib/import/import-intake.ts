@@ -1,11 +1,10 @@
 import type { ImportIntakeResult } from "./contracts";
-import { parseLinktreeLikeHtml } from "./linktree-intake";
+import {
+  type UpstreamLinktreeBootstrapResult,
+  adaptLinktreeBootstrapResult,
+} from "./linktree-intake";
 import { parseManualLinkList } from "./manual-link-list";
-
-export interface FetchImportSourceResult {
-  finalUrl: string;
-  html: string;
-}
+import { runUpstreamLinktreeBootstrap } from "./upstream-linktree-bootstrap";
 
 export interface RunImportIntakeInput {
   sourceUrl?: string;
@@ -13,29 +12,8 @@ export interface RunImportIntakeInput {
 }
 
 export interface ImportIntakeDependencies {
-  fetchSourceHtml?(sourceUrl: string): Promise<FetchImportSourceResult>;
+  extractLinktreeBootstrap?(sourceUrl: string): Promise<UpstreamLinktreeBootstrapResult>;
 }
-
-const fetchSourceHtml = async (sourceUrl: string): Promise<FetchImportSourceResult> => {
-  const response = await fetch(sourceUrl, {
-    redirect: "follow",
-    headers: {
-      accept: "text/html,application/xhtml+xml",
-      "user-agent": "open-links-sites-import/0.1",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(
-      `Failed to fetch '${sourceUrl}' for import: ${response.status} ${response.statusText}`,
-    );
-  }
-
-  return {
-    finalUrl: response.url || sourceUrl,
-    html: await response.text(),
-  };
-};
 
 export const runImportIntake = async (
   input: RunImportIntakeInput,
@@ -50,12 +28,10 @@ export const runImportIntake = async (
   }
 
   if (input.sourceUrl) {
-    const fetched = await (dependencies.fetchSourceHtml ?? fetchSourceHtml)(input.sourceUrl);
-    return parseLinktreeLikeHtml({
-      sourceUrl: input.sourceUrl,
-      fetchedUrl: fetched.finalUrl,
-      html: fetched.html,
-    });
+    const extracted = await (dependencies.extractLinktreeBootstrap ?? runUpstreamLinktreeBootstrap)(
+      input.sourceUrl,
+    );
+    return adaptLinktreeBootstrapResult(extracted);
   }
 
   return parseManualLinkList({

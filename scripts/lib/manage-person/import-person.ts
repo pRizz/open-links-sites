@@ -118,10 +118,10 @@ const parseImportPersonOptions = (args: string[], rootDir: string): ImportPerson
   if (hasActionFlag(parsedArgs, "--help")) {
     throw new Error(
       [
-        "Import or bootstrap a person from a source URL or pasted manual links.",
+        "Import or bootstrap a person from a Linktree URL or pasted manual links.",
         "",
         "Input:",
-        "  --source-url <url>        Crawl a Linktree-style source page.",
+        "  --source-url <url>        Bootstrap from a Linktree URL via the upstream extractor.",
         "  --manual-links <text>     Paste a freeform list of URLs or labeled lines.",
         "",
         "Targeting:",

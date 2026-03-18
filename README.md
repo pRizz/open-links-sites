@@ -120,7 +120,7 @@ Phase 1 establishes a deterministic low-level flow:
 
 Phase 3 extends `manage-person` into the migration/bootstrap path:
 
-1. `bun run manage:person -- import --source-url "<linktree-like-url>"` crawls a source page and extracts profile/link candidates.
+1. `bun run manage:person -- import --source-url "<linktree-url>"` calls the upstream `open-links` Linktree extractor and imports profile, social-link, and content-link candidates.
 2. `bun run manage:person -- import --manual-links "<freeform text>"` normalizes pasted URLs when there is no crawlable source.
 3. Imported data merges conservatively: curated source-of-truth data wins, placeholder scaffold content is replaced, source order is preserved, and obvious duplicate URLs are skipped.
 4. After source write, the repo materializes `generated/<id>/`, runs upstream `open-links` enrichment/cache scripts there, then syncs stable artifacts back into `people/<id>/cache/`.

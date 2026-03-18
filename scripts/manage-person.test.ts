@@ -12,6 +12,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 import { getPersonHelperLayout } from "./lib/import/cache-layout";
+import type { UpstreamLinktreeBootstrapResult } from "./lib/import/linktree-intake";
 import {
   MANAGE_PERSON_ACTIONS,
   buildManagePersonHelpText,
@@ -97,6 +98,48 @@ const createImportActionHandler =
       nowIso: () => "2026-03-17T12:00:00.000Z",
       ...dependencies,
     });
+
+const createUpstreamLinktreeBootstrapResult = (input: {
+  sourceUrl: string;
+  fetchedUrl?: string;
+  name?: string;
+  bio?: string;
+  avatar?: string;
+  links: Array<{ label: string; url: string; sourceOrder: number }>;
+  socialLinks?: Array<{ label: string; url: string; sourceOrder: number }>;
+  warnings?: string[];
+}): UpstreamLinktreeBootstrapResult => ({
+  kind: "linktree",
+  sourceUrl: input.sourceUrl,
+  fetchedUrl: input.fetchedUrl ?? input.sourceUrl,
+  profile: {
+    name: input.name,
+    bio: input.bio,
+    avatar: input.avatar,
+    socialLinks: input.socialLinks ?? [],
+  },
+  links: input.links,
+  snapshot: {
+    kind: "linktree",
+    sourceUrl: input.sourceUrl,
+    fetchedUrl: input.fetchedUrl ?? input.sourceUrl,
+    title: input.name,
+    description: input.bio,
+    avatar: input.avatar,
+    linkCount: input.links.length,
+    socialLinkCount: (input.socialLinks ?? []).length,
+    links: input.links.map((link) => ({
+      label: link.label,
+      url: link.url,
+    })),
+    socialLinks: (input.socialLinks ?? []).map((link) => ({
+      label: link.label,
+      url: link.url,
+    })),
+    warnings: input.warnings ?? [],
+  },
+  warnings: input.warnings ?? [],
+});
 
 describe("manage-person surface", () => {
   test("surface: exposes the explicit CRUD action set", () => {
@@ -224,22 +267,6 @@ describe("manage-person surface", () => {
     const rootDir = createFixtureRoot();
     const { stdout, stderr, stdoutWriter, stderrWriter } = createCapturedWriters();
     const sourceUrl = "https://linktr.ee/charlie-example";
-    const html = `
-      <html>
-        <head>
-          <title>Charlie Example | Linktree</title>
-          <meta name="description" content="Builder, operator, and writer." />
-          <meta property="og:image" content="https://cdn.example.com/charlie.jpg" />
-        </head>
-        <body>
-          <h1>Charlie Example</h1>
-          <a href="https://github.com/charlie-example">GitHub</a>
-          <a href="https://charlie.example.com">Website</a>
-          <a href="https://github.com/charlie-example/">GitHub Duplicate</a>
-          <a href="https://linktr.ee/charlie-example">Internal Linktree Link</a>
-        </body>
-      </html>
-    `;
 
     const exitCode = await runManagePerson(["import", "--source-url", sourceUrl], {
       cwd: rootDir,
@@ -248,10 +275,37 @@ describe("manage-person surface", () => {
       actionHandlers: {
         import: createImportActionHandler({
           importIntake: {
-            fetchSourceHtml: async () => ({
-              finalUrl: sourceUrl,
-              html,
-            }),
+            extractLinktreeBootstrap: async () =>
+              createUpstreamLinktreeBootstrapResult({
+                sourceUrl,
+                name: "Charlie Example",
+                bio: "Builder, operator, and writer.",
+                avatar: "https://cdn.example.com/charlie.jpg?size=avatar-v3_0",
+                links: [
+                  {
+                    label: "GitHub",
+                    url: "https://github.com/charlie-example",
+                    sourceOrder: 0,
+                  },
+                  {
+                    label: "Website",
+                    url: "https://charlie.example.com/",
+                    sourceOrder: 1,
+                  },
+                ],
+                socialLinks: [
+                  {
+                    label: "GitHub",
+                    url: "https://github.com/charlie-example",
+                    sourceOrder: 0,
+                  },
+                  {
+                    label: "X",
+                    url: "https://x.com/charlie_example",
+                    sourceOrder: 1,
+                  },
+                ],
+              }),
           },
           runUpstreamOpenLinks: async () => ({
             steps: [
@@ -283,6 +337,7 @@ describe("manage-person surface", () => {
       name: string;
       bio: string;
       avatar: string;
+      profileLinks: Array<{ label: string; url: string }>;
     };
     const links = JSON.parse(
       readFileSync(join(rootDir, "people", "charlie-example", "links.json"), "utf8"),
@@ -294,7 +349,17 @@ describe("manage-person surface", () => {
     expect(manifest.source.seedUrls).toContain(sourceUrl);
     expect(profile.name).toBe("Charlie Example");
     expect(profile.bio).toBe("Builder, operator, and writer.");
-    expect(profile.avatar).toBe("https://cdn.example.com/charlie.jpg");
+    expect(profile.avatar).toBe("https://cdn.example.com/charlie.jpg?size=avatar-v3_0");
+    expect(profile.profileLinks).toEqual([
+      {
+        label: "GitHub",
+        url: "https://github.com/charlie-example",
+      },
+      {
+        label: "X",
+        url: "https://x.com/charlie_example",
+      },
+    ]);
     expect(links.links.map((entry) => entry.label)).toEqual(["GitHub", "Website"]);
     expect(links.links.map((entry) => entry.url)).toEqual([
       "https://github.com/charlie-example",
@@ -307,18 +372,6 @@ describe("manage-person surface", () => {
     const rootDir = createFixtureRoot();
     const { stdout, stderr, stdoutWriter, stderrWriter } = createCapturedWriters();
     const sourceUrl = "https://linktr.ee/community-example";
-    const html = `
-      <html>
-        <head>
-          <title>Community Example | Linktree</title>
-        </head>
-        <body>
-          <h1>Community Example</h1>
-          <a href="https://x.com/i/communities/1871996451812769951">Community</a>
-          <a href="https://community.example.com">Website</a>
-        </body>
-      </html>
-    `;
 
     const exitCode = await runManagePerson(["import", "--source-url", sourceUrl], {
       cwd: rootDir,
@@ -327,10 +380,23 @@ describe("manage-person surface", () => {
       actionHandlers: {
         import: createImportActionHandler({
           importIntake: {
-            fetchSourceHtml: async () => ({
-              finalUrl: sourceUrl,
-              html,
-            }),
+            extractLinktreeBootstrap: async () =>
+              createUpstreamLinktreeBootstrapResult({
+                sourceUrl,
+                name: "Community Example",
+                links: [
+                  {
+                    label: "Community",
+                    url: "https://x.com/i/communities/1871996451812769951",
+                    sourceOrder: 0,
+                  },
+                  {
+                    label: "Website",
+                    url: "https://community.example.com",
+                    sourceOrder: 1,
+                  },
+                ],
+              }),
           },
           runUpstreamOpenLinks: async () => ({
             steps: [

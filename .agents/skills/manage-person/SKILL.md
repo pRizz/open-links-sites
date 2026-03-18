@@ -12,7 +12,7 @@ Use this skill as the primary operator workflow for person CRUD and import/boots
 1. Start by choosing one explicit action: `create`, `import`, `update`, `disable`, or `archive`.
 2. Prefer minimal conversational prompting:
    - `create`: ask only for the person's name, plus an optional seed URL if the operator already has one
-   - `import`: prefer a source URL only for Linktree-style bootstrap, or ask for pasted manual links when there is no crawlable source
+   - `import`: prefer a Linktree URL first so upstream `open-links` can extract profile, social-link, and content-link candidates; ask for pasted manual links only when there is no usable Linktree URL
    - `update`: locate the person by name or id, confirm the match, then ask for the specific task
    - `disable` / `archive`: confirm the intended person, then ask for one explicit confirmation before writing
 3. Drive the repo scripts instead of hand-editing JSON.
@@ -21,7 +21,7 @@ Use this skill as the primary operator workflow for person CRUD and import/boots
 ## Action Menu
 
 - `create`: bootstrap a new person from only a name plus optional seed URL
-- `import`: bootstrap or refresh a person from a Linktree-style source URL or pasted freeform links
+- `import`: bootstrap or refresh a person from a Linktree URL via upstream extraction or from pasted freeform links
 - `update`: apply one scoped profile, site, or orchestration change to an existing person
 - `disable`: mark a person excluded from future build/deploy flows
 - `archive`: mark a person archived and hidden by default in normal operator flows
@@ -29,7 +29,7 @@ Use this skill as the primary operator workflow for person CRUD and import/boots
 ## Required Behavior
 
 - Treat this skill as the preferred CRUD surface over raw file editing.
-- Keep import flows low-touch: source URL only when possible, pasted freeform links otherwise.
+- Keep import flows low-touch: Linktree URL first when possible, pasted freeform links otherwise.
 - Imported source data should merge conservatively and preserve curated content by default.
 - If upstream `open-links` support is missing, route the operator to fix it there and rerun here instead of inventing a local workaround.
 - Keep update flows task-based, not giant form walkthroughs.

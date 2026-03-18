@@ -42,7 +42,7 @@ export interface RunUpstreamOpenLinksInput {
   fullRefresh: boolean;
 }
 
-const resolveOpenLinksRepoDir = (): string => {
+export const resolveOpenLinksRepoDir = (): string => {
   for (const candidate of getDefaultOpenLinksCandidates()) {
     if (!candidate) {
       continue;

@@ -61,7 +61,12 @@ export interface ImportSourceSnapshot {
   description?: string;
   avatar?: string;
   linkCount: number;
+  socialLinkCount?: number;
   links: Array<{
+    label: string;
+    url: string;
+  }>;
+  socialLinks?: Array<{
     label: string;
     url: string;
   }>;
