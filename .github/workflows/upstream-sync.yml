@@ -23,39 +23,45 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Checkout upstream open-links
-        uses: actions/checkout@v5
-        with:
-          repository: pRizz/open-links
-          path: upstream/open-links
-          ref: main
-
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.3.9
 
+      - name: Clone upstream open-links
+        shell: bash
+        run: |
+          set -euo pipefail
+          upstream_repo_dir="$RUNNER_TEMP/open-links"
+          rm -rf "$upstream_repo_dir"
+          git clone --filter=blob:none --no-tags --branch main https://github.com/pRizz/open-links.git "$upstream_repo_dir"
+          echo "OPEN_LINKS_REPO_DIR=$upstream_repo_dir" >> "$GITHUB_ENV"
+
       - name: Install open-links-sites dependencies
         run: bun install --frozen-lockfile
 
       - name: Install upstream open-links dependencies
-        working-directory: upstream/open-links
-        run: bun install --frozen-lockfile
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$OPEN_LINKS_REPO_DIR"
+          bun install --frozen-lockfile
 
       - name: Sync pinned upstream state
         id: sync
-        env:
-          OPEN_LINKS_REPO_DIR: ${{ github.workspace }}/upstream/open-links
+        shell: bash
         run: |
+          set -euo pipefail
           mkdir -p .cache
           bun run sync:upstream -- --root "$GITHUB_WORKSPACE" --upstream-repo-dir "$OPEN_LINKS_REPO_DIR" | tee .cache/upstream-sync-summary.txt
 
       - name: Verify releasable state
         if: steps.sync.outputs.sync_result == 'changed'
+        shell: bash
         env:
-          OPEN_LINKS_REPO_DIR: ${{ github.workspace }}/upstream/open-links
           OPEN_LINKS_SITES_PUBLIC_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: |
+          set -euo pipefail
           bun run release:verify -- --root "$GITHUB_WORKSPACE" --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" --event-name "$GITHUB_EVENT_NAME" | tee .cache/release-verify-summary.txt
 
       - name: Commit and push synced upstream state

@@ -53,19 +53,25 @@ jobs:
           mkdir -p .cache
           bun run scripts/resolve-deploy-context.ts -- --root "$GITHUB_WORKSPACE" --event-name "$GITHUB_EVENT_NAME" | tee .cache/deploy-context-summary.txt
 
-      - name: Checkout upstream open-links
-        uses: actions/checkout@v5
-        with:
-          repository: pRizz/open-links
-          path: upstream/open-links
-          ref: ${{ steps.context.outputs.upstream_commit }}
+      - name: Clone upstream open-links
+        shell: bash
+        run: |
+          set -euo pipefail
+          upstream_repo_dir="$RUNNER_TEMP/open-links"
+          rm -rf "$upstream_repo_dir"
+          git clone --filter=blob:none --no-tags https://github.com/pRizz/open-links.git "$upstream_repo_dir"
+          git -C "$upstream_repo_dir" checkout --detach "${{ steps.context.outputs.upstream_commit }}"
+          echo "OPEN_LINKS_REPO_DIR=$upstream_repo_dir" >> "$GITHUB_ENV"
 
       - name: Install open-links-sites dependencies
         run: bun install --frozen-lockfile
 
       - name: Install upstream open-links dependencies
-        working-directory: upstream/open-links
-        run: bun install --frozen-lockfile
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$OPEN_LINKS_REPO_DIR"
+          bun install --frozen-lockfile
 
       - name: Resolve changed paths
         if: steps.context.outputs.use_changed_paths == 'true'
@@ -81,7 +87,6 @@ jobs:
         id: release_verify
         shell: bash
         env:
-          OPEN_LINKS_REPO_DIR: ${{ github.workspace }}/upstream/open-links
           OPEN_LINKS_SITES_PUBLIC_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: |
           if [[ "${{ steps.context.outputs.use_changed_paths }}" == "true" ]]; then

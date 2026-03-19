@@ -6,7 +6,7 @@
   "packageManager": "bun@1.3.9",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "bun test",
+    "test": "bun test $(find scripts -type f -name '*.test.ts' -print)",
     "validate": "bun run scripts/validate.ts",
     "sync:upstream": "bun run scripts/sync-upstream.ts",
     "release:verify": "bun run scripts/release-verify.ts",
@@ -17,7 +17,7 @@
     "build:site": "bun run scripts/build-site.ts",
     "changed:people": "bun run scripts/changed-people.ts",
     "deploy:pages:plan": "bun run scripts/deploy-pages-plan.ts",
-    "lint": "bunx @biomejs/biome check . --files-ignore-unknown=true",
+    "lint": "bunx @biomejs/biome check README.md biome.json package.json tsconfig.json landing.html vite.landing.config.ts config people schemas scripts src templates --files-ignore-unknown=true",
     "format": "bunx @biomejs/biome format --write .",
     "check": "bun run typecheck && bun run lint && bun run test"
   },

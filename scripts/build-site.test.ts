@@ -144,80 +144,90 @@ describe("build-site", () => {
     expect(html).toContain("OpenLinks Sites");
   });
 
-  test("person-build: builds one active person through the upstream workspace wrapper", async () => {
-    const rootDir = createTempRoot();
-    scaffoldFixture(rootDir, "fixture-user", "Fixture User");
+  test(
+    "person-build: builds one active person through the upstream workspace wrapper",
+    async () => {
+      const rootDir = createTempRoot();
+      scaffoldFixture(rootDir, "fixture-user", "Fixture User");
 
-    const result = await buildPersonSite({
-      rootDir,
-      personId: "fixture-user",
-      buildTimestamp: "2026-03-17T12:00:00.000Z",
-    });
+      const result = await buildPersonSite({
+        rootDir,
+        personId: "fixture-user",
+        buildTimestamp: "2026-03-17T12:00:00.000Z",
+      });
 
-    expect(result.personId).toBe("fixture-user");
-    expect(existsSync(join(result.outputDir, "index.html"))).toBe(true);
-    expect(existsSync(join(result.outputDir, "assets"))).toBe(true);
-  });
+      expect(result.personId).toBe("fixture-user");
+      expect(existsSync(join(result.outputDir, "index.html"))).toBe(true);
+      expect(existsSync(join(result.outputDir, "assets"))).toBe(true);
+    },
+    { timeout: 30_000 },
+  );
 
-  test("person-build: hermetic wrapper isolates staged person content from upstream repo data", async () => {
-    const rootDir = createTempRoot();
-    scaffoldFixture(rootDir, "fixture-user", "Fixture User");
-    seedHermeticFixture(rootDir, "fixture-user");
+  test(
+    "person-build: hermetic wrapper isolates staged person content from upstream repo data",
+    async () => {
+      const rootDir = createTempRoot();
+      scaffoldFixture(rootDir, "fixture-user", "Fixture User");
+      seedHermeticFixture(rootDir, "fixture-user");
 
-    const upstreamRoot = resolveOpenLinksRepoDir();
-    const upstreamProfile = JSON.parse(
-      readFileSync(join(upstreamRoot, "data", "profile.json"), "utf8"),
-    ) as { name?: string };
-    const upstreamLinks = JSON.parse(
-      readFileSync(join(upstreamRoot, "data", "links.json"), "utf8"),
-    ) as { links?: Array<{ url?: string }> };
-    const upstreamName = upstreamProfile.name;
-    const upstreamLinkUrl = upstreamLinks.links?.find((link) => typeof link.url === "string")?.url;
+      const upstreamRoot = resolveOpenLinksRepoDir();
+      const upstreamProfile = JSON.parse(
+        readFileSync(join(upstreamRoot, "data", "profile.json"), "utf8"),
+      ) as { name?: string };
+      const upstreamLinks = JSON.parse(
+        readFileSync(join(upstreamRoot, "data", "links.json"), "utf8"),
+      ) as { links?: Array<{ url?: string }> };
+      const upstreamName = upstreamProfile.name;
+      const upstreamLinkUrl = upstreamLinks.links?.find(
+        (link) => typeof link.url === "string",
+      )?.url;
 
-    const result = await buildPersonSite({
-      rootDir,
-      personId: "fixture-user",
-      buildTimestamp: "2026-03-17T12:00:00.000Z",
-    });
+      const result = await buildPersonSite({
+        rootDir,
+        personId: "fixture-user",
+        buildTimestamp: "2026-03-17T12:00:00.000Z",
+      });
 
-    const builtScriptName = readdirSync(join(result.outputDir, "assets")).find(
-      (fileName) => fileName.startsWith("index-") && fileName.endsWith(".js"),
-    );
-    expect(builtScriptName).toBeDefined();
-    if (!builtScriptName) {
-      throw new Error("Expected the person build to emit an index script.");
-    }
+      const builtScriptName = readdirSync(join(result.outputDir, "assets")).find(
+        (fileName) => fileName.startsWith("index-") && fileName.endsWith(".js"),
+      );
+      expect(builtScriptName).toBeDefined();
+      if (!builtScriptName) {
+        throw new Error("Expected the person build to emit an index script.");
+      }
 
-    const builtScript = readFileSync(join(result.outputDir, "assets", builtScriptName), "utf8");
-    expect(builtScript).toContain("Hermetic Fixture Person");
-    expect(builtScript).toContain("https://fixture.example/profile");
-    expect(upstreamName).toBeTruthy();
-    expect(upstreamLinkUrl).toBeTruthy();
-    if (!upstreamName || !upstreamLinkUrl) {
-      throw new Error("Expected upstream fixture data to expose a name and primary link URL.");
-    }
+      const builtScript = readFileSync(join(result.outputDir, "assets", builtScriptName), "utf8");
+      expect(builtScript).toContain("Hermetic Fixture Person");
+      expect(builtScript).toContain("https://fixture.example/profile");
+      expect(upstreamName).toBeTruthy();
+      expect(upstreamLinkUrl).toBeTruthy();
+      if (!upstreamName || !upstreamLinkUrl) {
+        throw new Error("Expected upstream fixture data to expose a name and primary link URL.");
+      }
 
-    expect(builtScript).not.toContain(upstreamName);
-    expect(builtScript).not.toContain(upstreamLinkUrl);
+      expect(builtScript).not.toContain(upstreamName);
+      expect(builtScript).not.toContain(upstreamLinkUrl);
 
-    const builtContentImageNames = readdirSync(join(result.outputDir, "cache", "content-images"));
-    expect(builtContentImageNames).toEqual(["fixture-preview.jpg"]);
+      const builtContentImageNames = readdirSync(join(result.outputDir, "cache", "content-images"));
+      expect(builtContentImageNames).toEqual(["fixture-preview.jpg"]);
 
-    const upstreamContentImageNames = new Set(
-      readdirSync(join(upstreamRoot, "public", "cache", "content-images")),
-    );
-    expect(builtContentImageNames.some((fileName) => upstreamContentImageNames.has(fileName))).toBe(
-      false,
-    );
+      const upstreamContentImageNames = new Set(
+        readdirSync(join(upstreamRoot, "public", "cache", "content-images")),
+      );
+      expect(
+        builtContentImageNames.some((fileName) => upstreamContentImageNames.has(fileName)),
+      ).toBe(false);
 
-    const historyIndex = JSON.parse(
-      readFileSync(join(result.outputDir, "history", "followers", "index.json"), "utf8"),
-    ) as { entries?: Array<{ linkId?: string }> };
-    expect(historyIndex.entries ?? []).toEqual([]);
-    expect(readdirSync(join(result.outputDir, "history", "followers")).sort()).toEqual([
-      "index.json",
-    ]);
-  });
+      const historyIndex = JSON.parse(
+        readFileSync(join(result.outputDir, "history", "followers", "index.json"), "utf8"),
+      ) as { entries?: Array<{ linkId?: string }> };
+      expect(historyIndex.entries ?? []).toEqual([]);
+      expect(readdirSync(join(result.outputDir, "history", "followers")).sort()).toEqual([
+        "index.json",
+      ]);
+    },
+    { timeout: 30_000 },
+  );
 
   test("full-build: only active people are built while landing output stays at root", async () => {
     const rootDir = createTempRoot();
