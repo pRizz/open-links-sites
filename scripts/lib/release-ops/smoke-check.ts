@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 import {
@@ -7,6 +7,7 @@ import {
   resolveDeploymentContext,
   resolvePersonRoutePath,
 } from "../build/deployment-context";
+import { PEOPLE_REGISTRY_FILE_NAME } from "../build/site-layout";
 import { loadPersonRegistry } from "../manage-person/person-registry";
 
 export type ReleaseSmokeCheckStatus = "passed" | "failed" | "skipped";
@@ -193,8 +194,44 @@ export const runReleaseSmokeChecks = async (
     );
   }
 
+  const peopleRegistryPath = path.join(input.siteDir, PEOPLE_REGISTRY_FILE_NAME);
+  if (!existsSync(peopleRegistryPath)) {
+    return failCheck(
+      checks,
+      "landing-assets",
+      `${PEOPLE_REGISTRY_FILE_NAME} is missing`,
+      `inspect generated/site/${PEOPLE_REGISTRY_FILE_NAME} output`,
+    );
+  }
+
+  const landingScriptName = readdirSync(landingAssetsPath).find((fileName) =>
+    fileName.endsWith(".js"),
+  );
+  if (!landingScriptName) {
+    return failCheck(
+      checks,
+      "landing-assets",
+      "landing bundle is missing a JavaScript entrypoint",
+      "inspect generated/site/landing-assets output",
+    );
+  }
+
+  const landingScript = readUtf8File(path.join(landingAssetsPath, landingScriptName));
+  if (!landingScript.includes(PEOPLE_REGISTRY_FILE_NAME)) {
+    return failCheck(
+      checks,
+      "landing-assets",
+      "landing bundle does not reference the people registry artifact",
+      "inspect landing app build output and registry fetch path",
+    );
+  }
+
   checks.push(
-    createCheck("landing-assets", "passed", "landing assets and root manifest are deployment-safe"),
+    createCheck(
+      "landing-assets",
+      "passed",
+      "landing assets, registry artifact, and root manifest are deployment-safe",
+    ),
   );
 
   const registry = await (dependencies.loadPersonRegistry ?? loadPersonRegistry)(input.rootDir, {

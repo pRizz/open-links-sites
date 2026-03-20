@@ -105,7 +105,7 @@ export const executeBuildSelection = async (
       personIds: buildablePersonIds,
       preserveExisting: true,
       removePersonIds: removedPersonIds,
-      includeLandingPage: false,
+      includeLandingPage: true,
       buildTimestamp: input.buildTimestamp,
       publicOrigin: deployment.publicOrigin,
       canonicalOrigin: deployment.canonicalOrigin,

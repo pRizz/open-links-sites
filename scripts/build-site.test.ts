@@ -143,12 +143,28 @@ describe("build-site", () => {
     expect(existsSync(join(layout.siteDir, "index.html"))).toBe(true);
     expect(existsSync(layout.landingAssetsDir)).toBe(true);
     expect(existsSync(join(layout.siteDir, "site.webmanifest"))).toBe(true);
+    expect(existsSync(layout.peopleRegistryPath)).toBe(true);
 
     const html = readFileSync(join(layout.siteDir, "index.html"), "utf8");
     expect(html).toContain("OpenLinks Sites");
     expect(html).toContain("/open-links-sites/landing-assets/");
     expect(html).toContain("/open-links-sites/favicon.ico");
     expect(html).toContain("/open-links-sites/site.webmanifest");
+
+    const registryPayload = JSON.parse(readFileSync(layout.peopleRegistryPath, "utf8")) as {
+      entries: unknown[];
+    };
+    expect(registryPayload.entries).toEqual([]);
+
+    const landingScriptName = readdirSync(layout.landingAssetsDir).find((fileName) =>
+      fileName.endsWith(".js"),
+    );
+    expect(landingScriptName).toBeDefined();
+    if (!landingScriptName) {
+      throw new Error("Expected the landing build to emit a JavaScript bundle.");
+    }
+    const landingScript = readFileSync(join(layout.landingAssetsDir, landingScriptName), "utf8");
+    expect(landingScript).toContain("people-registry.json");
 
     const manifest = readFileSync(join(layout.siteDir, "site.webmanifest"), "utf8");
     expect(manifest).toContain('"./android-chrome-192x192.png"');
@@ -299,6 +315,7 @@ describe("build-site", () => {
           mkdirSync(layout.siteDir, { recursive: true });
           writeFileSync(join(layout.siteDir, "index.html"), "landing\n", "utf8");
           mkdirSync(layout.landingAssetsDir, { recursive: true });
+          writeFileSync(layout.peopleRegistryPath, '{"entries":[]}\n', "utf8");
 
           return {
             siteDir: layout.siteDir,
@@ -357,12 +374,20 @@ describe("build-site", () => {
           includeLandingPage,
         }) => {
           expect(preserveExisting).toBe(true);
-          expect(includeLandingPage).toBe(false);
+          expect(includeLandingPage).toBe(true);
 
           for (const personId of personIds ?? []) {
             const outputDir = getGeneratedPersonSiteDir(targetRootDir, personId);
             mkdirSync(outputDir, { recursive: true });
             writeFileSync(join(outputDir, "index.html"), `${personId}\n`, "utf8");
+          }
+
+          if (includeLandingPage) {
+            const layout = getGeneratedSiteLayout(targetRootDir);
+            mkdirSync(layout.siteDir, { recursive: true });
+            mkdirSync(layout.landingAssetsDir, { recursive: true });
+            writeFileSync(join(layout.siteDir, "index.html"), "landing\n", "utf8");
+            writeFileSync(layout.peopleRegistryPath, '{"entries":[]}\n', "utf8");
           }
 
           for (const personId of removePersonIds ?? []) {
@@ -388,6 +413,8 @@ describe("build-site", () => {
     expect(
       existsSync(join(getGeneratedPersonSiteDir(rootDir, "alice-example"), "index.html")),
     ).toBe(true);
+    expect(existsSync(join(getGeneratedSiteLayout(rootDir).siteDir, "index.html"))).toBe(true);
+    expect(existsSync(getGeneratedSiteLayout(rootDir).peopleRegistryPath)).toBe(true);
     expect(existsSync(join(getGeneratedPersonSiteDir(rootDir, "bob-sample"), "index.html"))).toBe(
       false,
     );

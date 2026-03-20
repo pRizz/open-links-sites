@@ -4,6 +4,7 @@ import process from "node:process";
 
 import { resolveRepoPath } from "../person-contract";
 import { type DeploymentContextInput, resolveDeploymentContext } from "./deployment-context";
+import { buildLandingRegistry } from "./landing-registry";
 import { getGeneratedSiteLayout } from "./site-layout";
 import { writeDeploymentSafeSiteWebManifest } from "./site-web-manifest";
 
@@ -23,6 +24,7 @@ export const buildLandingPage = async (
   rmSync(layout.landingAssetsDir, { recursive: true, force: true });
   rmSync(`${layout.siteDir}/index.html`, { force: true });
   rmSync(`${layout.siteDir}/site.webmanifest`, { force: true });
+  rmSync(layout.peopleRegistryPath, { force: true });
   mkdirSync(layout.siteDir, { recursive: true });
 
   const result = spawnSync(
@@ -62,6 +64,12 @@ export const buildLandingPage = async (
     renameSync(renderedLandingPath, `${layout.siteDir}/index.html`);
   }
   writeDeploymentSafeSiteWebManifest(`${layout.siteDir}/site.webmanifest`);
+  await buildLandingRegistry({
+    rootDir: input.rootDir,
+    outputDir: layout.peopleRegistryPath,
+    publicOrigin: deployment.publicOrigin,
+    canonicalOrigin: deployment.canonicalOrigin,
+  });
 
   return {
     siteDir: layout.siteDir,

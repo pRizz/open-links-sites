@@ -4,11 +4,13 @@ import { GENERATED_ROOT } from "../person-contract";
 
 export const GENERATED_SITE_DIRECTORY = "site";
 export const LANDING_ASSETS_DIRECTORY = "landing-assets";
+export const PEOPLE_REGISTRY_FILE_NAME = "people-registry.json";
 
 export interface GeneratedSiteLayout {
   generatedDir: string;
   siteDir: string;
   landingAssetsDir: string;
+  peopleRegistryPath: string;
 }
 
 export const getGeneratedSiteLayout = (rootDir: string): GeneratedSiteLayout => {
@@ -19,6 +21,7 @@ export const getGeneratedSiteLayout = (rootDir: string): GeneratedSiteLayout => 
     generatedDir,
     siteDir,
     landingAssetsDir: join(siteDir, LANDING_ASSETS_DIRECTORY),
+    peopleRegistryPath: join(siteDir, PEOPLE_REGISTRY_FILE_NAME),
   };
 };
 

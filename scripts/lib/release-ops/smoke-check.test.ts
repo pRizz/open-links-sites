@@ -48,6 +48,14 @@ describe("release smoke-checks", () => {
     writeJson(join(siteDir, "site.webmanifest"), {
       icons: [{ src: "./android-chrome-192x192.png" }],
     });
+    writeJson(join(siteDir, "people-registry.json"), {
+      entries: [],
+    });
+    writeFileSync(
+      join(siteDir, "landing-assets", "landing.js"),
+      'console.log("people-registry.json","Browse Pages");\n',
+      "utf8",
+    );
     writeFileSync(
       join(siteDir, "alice-example", "index.html"),
       [
@@ -112,6 +120,14 @@ describe("release smoke-checks", () => {
     writeJson(join(siteDir, "site.webmanifest"), {
       icons: [{ src: "./android-chrome-192x192.png" }],
     });
+    writeJson(join(siteDir, "people-registry.json"), {
+      entries: [],
+    });
+    writeFileSync(
+      join(siteDir, "landing-assets", "landing.js"),
+      'console.log("people-registry.json","Browse Pages");\n',
+      "utf8",
+    );
     writeFileSync(
       join(siteDir, "alice-example", "index.html"),
       '<link rel="canonical" href="https://placeholder.example/alice-example/" /><link rel="icon" href="/open-links-sites/alice-example/favicon.svg" /><link rel="manifest" href="/open-links-sites/alice-example/site.webmanifest" /><script type="module" src="/open-links-sites/alice-example/assets/index.js"></script><meta property="og:url" content="https://placeholder.example/alice-example/" /><meta property="og:image" content="https://placeholder.example/alice-example/openlinks-social-fallback.svg" /><meta name="twitter:image" content="https://placeholder.example/alice-example/openlinks-social-fallback.svg" />',
