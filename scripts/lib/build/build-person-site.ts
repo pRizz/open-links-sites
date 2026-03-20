@@ -3,6 +3,7 @@ import { join } from "node:path";
 
 import { loadPersonRegistry } from "../manage-person/person-registry";
 import { materializePerson } from "../materialize-person";
+import { resolveNonPlaceholderText } from "../placeholder-text";
 import { resolveStableBuildTimestamp } from "./build-timestamp";
 import {
   type DeploymentContextInput,
@@ -18,6 +19,7 @@ import {
 } from "./upstream-site-builder";
 
 interface SiteJsonPayload {
+  description?: unknown;
   baseUrl?: unknown;
   quality?: {
     seo?: {
@@ -26,6 +28,13 @@ interface SiteJsonPayload {
     };
     [key: string]: unknown;
   };
+  [key: string]: unknown;
+}
+
+interface ProfileJsonPayload {
+  headline?: unknown;
+  bio?: unknown;
+  location?: unknown;
   [key: string]: unknown;
 }
 
@@ -52,6 +61,38 @@ export interface BuildPersonSiteDependencies {
   ) => Promise<{ repoDir?: string }>;
 }
 
+const setOptionalTextField = <
+  T extends Record<string, unknown>,
+  K extends Extract<keyof T, string>,
+>(
+  target: T,
+  key: K,
+  value: unknown,
+): void => {
+  const sanitizedValue = resolveNonPlaceholderText(value);
+
+  if (sanitizedValue) {
+    target[key] = sanitizedValue as T[K];
+    return;
+  }
+
+  delete target[key];
+};
+
+const patchGeneratedWorkspaceProfileData = (workspaceDir: string): void => {
+  const profilePath = join(workspaceDir, "data", "profile.json");
+  const profileData = JSON.parse(readFileSync(profilePath, "utf8")) as ProfileJsonPayload;
+  const updatedProfileData: ProfileJsonPayload = {
+    ...profileData,
+  };
+
+  setOptionalTextField(updatedProfileData, "headline", profileData.headline);
+  setOptionalTextField(updatedProfileData, "bio", profileData.bio);
+  setOptionalTextField(updatedProfileData, "location", profileData.location);
+
+  writeFileSync(profilePath, `${JSON.stringify(updatedProfileData, null, 2)}\n`, "utf8");
+};
+
 const patchGeneratedWorkspaceSiteData = (
   workspaceDir: string,
   personRoutePath: string,
@@ -72,6 +113,7 @@ const patchGeneratedWorkspaceSiteData = (
     },
   };
 
+  setOptionalTextField(updatedSiteData, "description", siteData.description);
   writeFileSync(sitePath, `${JSON.stringify(updatedSiteData, null, 2)}\n`, "utf8");
 };
 
@@ -108,6 +150,7 @@ export const buildPersonSite = async (
     canonicalRoutePath,
   );
 
+  patchGeneratedWorkspaceProfileData(workspace.outputDir);
   patchGeneratedWorkspaceSiteData(workspace.outputDir, canonicalRoutePath, canonicalPersonUrl);
   writeDeploymentSafeSiteWebManifest(join(workspace.publicDir, "site.webmanifest"));
 

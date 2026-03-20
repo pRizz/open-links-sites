@@ -6,11 +6,8 @@ import type {
   LandingRegistryPayload,
 } from "../../../src/landing/registry-contract";
 import { loadPersonRegistry } from "../manage-person/person-registry";
-import {
-  DEFAULT_AVATAR_ASSET,
-  DEFAULT_TEMPLATE_REPLACEMENTS,
-  isLocalAssetReference,
-} from "../person-contract";
+import { DEFAULT_AVATAR_ASSET, isLocalAssetReference } from "../person-contract";
+import { normalizeText, resolveNonPlaceholderText } from "../placeholder-text";
 import {
   type DeploymentContextInput,
   resolveDeploymentContext,
@@ -42,38 +39,15 @@ export interface BuildLandingRegistryDependencies {
   loadPersonRegistry?: typeof loadPersonRegistry;
 }
 
-const normalizeText = (value: unknown): string | undefined => {
-  if (typeof value !== "string") {
-    return undefined;
-  }
-
-  const trimmed = value.trim();
-  return trimmed.length > 0 ? trimmed : undefined;
-};
-
-const isPlaceholderText = (value: string | undefined): boolean => {
-  if (!value) {
-    return true;
-  }
-
-  return (
-    value.startsWith("TODO:") ||
-    value === DEFAULT_TEMPLATE_REPLACEMENTS.profileHeadline ||
-    value === DEFAULT_TEMPLATE_REPLACEMENTS.profileBio ||
-    value === DEFAULT_TEMPLATE_REPLACEMENTS.siteDescription
-  );
-};
-
 const readJsonFile = <T>(filePath: string): T => JSON.parse(readFileSync(filePath, "utf8")) as T;
 
 const resolveSummary = (profile: ProfilePayload, site: SitePayload): string | undefined => {
-  const profileBio = normalizeText(profile.bio);
-  if (profileBio && !isPlaceholderText(profileBio)) {
+  const profileBio = resolveNonPlaceholderText(profile.bio);
+  if (profileBio) {
     return profileBio;
   }
 
-  const siteDescription = normalizeText(site.description);
-  return siteDescription && !isPlaceholderText(siteDescription) ? siteDescription : undefined;
+  return resolveNonPlaceholderText(site.description);
 };
 
 const resolveAvatarUrl = (avatar: unknown, personRoutePath: string): string | undefined => {
@@ -112,14 +86,14 @@ export const buildLandingRegistry = async (
       const profile = readJsonFile<ProfilePayload>(join(person.directoryPath, "profile.json"));
       const site = readJsonFile<SitePayload>(join(person.directoryPath, "site.json"));
       const personRoutePath = resolvePersonRoutePath(deployment.publicBasePath, person.id);
-      const headline = normalizeText(profile.headline);
+      const headline = resolveNonPlaceholderText(profile.headline);
 
       return {
         id: person.id,
         displayName: person.displayName,
         path: personRoutePath,
         avatarUrl: resolveAvatarUrl(profile.avatar, personRoutePath),
-        headline: headline && !isPlaceholderText(headline) ? headline : undefined,
+        headline,
         summary: resolveSummary(profile, site),
       } satisfies LandingRegistryEntry;
     })
