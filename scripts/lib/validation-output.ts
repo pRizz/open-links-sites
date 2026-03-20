@@ -29,6 +29,7 @@ export interface ValidationTotals {
 export interface ValidationRunResult {
   valid: boolean;
   people: PersonValidationResult[];
+  repositoryIssues: ValidationIssue[];
   totals: ValidationTotals;
 }
 
@@ -38,8 +39,11 @@ const groupIssues = (issues: ValidationIssue[]): Record<ValidationSeverity, Vali
   suggestion: issues.filter((issue) => issue.severity === "suggestion"),
 });
 
-export const buildValidationTotals = (results: PersonValidationResult[]): ValidationTotals => {
-  const allIssues = results.flatMap((result) => result.issues);
+export const buildValidationTotals = (
+  results: PersonValidationResult[],
+  repositoryIssues: ValidationIssue[] = [],
+): ValidationTotals => {
+  const allIssues = [...results.flatMap((result) => result.issues), ...repositoryIssues];
   const problems = allIssues.filter((issue) => issue.severity === "problem").length;
   const warnings = allIssues.filter((issue) => issue.severity === "warning").length;
   const suggestions = allIssues.filter((issue) => issue.severity === "suggestion").length;
@@ -68,6 +72,25 @@ export const formatValidationRunHuman = (result: ValidationRunResult): string =>
   lines.push(
     `Problems: ${result.totals.problems} | warnings: ${result.totals.warnings} | suggestions: ${result.totals.suggestions}`,
   );
+
+  if (result.repositoryIssues.length > 0) {
+    const groups = groupIssues(result.repositoryIssues);
+
+    lines.push("");
+    lines.push("Repository Checks");
+    for (const severity of ["problem", "warning", "suggestion"] as const) {
+      const issues = groups[severity];
+      if (issues.length === 0) {
+        continue;
+      }
+
+      lines.push(`  ${severity[0].toUpperCase()}${severity.slice(1)}s:`);
+      for (const issue of issues) {
+        const path = issue.path ? ` [${issue.path}]` : "";
+        lines.push(`    - (${issue.code})${path} ${issue.message}`);
+      }
+    }
+  }
 
   if (result.people.length === 0) {
     lines.push("");

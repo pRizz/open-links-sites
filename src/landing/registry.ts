@@ -1,6 +1,6 @@
 import type { LandingRegistryEntry, LandingRegistryPayload } from "./registry-contract";
 
-const REGISTRY_FILE_NAME = "people-registry.json";
+const REGISTRY_FILE_NAME = "landing-registry.json";
 
 const normalizeSearchText = (value: string): string =>
   value.trim().toLowerCase().replaceAll(/\s+/gu, " ");
@@ -22,8 +22,10 @@ const isLandingRegistryEntry = (value: unknown): value is LandingRegistryEntry =
   const entry = value as LandingRegistryEntry;
   return (
     typeof entry.id === "string" &&
+    (entry.kind === "local" || entry.kind === "external") &&
     typeof entry.displayName === "string" &&
-    typeof entry.path === "string"
+    typeof entry.href === "string" &&
+    typeof entry.subtitle === "string"
   );
 };
 
@@ -57,7 +59,15 @@ export const filterLandingRegistry = (
 
   return entries.filter((entry) => {
     const searchableText = normalizeSearchText(
-      [entry.displayName, entry.id, entry.headline, entry.summary]
+      [
+        entry.displayName,
+        entry.id,
+        entry.subtitle,
+        entry.href,
+        entry.badgeLabel,
+        entry.headline,
+        entry.summary,
+      ]
         .filter((value): value is string => typeof value === "string" && value.trim().length > 0)
         .join(" "),
     );
@@ -67,7 +77,7 @@ export const filterLandingRegistry = (
 };
 
 export const formatRegistryCount = (count: number): string =>
-  count === 1 ? "1 active page" : `${count} active pages`;
+  count === 1 ? "1 directory entry" : `${count} directory entries`;
 
 export const initialsForRegistryEntry = (entry: LandingRegistryEntry): string => {
   const parts = entry.displayName
@@ -83,3 +93,12 @@ export const initialsForRegistryEntry = (entry: LandingRegistryEntry): string =>
     .map((part) => part[0]?.toUpperCase() ?? "")
     .join("");
 };
+
+export const landingRegistryLinkLabel = (entry: LandingRegistryEntry): string =>
+  entry.kind === "external" ? "Visit site" : "Open page";
+
+export const landingRegistryLinkRel = (entry: LandingRegistryEntry): string | undefined =>
+  entry.openInNewTab ? "noopener noreferrer" : undefined;
+
+export const landingRegistryLinkTarget = (entry: LandingRegistryEntry): string | undefined =>
+  entry.openInNewTab ? "_blank" : undefined;

@@ -1,13 +1,14 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
+import type { LandingRegistryPayload } from "../../../src/landing/registry-contract";
 import {
   type DeploymentContextInput,
   resolveAbsoluteRouteUrl,
   resolveDeploymentContext,
   resolvePersonRoutePath,
 } from "../build/deployment-context";
-import { PEOPLE_REGISTRY_FILE_NAME } from "../build/site-layout";
+import { LANDING_REGISTRY_FILE_NAME } from "../build/site-layout";
 import { loadPersonRegistry } from "../manage-person/person-registry";
 
 export type ReleaseSmokeCheckStatus = "passed" | "failed" | "skipped";
@@ -38,6 +39,11 @@ interface SiteWebManifest {
   icons?: Array<{
     src?: unknown;
   }>;
+}
+
+interface LandingRegistryEntryPreview {
+  id?: unknown;
+  previewImageUrl?: unknown;
 }
 
 const createCheck = (
@@ -97,6 +103,32 @@ const validateManifestIconPaths = (manifestPath: string): string | undefined => 
 
     if (trimmed.startsWith("/") || /^[a-z]+:/iu.test(trimmed)) {
       return `manifest icon source '${trimmed}' is not deployment-safe`;
+    }
+  }
+
+  return undefined;
+};
+
+const validateLandingRegistryPreviewAssets = (
+  registryPath: string,
+  siteDir: string,
+  publicBasePath: string,
+): string | undefined => {
+  const payload = JSON.parse(readUtf8File(registryPath)) as LandingRegistryPayload;
+  const expectedPreviewPrefix = `${publicBasePath}landing-assets/registry/`;
+
+  for (const entry of payload.entries as LandingRegistryEntryPreview[]) {
+    if (typeof entry.previewImageUrl !== "string" || entry.previewImageUrl.length === 0) {
+      continue;
+    }
+
+    if (!entry.previewImageUrl.startsWith(expectedPreviewPrefix)) {
+      return `landing registry preview '${entry.previewImageUrl}' is not rooted at '${expectedPreviewPrefix}'`;
+    }
+
+    const relativeAssetPath = entry.previewImageUrl.slice(publicBasePath.length);
+    if (!existsSync(path.join(siteDir, relativeAssetPath))) {
+      return `landing registry preview asset '${relativeAssetPath}' is missing`;
     }
   }
 
@@ -194,13 +226,13 @@ export const runReleaseSmokeChecks = async (
     );
   }
 
-  const peopleRegistryPath = path.join(input.siteDir, PEOPLE_REGISTRY_FILE_NAME);
-  if (!existsSync(peopleRegistryPath)) {
+  const landingRegistryPath = path.join(input.siteDir, LANDING_REGISTRY_FILE_NAME);
+  if (!existsSync(landingRegistryPath)) {
     return failCheck(
       checks,
       "landing-assets",
-      `${PEOPLE_REGISTRY_FILE_NAME} is missing`,
-      `inspect generated/site/${PEOPLE_REGISTRY_FILE_NAME} output`,
+      `${LANDING_REGISTRY_FILE_NAME} is missing`,
+      `inspect generated/site/${LANDING_REGISTRY_FILE_NAME} output`,
     );
   }
 
@@ -217,12 +249,26 @@ export const runReleaseSmokeChecks = async (
   }
 
   const landingScript = readUtf8File(path.join(landingAssetsPath, landingScriptName));
-  if (!landingScript.includes(PEOPLE_REGISTRY_FILE_NAME)) {
+  if (!landingScript.includes(LANDING_REGISTRY_FILE_NAME)) {
     return failCheck(
       checks,
       "landing-assets",
-      "landing bundle does not reference the people registry artifact",
+      "landing bundle does not reference the landing registry artifact",
       "inspect landing app build output and registry fetch path",
+    );
+  }
+
+  const landingRegistryPreviewIssue = validateLandingRegistryPreviewAssets(
+    landingRegistryPath,
+    input.siteDir,
+    deployment.publicBasePath,
+  );
+  if (landingRegistryPreviewIssue) {
+    return failCheck(
+      checks,
+      "landing-assets",
+      landingRegistryPreviewIssue,
+      "inspect generated landing registry preview assets under landing-assets/registry",
     );
   }
 

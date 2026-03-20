@@ -24,7 +24,7 @@ export const buildLandingPage = async (
   rmSync(layout.landingAssetsDir, { recursive: true, force: true });
   rmSync(`${layout.siteDir}/index.html`, { force: true });
   rmSync(`${layout.siteDir}/site.webmanifest`, { force: true });
-  rmSync(layout.peopleRegistryPath, { force: true });
+  rmSync(layout.landingRegistryPath, { force: true });
   mkdirSync(layout.siteDir, { recursive: true });
 
   const result = spawnSync(
@@ -66,7 +66,7 @@ export const buildLandingPage = async (
   writeDeploymentSafeSiteWebManifest(`${layout.siteDir}/site.webmanifest`);
   await buildLandingRegistry({
     rootDir: input.rootDir,
-    outputDir: layout.peopleRegistryPath,
+    outputDir: layout.landingRegistryPath,
     publicOrigin: deployment.publicOrigin,
     canonicalOrigin: deployment.canonicalOrigin,
   });

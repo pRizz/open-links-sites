@@ -9,7 +9,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import process from "node:process";
 
 import {
@@ -23,6 +23,7 @@ import { validateRepository } from "./validate";
 const tempRoots: string[] = [];
 
 const writeJson = (filePath: string, value: unknown): void => {
+  mkdirSync(dirname(filePath), { recursive: true });
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
 };
 
@@ -178,6 +179,69 @@ describe("validateRepository", () => {
     );
   });
 
+  test("landing-registry: external entries fail validation on local id conflicts and missing cache", async () => {
+    const rootDir = createFixtureRoot("openlinks-us");
+    writeJson(join(rootDir, "config", "landing", "external-openlinks.json"), {
+      entries: [
+        {
+          id: "openlinks-us",
+          siteUrl: "https://openlinks.us/",
+          enabled: true,
+        },
+      ],
+    });
+
+    const result = await validateRepository(rootDir);
+
+    expect(result.valid).toBe(false);
+    expect(
+      result.repositoryIssues.some((issue) => issue.code === "landing_registry_id_conflict"),
+    ).toBe(true);
+    expect(
+      result.repositoryIssues.some((issue) => issue.code === "external_openlinks_cache_required"),
+    ).toBe(true);
+  });
+
+  test("landing-registry: unclear OpenLinks verification only warns", async () => {
+    const rootDir = createFixtureRoot();
+    writeJson(join(rootDir, "config", "landing", "external-openlinks.json"), {
+      entries: [
+        {
+          id: "openlinks-us",
+          siteUrl: "https://openlinks.us/",
+          enabled: true,
+        },
+      ],
+    });
+    writeJson(join(rootDir, "config", "landing", "external-openlinks-cache.json"), {
+      version: 1,
+      entries: {
+        "openlinks-us": {
+          id: "openlinks-us",
+          siteUrl: "https://openlinks.us/",
+          fetchedAt: "2026-03-20T18:00:00.000Z",
+          finalUrl: "https://openlinks.us/",
+          destinationUrl: "https://openlinks.us/",
+          displayName: "OpenLinks US",
+          subtitle: "openlinks.us",
+          verification: {
+            status: "unclear",
+            reasons: ["No clear OpenLinks marker was found."],
+          },
+        },
+      },
+    });
+
+    const result = await validateRepository(rootDir);
+
+    expect(result.valid).toBe(true);
+    expect(
+      result.repositoryIssues.some(
+        (issue) => issue.code === "external_openlinks_verification_unclear",
+      ),
+    ).toBe(true);
+  });
+
   test("cli: emits machine-readable json", async () => {
     const rootDir = createFixtureRoot();
     const cliResult = Bun.spawnSync({
@@ -198,9 +262,11 @@ describe("validateRepository", () => {
     expect(cliResult.exitCode).toBe(0);
     const parsed = JSON.parse(new TextDecoder().decode(cliResult.stdout)) as {
       valid: boolean;
+      repositoryIssues: unknown[];
       totals: { people: number };
     };
     expect(parsed.valid).toBe(true);
+    expect(Array.isArray(parsed.repositoryIssues)).toBe(true);
     expect(parsed.totals.people).toBe(1);
   });
 });

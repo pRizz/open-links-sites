@@ -48,12 +48,22 @@ describe("release smoke-checks", () => {
     writeJson(join(siteDir, "site.webmanifest"), {
       icons: [{ src: "./android-chrome-192x192.png" }],
     });
-    writeJson(join(siteDir, "people-registry.json"), {
-      entries: [],
+    mkdirSync(join(siteDir, "landing-assets", "registry"), { recursive: true });
+    writeJson(join(siteDir, "landing-registry.json"), {
+      entries: [
+        {
+          id: "openlinks-us",
+          previewImageUrl: "/apps/links/landing-assets/registry/openlinks-us-preview.jpg",
+        },
+      ],
     });
     writeFileSync(
+      join(siteDir, "landing-assets", "registry", "openlinks-us-preview.jpg"),
+      "preview",
+    );
+    writeFileSync(
       join(siteDir, "landing-assets", "landing.js"),
-      'console.log("people-registry.json","Browse Pages");\n',
+      'console.log("landing-registry.json","Browse Pages");\n',
       "utf8",
     );
     writeFileSync(
@@ -120,12 +130,12 @@ describe("release smoke-checks", () => {
     writeJson(join(siteDir, "site.webmanifest"), {
       icons: [{ src: "./android-chrome-192x192.png" }],
     });
-    writeJson(join(siteDir, "people-registry.json"), {
+    writeJson(join(siteDir, "landing-registry.json"), {
       entries: [],
     });
     writeFileSync(
       join(siteDir, "landing-assets", "landing.js"),
-      'console.log("people-registry.json","Browse Pages");\n',
+      'console.log("landing-registry.json","Browse Pages");\n',
       "utf8",
     );
     writeFileSync(

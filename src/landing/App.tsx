@@ -1,11 +1,7 @@
 import { For, Match, Show, Switch, createMemo, createResource, createSignal } from "solid-js";
 
-import {
-  fetchLandingRegistry,
-  filterLandingRegistry,
-  formatRegistryCount,
-  initialsForRegistryEntry,
-} from "./registry";
+import { RegistryCard } from "./RegistryCard";
+import { fetchLandingRegistry, filterLandingRegistry, formatRegistryCount } from "./registry";
 import { applyTheme, readDocumentTheme, saveTheme } from "./theme";
 
 const requestSteps = [
@@ -87,11 +83,11 @@ export const App = () => {
           <div class="registry-copy">
             <p class="eyebrow">Browse Pages</p>
             <h2 class="section-title" id="registry-title">
-              Discover people in this OpenLinks network.
+              Discover managed pages and connected OpenLinks sites.
             </h2>
             <p class="registry-lede">
-              Search across {registryCount()} and jump directly into the pages that are already
-              live.
+              Search across {registryCount()} and jump into live pages, whether they are hosted in
+              this repo or linked in from a connected OpenLinks site.
             </p>
           </div>
 
@@ -102,7 +98,7 @@ export const App = () => {
               type="search"
               value={query()}
               onInput={(event) => setQuery(event.currentTarget.value)}
-              placeholder="Search by name, slug, or summary"
+              placeholder="Search by name, route, domain, or summary"
             />
           </label>
         </div>
@@ -111,7 +107,9 @@ export const App = () => {
           <Match when={entries.loading}>
             <div class="registry-empty">
               <p class="panel-title">Loading Directory</p>
-              <p>Collecting the currently active pages for this network.</p>
+              <p>
+                Collecting the live managed pages and connected OpenLinks sites for this network.
+              </p>
             </div>
           </Match>
 
@@ -124,9 +122,10 @@ export const App = () => {
 
           <Match when={(entries()?.length ?? 0) === 0}>
             <div class="registry-empty">
-              <p class="panel-title">No Pages Yet</p>
+              <p class="panel-title">No Listings Yet</p>
               <p>
-                As active people are added to this repo, their OpenLinks pages will appear here.
+                As managed pages and external OpenLinks sites are added to this registry, they will
+                appear here.
               </p>
             </div>
           </Match>
@@ -134,52 +133,13 @@ export const App = () => {
           <Match when={filteredEntries().length === 0}>
             <div class="registry-empty">
               <p class="panel-title">No Matches</p>
-              <p>Try a different name, slug, or keyword from someone&apos;s summary.</p>
+              <p>Try a different name, route, domain, or keyword from someone&apos;s summary.</p>
             </div>
           </Match>
 
           <Match when={filteredEntries().length > 0}>
             <div class="registry-grid">
-              <For each={filteredEntries()}>
-                {(entry) => (
-                  <article class="registry-card">
-                    <div class="registry-card-head">
-                      <Show
-                        when={entry.avatarUrl}
-                        fallback={
-                          <div class="registry-avatar registry-avatar-fallback">
-                            {initialsForRegistryEntry(entry)}
-                          </div>
-                        }
-                      >
-                        <img
-                          class="registry-avatar"
-                          src={entry.avatarUrl}
-                          alt={`${entry.displayName} avatar`}
-                          loading="lazy"
-                        />
-                      </Show>
-
-                      <div class="registry-card-copy">
-                        <p class="registry-name">{entry.displayName}</p>
-                        <p class="registry-slug">/{entry.id}</p>
-                      </div>
-                    </div>
-
-                    <Show when={entry.headline}>
-                      <p class="registry-headline">{entry.headline}</p>
-                    </Show>
-
-                    <Show when={entry.summary}>
-                      <p class="registry-summary">{entry.summary}</p>
-                    </Show>
-
-                    <a class="registry-link" href={entry.path}>
-                      Open page
-                    </a>
-                  </article>
-                )}
-              </For>
+              <For each={filteredEntries()}>{(entry) => <RegistryCard entry={entry} />}</For>
             </div>
           </Match>
         </Switch>

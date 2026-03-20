@@ -256,6 +256,15 @@ a {
   min-height: 100%;
 }
 
+.registry-preview {
+  width: 100%;
+  aspect-ratio: 16 / 8.4;
+  object-fit: cover;
+  border-radius: 1rem;
+  border: 1px solid var(--surface-border);
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .registry-card-head {
   display: flex;
   gap: 0.95rem;
@@ -286,11 +295,18 @@ a {
 }
 
 .registry-name,
-.registry-slug,
+.registry-subtitle,
 .registry-headline,
 .registry-summary,
 .registry-empty p {
   margin: 0;
+}
+
+.registry-name-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
 }
 
 .registry-name {
@@ -299,10 +315,25 @@ a {
   color: var(--text-strong);
 }
 
-.registry-slug {
+.registry-subtitle {
   margin-top: 0.2rem;
   color: var(--text-subtle);
   font-size: 0.92rem;
+}
+
+.registry-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.55rem;
+  padding: 0 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 225, 218, 0.2);
+  background: rgba(209, 230, 221, 0.08);
+  color: var(--text-accent);
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .registry-headline {

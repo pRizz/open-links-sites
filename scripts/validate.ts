@@ -1,5 +1,7 @@
 import process from "node:process";
 
+import { validateExternalOpenLinksRepository } from "./lib/landing/external-openlinks";
+import { loadPersonRegistry } from "./lib/manage-person/person-registry";
 import { resolveRepoPath } from "./lib/person-contract";
 import { discoverPeople } from "./lib/person-discovery";
 import { validateDiscoveredPerson } from "./lib/validate-person";
@@ -43,11 +45,19 @@ export const validateRepository = async (
 ): Promise<ValidationRunResult> => {
   const people = await discoverPeople(rootDir);
   const results = await Promise.all(people.map((person) => validateDiscoveredPerson(person)));
-  const totals = buildValidationTotals(results);
+  const localRegistry = await loadPersonRegistry(rootDir, {
+    includeArchived: true,
+  });
+  const repositoryIssues = validateExternalOpenLinksRepository({
+    rootDir,
+    localIds: localRegistry.map((entry) => entry.id),
+  });
+  const totals = buildValidationTotals(results, repositoryIssues);
 
   return {
     valid: totals.problems === 0,
     people: results,
+    repositoryIssues,
     totals,
   };
 };
