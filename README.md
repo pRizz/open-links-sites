@@ -201,7 +201,11 @@ The scheduled workflow for this lives at:
 
 - `.github/workflows/upstream-sync.yml`
 
-That workflow:
+That workflow runs every 4 hours and starts with a cheap `git ls-remote`
+preflight against `pRizz/open-links` `main`. If the pinned commit already
+matches upstream, it exits before cloning upstream or installing dependencies.
+
+When upstream has moved, it:
 
 1. checks out this repo plus upstream `open-links`
 2. refreshes `config/upstream-open-links.json` when upstream has moved

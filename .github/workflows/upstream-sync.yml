@@ -2,7 +2,7 @@ name: Upstream Sync
 
 on:
   schedule:
-    - cron: "0 8 * * *"
+    - cron: "0 */4 * * *"
   workflow_dispatch:
 
 permissions:
@@ -23,12 +23,48 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Preflight upstream HEAD check
+        id: preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .cache
+          tracked_commit="$(python3 -c 'import json, pathlib; print(json.loads(pathlib.Path("config/upstream-open-links.json").read_text(encoding="utf8"))["commit"])')"
+          latest_commit="$(git ls-remote https://github.com/pRizz/open-links.git refs/heads/main | awk '{print $1}')"
+          if [[ -z "$latest_commit" ]]; then
+            echo "Unable to resolve upstream open-links main HEAD." >&2
+            exit 1
+          fi
+
+          changed=true
+          action="continue with full upstream sync"
+          if [[ "$tracked_commit" == "$latest_commit" ]]; then
+            changed=false
+            action="skip clone/install/verify because the pinned upstream commit is already current"
+          fi
+
+          {
+            echo "changed=$changed"
+            echo "tracked_commit=$tracked_commit"
+            echo "latest_commit=$latest_commit"
+          } >> "$GITHUB_OUTPUT"
+
+          printf '%s\n' \
+            '## Upstream Preflight' \
+            "- Tracked commit: \`${tracked_commit:0:12}\`" \
+            "- Latest commit: \`${latest_commit:0:12}\`" \
+            "- Upstream changed: \`${changed}\`" \
+            "- Action: ${action}" \
+            > .cache/upstream-preflight-summary.txt
+
       - name: Setup Bun
+        if: steps.preflight.outputs.changed == 'true'
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.3.9
 
       - name: Clone upstream open-links
+        if: steps.preflight.outputs.changed == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -38,9 +74,11 @@ jobs:
           echo "OPEN_LINKS_REPO_DIR=$upstream_repo_dir" >> "$GITHUB_ENV"
 
       - name: Install open-links-sites dependencies
+        if: steps.preflight.outputs.changed == 'true'
         run: bun install --frozen-lockfile
 
       - name: Install upstream open-links dependencies
+        if: steps.preflight.outputs.changed == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -48,6 +86,7 @@ jobs:
           bun install --frozen-lockfile
 
       - name: Sync pinned upstream state
+        if: steps.preflight.outputs.changed == 'true'
         id: sync
         shell: bash
         run: |
@@ -56,7 +95,7 @@ jobs:
           bun run sync:upstream -- --root "$GITHUB_WORKSPACE" --upstream-repo-dir "$OPEN_LINKS_REPO_DIR" | tee .cache/upstream-sync-summary.txt
 
       - name: Verify releasable state
-        if: steps.sync.outputs.sync_result == 'changed'
+        if: steps.preflight.outputs.changed == 'true' && steps.sync.outputs.sync_result == 'changed'
         shell: bash
         env:
           OPEN_LINKS_SITES_PUBLIC_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
@@ -65,7 +104,7 @@ jobs:
           bun run release:verify -- --root "$GITHUB_WORKSPACE" --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" --event-name "$GITHUB_EVENT_NAME" | tee .cache/release-verify-summary.txt
 
       - name: Commit and push synced upstream state
-        if: steps.sync.outputs.sync_result == 'changed'
+        if: steps.preflight.outputs.changed == 'true' && steps.sync.outputs.sync_result == 'changed'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -81,7 +120,11 @@ jobs:
         if: always()
         shell: bash
         run: |
+          if [[ -f .cache/upstream-preflight-summary.txt ]]; then
+            cat .cache/upstream-preflight-summary.txt >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [[ -f .cache/upstream-sync-summary.txt ]]; then
+            printf '\n' >> "$GITHUB_STEP_SUMMARY"
             cat .cache/upstream-sync-summary.txt >> "$GITHUB_STEP_SUMMARY"
           fi
           if [[ -f .cache/release-verify-summary.txt ]]; then
