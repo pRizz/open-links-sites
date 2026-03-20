@@ -6,6 +6,7 @@ import {
   formatRegistryCount,
   initialsForRegistryEntry,
 } from "./registry";
+import { applyTheme, readDocumentTheme, saveTheme } from "./theme";
 
 const requestSteps = [
   "Share who the page is for and any existing Linktree-style URL.",
@@ -15,15 +16,35 @@ const requestSteps = [
 
 export const App = () => {
   const [query, setQuery] = createSignal("");
+  const [theme, setTheme] = createSignal(readDocumentTheme());
   const [entries] = createResource(fetchLandingRegistry);
   const filteredEntries = createMemo(() => filterLandingRegistry(entries() ?? [], query()));
   const registryCount = createMemo(() => formatRegistryCount(entries()?.length ?? 0));
+  const nextThemeLabel = createMemo(() => (theme() === "dark" ? "Light mode" : "Dark mode"));
+
+  const toggleTheme = () => {
+    const nextTheme = theme() === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    applyTheme(nextTheme);
+    saveTheme(nextTheme);
+  };
 
   return (
     <main class="shell">
+      <header class="site-head">
+        <p class="eyebrow">Managed OpenLinks Network</p>
+        <button
+          class="theme-toggle"
+          type="button"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${theme() === "dark" ? "light" : "dark"} mode`}
+        >
+          {nextThemeLabel()}
+        </button>
+      </header>
+
       <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">Managed OpenLinks Network</p>
           <h1>Simple pages for people who need one clear place to be found.</h1>
           <p class="lede">
             This site hosts individual OpenLinks pages under path-based routes. Each page is built
