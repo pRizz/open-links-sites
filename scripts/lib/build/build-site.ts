@@ -4,9 +4,10 @@ import { loadPersonRegistry } from "../manage-person/person-registry";
 import { buildLandingPage } from "./build-landing-page";
 import { buildPersonSite } from "./build-person-site";
 import { resolveStableBuildTimestamp } from "./build-timestamp";
+import { type DeploymentContextInput, resolveDeploymentContext } from "./deployment-context";
 import { getGeneratedPersonSiteDir, getGeneratedSiteLayout } from "./site-layout";
 
-export interface BuildSiteInput {
+export interface BuildSiteInput extends DeploymentContextInput {
   rootDir: string;
   personIds?: string[];
   preserveExisting?: boolean;
@@ -34,6 +35,7 @@ export const buildSite = async (
   input: BuildSiteInput,
   dependencies: BuildSiteDependencies = {},
 ): Promise<BuildSiteResult> => {
+  const deployment = resolveDeploymentContext(input);
   const layout = getGeneratedSiteLayout(input.rootDir);
   const registry = await (dependencies.loadPersonRegistry ?? loadPersonRegistry)(input.rootDir, {
     includeArchived: true,
@@ -69,6 +71,8 @@ export const buildSite = async (
       rootDir: input.rootDir,
       personId,
       buildTimestamp,
+      publicOrigin: deployment.publicOrigin,
+      canonicalOrigin: deployment.canonicalOrigin,
     });
     builtPersonIds.push(personId);
   }
@@ -84,6 +88,8 @@ export const buildSite = async (
   if (input.includeLandingPage !== false) {
     await (dependencies.buildLandingPage ?? buildLandingPage)({
       rootDir: input.rootDir,
+      publicOrigin: deployment.publicOrigin,
+      canonicalOrigin: deployment.canonicalOrigin,
     });
   }
 

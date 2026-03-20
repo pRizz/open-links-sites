@@ -5,12 +5,12 @@ import {
   type BuildSelectionMode,
   formatBuildSelectionHuman,
 } from "./change-detection";
+import { type DeploymentContextInput, resolveDeploymentContext } from "./deployment-context";
 import { type RestoreLiveSiteResult, restoreLiveSite } from "./restore-live-site";
 
-export interface ExecuteBuildSelectionInput {
+export interface ExecuteBuildSelectionInput extends DeploymentContextInput {
   rootDir: string;
   selection: BuildSelection;
-  publicOrigin?: string;
   buildTimestamp?: string;
 }
 
@@ -31,6 +31,7 @@ export const executeBuildSelection = async (
   input: ExecuteBuildSelectionInput,
   dependencies: ExecuteBuildSelectionDependencies = {},
 ): Promise<ExecuteBuildSelectionResult> => {
+  const deployment = resolveDeploymentContext(input);
   const selectionSummary = formatBuildSelectionHuman(input.selection);
   const buildSiteImpl = dependencies.buildSite ?? buildSite;
 
@@ -41,6 +42,8 @@ export const executeBuildSelection = async (
       preserveExisting: true,
       includeLandingPage: false,
       buildTimestamp: input.buildTimestamp,
+      publicOrigin: deployment.publicOrigin,
+      canonicalOrigin: deployment.canonicalOrigin,
     });
 
     return {
@@ -54,6 +57,8 @@ export const executeBuildSelection = async (
     const result = await buildSiteImpl({
       rootDir: input.rootDir,
       buildTimestamp: input.buildTimestamp,
+      publicOrigin: deployment.publicOrigin,
+      canonicalOrigin: deployment.canonicalOrigin,
     });
 
     return {
@@ -66,6 +71,8 @@ export const executeBuildSelection = async (
     const result = await buildSiteImpl({
       rootDir: input.rootDir,
       buildTimestamp: input.buildTimestamp,
+      publicOrigin: deployment.publicOrigin,
+      canonicalOrigin: deployment.canonicalOrigin,
     });
 
     return {
@@ -79,7 +86,7 @@ export const executeBuildSelection = async (
   try {
     const restoredSite = await (dependencies.restoreLiveSite ?? restoreLiveSite)({
       rootDir: input.rootDir,
-      publicOrigin: input.publicOrigin,
+      publicOrigin: deployment.publicOrigin,
     });
     const registry = await (dependencies.loadPersonRegistry ?? loadPersonRegistry)(input.rootDir, {
       includeArchived: true,
@@ -100,6 +107,8 @@ export const executeBuildSelection = async (
       removePersonIds: removedPersonIds,
       includeLandingPage: false,
       buildTimestamp: input.buildTimestamp,
+      publicOrigin: deployment.publicOrigin,
+      canonicalOrigin: deployment.canonicalOrigin,
     });
 
     return {
@@ -111,6 +120,8 @@ export const executeBuildSelection = async (
     const result = await buildSiteImpl({
       rootDir: input.rootDir,
       buildTimestamp: input.buildTimestamp,
+      publicOrigin: deployment.publicOrigin,
+      canonicalOrigin: deployment.canonicalOrigin,
     });
 
     return {

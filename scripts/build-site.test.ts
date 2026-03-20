@@ -133,15 +133,39 @@ describe("build-site", () => {
   test("landing-page: builds the root landing experience into generated/site", async () => {
     const rootDir = createTempRoot();
 
-    const result = await buildLandingPage({ rootDir });
+    const result = await buildLandingPage({
+      rootDir,
+      publicOrigin: "https://example.com/open-links-sites",
+    });
     const layout = getGeneratedSiteLayout(rootDir);
 
     expect(result.siteDir).toBe(layout.siteDir);
     expect(existsSync(join(layout.siteDir, "index.html"))).toBe(true);
     expect(existsSync(layout.landingAssetsDir)).toBe(true);
+    expect(existsSync(join(layout.siteDir, "site.webmanifest"))).toBe(true);
 
     const html = readFileSync(join(layout.siteDir, "index.html"), "utf8");
     expect(html).toContain("OpenLinks Sites");
+    expect(html).toContain("/open-links-sites/landing-assets/");
+    expect(html).toContain("/open-links-sites/favicon.ico");
+    expect(html).toContain("/open-links-sites/site.webmanifest");
+
+    const manifest = readFileSync(join(layout.siteDir, "site.webmanifest"), "utf8");
+    expect(manifest).toContain('"./android-chrome-192x192.png"');
+    expect(manifest).not.toContain('"/android-chrome-192x192.png"');
+  });
+
+  test("landing-page: root deployments keep root-relative asset paths", async () => {
+    const rootDir = createTempRoot();
+
+    await buildLandingPage({
+      rootDir,
+      publicOrigin: "https://links.example.com",
+    });
+
+    const html = readFileSync(join(getGeneratedSiteLayout(rootDir).siteDir, "index.html"), "utf8");
+    expect(html).toContain("/landing-assets/");
+    expect(html).not.toContain("/open-links-sites/landing-assets/");
   });
 
   test(
@@ -154,6 +178,8 @@ describe("build-site", () => {
         rootDir,
         personId: "fixture-user",
         buildTimestamp: "2026-03-17T12:00:00.000Z",
+        publicOrigin: "https://cdn.example.com/apps/links",
+        canonicalOrigin: "https://links.example.com/apps/links",
       });
 
       expect(result.personId).toBe("fixture-user");
@@ -186,6 +212,8 @@ describe("build-site", () => {
         rootDir,
         personId: "fixture-user",
         buildTimestamp: "2026-03-17T12:00:00.000Z",
+        publicOrigin: "https://cdn.example.com/apps/links",
+        canonicalOrigin: "https://links.example.com/apps/links",
       });
 
       const builtScriptName = readdirSync(join(result.outputDir, "assets")).find(
@@ -207,6 +235,17 @@ describe("build-site", () => {
 
       expect(builtScript).not.toContain(upstreamName);
       expect(builtScript).not.toContain(upstreamLinkUrl);
+
+      const builtHtml = readFileSync(join(result.outputDir, "index.html"), "utf8");
+      expect(builtHtml).toContain("/apps/links/fixture-user/assets/");
+      expect(builtHtml).toContain("/apps/links/fixture-user/favicon.svg");
+      expect(builtHtml).toContain("/apps/links/fixture-user/site.webmanifest");
+      expect(builtHtml).not.toContain("placeholder.example");
+      expect(builtHtml).toContain("https://links.example.com/apps/links/fixture-user/");
+
+      const builtManifest = readFileSync(join(result.outputDir, "site.webmanifest"), "utf8");
+      expect(builtManifest).toContain('"./android-chrome-192x192.png"');
+      expect(builtManifest).not.toContain('"/android-chrome-192x192.png"');
 
       const builtContentImageNames = readdirSync(join(result.outputDir, "cache", "content-images"));
       expect(builtContentImageNames).toEqual(["fixture-preview.jpg"]);

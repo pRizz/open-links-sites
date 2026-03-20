@@ -8,6 +8,7 @@ type OutputFormat = "human" | "json";
 interface ParsedArgs {
   rootDir: string;
   publicOrigin: string;
+  canonicalOrigin?: string;
   eventName?: string;
   changedPaths: string[];
   changedPathsFile?: string;
@@ -52,6 +53,10 @@ const parseArgs = (): ParsedArgs => {
           process.env.GITHUB_REPOSITORY?.split("/") ?? [];
         return `https://${owner}.github.io/${repository}`;
       })(),
+    canonicalOrigin:
+      readSingleFlag("--canonical-origin") ??
+      process.env.OPEN_LINKS_SITES_CANONICAL_ORIGIN ??
+      undefined,
     eventName: readSingleFlag("--event-name") ?? process.env.GITHUB_EVENT_NAME,
     changedPaths: readMultiFlag("--changed-path"),
     changedPathsFile: readSingleFlag("--changed-paths-file"),
@@ -65,6 +70,7 @@ const main = async (): Promise<void> => {
   const result = await runReleaseVerification({
     rootDir: args.rootDir,
     publicOrigin: args.publicOrigin,
+    canonicalOrigin: args.canonicalOrigin,
     eventName: args.eventName,
     changedPaths: args.changedPaths,
     changedPathsFile: args.changedPathsFile,

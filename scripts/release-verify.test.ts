@@ -5,10 +5,14 @@ import { createOpenLinksUpstreamState } from "./lib/release-ops/upstream-state";
 
 describe("release-verify", () => {
   test("passes when all verification stages succeed", async () => {
+    let capturedBuildInput: unknown;
+    let capturedSmokeInput: unknown;
+
     const result = await runReleaseVerification(
       {
         rootDir: "/tmp/open-links-sites",
         publicOrigin: "https://example.com/open-links-sites",
+        canonicalOrigin: "https://links.example.com",
         eventName: "schedule",
       },
       {
@@ -26,12 +30,16 @@ describe("release-verify", () => {
         runCommand: () => ({
           status: 0,
         }),
-        buildSite: async () => ({
-          mode: "full",
-          siteDir: "/tmp/open-links-sites/generated/site",
-          builtPersonIds: [],
-          removedPersonIds: [],
-        }),
+        buildSite: async (input) => {
+          capturedBuildInput = input;
+
+          return {
+            mode: "full",
+            siteDir: "/tmp/open-links-sites/generated/site",
+            builtPersonIds: [],
+            removedPersonIds: [],
+          };
+        },
         planPagesDeployment: async () => ({
           artifactDir: "/tmp/open-links-sites/generated/site",
           artifactHash: "artifact-hash",
@@ -50,21 +58,25 @@ describe("release-verify", () => {
           },
           maybeRemoteManifest: null,
         }),
-        runReleaseSmokeChecks: async () => ({
-          status: "passed",
-          checks: [
-            {
-              key: "root-index",
-              status: "passed",
-              detail: "root landing page exists",
-            },
-            {
-              key: "representative-person",
-              status: "skipped",
-              detail: "no active people are present, so route smoke verification was skipped",
-            },
-          ],
-        }),
+        runReleaseSmokeChecks: async (input) => {
+          capturedSmokeInput = input;
+
+          return {
+            status: "passed",
+            checks: [
+              {
+                key: "root-index",
+                status: "passed",
+                detail: "root landing page exists",
+              },
+              {
+                key: "representative-person",
+                status: "skipped",
+                detail: "no active people are present, so route smoke verification was skipped",
+              },
+            ],
+          };
+        },
       },
     );
 
@@ -78,6 +90,14 @@ describe("release-verify", () => {
     ]);
     expect(result.summary).toContain("Status: `passed`");
     expect(result.summary).toContain("Pages changed: `true`");
+    expect(capturedBuildInput).toMatchObject({
+      publicOrigin: "https://example.com/open-links-sites",
+      canonicalOrigin: "https://links.example.com",
+    });
+    expect(capturedSmokeInput).toMatchObject({
+      publicOrigin: "https://example.com/open-links-sites",
+      canonicalOrigin: "https://links.example.com",
+    });
   });
 
   test("fails fast when smoke checks fail after build and page planning", async () => {

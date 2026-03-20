@@ -3,9 +3,11 @@ import { existsSync, mkdirSync, renameSync, rmSync } from "node:fs";
 import process from "node:process";
 
 import { resolveRepoPath } from "../person-contract";
+import { type DeploymentContextInput, resolveDeploymentContext } from "./deployment-context";
 import { getGeneratedSiteLayout } from "./site-layout";
+import { writeDeploymentSafeSiteWebManifest } from "./site-web-manifest";
 
-export interface BuildLandingPageInput {
+export interface BuildLandingPageInput extends DeploymentContextInput {
   rootDir: string;
 }
 
@@ -16,9 +18,11 @@ export interface BuildLandingPageResult {
 export const buildLandingPage = async (
   input: BuildLandingPageInput,
 ): Promise<BuildLandingPageResult> => {
+  const deployment = resolveDeploymentContext(input);
   const layout = getGeneratedSiteLayout(input.rootDir);
   rmSync(layout.landingAssetsDir, { recursive: true, force: true });
   rmSync(`${layout.siteDir}/index.html`, { force: true });
+  rmSync(`${layout.siteDir}/site.webmanifest`, { force: true });
   mkdirSync(layout.siteDir, { recursive: true });
 
   const result = spawnSync(
@@ -34,7 +38,10 @@ export const buildLandingPage = async (
     {
       cwd: resolveRepoPath("."),
       encoding: "utf8",
-      env: process.env,
+      env: {
+        ...process.env,
+        BASE_PATH: deployment.publicBasePath,
+      },
     },
   );
 
@@ -54,6 +61,7 @@ export const buildLandingPage = async (
   if (existsSync(renderedLandingPath)) {
     renameSync(renderedLandingPath, `${layout.siteDir}/index.html`);
   }
+  writeDeploymentSafeSiteWebManifest(`${layout.siteDir}/site.webmanifest`);
 
   return {
     siteDir: layout.siteDir,

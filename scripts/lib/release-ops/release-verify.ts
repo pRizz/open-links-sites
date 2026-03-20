@@ -7,6 +7,7 @@ import {
   detectBuildSelection,
   loadChangedPaths,
 } from "../build/change-detection";
+import { resolveDeploymentContext } from "../build/deployment-context";
 import { type ExecuteBuildSelectionResult, executeBuildSelection } from "../build/selective-build";
 import { getGeneratedSiteLayout } from "../build/site-layout";
 import { type PlanPagesDeploymentResult, planPagesDeployment } from "../deploy/pages-plan";
@@ -23,6 +24,7 @@ export interface CommandExecutionResult {
 export interface RunReleaseVerificationInput {
   rootDir: string;
   publicOrigin: string;
+  canonicalOrigin?: string;
   eventName?: string;
   changedPaths?: string[];
   changedPathsFile?: string;
@@ -111,6 +113,10 @@ export const runReleaseVerification = async (
   input: RunReleaseVerificationInput,
   dependencies: ReleaseVerificationDependencies = {},
 ): Promise<ReleaseVerificationResult> => {
+  const deployment = resolveDeploymentContext({
+    publicOrigin: input.publicOrigin,
+    canonicalOrigin: input.canonicalOrigin,
+  });
   const context = (dependencies.resolveDeployWorkflowContext ?? resolveDeployWorkflowContext)({
     rootDir: input.rootDir,
     eventName: input.eventName,
@@ -178,12 +184,15 @@ export const runReleaseVerification = async (
       );
       buildResult = await (dependencies.executeBuildSelection ?? executeBuildSelection)({
         rootDir: input.rootDir,
-        publicOrigin: input.publicOrigin,
+        publicOrigin: deployment.publicOrigin,
+        canonicalOrigin: deployment.canonicalOrigin,
         selection,
       });
     } else {
       buildResult = await (dependencies.buildSite ?? buildSite)({
         rootDir: input.rootDir,
+        publicOrigin: deployment.publicOrigin,
+        canonicalOrigin: deployment.canonicalOrigin,
       });
     }
   } catch (error) {
@@ -214,7 +223,7 @@ export const runReleaseVerification = async (
   try {
     pagesPlan = await (dependencies.planPagesDeployment ?? planPagesDeployment)({
       siteDir,
-      publicOrigin: input.publicOrigin,
+      publicOrigin: deployment.publicOrigin,
     });
   } catch (error) {
     stages.push({
@@ -246,6 +255,8 @@ export const runReleaseVerification = async (
     smokeChecks = await (dependencies.runReleaseSmokeChecks ?? runReleaseSmokeChecks)({
       rootDir: input.rootDir,
       siteDir,
+      publicOrigin: deployment.publicOrigin,
+      canonicalOrigin: deployment.canonicalOrigin,
     });
   } catch (error) {
     stages.push({

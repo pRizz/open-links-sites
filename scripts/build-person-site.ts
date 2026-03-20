@@ -5,6 +5,8 @@ import { buildPersonSite } from "./lib/build/build-person-site";
 interface ParsedArgs {
   personId: string;
   rootDir: string;
+  publicOrigin?: string;
+  canonicalOrigin?: string;
 }
 
 const parseArgs = (): ParsedArgs => {
@@ -27,6 +29,8 @@ const parseArgs = (): ParsedArgs => {
   return {
     personId,
     rootDir: readFlag("--root") ?? process.cwd(),
+    publicOrigin: readFlag("--public-origin"),
+    canonicalOrigin: readFlag("--canonical-origin"),
   };
 };
 
@@ -35,6 +39,8 @@ const main = async (): Promise<void> => {
   const result = await buildPersonSite({
     rootDir: args.rootDir,
     personId: args.personId,
+    publicOrigin: args.publicOrigin,
+    canonicalOrigin: args.canonicalOrigin,
   });
 
   process.stdout.write(

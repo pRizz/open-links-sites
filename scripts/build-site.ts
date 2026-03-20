@@ -14,6 +14,7 @@ interface ParsedArgs {
   changedPathsFile?: string;
   baseRef?: string;
   publicOrigin?: string;
+  canonicalOrigin?: string;
 }
 
 const parseArgs = (): ParsedArgs => {
@@ -51,6 +52,7 @@ const parseArgs = (): ParsedArgs => {
     changedPathsFile: readSingleFlag("--changed-paths-file"),
     baseRef: readSingleFlag("--base-ref"),
     publicOrigin: readSingleFlag("--public-origin"),
+    canonicalOrigin: readSingleFlag("--canonical-origin"),
   };
 };
 
@@ -64,6 +66,7 @@ const main = async (): Promise<void> => {
     ? await executeBuildSelection({
         rootDir: args.rootDir,
         publicOrigin: args.publicOrigin,
+        canonicalOrigin: args.canonicalOrigin,
         selection: detectBuildSelection(
           loadChangedPaths({
             baseRef: args.baseRef,
@@ -78,6 +81,8 @@ const main = async (): Promise<void> => {
         preserveExisting: args.preserveExisting,
         removePersonIds: args.removePersonIds,
         includeLandingPage: args.includeLandingPage,
+        publicOrigin: args.publicOrigin,
+        canonicalOrigin: args.canonicalOrigin,
       });
 
   process.stdout.write(

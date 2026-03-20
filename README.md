@@ -55,6 +55,7 @@ bun run scaffold:person -- --id alice-example --name "Alice Example"
 bun run materialize:person -- --id alice-example
 bun run build:person:site -- --id alice-example
 bun run build:site
+OPEN_LINKS_SITES_PUBLIC_ORIGIN="https://USER.github.io/open-links-sites" bun run release:verify
 ```
 
 ## Source Of Truth
@@ -168,8 +169,16 @@ Selective-build helpers are now available too:
 ```bash
 bun run changed:people -- --base-ref HEAD~1
 bun run build:site -- --changed-paths-file .cache/changed-paths.txt --public-origin "https://USER.github.io/open-links-sites"
+bun run build:site -- --public-origin "https://links.example.com"
+bun run build:site -- --public-origin "https://cdn.example.com/apps/links" --canonical-origin "https://links.example.com/apps/links"
 bun run deploy:pages:plan -- --site-dir generated/site --public-origin "https://USER.github.io/open-links-sites"
 ```
+
+Supported deployment shapes:
+
+- GitHub Pages project path: `--public-origin "https://USER.github.io/open-links-sites"`
+- Custom-domain root deploy: `--public-origin "https://links.example.com"`
+- Arbitrary subpath deploy with separate canonical origin: `--public-origin "https://cdn.example.com/apps/links" --canonical-origin "https://links.example.com/apps/links"`
 
 ## Autonomous Upstream Sync
 
@@ -210,6 +219,7 @@ Phase 5 also adds one shared release gate:
 
 ```bash
 bun run release:verify -- --root "$PWD" --public-origin "https://USER.github.io/open-links-sites"
+bun run release:verify -- --root "$PWD" --public-origin "https://cdn.example.com/apps/links" --canonical-origin "https://links.example.com/apps/links"
 ```
 
 That command is now reused by both scheduled upstream sync and the deploy
@@ -220,6 +230,12 @@ workflow. It runs:
 3. a Pages-ready site build for the current mode
 4. Pages artifact planning
 5. lightweight smoke checks against `generated/site/`
+
+Deployment notes:
+
+- `publicOrigin` controls emitted asset URLs and the path where the site is actually served.
+- `canonicalOrigin` is optional and defaults to `publicOrigin`.
+- Person builds now emit deployment-safe manifests with relative icon paths, so the same output works on GitHub Pages, custom domains, and arbitrary reverse-proxied subpaths.
 
 Operational posture for v1:
 
