@@ -3,42 +3,33 @@
   font-family: "Avenir Next", "Segoe UI", sans-serif;
   line-height: 1.5;
   color: #f4f6f1;
-  --page-background: radial-gradient(
-      circle at top left,
-      rgba(231, 164, 92, 0.24),
-      transparent 28rem
-    ), radial-gradient(circle at top right, rgba(57, 105, 88, 0.22), transparent 24rem),
-    linear-gradient(180deg, #09110f 0%, #101917 45%, #18231f 100%);
+  --page-background: #101917;
   --surface-border: rgba(232, 239, 234, 0.12);
   --surface-card: rgba(17, 28, 25, 0.78);
   --surface-card-strong: rgba(13, 22, 20, 0.9);
-  --surface-accent: linear-gradient(135deg, rgba(180, 125, 66, 0.94), rgba(75, 129, 106, 0.9));
+  --surface-accent: #2e5a4c;
   --surface-input: rgba(10, 16, 15, 0.56);
   --text-strong: #f4f6f1;
   --text-body: rgba(244, 246, 241, 0.92);
   --text-muted: rgba(225, 231, 226, 0.8);
   --text-subtle: #9fb6ad;
   --text-accent: #c5e0d4;
-  --button-background: #f2dfc7;
-  --button-text: #13231e;
+  --button-background: #c5dfd3;
+  --button-text: #12221d;
   --button-shadow: 0 0.9rem 1.8rem rgba(0, 0, 0, 0.24);
   --shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.28);
-  --focus-ring: rgba(242, 223, 199, 0.38);
+  --focus-ring: rgba(197, 223, 211, 0.34);
 }
 
 :root[data-theme="light"] {
   color-scheme: light;
   color: #13231e;
-  --page-background: radial-gradient(
-      circle at top left,
-      rgba(229, 162, 94, 0.22),
-      transparent 32rem
-    ), linear-gradient(180deg, #fbf5eb 0%, #eef3ec 100%);
+  --page-background: #edf3ee;
   --surface-border: rgba(19, 35, 30, 0.12);
-  --surface-card: rgba(255, 252, 246, 0.74);
-  --surface-card-strong: rgba(255, 252, 246, 0.88);
-  --surface-accent: linear-gradient(135deg, rgba(22, 71, 60, 0.95), rgba(41, 105, 84, 0.9));
-  --surface-input: rgba(255, 252, 246, 0.88);
+  --surface-card: rgba(248, 251, 249, 0.78);
+  --surface-card-strong: rgba(246, 250, 247, 0.92);
+  --surface-accent: #1f4f43;
+  --surface-input: rgba(246, 250, 247, 0.92);
   --text-strong: #13231e;
   --text-body: rgba(19, 35, 30, 0.92);
   --text-muted: rgba(19, 35, 30, 0.84);
@@ -287,7 +278,7 @@ a {
   font-weight: 700;
   letter-spacing: 0.08em;
   color: #f5f7f2;
-  background: linear-gradient(135deg, rgba(22, 71, 60, 0.96), rgba(180, 125, 66, 0.88));
+  background: var(--surface-accent);
 }
 
 .registry-card-copy {
