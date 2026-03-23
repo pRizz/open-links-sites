@@ -4,20 +4,19 @@
     "openlinks-us": {
       "id": "openlinks-us",
       "siteUrl": "https://openlinks.us/",
-      "fetchedAt": "2026-03-20T09:09:03.137Z",
+      "fetchedAt": "2026-03-23T15:26:45.084Z",
       "finalUrl": "https://openlinks.us/",
       "destinationUrl": "https://openlinks.us/",
       "displayName": "OpenLinks",
       "subtitle": "openlinks.us",
       "summary": "Personal, free, open source, version-controlled social links website.",
       "avatarUrl": "https://openlinks.us/apple-touch-icon.png",
-      "previewImageSourceUrl": "https://openlinks.us/openlinks-social-fallback.svg",
-      "mirroredPreviewImagePath": "config/landing/external-openlinks-media/openlinks-us-preview.svg",
+      "previewImageSourceUrl": "https://openlinks.us/generated/seo/social-preview.png",
+      "mirroredPreviewImagePath": "config/landing/external-openlinks-media/openlinks-us-preview.png",
       "verification": {
         "status": "confirmed",
         "reasons": [
           "page title includes OpenLinks",
-          "HTML references the OpenLinks social fallback asset",
           "site.webmanifest name includes OpenLinks",
           "site.webmanifest short_name includes OpenLinks"
         ],
