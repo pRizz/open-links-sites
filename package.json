@@ -5,6 +5,8 @@
   "type": "module",
   "packageManager": "bun@1.3.9",
   "scripts": {
+    "dev": "bun run scripts/dev.ts",
+    "preview": "bun run scripts/dev.ts",
     "typecheck": "tsc --noEmit",
     "test": "bun test $(find scripts -type f -name '*.test.ts' -print)",
     "validate": "bun run scripts/validate.ts",

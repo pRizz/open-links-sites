@@ -182,6 +182,23 @@
           "sourceUrl": "https://linktr.ee/XSTACI"
         }
       }
+    },
+    {
+      "id": "tip-staci",
+      "label": "Tip Staci",
+      "url": "lightning:xstac1@strike.me",
+      "type": "payment",
+      "enabled": true,
+      "payment": {
+        "rails": [
+          {
+            "id": "strike",
+            "rail": "lightning",
+            "label": "Strike",
+            "address": "xstac1@strike.me"
+          }
+        ]
+      }
     }
   ],
   "groups": [],
@@ -198,7 +215,8 @@
     "club-orange",
     "audible-the-bitcoin-nova-podcast",
     "the-bitcoin-nova-podcast-on-amazon-music",
-    "rumble"
+    "rumble",
+    "tip-staci"
   ],
   "custom": {}
 }

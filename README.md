@@ -52,6 +52,8 @@ bun install
 bun run typecheck
 bun test
 bun run validate
+bun run preview
+bun run dev
 bun run manage:person -- --help
 bun run scaffold:person -- --id alice-example --name "Alice Example"
 bun run materialize:person -- --id alice-example
@@ -162,6 +164,10 @@ materialize/import contract:
 2. `bun run build:site` builds every active person into `generated/site/<id>/`
    and also generates the root landing page at `generated/site/index.html`.
 3. Disabled or archived people are omitted from generated output.
+4. `bun run preview` runs a full local build once and serves `generated/site/`
+   at `http://127.0.0.1:4173/` by default for browser checks.
+5. `bun run dev` is a convenience alias for the same preview flow; it does not
+   currently run a watch or hot-reload loop.
 
 The upstream renderer stays canonical for person pages. This repo owns the thin
 orchestration layer around it plus the root landing page.
