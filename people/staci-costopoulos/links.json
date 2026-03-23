@@ -6,6 +6,7 @@
       "label": "The Bitcoin Nova",
       "url": "https://bitcoinnova.store/",
       "type": "rich",
+      "group": "links",
       "enabled": true,
       "custom": {
         "import": {
@@ -20,6 +21,7 @@
       "label": "Home - Bitcoin Black Sheep",
       "url": "https://bitcoinblacksheep.com/",
       "type": "rich",
+      "group": "links",
       "enabled": true,
       "custom": {
         "import": {
@@ -34,6 +36,7 @@
       "label": "bookings.thebitcoinnova@gmail.com",
       "url": "mailto:TheBitcoinNova@gmail.com",
       "type": "simple",
+      "group": "links",
       "enabled": true,
       "custom": {
         "import": {
@@ -48,6 +51,7 @@
       "label": "Live with the Hive Podcast",
       "url": "https://youtube.com/@livewiththehive?si=tQizrqZ7AVqSBimH&sub_confirmation=1",
       "type": "rich",
+      "group": "links",
       "enabled": true,
       "custom": {
         "import": {
@@ -62,6 +66,7 @@
       "label": "Paranoid Bitcoin Anarchists",
       "url": "https://x.com/i/communities/1871996451812769951",
       "type": "simple",
+      "group": "links",
       "enabled": true,
       "custom": {
         "import": {
@@ -76,6 +81,7 @@
       "label": "Satoshoes",
       "url": "https://satoshoes.co.uk/?ref=xstac1",
       "type": "rich",
+      "group": "links",
       "enabled": true,
       "custom": {
         "import": {
@@ -90,6 +96,7 @@
       "label": "XSTACI Sweet Biddi Beats by @thebitcoinnova | Suno",
       "url": "https://suno.com/playlist/2c53c4e4-e7c0-4772-b2c2-bb1d16c4d2ab",
       "type": "rich",
+      "group": "links",
       "enabled": true,
       "custom": {
         "import": {
@@ -104,6 +111,7 @@
       "label": "The Bitcoin Adviser - The Bitcoin Nova",
       "url": "https://content.thebitcoinadviser.com/the-bitcoin-nova",
       "type": "rich",
+      "group": "links",
       "enabled": true,
       "custom": {
         "import": {
@@ -118,6 +126,7 @@
       "label": "Home - MicroSeed",
       "url": "https://microseed.io/?ref=XSTACI",
       "type": "rich",
+      "group": "links",
       "enabled": true,
       "custom": {
         "import": {
@@ -132,6 +141,7 @@
       "label": "Club Orange",
       "url": "https://signup.cluborange.org/co/bitcoinnova",
       "type": "rich",
+      "group": "links",
       "enabled": true,
       "custom": {
         "import": {
@@ -146,6 +156,7 @@
       "label": "Audible: The Bitcoin Nova Podcast",
       "url": "https://www.audible.com/pd/B0DZJV461D?source_code=ASSORAP0511160006&share_location=podcast_show_detail",
       "type": "rich",
+      "group": "links",
       "enabled": true,
       "custom": {
         "import": {
@@ -160,6 +171,7 @@
       "label": "The Bitcoin Nova Podcast on Amazon Music",
       "url": "https://music.amazon.com/podcasts/9d4d6b00-3b5f-4bfa-93d6-b40bf4e12a69/the-bitcoin-nova-podcast",
       "type": "rich",
+      "group": "links",
       "enabled": true,
       "custom": {
         "import": {
@@ -174,6 +186,7 @@
       "label": "RUMBLE",
       "url": "https://rumble.com/c/c-7752998",
       "type": "rich",
+      "group": "links",
       "enabled": true,
       "custom": {
         "import": {
@@ -201,7 +214,13 @@
       }
     }
   ],
-  "groups": [],
+  "groups": [
+    {
+      "id": "links",
+      "label": "Links",
+      "order": 0
+    }
+  ],
   "order": [
     "the-bitcoin-nova",
     "home-bitcoin-black-sheep",
