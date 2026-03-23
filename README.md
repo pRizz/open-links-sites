@@ -1,5 +1,7 @@
 # open-links-sites
 
+[![OpenLinks Site](https://openlinks.us/badges/openlinks.svg)](https://openlinks.us/)
+
 `open-links-sites` is the control repo for many individual OpenLinks sites.
 It keeps per-person source data in one place, then later phases build and deploy
 path-based multi-site output through the upstream
