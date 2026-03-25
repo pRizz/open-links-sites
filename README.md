@@ -1,5 +1,13 @@
 # open-links-sites
 
+<!-- coding-and-architecture-requirements-readme-badges:begin -->
+[![GitHub Stars](https://img.shields.io/github/stars/pRizz/open-links-sites)](https://github.com/pRizz/open-links-sites)
+[![License](https://img.shields.io/github/license/pRizz/open-links-sites?s)](./LICENSE)
+[![TypeScript 5.9.3](https://img.shields.io/badge/TypeScript-5.9.3-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![SolidJS 1.9.11](https://img.shields.io/badge/SolidJS-1.9.11-2C4F7C?logo=solid&logoColor=white)](https://www.solidjs.com/)
+[![Vite 7.3.1](https://img.shields.io/badge/Vite-7.3.1-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
+<!-- coding-and-architecture-requirements-readme-badges:end -->
+
 [![OpenLinks Site](https://openlinks.us/badges/openlinks.svg)](https://openlinks.us/)
 
 `open-links-sites` is the control repo for many individual OpenLinks sites.
