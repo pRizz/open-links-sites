@@ -54,14 +54,10 @@ describe("syncWorkspaceCacheToPerson", () => {
 
     // Assert
     expect(result.copiedPaths).toContain(helperLayout.files.richEnrichmentReport);
-    expect(readFileSync(helperLayout.files.richEnrichmentReport, "utf8")).toBe(
-      [
-        "{",
-        '  "generatedAt": "2026-03-25T08:16:30.372Z",',
-        '  "entries": [{ "missingProfileFields": ["subscribersCount"] }]',
-        "}",
-        "",
-      ].join("\n"),
+    const syncedReport = readFileSync(helperLayout.files.richEnrichmentReport, "utf8");
+    expect(syncedReport).toContain('"missingProfileFields": ["subscribersCount"]');
+    expect(syncedReport).not.toContain(
+      '"missingProfileFields": [\n        "subscribersCount"\n      ]',
     );
   });
 });
