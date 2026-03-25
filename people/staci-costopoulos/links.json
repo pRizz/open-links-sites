@@ -61,9 +61,6 @@
         "sourceLabel": "x.com",
         "membersCountRaw": "X Community"
       },
-      "enrichment": {
-        "enabled": false
-      },
       "custom": {
         "import": {
           "kind": "linktree",
