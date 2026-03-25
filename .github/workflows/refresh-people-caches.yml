@@ -69,7 +69,14 @@ jobs:
       - name: Commit and push refreshed cache artifacts
         id: commit_cache
         shell: bash
-        run: scripts/github-actions/commit-and-push.sh --message "chore(cache): refresh people caches" --output-key pushed -- -A -- ':(glob)people/*/cache/**'
+        run: >-
+          scripts/github-actions/commit-and-push.sh
+          --message "chore(cache): refresh people caches"
+          --output-key pushed
+          --
+          -A
+          --
+          ':(glob)people/*/cache/**'
 
       - name: Trigger Deploy Pages workflow
         if: success() && steps.commit_cache.outputs.pushed == 'true'

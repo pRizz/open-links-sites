@@ -69,7 +69,11 @@ jobs:
       - name: Commit and push synced upstream state
         if: steps.preflight.outputs.changed == 'true' && steps.sync.outputs.sync_result == 'changed'
         shell: bash
-        run: scripts/github-actions/commit-and-push.sh --message "chore(upstream): sync open-links to ${{ steps.sync.outputs.sync_latest_commit }}" -- config/upstream-open-links.json
+        run: >-
+          scripts/github-actions/commit-and-push.sh
+          --message "chore(upstream): sync open-links to ${{ steps.sync.outputs.sync_latest_commit }}"
+          --
+          config/upstream-open-links.json
 
       - name: Trigger Deploy Pages workflow
         if: success() && steps.preflight.outputs.changed == 'true' && steps.sync.outputs.sync_result == 'changed'

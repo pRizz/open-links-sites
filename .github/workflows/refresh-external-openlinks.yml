@@ -67,7 +67,11 @@ jobs:
 
       - name: Commit and push refreshed landing artifacts
         shell: bash
-        run: scripts/github-actions/commit-and-push.sh --message "chore(landing): refresh external OpenLinks cache" -- config/landing
+        run: >-
+          scripts/github-actions/commit-and-push.sh
+          --message "chore(landing): refresh external OpenLinks cache"
+          --
+          config/landing
 
       - name: Publish workflow summary
         if: always()
