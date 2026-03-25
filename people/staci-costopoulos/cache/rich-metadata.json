@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-25T17:59:11.478Z",
+  "generatedAt": "2026-03-25T20:14:31.788Z",
   "links": {
     "the-bitcoin-nova": {
       "metadata": {
@@ -10,8 +10,8 @@
         "twitterImage": "https://imgproxy.fourthwall.com/NAyaO0KRbLeRPi9fCxfKafCsg9joK0bCPE9Mz0Jdm-A/w:1200/sm:1/enc/FNEq3fHnhor1KeC-/uNNaBGJ5cCaEPfgy/4aVqCKBdDo49WVWy/OK9b3ZlOTvaqhOxy/LBUiJuwWy4p9duQT/_q7k1xYKVn2qv7TA/8KZ9BS58ETH3yKSD/M80b5OUDjWGzwSKC/ZXUNGRnLhvSolD8Y/ztjXJ93Y0yFy3xTz/4hwl85Quf2Ii7-47/t7fGJG6IRJ43JtIu/28C-YgJr6fM7-yMN/Vrzr8A5Y0Y5QfFlA/pKltqUli_-7yc_eq/f_8vLp-uumS2fmKc.png",
         "sourceLabel": "bitcoinnova.store",
         "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichmentReason": "public_cache",
+        "enrichedAt": "2026-03-25T20:14:09.395Z"
       }
     },
     "home-bitcoin-black-sheep": {
@@ -21,8 +21,8 @@
         "image": "https://bitcoinblacksheep.com/wp-content/uploads/2025/11/cropped-AC96E2A4-4B9B-4F6C-BF19-36A11B3782D3.png",
         "sourceLabel": "bitcoinblacksheep.com",
         "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichmentReason": "public_cache",
+        "enrichedAt": "2026-03-25T20:14:09.395Z"
       }
     },
     "live-with-the-hive-podcast": {
@@ -36,20 +36,23 @@
         "sourceLabel": "youtube.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z",
+        "enrichedAt": "2026-03-25T20:14:09.395Z",
         "profileImage": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj"
       }
     },
     "paranoid-bitcoin-anarchists": {
       "metadata": {
-        "title": "Paranoid Bitcoin Anarchists",
-        "description": "Bitcoin community for people who question everything, run nodes, hold their own keys, and build outside the fiat system.",
-        "image": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
+        "title": "PARANOID BITCOIN ANARCHISTS",
+        "description": "Hold your keys | Run a Node Paranoid: Question everything Bitcoin: Don’t trust, verify. Anarchists: We build, laugh, and ignore conspiring fiat clowns",
+        "image": "https://pbs.twimg.com/community_banner_img/1997471355478892544/GydvYqIp?format=jpg&name=orig",
+        "ogImage": "https://pbs.twimg.com/community_banner_img/1997471355478892544/GydvYqIp?format=jpg&name=orig",
         "handle": "1871996451812769951",
-        "enrichmentStatus": "skipped",
-        "enrichmentReason": "enrichment_disabled",
-        "enrichedAt": "2026-03-25T17:59:11.478Z",
-        "membersCountRaw": "X Community"
+        "sourceLabel": "x.com",
+        "enrichmentStatus": "fetched",
+        "enrichmentReason": "metadata_complete",
+        "enrichedAt": "2026-03-25T20:14:31.788Z",
+        "membersCount": 785,
+        "membersCountRaw": "785 Members"
       }
     },
     "satoshoes": {
@@ -60,8 +63,8 @@
         "ogImage": "http://satoshoes.co.uk/cdn/shop/files/New_Satoshoes_Logo.png?height=628&pad_color=ffffff&v=1764584362&width=1200",
         "sourceLabel": "satoshoes.co.uk",
         "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichmentReason": "public_cache",
+        "enrichedAt": "2026-03-25T20:14:09.395Z"
       }
     },
     "xstaci-sweet-biddi-beats-by-thebitcoinnova-suno": {
@@ -74,7 +77,7 @@
         "sourceLabel": "suno.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichedAt": "2026-03-25T20:14:09.395Z"
       }
     },
     "the-bitcoin-adviser-the-bitcoin-nova": {
@@ -87,7 +90,7 @@
         "sourceLabel": "content.thebitcoinadviser.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichedAt": "2026-03-25T20:14:09.395Z"
       }
     },
     "home-microseed": {
@@ -100,7 +103,7 @@
         "sourceLabel": "microseed.io",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichedAt": "2026-03-25T20:14:09.395Z"
       }
     },
     "club-orange": {
@@ -108,8 +111,8 @@
         "title": "Club Orange",
         "sourceLabel": "signup.cluborange.org",
         "enrichmentStatus": "partial",
-        "enrichmentReason": "metadata_partial",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichmentReason": "public_cache",
+        "enrichedAt": "2026-03-25T20:14:09.395Z"
       }
     },
     "audible-the-bitcoin-nova-podcast": {
@@ -122,7 +125,7 @@
         "sourceLabel": "audible.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichedAt": "2026-03-25T20:14:09.395Z"
       }
     },
     "the-bitcoin-nova-podcast-on-amazon-music": {
@@ -133,7 +136,7 @@
         "sourceLabel": "music.amazon.com",
         "enrichmentStatus": "partial",
         "enrichmentReason": "metadata_missing",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichedAt": "2026-03-25T20:14:09.395Z"
       }
     },
     "rumble": {
@@ -144,7 +147,7 @@
         "handle": "c-7752998",
         "enrichmentStatus": "skipped",
         "enrichmentReason": "enrichment_disabled",
-        "enrichedAt": "2026-03-25T17:59:11.478Z",
+        "enrichedAt": "2026-03-25T20:14:09.395Z",
         "followersCount": 23,
         "followersCountRaw": "23 Followers"
       }
