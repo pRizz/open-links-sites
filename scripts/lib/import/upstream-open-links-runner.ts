@@ -97,11 +97,21 @@ const hasRemoteAvatar = (layout: GeneratedWorkspaceLayout): boolean => {
 const hasPublicRichTargets = (layout: GeneratedWorkspaceLayout): boolean => {
   try {
     const links = JSON.parse(readFileSync(`${layout.dataDir}/links.json`, "utf8")) as {
-      links?: Array<{ type?: unknown; url?: unknown }>;
+      links?: Array<{ type?: unknown; url?: unknown; enrichment?: unknown }>;
     };
 
     return (links.links ?? []).some((entry) => {
       if (entry.type !== "rich" || typeof entry.url !== "string") {
+        return false;
+      }
+
+      const enrichment =
+        typeof entry.enrichment === "object" &&
+        entry.enrichment !== null &&
+        !Array.isArray(entry.enrichment)
+          ? (entry.enrichment as Record<string, unknown>)
+          : undefined;
+      if (enrichment?.enabled === false) {
         return false;
       }
 

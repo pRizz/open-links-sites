@@ -273,4 +273,77 @@ describe("manage-person update and enrichment", () => {
       "Use --full-refresh to force a fresh upstream cache rebuild on the next rerun.",
     );
   });
+
+  test("import-summary: skips public-rich-sync when public rich links disable enrichment", async () => {
+    // Arrange
+    const rootDir = createFixtureRoot();
+    const personDir = join(rootDir, "people", "alice-example");
+    writeJson(join(personDir, "links.json"), {
+      $schema: "https://open-links.dev/schema/links.schema.json",
+      links: [
+        {
+          id: "x-community",
+          label: "Community",
+          url: "https://x.com/i/communities/1871996451812769951",
+          type: "rich",
+          enabled: true,
+          enrichment: {
+            enabled: false,
+          },
+          metadata: {
+            title: "Community",
+            description: "Community description",
+            image: "https://example.com/community.jpg",
+            sourceLabel: "x.com",
+          },
+        },
+      ],
+      groups: [],
+      order: ["x-community"],
+      custom: {},
+    });
+    const { stdout, stderr, stdoutWriter, stderrWriter } = createCapturedWriters();
+
+    // Act
+    const exitCode = await runManagePerson(
+      [
+        "import",
+        "--person",
+        "alice-example",
+        "--manual-links",
+        "Website https://alice.example.com",
+      ],
+      {
+        cwd: rootDir,
+        stdout: stdoutWriter,
+        stderr: stderrWriter,
+        actionHandlers: {
+          import: createImportActionHandler({
+            runUpstreamOpenLinks: async () => ({
+              steps: [
+                { key: "enrich-rich-links", status: "ran", blocking: false },
+                { key: "sync-profile-avatar", status: "ran", blocking: false },
+                { key: "sync-content-images", status: "ran", blocking: false },
+                {
+                  key: "public-rich-sync",
+                  status: "skipped",
+                  blocking: false,
+                  reason: "no eligible x, medium, or primal rich links were present",
+                },
+                { key: "validate-data", status: "ran", blocking: false },
+              ],
+            }),
+          }),
+        },
+      },
+    );
+
+    // Assert
+    expect(exitCode).toBe(0);
+    expect(stderr.join("")).toBe("");
+    expect(stdout.join("")).toContain("Skipped upstream steps:");
+    expect(stdout.join("")).toContain(
+      "public-rich-sync: no eligible x, medium, or primal rich links were present",
+    );
+  });
 });

@@ -203,3 +203,84 @@ test("preserves curated remote avatars while refreshing Linktree profile links",
     },
   ]);
 });
+
+test("upgrades existing imported X community links from simple to rich on re-import", () => {
+  const documents = {
+    person: {
+      id: "staci-costopoulos",
+      displayName: "Staci Costopoulos",
+      source: {
+        kind: "linktree",
+        url: "https://linktr.ee/XSTACI",
+        seedUrls: ["https://linktr.ee/XSTACI", "https://x.com/i/communities/1871996451812769951"],
+      },
+    },
+    profile: {
+      name: "Staci Costopoulos",
+      headline: "Host",
+      avatar: "https://cdn.example.com/custom-avatar.jpeg",
+      bio: "Curated bio",
+      location: "Chicago",
+      profileLinks: [],
+      custom: {},
+    },
+    links: {
+      links: [
+        {
+          id: "paranoid-bitcoin-anarchists",
+          label: "Paranoid Bitcoin Anarchists",
+          url: "https://x.com/i/communities/1871996451812769951",
+          type: "simple",
+          enabled: true,
+          custom: {
+            import: {
+              kind: "linktree",
+              importedAt: "2026-03-18T11:24:40.180Z",
+              sourceUrl: "https://linktr.ee/XSTACI",
+            },
+          },
+        },
+      ],
+      order: ["paranoid-bitcoin-anarchists"],
+    },
+    site: {
+      title: "Staci Costopoulos | OpenLinks",
+      description: "Curated bio",
+    },
+  };
+
+  const result = mergeImportedPerson({
+    importedAt: "2026-03-25T18:00:00.000Z",
+    intake: {
+      ...createLinktreeIntake(),
+      links: [
+        {
+          label: "Paranoid Bitcoin Anarchists",
+          url: "https://x.com/i/communities/1871996451812769951",
+          sourceOrder: 0,
+        },
+      ],
+    },
+    documents,
+  });
+
+  expect(result.changed).toBe(true);
+  expect(result.addedLinkIds).toEqual([]);
+  expect(result.skippedDuplicateUrls).toEqual([]);
+  expect(documents.links.links).toEqual([
+    {
+      id: "paranoid-bitcoin-anarchists",
+      label: "Paranoid Bitcoin Anarchists",
+      url: "https://x.com/i/communities/1871996451812769951",
+      type: "rich",
+      enabled: true,
+      custom: {
+        import: {
+          kind: "linktree",
+          importedAt: "2026-03-25T18:00:00.000Z",
+          sourceUrl: "https://linktr.ee/xstaci",
+        },
+      },
+    },
+  ]);
+});

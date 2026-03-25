@@ -188,30 +188,58 @@ const normalizeLinkCandidate = (candidate: ImportedLinkCandidate): ImportedLinkC
   label: normalizeWhitespace(candidate.label) || deriveDefaultLinkLabel(candidate.url),
 });
 
-const isXCommunityUrl = (value: string): boolean => {
-  if (!isRemoteHttpUrl(value)) {
-    return false;
-  }
-
-  try {
-    const parsed = new URL(value);
-    const host = parsed.hostname.replace(/^www\./u, "").toLowerCase();
-    const normalizedPath = parsed.pathname.replace(/\/+$/u, "");
-    return (
-      (host === "x.com" || host === "twitter.com") && normalizedPath.startsWith("/i/communities")
-    );
-  } catch {
-    return false;
-  }
-};
-
 const resolveImportedLinkType = (url: string): "rich" | "simple" => {
-  // X community pages are a known direct-fetch blocker upstream, so import them as simple links.
-  if (!isRemoteHttpUrl(url) || isXCommunityUrl(url)) {
+  if (!isRemoteHttpUrl(url)) {
     return "simple";
   }
 
   return "rich";
+};
+
+const getExistingImportedLinkMetadata = (link: LinkRecord): Record<string, unknown> | null => {
+  const custom = link.custom;
+  if (typeof custom !== "object" || custom === null || Array.isArray(custom)) {
+    return null;
+  }
+
+  const maybeImportedLinkMetadata = (custom as Record<string, unknown>).import;
+  if (
+    typeof maybeImportedLinkMetadata !== "object" ||
+    maybeImportedLinkMetadata === null ||
+    Array.isArray(maybeImportedLinkMetadata)
+  ) {
+    return null;
+  }
+
+  return maybeImportedLinkMetadata as Record<string, unknown>;
+};
+
+const maybeUpgradeImportedLink = (
+  link: LinkRecord,
+  candidate: ImportedLinkCandidate,
+  input: MergeImportedPersonInput,
+): boolean => {
+  const maybeImportedLinkMetadata = getExistingImportedLinkMetadata(link);
+  if (maybeImportedLinkMetadata === null || link.type !== "simple") {
+    return false;
+  }
+
+  const nextType = resolveImportedLinkType(candidate.url);
+  if (nextType !== "rich") {
+    return false;
+  }
+
+  link.type = nextType;
+  maybeImportedLinkMetadata.kind = input.intake.kind;
+  maybeImportedLinkMetadata.importedAt = input.importedAt;
+  if (input.intake.sourceUrl) {
+    maybeImportedLinkMetadata.sourceUrl = input.intake.sourceUrl;
+  }
+  if (candidate.description && typeof link.description !== "string") {
+    link.description = candidate.description;
+  }
+
+  return true;
 };
 
 const createLinkRecord = (
@@ -447,24 +475,42 @@ export const mergeImportedPerson = (input: MergeImportedPersonInput): MergeImpor
       )
       .filter((entry): entry is string => typeof entry === "string"),
   );
+  const existingLinksByComparableUrl = new Map<string, LinkRecord>(
+    workingLinks.flatMap((entry) => {
+      if (typeof entry.url !== "string") {
+        return [];
+      }
+
+      return [[normalizeComparableUrl(entry.url), entry] as const];
+    }),
+  );
   const addedLinkIds: string[] = [];
   const skippedDuplicateUrls: string[] = [];
+  let updatedExistingLinks = false;
 
   for (const candidate of input.intake.links.map(normalizeLinkCandidate)) {
     const comparableUrl = normalizeComparableUrl(candidate.url);
     if (comparableUrls.has(comparableUrl)) {
-      skippedDuplicateUrls.push(candidate.url);
+      const existingLink = existingLinksByComparableUrl.get(comparableUrl);
+      if (!existingLink || !maybeUpgradeImportedLink(existingLink, candidate, input)) {
+        skippedDuplicateUrls.push(candidate.url);
+        continue;
+      }
+
+      updatedExistingLinks = true;
       continue;
     }
 
     comparableUrls.add(comparableUrl);
     const linkId = buildUniqueLinkId(candidate.label, candidate.url, existingIds);
-    workingLinks.push(createLinkRecord(linkId, candidate, input));
+    const createdLink = createLinkRecord(linkId, candidate, input);
+    workingLinks.push(createdLink);
     workingOrder.push(linkId);
+    existingLinksByComparableUrl.set(comparableUrl, createdLink);
     addedLinkIds.push(linkId);
   }
 
-  if (replaceBootstrapLinks || addedLinkIds.length > 0) {
+  if (replaceBootstrapLinks || addedLinkIds.length > 0 || updatedExistingLinks) {
     linksRoot.links = workingLinks;
     linksRoot.order = workingOrder;
     changed = true;

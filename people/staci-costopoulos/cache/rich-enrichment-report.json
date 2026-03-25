@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-03-25T16:57:34.567Z",
+  "generatedAt": "2026-03-25T17:59:11.478Z",
   "strict": false,
   "summary": {
-    "total": 11,
+    "total": 12,
     "fetched": 8,
     "partial": 2,
-    "failed": 1,
-    "skipped": 0
+    "failed": 0,
+    "skipped": 2
   },
   "entries": [
     {
@@ -15,7 +15,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 205.52263700000003,
+      "durationMs": 148.945329,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -28,7 +28,7 @@
         "sourceLabel": "bitcoinnova.store",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       },
       "blocking": false
     },
@@ -38,7 +38,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 1703.9783470000002,
+      "durationMs": 240.20552300000003,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -49,7 +49,7 @@
         "sourceLabel": "bitcoinblacksheep.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       },
       "blocking": false
     },
@@ -59,7 +59,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 284.2269919999999,
+      "durationMs": 218.6963179999999,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -73,7 +73,7 @@
         "sourceLabel": "youtube.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z",
+        "enrichedAt": "2026-03-25T17:59:11.478Z",
         "profileImage": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj"
       },
       "blocking": false,
@@ -81,12 +81,33 @@
       "missingProfileFields": ["subscribersCount"]
     },
     {
+      "linkId": "paranoid-bitcoin-anarchists",
+      "url": "https://x.com/i/communities/1871996451812769951",
+      "status": "skipped",
+      "reason": "enrichment_disabled",
+      "attempts": 0,
+      "durationMs": 0,
+      "message": "Enrichment skipped by configuration.",
+      "remediation": "Set enrichment.enabled=true on this rich link or adjust site.ui.richCards.enrichment.enabledByDefault.",
+      "metadata": {
+        "title": "Paranoid Bitcoin Anarchists",
+        "description": "Bitcoin community for people who question everything, run nodes, hold their own keys, and build outside the fiat system.",
+        "image": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
+        "handle": "1871996451812769951",
+        "enrichmentStatus": "skipped",
+        "enrichmentReason": "enrichment_disabled",
+        "enrichedAt": "2026-03-25T17:59:11.478Z",
+        "membersCountRaw": "X Community"
+      },
+      "blocking": false
+    },
+    {
       "linkId": "satoshoes",
       "url": "https://satoshoes.co.uk/?ref=xstac1",
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 818.6465400000002,
+      "durationMs": 756.064222,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -98,7 +119,7 @@
         "sourceLabel": "satoshoes.co.uk",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       },
       "blocking": false
     },
@@ -108,7 +129,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 584.7684160000003,
+      "durationMs": 424.5575590000001,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -121,7 +142,7 @@
         "sourceLabel": "suno.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       },
       "blocking": false
     },
@@ -131,7 +152,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 383.6974720000003,
+      "durationMs": 147.44965899999988,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -144,7 +165,7 @@
         "sourceLabel": "content.thebitcoinadviser.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       },
       "blocking": false
     },
@@ -154,7 +175,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 2240.437471,
+      "durationMs": 2379.6093269999997,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -167,7 +188,7 @@
         "sourceLabel": "microseed.io",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       },
       "blocking": false
     },
@@ -177,7 +198,7 @@
       "status": "partial",
       "reason": "metadata_partial",
       "attempts": 2,
-      "durationMs": 523.8586439999999,
+      "durationMs": 63.15704399999959,
       "statusCode": 200,
       "message": "Partial preview metadata found; missing fields will use fallback values.",
       "remediation": "Fill missing preview fields via link.metadata or improve target-site SEO metadata completeness.",
@@ -186,7 +207,7 @@
         "sourceLabel": "signup.cluborange.org",
         "enrichmentStatus": "partial",
         "enrichmentReason": "metadata_partial",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       },
       "blocking": false
     },
@@ -196,7 +217,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 632.6212540000006,
+      "durationMs": 402.51130099999955,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -209,7 +230,7 @@
         "sourceLabel": "audible.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       },
       "blocking": false
     },
@@ -219,38 +240,46 @@
       "status": "partial",
       "reason": "metadata_missing",
       "attempts": 2,
-      "durationMs": 154.2616680000001,
+      "durationMs": 64.25468000000001,
       "statusCode": 200,
-      "message": "No preview metadata found; rich-card fallback shell will be used.",
-      "remediation": "Add Open Graph/Twitter metadata on the target site or set link.metadata fields manually in data/links.json.",
+      "message": "No remote preview metadata found; using manual link.metadata fallback.",
+      "remediation": "Manual metadata fallback is active. Optional: improve target-site Open Graph/Twitter metadata to clear this warning.",
       "metadata": {
+        "title": "The Bitcoin Nova Podcast",
+        "description": "Staci hosts grounded conversations about Bitcoin, communities, culture, and the people building a better future.",
+        "image": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
         "sourceLabel": "music.amazon.com",
         "enrichmentStatus": "partial",
         "enrichmentReason": "metadata_missing",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       },
-      "blocking": true,
+      "blocking": false,
+      "manualFallbackUsed": true,
       "missingFields": ["title", "description", "image"]
     },
     {
       "linkId": "rumble",
       "url": "https://rumble.com/c/c-7752998",
-      "status": "failed",
-      "reason": "fetch_failed",
-      "attempts": 2,
-      "durationMs": 473.77726899999925,
-      "statusCode": 403,
-      "message": "Received HTTP 403",
-      "remediation": "Check URL/network availability, provide metadata manually under link.metadata, or disable enrichment for this link.",
+      "status": "skipped",
+      "reason": "enrichment_disabled",
+      "attempts": 0,
+      "durationMs": 0,
+      "message": "Enrichment skipped by configuration.",
+      "remediation": "Set enrichment.enabled=true on this rich link or adjust site.ui.richCards.enrichment.enabledByDefault.",
       "metadata": {
+        "title": "The Bitcoin Nova Podcast",
+        "description": "Video home for The Bitcoin Nova Podcast with interviews, live conversations, and Bitcoin-focused episodes from Staci.",
+        "image": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
         "handle": "c-7752998",
-        "enrichmentStatus": "failed",
-        "enrichmentReason": "fetch_failed",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichmentStatus": "skipped",
+        "enrichmentReason": "enrichment_disabled",
+        "enrichedAt": "2026-03-25T17:59:11.478Z",
+        "followersCount": 23,
+        "followersCountRaw": "23 Followers"
       },
-      "blocking": true,
+      "blocking": false,
       "supportedProfilePlatform": "rumble",
-      "missingProfileFields": ["profileImage", "followersCount"]
+      "missingProfileFields": ["profileImage"]
     }
   ],
   "failureMode": "immediate",

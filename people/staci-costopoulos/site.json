@@ -10,7 +10,7 @@
   "ui": {
     "compositionMode": "balanced",
     "groupingStyle": "subtle",
-    "profileRichness": "standard",
+    "profileRichness": "rich",
     "density": "medium",
     "modePolicy": "dark-toggle",
     "linkTarget": "new-tab-external",

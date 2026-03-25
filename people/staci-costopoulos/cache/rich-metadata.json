@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-25T16:57:34.567Z",
+  "generatedAt": "2026-03-25T17:59:11.478Z",
   "links": {
     "the-bitcoin-nova": {
       "metadata": {
@@ -11,7 +11,7 @@
         "sourceLabel": "bitcoinnova.store",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       }
     },
     "home-bitcoin-black-sheep": {
@@ -22,7 +22,7 @@
         "sourceLabel": "bitcoinblacksheep.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       }
     },
     "live-with-the-hive-podcast": {
@@ -36,8 +36,20 @@
         "sourceLabel": "youtube.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z",
+        "enrichedAt": "2026-03-25T17:59:11.478Z",
         "profileImage": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj"
+      }
+    },
+    "paranoid-bitcoin-anarchists": {
+      "metadata": {
+        "title": "Paranoid Bitcoin Anarchists",
+        "description": "Bitcoin community for people who question everything, run nodes, hold their own keys, and build outside the fiat system.",
+        "image": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
+        "handle": "1871996451812769951",
+        "enrichmentStatus": "skipped",
+        "enrichmentReason": "enrichment_disabled",
+        "enrichedAt": "2026-03-25T17:59:11.478Z",
+        "membersCountRaw": "X Community"
       }
     },
     "satoshoes": {
@@ -49,7 +61,7 @@
         "sourceLabel": "satoshoes.co.uk",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       }
     },
     "xstaci-sweet-biddi-beats-by-thebitcoinnova-suno": {
@@ -62,7 +74,7 @@
         "sourceLabel": "suno.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       }
     },
     "the-bitcoin-adviser-the-bitcoin-nova": {
@@ -75,7 +87,7 @@
         "sourceLabel": "content.thebitcoinadviser.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       }
     },
     "home-microseed": {
@@ -88,7 +100,7 @@
         "sourceLabel": "microseed.io",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       }
     },
     "club-orange": {
@@ -97,7 +109,7 @@
         "sourceLabel": "signup.cluborange.org",
         "enrichmentStatus": "partial",
         "enrichmentReason": "metadata_partial",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       }
     },
     "audible-the-bitcoin-nova-podcast": {
@@ -110,23 +122,31 @@
         "sourceLabel": "audible.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       }
     },
     "the-bitcoin-nova-podcast-on-amazon-music": {
       "metadata": {
+        "title": "The Bitcoin Nova Podcast",
+        "description": "Staci hosts grounded conversations about Bitcoin, communities, culture, and the people building a better future.",
+        "image": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
         "sourceLabel": "music.amazon.com",
         "enrichmentStatus": "partial",
         "enrichmentReason": "metadata_missing",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichedAt": "2026-03-25T17:59:11.478Z"
       }
     },
     "rumble": {
       "metadata": {
+        "title": "The Bitcoin Nova Podcast",
+        "description": "Video home for The Bitcoin Nova Podcast with interviews, live conversations, and Bitcoin-focused episodes from Staci.",
+        "image": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
         "handle": "c-7752998",
-        "enrichmentStatus": "failed",
-        "enrichmentReason": "fetch_failed",
-        "enrichedAt": "2026-03-25T16:57:34.567Z"
+        "enrichmentStatus": "skipped",
+        "enrichmentReason": "enrichment_disabled",
+        "enrichedAt": "2026-03-25T17:59:11.478Z",
+        "followersCount": 23,
+        "followersCountRaw": "23 Followers"
       }
     }
   }
