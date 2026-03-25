@@ -22,6 +22,7 @@ export interface UpstreamRunnerStep {
     | "sync-profile-avatar"
     | "sync-content-images"
     | "public-rich-sync"
+    | "refresh-generated-rich-metadata"
     | "validate-data";
   status: RunnerStatus;
   blocking: boolean;
@@ -42,6 +43,19 @@ export interface RunUpstreamOpenLinksInput {
   fullRefresh: boolean;
 }
 
+export interface RunUpstreamScriptInput {
+  repoDir: string;
+  workspaceDir: string;
+  stepKey: UpstreamRunnerStep["key"];
+  scriptName: string;
+  args: string[];
+}
+
+export interface RunUpstreamOpenLinksDependencies {
+  resolveOpenLinksRepoDir?: () => string;
+  runUpstreamScript?: (input: RunUpstreamScriptInput) => UpstreamRunnerStep;
+}
+
 export const resolveOpenLinksRepoDir = (): string => {
   for (const candidate of getDefaultOpenLinksCandidates()) {
     if (!candidate) {
@@ -58,23 +72,18 @@ export const resolveOpenLinksRepoDir = (): string => {
   );
 };
 
-const runUpstreamScript = (
-  repoDir: string,
-  workspaceDir: string,
-  scriptName: string,
-  args: string[],
-): UpstreamRunnerStep => {
+const runUpstreamScript = (input: RunUpstreamScriptInput): UpstreamRunnerStep => {
   const result = spawnSync(
     process.execPath,
-    ["run", join(repoDir, "scripts", scriptName), ...args],
+    ["run", join(input.repoDir, "scripts", input.scriptName), ...input.args],
     {
-      cwd: workspaceDir,
+      cwd: input.workspaceDir,
       encoding: "utf8",
     },
   );
 
   return {
-    key: scriptName.replace(/\.ts$/u, "") as UpstreamRunnerStep["key"],
+    key: input.stepKey,
     status: result.status === 0 ? "ran" : "failed",
     blocking: result.status !== 0,
     exitCode: result.status ?? 1,
@@ -147,14 +156,28 @@ const prepareFullRefreshWorkspace = (layout: GeneratedWorkspaceLayout): void => 
 
 export const runUpstreamOpenLinks = async (
   input: RunUpstreamOpenLinksInput,
+  dependencies: RunUpstreamOpenLinksDependencies = {},
 ): Promise<UpstreamRunnerResult> => {
-  const repoDir = resolveOpenLinksRepoDir();
+  const repoDir = (dependencies.resolveOpenLinksRepoDir ?? resolveOpenLinksRepoDir)();
+  const runScript = (
+    stepKey: UpstreamRunnerStep["key"],
+    scriptName: string,
+    args: string[],
+  ): UpstreamRunnerStep =>
+    (dependencies.runUpstreamScript ?? runUpstreamScript)({
+      repoDir,
+      workspaceDir: input.workspace.outputDir,
+      stepKey,
+      scriptName,
+      args,
+    });
+
   if (input.fullRefresh) {
     prepareFullRefreshWorkspace(input.workspace);
   }
 
   const steps: UpstreamRunnerStep[] = [];
-  const enrichStep = runUpstreamScript(repoDir, input.workspace.outputDir, "enrich-rich-links.ts", [
+  const enrichStep = runScript("enrich-rich-links", "enrich-rich-links.ts", [
     "--write-public-cache",
   ]);
   steps.push(enrichStep);
@@ -166,9 +189,8 @@ export const runUpstreamOpenLinks = async (
   }
 
   if (hasRemoteAvatar(input.workspace)) {
-    const avatarStep = runUpstreamScript(
-      repoDir,
-      input.workspace.outputDir,
+    const avatarStep = runScript(
+      "sync-profile-avatar",
       "sync-profile-avatar.ts",
       input.fullRefresh ? ["--force"] : [],
     );
@@ -189,9 +211,8 @@ export const runUpstreamOpenLinks = async (
   }
 
   const contentImageArgs = input.fullRefresh ? ["--force"] : [];
-  const contentImageStep = runUpstreamScript(
-    repoDir,
-    input.workspace.outputDir,
+  const contentImageStep = runScript(
+    "sync-content-images",
     "sync-content-images.ts",
     contentImageArgs,
   );
@@ -205,17 +226,25 @@ export const runUpstreamOpenLinks = async (
 
   if (hasPublicRichTargets(input.workspace)) {
     const publicRichArgs = input.fullRefresh ? ["--force"] : ["--only-missing"];
-    const publicRichStep = runUpstreamScript(
-      repoDir,
-      input.workspace.outputDir,
-      "public-rich-sync.ts",
-      publicRichArgs,
-    );
+    const publicRichStep = runScript("public-rich-sync", "public-rich-sync.ts", publicRichArgs);
     steps.push(publicRichStep);
     if (publicRichStep.status === "failed") {
       return {
         steps,
         blockingFailure: publicRichStep,
+      };
+    }
+
+    const refreshGeneratedRichMetadataStep = runScript(
+      "refresh-generated-rich-metadata",
+      "enrich-rich-links.ts",
+      ["--write-public-cache"],
+    );
+    steps.push(refreshGeneratedRichMetadataStep);
+    if (refreshGeneratedRichMetadataStep.status === "failed") {
+      return {
+        steps,
+        blockingFailure: refreshGeneratedRichMetadataStep,
       };
     }
   } else {
@@ -227,10 +256,7 @@ export const runUpstreamOpenLinks = async (
     });
   }
 
-  const validateStep = runUpstreamScript(repoDir, input.workspace.outputDir, "validate-data.ts", [
-    "--format",
-    "json",
-  ]);
+  const validateStep = runScript("validate-data", "validate-data.ts", ["--format", "json"]);
   steps.push(validateStep);
 
   let validationOutput: Record<string, unknown> | undefined;

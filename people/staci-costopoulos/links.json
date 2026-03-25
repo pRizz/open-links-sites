@@ -58,11 +58,7 @@
         "title": "Paranoid Bitcoin Anarchists",
         "description": "Bitcoin community for people who question everything, run nodes, hold their own keys, and build outside the fiat system.",
         "image": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
-        "sourceLabel": "x.com",
-        "membersCountRaw": "X Community"
-      },
-      "enrichment": {
-        "enabled": false
+        "sourceLabel": "x.com"
       },
       "custom": {
         "import": {

@@ -1,10 +1,10 @@
 {
   "$schema": "https://open-links.dev/schema/profile.schema.json",
   "name": "Staci Costopoulos",
-  "headline": "TODO: add a short headline",
+  "headline": "Bitcoin educator, podcast host, and community builder",
   "avatar": "https://ugc.production.linktr.ee/cb51ef8a-75f5-45d0-b5ee-84930a9a6116_IMG-0031.jpeg?io=true&size=avatar-v3_0",
   "bio": "Host of Bitcoin Nova Podcast | X Community Leader",
-  "location": "TODO: add location",
+  "location": "Chicago",
   "profileLinks": [
     {
       "label": "Website",
@@ -31,7 +31,5 @@
       "url": "https://podcasts.apple.com/us/podcast/the-bitcoin-nova-podcast/id1800522855"
     }
   ],
-  "custom": {
-    "bootstrapStatus": "placeholder"
-  }
+  "custom": {}
 }

@@ -1,24 +1,23 @@
 {
-  "generatedAt": "2026-03-25T17:59:11.478Z",
+  "generatedAt": "2026-03-25T20:14:31.788Z",
   "strict": false,
   "summary": {
     "total": 12,
-    "fetched": 8,
+    "fetched": 9,
     "partial": 2,
     "failed": 0,
-    "skipped": 2
+    "skipped": 1
   },
   "entries": [
     {
       "linkId": "the-bitcoin-nova",
       "url": "https://bitcoinnova.store/",
       "status": "fetched",
-      "reason": "metadata_complete",
-      "attempts": 2,
-      "durationMs": 148.945329,
-      "statusCode": 200,
-      "message": "Preview metadata fetched successfully.",
-      "remediation": "No action required.",
+      "reason": "public_cache",
+      "attempts": 0,
+      "durationMs": 0,
+      "message": "Using fresh committed public cache metadata without a network fetch.",
+      "remediation": "No action required. Stable public-cache refreshes are explicit; run `bun run enrich:rich:strict:write-cache` when you want to persist fetched public metadata changes.",
       "metadata": {
         "title": "The Bitcoin Nova",
         "description": "The official home of The Bitcoin Nova. Watch the latest episodes, explore merch, see upcoming speaking events, support Bitcoin-aligned companies, and be part of a growing global community.",
@@ -27,31 +26,34 @@
         "twitterImage": "https://imgproxy.fourthwall.com/NAyaO0KRbLeRPi9fCxfKafCsg9joK0bCPE9Mz0Jdm-A/w:1200/sm:1/enc/FNEq3fHnhor1KeC-/uNNaBGJ5cCaEPfgy/4aVqCKBdDo49WVWy/OK9b3ZlOTvaqhOxy/LBUiJuwWy4p9duQT/_q7k1xYKVn2qv7TA/8KZ9BS58ETH3yKSD/M80b5OUDjWGzwSKC/ZXUNGRnLhvSolD8Y/ztjXJ93Y0yFy3xTz/4hwl85Quf2Ii7-47/t7fGJG6IRJ43JtIu/28C-YgJr6fM7-yMN/Vrzr8A5Y0Y5QfFlA/pKltqUli_-7yc_eq/f_8vLp-uumS2fmKc.png",
         "sourceLabel": "bitcoinnova.store",
         "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichmentReason": "public_cache",
+        "enrichedAt": "2026-03-25T20:14:09.395Z"
       },
-      "blocking": false
+      "blocking": false,
+      "cacheKey": "the-bitcoin-nova",
+      "cacheCapturedAt": "2026-03-25T20:14:09.395Z"
     },
     {
       "linkId": "home-bitcoin-black-sheep",
       "url": "https://bitcoinblacksheep.com/",
       "status": "fetched",
-      "reason": "metadata_complete",
-      "attempts": 2,
-      "durationMs": 240.20552300000003,
-      "statusCode": 200,
-      "message": "Preview metadata fetched successfully.",
-      "remediation": "No action required.",
+      "reason": "public_cache",
+      "attempts": 0,
+      "durationMs": 0,
+      "message": "Using fresh committed public cache metadata without a network fetch.",
+      "remediation": "No action required. Stable public-cache refreshes are explicit; run `bun run enrich:rich:strict:write-cache` when you want to persist fetched public metadata changes.",
       "metadata": {
         "title": "Home - Bitcoin Black Sheep",
         "description": "Bitcoin Black Sheep This isn’t fashion for the masses. It’s a uniform for those who refuse to be led. Bitcoin Black Sheep was born for the ones who never fit the mold. The ones who question everything. The ones who refuse to shrink just to make other people comfortable. This isn’t a brand for everyone....",
         "image": "https://bitcoinblacksheep.com/wp-content/uploads/2025/11/cropped-AC96E2A4-4B9B-4F6C-BF19-36A11B3782D3.png",
         "sourceLabel": "bitcoinblacksheep.com",
         "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichmentReason": "public_cache",
+        "enrichedAt": "2026-03-25T20:14:09.395Z"
       },
-      "blocking": false
+      "blocking": false,
+      "cacheKey": "home-bitcoin-black-sheep",
+      "cacheCapturedAt": "2026-03-25T20:14:09.395Z"
     },
     {
       "linkId": "live-with-the-hive-podcast",
@@ -59,7 +61,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 218.6963179999999,
+      "durationMs": 244.26568000000003,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -73,7 +75,7 @@
         "sourceLabel": "youtube.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z",
+        "enrichedAt": "2026-03-25T20:14:31.788Z",
         "profileImage": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj"
       },
       "blocking": false,
@@ -83,21 +85,25 @@
     {
       "linkId": "paranoid-bitcoin-anarchists",
       "url": "https://x.com/i/communities/1871996451812769951",
-      "status": "skipped",
-      "reason": "enrichment_disabled",
-      "attempts": 0,
-      "durationMs": 0,
-      "message": "Enrichment skipped by configuration.",
-      "remediation": "Set enrichment.enabled=true on this rich link or adjust site.ui.richCards.enrichment.enabledByDefault.",
+      "status": "fetched",
+      "reason": "metadata_complete",
+      "attempts": 2,
+      "durationMs": 174.834269,
+      "statusCode": 200,
+      "message": "Preview metadata fetched successfully.",
+      "remediation": "No action required.",
       "metadata": {
-        "title": "Paranoid Bitcoin Anarchists",
-        "description": "Bitcoin community for people who question everything, run nodes, hold their own keys, and build outside the fiat system.",
-        "image": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
+        "title": "PARANOID BITCOIN ANARCHISTS",
+        "description": "Hold your keys | Run a Node Paranoid: Question everything Bitcoin: Don’t trust, verify. Anarchists: We build, laugh, and ignore conspiring fiat clowns",
+        "image": "https://pbs.twimg.com/community_banner_img/1997471355478892544/GydvYqIp?format=jpg&name=orig",
+        "ogImage": "https://pbs.twimg.com/community_banner_img/1997471355478892544/GydvYqIp?format=jpg&name=orig",
         "handle": "1871996451812769951",
-        "enrichmentStatus": "skipped",
-        "enrichmentReason": "enrichment_disabled",
-        "enrichedAt": "2026-03-25T17:59:11.478Z",
-        "membersCountRaw": "X Community"
+        "sourceLabel": "x.com",
+        "enrichmentStatus": "fetched",
+        "enrichmentReason": "metadata_complete",
+        "enrichedAt": "2026-03-25T20:14:31.788Z",
+        "membersCount": 785,
+        "membersCountRaw": "785 Members"
       },
       "blocking": false
     },
@@ -105,12 +111,12 @@
       "linkId": "satoshoes",
       "url": "https://satoshoes.co.uk/?ref=xstac1",
       "status": "fetched",
-      "reason": "metadata_complete",
+      "reason": "public_cache",
       "attempts": 2,
-      "durationMs": 756.064222,
-      "statusCode": 200,
-      "message": "Preview metadata fetched successfully.",
-      "remediation": "No action required.",
+      "durationMs": 255.31107699999995,
+      "statusCode": 304,
+      "message": "Using committed public cache metadata.",
+      "remediation": "No action required. Stable public-cache refreshes are explicit; run `bun run enrich:rich:strict:write-cache` when you want to persist fetched public metadata changes.",
       "metadata": {
         "title": "Satoshoes | Bitcoin-Themed Sneakers & Apparel — Wear The Message",
         "description": "Bitcoin-inspired sneakers, hoodies and accessories for hodlers and freedom seekers. Unique designs you won't find on the high street. Ships worldwide with full tracking",
@@ -118,10 +124,12 @@
         "ogImage": "http://satoshoes.co.uk/cdn/shop/files/New_Satoshoes_Logo.png?height=628&pad_color=ffffff&v=1764584362&width=1200",
         "sourceLabel": "satoshoes.co.uk",
         "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichmentReason": "public_cache",
+        "enrichedAt": "2026-03-25T20:14:09.395Z"
       },
-      "blocking": false
+      "blocking": false,
+      "cacheKey": "satoshoes",
+      "cacheCapturedAt": "2026-03-25T20:14:09.395Z"
     },
     {
       "linkId": "xstaci-sweet-biddi-beats-by-thebitcoinnova-suno",
@@ -129,7 +137,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 424.5575590000001,
+      "durationMs": 469.6943480000001,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -142,7 +150,7 @@
         "sourceLabel": "suno.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichedAt": "2026-03-25T20:14:31.788Z"
       },
       "blocking": false
     },
@@ -152,7 +160,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 147.44965899999988,
+      "durationMs": 44.530944999999974,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -165,7 +173,7 @@
         "sourceLabel": "content.thebitcoinadviser.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichedAt": "2026-03-25T20:14:31.788Z"
       },
       "blocking": false
     },
@@ -175,7 +183,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 2379.6093269999997,
+      "durationMs": 2108.916851,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -188,7 +196,7 @@
         "sourceLabel": "microseed.io",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichedAt": "2026-03-25T20:14:31.788Z"
       },
       "blocking": false
     },
@@ -196,20 +204,23 @@
       "linkId": "club-orange",
       "url": "https://signup.cluborange.org/co/bitcoinnova",
       "status": "partial",
-      "reason": "metadata_partial",
+      "reason": "public_cache",
       "attempts": 2,
-      "durationMs": 63.15704399999959,
-      "statusCode": 200,
-      "message": "Partial preview metadata found; missing fields will use fallback values.",
-      "remediation": "Fill missing preview fields via link.metadata or improve target-site SEO metadata completeness.",
+      "durationMs": 49.9679799999999,
+      "statusCode": 304,
+      "message": "Using committed public cache metadata.",
+      "remediation": "No action required. Stable public-cache refreshes are explicit; run `bun run enrich:rich:strict:write-cache` when you want to persist fetched public metadata changes.",
       "metadata": {
         "title": "Club Orange",
         "sourceLabel": "signup.cluborange.org",
         "enrichmentStatus": "partial",
-        "enrichmentReason": "metadata_partial",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichmentReason": "public_cache",
+        "enrichedAt": "2026-03-25T20:14:09.395Z"
       },
-      "blocking": false
+      "blocking": false,
+      "missingFields": ["description", "image"],
+      "cacheKey": "club-orange",
+      "cacheCapturedAt": "2026-03-25T20:14:09.395Z"
     },
     {
       "linkId": "audible-the-bitcoin-nova-podcast",
@@ -217,7 +228,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 402.51130099999955,
+      "durationMs": 656.4852169999999,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -230,7 +241,7 @@
         "sourceLabel": "audible.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichedAt": "2026-03-25T20:14:31.788Z"
       },
       "blocking": false
     },
@@ -240,7 +251,7 @@
       "status": "partial",
       "reason": "metadata_missing",
       "attempts": 2,
-      "durationMs": 64.25468000000001,
+      "durationMs": 44.8084630000003,
       "statusCode": 200,
       "message": "No remote preview metadata found; using manual link.metadata fallback.",
       "remediation": "Manual metadata fallback is active. Optional: improve target-site Open Graph/Twitter metadata to clear this warning.",
@@ -251,7 +262,7 @@
         "sourceLabel": "music.amazon.com",
         "enrichmentStatus": "partial",
         "enrichmentReason": "metadata_missing",
-        "enrichedAt": "2026-03-25T17:59:11.478Z"
+        "enrichedAt": "2026-03-25T20:14:31.788Z"
       },
       "blocking": false,
       "manualFallbackUsed": true,
@@ -273,7 +284,7 @@
         "handle": "c-7752998",
         "enrichmentStatus": "skipped",
         "enrichmentReason": "enrichment_disabled",
-        "enrichedAt": "2026-03-25T17:59:11.478Z",
+        "enrichedAt": "2026-03-25T20:14:31.788Z",
         "followersCount": 23,
         "followersCountRaw": "23 Followers"
       },
