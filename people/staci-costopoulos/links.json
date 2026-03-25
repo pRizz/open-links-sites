@@ -32,21 +32,6 @@
       }
     },
     {
-      "id": "bookings-thebitcoinnova-gmail-com",
-      "label": "bookings.thebitcoinnova@gmail.com",
-      "url": "mailto:TheBitcoinNova@gmail.com",
-      "type": "simple",
-      "group": "links",
-      "enabled": true,
-      "custom": {
-        "import": {
-          "kind": "linktree",
-          "importedAt": "2026-03-18T11:24:40.180Z",
-          "sourceUrl": "https://linktr.ee/XSTACI"
-        }
-      }
-    },
-    {
       "id": "live-with-the-hive-podcast",
       "label": "Live with the Hive Podcast",
       "url": "https://youtube.com/@livewiththehive?si=tQizrqZ7AVqSBimH&sub_confirmation=1",
@@ -212,6 +197,21 @@
           }
         ]
       }
+    },
+    {
+      "id": "bookings-thebitcoinnova-gmail-com",
+      "label": "bookings.thebitcoinnova@gmail.com",
+      "url": "mailto:TheBitcoinNova@gmail.com",
+      "type": "simple",
+      "group": "links",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "linktree",
+          "importedAt": "2026-03-18T11:24:40.180Z",
+          "sourceUrl": "https://linktr.ee/XSTACI"
+        }
+      }
     }
   ],
   "groups": [
@@ -224,7 +224,6 @@
   "order": [
     "the-bitcoin-nova",
     "home-bitcoin-black-sheep",
-    "bookings-thebitcoinnova-gmail-com",
     "live-with-the-hive-podcast",
     "paranoid-bitcoin-anarchists",
     "satoshoes",
@@ -235,7 +234,8 @@
     "audible-the-bitcoin-nova-podcast",
     "the-bitcoin-nova-podcast-on-amazon-music",
     "rumble",
-    "tip-staci"
+    "tip-staci",
+    "bookings-thebitcoinnova-gmail-com"
   ],
   "custom": {}
 }
