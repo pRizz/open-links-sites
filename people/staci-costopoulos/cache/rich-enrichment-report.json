@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-25T08:16:30.372Z",
+  "generatedAt": "2026-03-25T16:57:34.567Z",
   "strict": false,
   "summary": {
     "total": 11,
@@ -15,7 +15,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 427.42295900000005,
+      "durationMs": 205.52263700000003,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -28,7 +28,7 @@
         "sourceLabel": "bitcoinnova.store",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T08:16:30.372Z"
+        "enrichedAt": "2026-03-25T16:57:34.567Z"
       },
       "blocking": false
     },
@@ -38,7 +38,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 2275.799416,
+      "durationMs": 1703.9783470000002,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -49,7 +49,7 @@
         "sourceLabel": "bitcoinblacksheep.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T08:16:30.372Z"
+        "enrichedAt": "2026-03-25T16:57:34.567Z"
       },
       "blocking": false
     },
@@ -59,7 +59,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 3979.774584,
+      "durationMs": 284.2269919999999,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -73,7 +73,7 @@
         "sourceLabel": "youtube.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T08:16:30.372Z",
+        "enrichedAt": "2026-03-25T16:57:34.567Z",
         "profileImage": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj"
       },
       "blocking": false,
@@ -86,7 +86,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 1736.9280420000005,
+      "durationMs": 818.6465400000002,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -98,7 +98,7 @@
         "sourceLabel": "satoshoes.co.uk",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T08:16:30.372Z"
+        "enrichedAt": "2026-03-25T16:57:34.567Z"
       },
       "blocking": false
     },
@@ -108,7 +108,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 1114.461709000001,
+      "durationMs": 584.7684160000003,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -121,7 +121,7 @@
         "sourceLabel": "suno.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T08:16:30.372Z"
+        "enrichedAt": "2026-03-25T16:57:34.567Z"
       },
       "blocking": false
     },
@@ -131,7 +131,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 492.868292000001,
+      "durationMs": 383.6974720000003,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -144,7 +144,7 @@
         "sourceLabel": "content.thebitcoinadviser.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T08:16:30.372Z"
+        "enrichedAt": "2026-03-25T16:57:34.567Z"
       },
       "blocking": false
     },
@@ -154,7 +154,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 3446.247375000001,
+      "durationMs": 2240.437471,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -167,7 +167,7 @@
         "sourceLabel": "microseed.io",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T08:16:30.372Z"
+        "enrichedAt": "2026-03-25T16:57:34.567Z"
       },
       "blocking": false
     },
@@ -177,7 +177,7 @@
       "status": "partial",
       "reason": "metadata_partial",
       "attempts": 2,
-      "durationMs": 472.96429100000023,
+      "durationMs": 523.8586439999999,
       "statusCode": 200,
       "message": "Partial preview metadata found; missing fields will use fallback values.",
       "remediation": "Fill missing preview fields via link.metadata or improve target-site SEO metadata completeness.",
@@ -186,26 +186,32 @@
         "sourceLabel": "signup.cluborange.org",
         "enrichmentStatus": "partial",
         "enrichmentReason": "metadata_partial",
-        "enrichedAt": "2026-03-25T08:16:30.372Z"
+        "enrichedAt": "2026-03-25T16:57:34.567Z"
       },
       "blocking": false
     },
     {
       "linkId": "audible-the-bitcoin-nova-podcast",
       "url": "https://www.audible.com/pd/B0DZJV461D?source_code=ASSORAP0511160006&share_location=podcast_show_detail",
-      "status": "failed",
-      "reason": "fetch_failed",
+      "status": "fetched",
+      "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 1286.3870420000003,
-      "statusCode": 429,
-      "message": "Received HTTP 429",
-      "remediation": "Check URL/network availability, provide metadata manually under link.metadata, or disable enrichment for this link.",
+      "durationMs": 632.6212540000006,
+      "statusCode": 200,
+      "message": "Preview metadata fetched successfully.",
+      "remediation": "No action required.",
       "metadata": {
-        "enrichmentStatus": "failed",
-        "enrichmentReason": "fetch_failed",
-        "enrichedAt": "2026-03-25T08:16:30.372Z"
+        "title": "The Bitcoin Nova Podcast",
+        "description": "I&rsquo;m talking everything Bitcoin or any related topics with my 𝕏 communities or anyone that wants to talk Bitcoin! From updates, to speculations, ...",
+        "image": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
+        "ogImage": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
+        "twitterImage": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1024,512_CLa%7C1024,512%7C51kpmcJOswL.jpg%7C0,0,1024,512+67,67,376,376_PJAdblSocialShare-Gradientoverlay-twitter-largeasin-0to60,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Medium,TopLeft,490,223_OU01_ZBLISTENING%20ON,483,152,55,450,AudibleSansMd,32,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,929,45.jpg",
+        "sourceLabel": "audible.com",
+        "enrichmentStatus": "fetched",
+        "enrichmentReason": "metadata_complete",
+        "enrichedAt": "2026-03-25T16:57:34.567Z"
       },
-      "blocking": true
+      "blocking": false
     },
     {
       "linkId": "the-bitcoin-nova-podcast-on-amazon-music",
@@ -213,7 +219,7 @@
       "status": "partial",
       "reason": "metadata_missing",
       "attempts": 2,
-      "durationMs": 1634.366582999999,
+      "durationMs": 154.2616680000001,
       "statusCode": 200,
       "message": "No preview metadata found; rich-card fallback shell will be used.",
       "remediation": "Add Open Graph/Twitter metadata on the target site or set link.metadata fields manually in data/links.json.",
@@ -221,7 +227,7 @@
         "sourceLabel": "music.amazon.com",
         "enrichmentStatus": "partial",
         "enrichmentReason": "metadata_missing",
-        "enrichedAt": "2026-03-25T08:16:30.372Z"
+        "enrichedAt": "2026-03-25T16:57:34.567Z"
       },
       "blocking": true,
       "missingFields": ["title", "description", "image"]
@@ -229,30 +235,22 @@
     {
       "linkId": "rumble",
       "url": "https://rumble.com/c/c-7752998",
-      "status": "fetched",
-      "reason": "metadata_complete",
+      "status": "failed",
+      "reason": "fetch_failed",
       "attempts": 2,
-      "durationMs": 1109.896667000001,
-      "statusCode": 200,
-      "message": "Preview metadata fetched successfully.",
-      "remediation": "No action required.",
+      "durationMs": 473.77726899999925,
+      "statusCode": 403,
+      "message": "Received HTTP 403",
+      "remediation": "Check URL/network availability, provide metadata manually under link.metadata, or disable enrichment for this link.",
       "metadata": {
-        "title": "The Bitcoin Nova Podcast",
-        "description": "Staci drives Bitcoin education through raw, human centered conversation. Known for translating real world moments into clear, relatable insights on Bitcoin adoption and self custody, she brings clarity without jargon or fear. As host of The Bitcoin Nova Podcast, Staci delivers thoughtful, unfiltered interviews focused on Bitcoin, energy, sovereignty, and the future of money. Her work emphasizes honest dialogue, community engagement, and practical understanding over noise. Staci is also active in grassroots Bitcoin advocacy and regularly supports community discussions and educational spaces.",
-        "image": "https://1a-1791.com/video/z8/M/0/K/D/M0KDa.caa-TheBitcoinNova-szrx8e.jpeg",
-        "ogImage": "https://1a-1791.com/video/z8/M/0/K/D/M0KDa.caa-TheBitcoinNova-szrx8e.jpeg",
         "handle": "c-7752998",
-        "sourceLabel": "rumble.com",
-        "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-25T08:16:30.372Z",
-        "profileDescription": "Staci drives Bitcoin education through raw, human centered conversation. Known for translating real world moments into clear, relatable insights on Bitcoin adoption and self custody, she brings clarity without jargon or fear. As host of The Bitcoin Nova Podcast, Staci delivers thoughtful, unfiltered interviews focused on Bitcoin, energy, sovereignty, and the future of money. Her work emphasizes honest dialogue, community engagement, and practical understanding over noise. Staci is also active in grassroots Bitcoin advocacy and regularly supports community discussions and educational spaces.",
-        "profileImage": "https://1a-1791.com/video/z8/M/0/K/D/M0KDa.baa.1-TheBitcoinNova-t8kb1o.jpeg",
-        "followersCount": 23,
-        "followersCountRaw": "23 Followers"
+        "enrichmentStatus": "failed",
+        "enrichmentReason": "fetch_failed",
+        "enrichedAt": "2026-03-25T16:57:34.567Z"
       },
-      "blocking": false,
-      "supportedProfilePlatform": "rumble"
+      "blocking": true,
+      "supportedProfilePlatform": "rumble",
+      "missingProfileFields": ["profileImage", "followersCount"]
     }
   ],
   "failureMode": "immediate",

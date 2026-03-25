@@ -1,106 +1,106 @@
 {
-  "generatedAt": "2026-03-25T08:17:15.699Z",
+  "generatedAt": "2026-03-25T16:57:45.518Z",
   "bySlot": {
     "link:the-bitcoin-nova:image": {
       "sourceUrl": "https://imgproxy.fourthwall.com/NAyaO0KRbLeRPi9fCxfKafCsg9joK0bCPE9Mz0Jdm-A/w:1200/sm:1/enc/FNEq3fHnhor1KeC-/uNNaBGJ5cCaEPfgy/4aVqCKBdDo49WVWy/OK9b3ZlOTvaqhOxy/LBUiJuwWy4p9duQT/_q7k1xYKVn2qv7TA/8KZ9BS58ETH3yKSD/M80b5OUDjWGzwSKC/ZXUNGRnLhvSolD8Y/ztjXJ93Y0yFy3xTz/4hwl85Quf2Ii7-47/t7fGJG6IRJ43JtIu/28C-YgJr6fM7-yMN/Vrzr8A5Y0Y5QfFlA/pKltqUli_-7yc_eq/f_8vLp-uumS2fmKc.png",
       "etag": "\"aH-wkEQKaql68ZwnVJ9pYNYyyahlqS5zF_AIeZ7wxek/RIjkyYjE3YTY3YTQ4YTQzNDM5NWJmNWI0YjVmODM2YjEyIg\"",
       "checkStatus": "fetched",
       "cacheControl": "max-age=31622400,s-maxage=31622400,public",
-      "expiresAt": "2027-03-26T08:16:49.000Z",
-      "checkedAt": "2026-03-25T08:16:49.187Z"
+      "expiresAt": "2027-03-26T16:57:43.000Z",
+      "checkedAt": "2026-03-25T16:57:42.968Z"
     },
     "link:the-bitcoin-nova:ogImage": {
       "sourceUrl": "https://imgproxy.fourthwall.com/NAyaO0KRbLeRPi9fCxfKafCsg9joK0bCPE9Mz0Jdm-A/w:1200/sm:1/enc/FNEq3fHnhor1KeC-/uNNaBGJ5cCaEPfgy/4aVqCKBdDo49WVWy/OK9b3ZlOTvaqhOxy/LBUiJuwWy4p9duQT/_q7k1xYKVn2qv7TA/8KZ9BS58ETH3yKSD/M80b5OUDjWGzwSKC/ZXUNGRnLhvSolD8Y/ztjXJ93Y0yFy3xTz/4hwl85Quf2Ii7-47/t7fGJG6IRJ43JtIu/28C-YgJr6fM7-yMN/Vrzr8A5Y0Y5QfFlA/pKltqUli_-7yc_eq/f_8vLp-uumS2fmKc.png",
       "etag": "\"aH-wkEQKaql68ZwnVJ9pYNYyyahlqS5zF_AIeZ7wxek/RIjkyYjE3YTY3YTQ4YTQzNDM5NWJmNWI0YjVmODM2YjEyIg\"",
       "checkStatus": "fetched",
       "cacheControl": "max-age=31622400,s-maxage=31622400,public",
-      "expiresAt": "2027-03-26T08:16:49.000Z",
-      "checkedAt": "2026-03-25T08:16:50.520Z"
+      "expiresAt": "2027-03-26T16:57:43.000Z",
+      "checkedAt": "2026-03-25T16:57:43.348Z"
     },
     "link:the-bitcoin-nova:twitterImage": {
       "sourceUrl": "https://imgproxy.fourthwall.com/NAyaO0KRbLeRPi9fCxfKafCsg9joK0bCPE9Mz0Jdm-A/w:1200/sm:1/enc/FNEq3fHnhor1KeC-/uNNaBGJ5cCaEPfgy/4aVqCKBdDo49WVWy/OK9b3ZlOTvaqhOxy/LBUiJuwWy4p9duQT/_q7k1xYKVn2qv7TA/8KZ9BS58ETH3yKSD/M80b5OUDjWGzwSKC/ZXUNGRnLhvSolD8Y/ztjXJ93Y0yFy3xTz/4hwl85Quf2Ii7-47/t7fGJG6IRJ43JtIu/28C-YgJr6fM7-yMN/Vrzr8A5Y0Y5QfFlA/pKltqUli_-7yc_eq/f_8vLp-uumS2fmKc.png",
       "etag": "\"aH-wkEQKaql68ZwnVJ9pYNYyyahlqS5zF_AIeZ7wxek/RIjkyYjE3YTY3YTQ4YTQzNDM5NWJmNWI0YjVmODM2YjEyIg\"",
       "checkStatus": "fetched",
       "cacheControl": "max-age=31622400,s-maxage=31622400,public",
-      "expiresAt": "2027-03-26T08:16:49.000Z",
-      "checkedAt": "2026-03-25T08:16:51.450Z"
+      "expiresAt": "2027-03-26T16:57:43.000Z",
+      "checkedAt": "2026-03-25T16:57:43.364Z"
     },
     "link:home-bitcoin-black-sheep:image": {
       "sourceUrl": "https://bitcoinblacksheep.com/wp-content/uploads/2025/11/cropped-AC96E2A4-4B9B-4F6C-BF19-36A11B3782D3.png",
       "lastModified": "Wed, 26 Nov 2025 00:35:33 GMT",
       "checkStatus": "fetched",
       "cacheControl": "max-age=86400",
-      "expiresAt": "2026-03-26T08:16:52.000Z",
-      "checkedAt": "2026-03-25T08:16:52.459Z"
+      "expiresAt": "2026-03-26T16:57:43.000Z",
+      "checkedAt": "2026-03-25T16:57:43.375Z"
     },
     "link:live-with-the-hive-podcast:image": {
       "sourceUrl": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj",
       "etag": "\"v1\"",
       "checkStatus": "fetched",
       "cacheControl": "public, max-age=86400, no-transform",
-      "expiresAt": "2026-03-26T08:16:53.000Z",
-      "checkedAt": "2026-03-25T08:16:53.416Z"
+      "expiresAt": "2026-03-26T16:57:43.000Z",
+      "checkedAt": "2026-03-25T16:57:43.434Z"
     },
     "link:live-with-the-hive-podcast:profileImage": {
       "sourceUrl": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj",
       "etag": "\"v1\"",
       "checkStatus": "fetched",
       "cacheControl": "public, max-age=86400, no-transform",
-      "expiresAt": "2026-03-26T08:16:53.000Z",
-      "checkedAt": "2026-03-25T08:16:54.956Z"
+      "expiresAt": "2026-03-26T16:57:43.000Z",
+      "checkedAt": "2026-03-25T16:57:43.728Z"
     },
     "link:live-with-the-hive-podcast:ogImage": {
       "sourceUrl": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj",
       "etag": "\"v1\"",
       "checkStatus": "fetched",
       "cacheControl": "public, max-age=86400, no-transform",
-      "expiresAt": "2026-03-26T08:16:53.000Z",
-      "checkedAt": "2026-03-25T08:16:55.219Z"
+      "expiresAt": "2026-03-26T16:57:43.000Z",
+      "checkedAt": "2026-03-25T16:57:43.734Z"
     },
     "link:live-with-the-hive-podcast:twitterImage": {
       "sourceUrl": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj",
       "etag": "\"v1\"",
       "checkStatus": "fetched",
       "cacheControl": "public, max-age=86400, no-transform",
-      "expiresAt": "2026-03-26T08:16:53.000Z",
-      "checkedAt": "2026-03-25T08:16:55.445Z"
+      "expiresAt": "2026-03-26T16:57:43.000Z",
+      "checkedAt": "2026-03-25T16:57:43.740Z"
     },
     "link:satoshoes:image": {
       "sourceUrl": "http://satoshoes.co.uk/cdn/shop/files/New_Satoshoes_Logo.png?height=628&pad_color=ffffff&v=1764584362&width=1200",
-      "lastModified": "Sun, 22 Mar 2026 03:56:07 GMT",
+      "lastModified": "Wed, 25 Mar 2026 16:57:44 GMT",
       "checkStatus": "fetched",
       "cacheControl": "public, max-age=31557600",
-      "expiresAt": "2027-03-25T14:16:55.000Z",
-      "checkedAt": "2026-03-25T08:16:55.657Z"
+      "expiresAt": "2027-03-25T22:57:44.000Z",
+      "checkedAt": "2026-03-25T16:57:43.745Z"
     },
     "link:satoshoes:ogImage": {
       "sourceUrl": "http://satoshoes.co.uk/cdn/shop/files/New_Satoshoes_Logo.png?height=628&pad_color=ffffff&v=1764584362&width=1200",
-      "lastModified": "Sun, 22 Mar 2026 03:56:07 GMT",
+      "lastModified": "Wed, 25 Mar 2026 16:57:44 GMT",
       "checkStatus": "fetched",
       "cacheControl": "public, max-age=31557600",
-      "expiresAt": "2027-03-25T14:16:56.000Z",
-      "checkedAt": "2026-03-25T08:16:56.082Z"
+      "expiresAt": "2027-03-25T22:57:44.000Z",
+      "checkedAt": "2026-03-25T16:57:44.583Z"
     },
     "link:xstaci-sweet-biddi-beats-by-thebitcoinnova-suno:image": {
       "sourceUrl": "https://cdn2.suno.ai/6206d743.jpeg",
       "checkStatus": "fetched",
       "cacheControl": "public,max-age=2592000",
-      "expiresAt": "2026-04-24T08:16:56.000Z",
-      "checkedAt": "2026-03-25T08:16:56.388Z"
+      "expiresAt": "2026-04-24T16:57:44.000Z",
+      "checkedAt": "2026-03-25T16:57:44.672Z"
     },
     "link:xstaci-sweet-biddi-beats-by-thebitcoinnova-suno:ogImage": {
       "sourceUrl": "https://cdn2.suno.ai/6206d743.jpeg",
       "checkStatus": "fetched",
       "cacheControl": "public,max-age=2592000",
-      "expiresAt": "2026-04-24T08:16:56.000Z",
-      "checkedAt": "2026-03-25T08:16:56.854Z"
+      "expiresAt": "2026-04-24T16:57:44.000Z",
+      "checkedAt": "2026-03-25T16:57:44.959Z"
     },
     "link:xstaci-sweet-biddi-beats-by-thebitcoinnova-suno:twitterImage": {
       "sourceUrl": "https://cdn2.suno.ai/6206d743.jpeg",
       "checkStatus": "fetched",
       "cacheControl": "public,max-age=2592000",
-      "expiresAt": "2026-04-24T08:16:56.000Z",
-      "checkedAt": "2026-03-25T08:16:56.996Z"
+      "expiresAt": "2026-04-24T16:57:44.000Z",
+      "checkedAt": "2026-03-25T16:57:44.971Z"
     },
     "link:the-bitcoin-adviser-the-bitcoin-nova:image": {
       "sourceUrl": "https://content.thebitcoinadviser.com/hubfs/block3.png",
@@ -108,8 +108,8 @@
       "lastModified": "Mon, 15 Jan 2024 08:26:51 GMT",
       "checkStatus": "fetched",
       "cacheControl": "s-maxage=2592000, max-age=1209600, stale-while-revalidate=900",
-      "expiresAt": "2026-04-08T08:16:57.000Z",
-      "checkedAt": "2026-03-25T08:16:57.129Z"
+      "expiresAt": "2026-04-08T16:57:45.000Z",
+      "checkedAt": "2026-03-25T16:57:44.978Z"
     },
     "link:the-bitcoin-adviser-the-bitcoin-nova:ogImage": {
       "sourceUrl": "https://content.thebitcoinadviser.com/hubfs/block3.png",
@@ -117,8 +117,8 @@
       "lastModified": "Mon, 15 Jan 2024 08:26:51 GMT",
       "checkStatus": "fetched",
       "cacheControl": "s-maxage=2592000, max-age=1209600, stale-while-revalidate=900",
-      "expiresAt": "2026-04-08T08:17:00.000Z",
-      "checkedAt": "2026-03-25T08:17:00.721Z"
+      "expiresAt": "2026-04-08T16:57:45.000Z",
+      "checkedAt": "2026-03-25T16:57:45.194Z"
     },
     "link:the-bitcoin-adviser-the-bitcoin-nova:twitterImage": {
       "sourceUrl": "https://content.thebitcoinadviser.com/hubfs/block3.png",
@@ -126,8 +126,8 @@
       "lastModified": "Mon, 15 Jan 2024 08:26:51 GMT",
       "checkStatus": "fetched",
       "cacheControl": "s-maxage=2592000, max-age=1209600, stale-while-revalidate=900",
-      "expiresAt": "2026-04-08T08:17:02.000Z",
-      "checkedAt": "2026-03-25T08:17:02.889Z"
+      "expiresAt": "2026-04-08T16:57:45.000Z",
+      "checkedAt": "2026-03-25T16:57:45.283Z"
     },
     "link:home-microseed:image": {
       "sourceUrl": "https://microseed.io/wp-content/uploads/2025/08/IMG_1276-2-rotated.jpg",
@@ -135,8 +135,8 @@
       "lastModified": "Fri, 29 Aug 2025 05:05:00 GMT",
       "checkStatus": "fetched",
       "cacheControl": "max-age=31536000",
-      "expiresAt": "2027-03-25T08:17:05.000Z",
-      "checkedAt": "2026-03-25T08:17:04.850Z"
+      "expiresAt": "2027-03-25T16:57:45.000Z",
+      "checkedAt": "2026-03-25T16:57:45.388Z"
     },
     "link:home-microseed:ogImage": {
       "sourceUrl": "https://microseed.io/wp-content/uploads/2025/08/IMG_1276-2-rotated.jpg",
@@ -144,8 +144,8 @@
       "lastModified": "Fri, 29 Aug 2025 05:05:00 GMT",
       "checkStatus": "fetched",
       "cacheControl": "max-age=31536000",
-      "expiresAt": "2027-03-25T08:17:07.000Z",
-      "checkedAt": "2026-03-25T08:17:07.112Z"
+      "expiresAt": "2027-03-25T16:57:45.000Z",
+      "checkedAt": "2026-03-25T16:57:45.419Z"
     },
     "link:home-microseed:twitterImage": {
       "sourceUrl": "https://microseed.io/wp-content/uploads/2025/08/IMG_1276-2-rotated.jpg",
@@ -153,35 +153,32 @@
       "lastModified": "Fri, 29 Aug 2025 05:05:00 GMT",
       "checkStatus": "fetched",
       "cacheControl": "max-age=31536000",
-      "expiresAt": "2027-03-25T08:17:10.000Z",
-      "checkedAt": "2026-03-25T08:17:10.896Z"
+      "expiresAt": "2027-03-25T16:57:45.000Z",
+      "checkedAt": "2026-03-25T16:57:45.437Z"
     },
-    "link:rumble:image": {
-      "sourceUrl": "https://1a-1791.com/video/z8/M/0/K/D/M0KDa.caa-TheBitcoinNova-szrx8e.jpeg",
-      "etag": "\"6c483e9fba27ec462a376c785ef8c15f\"",
-      "lastModified": "Mon, 21 Jul 2025 23:57:51 GMT",
+    "link:audible-the-bitcoin-nova-podcast:image": {
+      "sourceUrl": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
+      "lastModified": "Sun, 13 Jul 2025 03:42:45 GMT",
       "checkStatus": "fetched",
-      "cacheControl": "max-age=5184000",
-      "expiresAt": "2026-05-24T08:17:14.000Z",
-      "checkedAt": "2026-03-25T08:17:14.337Z"
+      "cacheControl": "max-age=630720000,public",
+      "expiresAt": "2046-03-20T16:27:00.000Z",
+      "checkedAt": "2026-03-25T16:57:45.444Z"
     },
-    "link:rumble:profileImage": {
-      "sourceUrl": "https://1a-1791.com/video/z8/M/0/K/D/M0KDa.baa.1-TheBitcoinNova-t8kb1o.jpeg",
-      "etag": "\"ec07718e1dc982084f4fd1d5bc4a34a5\"",
-      "lastModified": "Thu, 08 Jan 2026 20:17:51 GMT",
+    "link:audible-the-bitcoin-nova-podcast:ogImage": {
+      "sourceUrl": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
+      "lastModified": "Sun, 13 Jul 2025 03:42:45 GMT",
       "checkStatus": "fetched",
-      "cacheControl": "max-age=5184000",
-      "expiresAt": "2026-05-24T08:17:15.000Z",
-      "checkedAt": "2026-03-25T08:17:15.120Z"
+      "cacheControl": "max-age=630720000,public",
+      "expiresAt": "2046-03-20T16:27:00.000Z",
+      "checkedAt": "2026-03-25T16:57:45.495Z"
     },
-    "link:rumble:ogImage": {
-      "sourceUrl": "https://1a-1791.com/video/z8/M/0/K/D/M0KDa.caa-TheBitcoinNova-szrx8e.jpeg",
-      "etag": "\"6c483e9fba27ec462a376c785ef8c15f\"",
-      "lastModified": "Mon, 21 Jul 2025 23:57:51 GMT",
+    "link:audible-the-bitcoin-nova-podcast:twitterImage": {
+      "sourceUrl": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1024,512_CLa%7C1024,512%7C51kpmcJOswL.jpg%7C0,0,1024,512+67,67,376,376_PJAdblSocialShare-Gradientoverlay-twitter-largeasin-0to60,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Medium,TopLeft,490,223_OU01_ZBLISTENING%20ON,483,152,55,450,AudibleSansMd,32,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,929,45.jpg",
+      "lastModified": "Sun, 13 Jul 2025 03:42:45 GMT",
       "checkStatus": "fetched",
-      "cacheControl": "max-age=5184000",
-      "expiresAt": "2026-05-24T08:17:15.000Z",
-      "checkedAt": "2026-03-25T08:17:15.251Z"
+      "cacheControl": "max-age=630720000,public",
+      "expiresAt": "2046-03-20T16:27:00.000Z",
+      "checkedAt": "2026-03-25T16:57:45.504Z"
     }
   }
 }
