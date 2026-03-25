@@ -10,7 +10,6 @@ interface ParsedArgs {
   upstreamRepoDir?: string;
   format: OutputFormat;
   writeState: boolean;
-  syncedAt?: string;
 }
 
 const parseArgs = (): ParsedArgs => {
@@ -30,7 +29,6 @@ const parseArgs = (): ParsedArgs => {
     upstreamRepoDir: readSingleFlag("--upstream-repo-dir"),
     format: readSingleFlag("--format") === "json" ? "json" : "human",
     writeState: !args.includes("--dry-run"),
-    syncedAt: readSingleFlag("--synced-at"),
   };
 };
 
@@ -40,7 +38,6 @@ const main = async (): Promise<void> => {
     rootDir: args.rootDir,
     upstreamRepoDir: args.upstreamRepoDir,
     writeState: args.writeState,
-    syncedAt: args.syncedAt,
   });
 
   if (process.env.GITHUB_OUTPUT) {

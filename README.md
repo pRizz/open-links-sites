@@ -55,6 +55,8 @@ bun run validate
 bun run preview
 bun run dev
 bun run manage:person -- --help
+bun run refresh:people:caches -- --person staci-costopoulos
+bun run refresh:people:caches -- --all
 bun run scaffold:person -- --id alice-example --name "Alice Example"
 bun run materialize:person -- --id alice-example
 bun run build:person:site -- --id alice-example
@@ -153,6 +155,32 @@ people/
 
 These helper artifacts support incremental reruns. They do not replace the canonical required files under `people/<id>/`.
 
+## Cache-Only Refresh
+
+The cache-refresh surface rebuilds helper caches without rerunning the full
+`manage:person import` mutation path:
+
+```bash
+bun run refresh:people:caches -- --person staci-costopoulos
+bun run refresh:people:caches -- --all
+```
+
+Behavior:
+
+1. The command materializes each selected active person into `generated/<id>/`.
+2. It runs the upstream enrichment/cache steps with a forced refresh.
+3. It syncs only `people/<id>/cache/**` back into the repo.
+4. Disabled or archived people are skipped during `--all` refreshes.
+5. Targeted refreshes require an active person.
+6. The command exits non-zero if any selected person's refresh fails.
+
+Safety contract:
+
+- allowed writes: `people/<id>/cache/**`
+- blocked writes: `people/<id>/person.json`, `profile.json`, `links.json`, `site.json`
+- any out-of-scope write is treated as a blocking failure and the person is
+  restored to its pre-refresh state before the command exits
+
 ## Multi-Site Build Foundation
 
 Phase 4 adds the first centralized site-generation layer on top of the existing
@@ -224,6 +252,21 @@ The main deploy workflow now also treats that file as build-relevant input:
 
 - push-triggered deploys build against the pinned upstream commit from `config/upstream-open-links.json`
 - nightly scheduled deploys rebuild current `main` against that same pinned upstream commit and only deploy when `deploy-manifest.json` differs from the live Pages site
+
+## Daily Cache Refresh
+
+Rich-profile cache refresh now has its own daily workflow:
+
+- `.github/workflows/refresh-people-caches.yml`
+
+That workflow:
+
+1. checks out this repo plus the pinned upstream `open-links` commit
+2. runs `bun run refresh:people:caches -- --all`
+3. runs `bun run check`, `bun run validate`, and `bun run release:verify`
+4. commits only `people/*/cache/**` when cache artifacts changed
+5. manually dispatches `deploy.yml` after a successful cache-only push because
+   pushes made with `GITHUB_TOKEN` do not trigger downstream workflows
 
 ## Release Verification
 

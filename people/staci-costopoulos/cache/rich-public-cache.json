@@ -1,25 +1,11 @@
 {
   "version": 1,
   "entries": {
-    "audible-the-bitcoin-nova-podcast": {
-      "linkId": "audible-the-bitcoin-nova-podcast",
-      "sourceUrl": "https://www.audible.com/pd/B0DZJV461D?source_code=ASSORAP0511160006&share_location=podcast_show_detail",
-      "capturedAt": "2026-03-18T11:24:40.263Z",
-      "updatedAt": "2026-03-18T11:24:40.263Z",
-      "metadata": {
-        "title": "The Bitcoin Nova Podcast",
-        "description": "I&rsquo;m talking everything Bitcoin or any related topics with my 𝕏 communities or anyone that wants to talk Bitcoin! From updates, to speculations, ...",
-        "image": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
-        "ogImage": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
-        "twitterImage": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1024,512_CLa%7C1024,512%7C51kpmcJOswL.jpg%7C0,0,1024,512+67,67,376,376_PJAdblSocialShare-Gradientoverlay-twitter-largeasin-0to60,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Medium,TopLeft,490,223_OU01_ZBLISTENING%20ON,483,152,55,450,AudibleSansMd,32,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,929,45.jpg",
-        "sourceLabel": "audible.com"
-      }
-    },
     "club-orange": {
       "linkId": "club-orange",
       "sourceUrl": "https://signup.cluborange.org/co/bitcoinnova",
-      "capturedAt": "2026-03-18T11:24:40.263Z",
-      "updatedAt": "2026-03-18T11:24:40.263Z",
+      "capturedAt": "2026-03-25T08:16:30.372Z",
+      "updatedAt": "2026-03-25T08:16:30.372Z",
       "metadata": {
         "title": "Club Orange",
         "sourceLabel": "signup.cluborange.org"
@@ -30,19 +16,20 @@
     "home-bitcoin-black-sheep": {
       "linkId": "home-bitcoin-black-sheep",
       "sourceUrl": "https://bitcoinblacksheep.com/",
-      "capturedAt": "2026-03-18T11:24:40.263Z",
-      "updatedAt": "2026-03-18T11:24:40.263Z",
+      "capturedAt": "2026-03-25T08:16:30.372Z",
+      "updatedAt": "2026-03-25T08:16:30.372Z",
       "metadata": {
         "title": "Home - Bitcoin Black Sheep",
         "description": "Bitcoin Black Sheep This isn’t fashion for the masses. It’s a uniform for those who refuse to be led. Bitcoin Black Sheep was born for the ones who never fit the mold. The ones who question everything. The ones who refuse to shrink just to make other people comfortable. This isn’t a brand for everyone....",
+        "image": "https://bitcoinblacksheep.com/wp-content/uploads/2025/11/cropped-AC96E2A4-4B9B-4F6C-BF19-36A11B3782D3.png",
         "sourceLabel": "bitcoinblacksheep.com"
       }
     },
     "home-microseed": {
       "linkId": "home-microseed",
       "sourceUrl": "https://microseed.io/?ref=XSTACI",
-      "capturedAt": "2026-03-18T11:24:40.263Z",
-      "updatedAt": "2026-03-18T11:24:40.263Z",
+      "capturedAt": "2026-03-25T08:16:30.372Z",
+      "updatedAt": "2026-03-25T08:16:30.372Z",
       "metadata": {
         "title": "Home - MicroSeed",
         "description": "Premium Seed Phrase Backup MicroSeed engraves your entire Bitcoin seed phrase on fireproof, waterproof steel or titanium the size of a coin Unlock Security",
@@ -55,10 +42,10 @@
     "live-with-the-hive-podcast": {
       "linkId": "live-with-the-hive-podcast",
       "sourceUrl": "https://www.youtube.com/@livewiththehive",
-      "capturedAt": "2026-03-18T11:24:40.263Z",
-      "updatedAt": "2026-03-18T11:24:40.263Z",
+      "capturedAt": "2026-03-25T08:16:30.372Z",
+      "updatedAt": "2026-03-25T08:16:30.372Z",
       "metadata": {
-        "title": "LIVE WITH THE HIVE",
+        "title": "Hive Minded",
         "description": "The Hive Minded is created and hosted by Staci Costopoulos, creator of The Bitcoin Nova.The Hive Minded is a Bitcoin hangout. Real conversations, reactions, ...",
         "image": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj",
         "ogImage": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj",
@@ -69,36 +56,41 @@
     },
     "rumble": {
       "linkId": "rumble",
-      "sourceUrl": "https://rumble.com/c/c-7752998",
-      "capturedAt": "2026-03-18T11:24:40.263Z",
-      "updatedAt": "2026-03-18T11:24:40.263Z",
+      "sourceUrl": "https://rumble.com/c/c-7752998/about",
+      "capturedAt": "2026-03-25T08:16:30.372Z",
+      "updatedAt": "2026-03-25T08:16:30.372Z",
       "metadata": {
         "title": "The Bitcoin Nova Podcast",
-        "description": "Browse the most recent videos from channel \"The Bitcoin Nova Podcast\" uploaded to Rumble.com",
+        "description": "Staci drives Bitcoin education through raw, human centered conversation. Known for translating real world moments into clear, relatable insights on Bitcoin adoption and self custody, she brings clarity without jargon or fear. As host of The Bitcoin Nova Podcast, Staci delivers thoughtful, unfiltered interviews focused on Bitcoin, energy, sovereignty, and the future of money. Her work emphasizes honest dialogue, community engagement, and practical understanding over noise. Staci is also active in grassroots Bitcoin advocacy and regularly supports community discussions and educational spaces.",
+        "profileDescription": "Staci drives Bitcoin education through raw, human centered conversation. Known for translating real world moments into clear, relatable insights on Bitcoin adoption and self custody, she brings clarity without jargon or fear. As host of The Bitcoin Nova Podcast, Staci delivers thoughtful, unfiltered interviews focused on Bitcoin, energy, sovereignty, and the future of money. Her work emphasizes honest dialogue, community engagement, and practical understanding over noise. Staci is also active in grassroots Bitcoin advocacy and regularly supports community discussions and educational spaces.",
         "image": "https://1a-1791.com/video/z8/M/0/K/D/M0KDa.caa-TheBitcoinNova-szrx8e.jpeg",
         "ogImage": "https://1a-1791.com/video/z8/M/0/K/D/M0KDa.caa-TheBitcoinNova-szrx8e.jpeg",
-        "sourceLabel": "rumble.com"
+        "handle": "c-7752998",
+        "sourceLabel": "rumble.com",
+        "profileImage": "https://1a-1791.com/video/z8/M/0/K/D/M0KDa.baa.1-TheBitcoinNova-t8kb1o.jpeg",
+        "followersCount": 23,
+        "followersCountRaw": "23 Followers"
       }
     },
     "satoshoes": {
       "linkId": "satoshoes",
       "sourceUrl": "https://satoshoes.co.uk/?ref=xstac1",
-      "capturedAt": "2026-03-18T11:24:40.263Z",
-      "updatedAt": "2026-03-18T11:24:40.263Z",
+      "capturedAt": "2026-03-25T08:16:30.372Z",
+      "updatedAt": "2026-03-25T08:16:30.372Z",
       "metadata": {
-        "title": "Satoshoes",
-        "description": "Discover Satoshoes, your go-to for bold Bitcoin-themed casual sneakers. Shop vibrant, Bitcoin-inspired designs that blend style and passion for Bitcoin. Perfect for enthusiasts and trendsetters alike",
+        "title": "Satoshoes | Bitcoin-Themed Sneakers & Apparel — Wear The Message",
+        "description": "Bitcoin-inspired sneakers, hoodies and accessories for hodlers and freedom seekers. Unique designs you won't find on the high street. Ships worldwide with full tracking",
         "image": "http://satoshoes.co.uk/cdn/shop/files/New_Satoshoes_Logo.png?height=628&pad_color=ffffff&v=1764584362&width=1200",
         "ogImage": "http://satoshoes.co.uk/cdn/shop/files/New_Satoshoes_Logo.png?height=628&pad_color=ffffff&v=1764584362&width=1200",
         "sourceLabel": "satoshoes.co.uk"
       },
-      "etag": "\"page_cache:94205477246:IndexController:27887f1bf61a339db0244aba341ba22a\""
+      "etag": "\"page_cache:94205477246:IndexController:a36cc1d9e72c47b6ce57cc5a4008d13c\""
     },
     "the-bitcoin-adviser-the-bitcoin-nova": {
       "linkId": "the-bitcoin-adviser-the-bitcoin-nova",
       "sourceUrl": "https://content.thebitcoinadviser.com/the-bitcoin-nova",
-      "capturedAt": "2026-03-18T11:24:40.263Z",
-      "updatedAt": "2026-03-18T11:24:40.263Z",
+      "capturedAt": "2026-03-25T08:16:30.372Z",
+      "updatedAt": "2026-03-25T08:16:30.372Z",
       "metadata": {
         "title": "The Bitcoin Adviser - The Bitcoin Nova",
         "description": "Secure your Bitcoin with expert guidance at The Bitcoin Adviser. We help you transition off exchanges, focusing on your unique goals and providing peace of mind for your investments.",
@@ -112,8 +104,8 @@
     "the-bitcoin-nova": {
       "linkId": "the-bitcoin-nova",
       "sourceUrl": "https://bitcoinnova.store/",
-      "capturedAt": "2026-03-18T11:24:40.263Z",
-      "updatedAt": "2026-03-18T11:24:40.263Z",
+      "capturedAt": "2026-03-25T08:16:30.372Z",
+      "updatedAt": "2026-03-25T08:16:30.372Z",
       "metadata": {
         "title": "The Bitcoin Nova",
         "description": "The official home of The Bitcoin Nova. Watch the latest episodes, explore merch, see upcoming speaking events, support Bitcoin-aligned companies, and be part of a growing global community.",
@@ -122,13 +114,13 @@
         "twitterImage": "https://imgproxy.fourthwall.com/NAyaO0KRbLeRPi9fCxfKafCsg9joK0bCPE9Mz0Jdm-A/w:1200/sm:1/enc/FNEq3fHnhor1KeC-/uNNaBGJ5cCaEPfgy/4aVqCKBdDo49WVWy/OK9b3ZlOTvaqhOxy/LBUiJuwWy4p9duQT/_q7k1xYKVn2qv7TA/8KZ9BS58ETH3yKSD/M80b5OUDjWGzwSKC/ZXUNGRnLhvSolD8Y/ztjXJ93Y0yFy3xTz/4hwl85Quf2Ii7-47/t7fGJG6IRJ43JtIu/28C-YgJr6fM7-yMN/Vrzr8A5Y0Y5QfFlA/pKltqUli_-7yc_eq/f_8vLp-uumS2fmKc.png",
         "sourceLabel": "bitcoinnova.store"
       },
-      "etag": "W/\"962bf1b40e85338df97c2cce42a01d54\""
+      "etag": "W/\"65db11a644b58f97988b30c3540ec663\""
     },
     "xstaci-sweet-biddi-beats-by-thebitcoinnova-suno": {
       "linkId": "xstaci-sweet-biddi-beats-by-thebitcoinnova-suno",
       "sourceUrl": "https://suno.com/playlist/2c53c4e4-e7c0-4772-b2c2-bb1d16c4d2ab",
-      "capturedAt": "2026-03-18T11:24:40.263Z",
-      "updatedAt": "2026-03-18T11:24:40.263Z",
+      "capturedAt": "2026-03-25T08:16:30.372Z",
+      "updatedAt": "2026-03-25T08:16:30.372Z",
       "metadata": {
         "title": "XSTACI Sweet Biddi Beats by @thebitcoinnova | Suno",
         "description": "Suno is building a future where anyone can make great music.",

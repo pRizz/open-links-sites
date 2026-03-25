@@ -10,13 +10,11 @@ export interface OpenLinksUpstreamState {
   repository: string;
   branch: string;
   commit: string;
-  syncedAt: string;
 }
 
 export interface ResolveLatestUpstreamStateInput {
   rootDir: string;
   upstreamRepoDir?: string;
-  syncedAt?: string;
 }
 
 const DEFAULT_UPSTREAM_REPOSITORY = "pRizz/open-links";
@@ -73,7 +71,6 @@ export const createOpenLinksUpstreamState = (
   repository: input.repository,
   branch: input.branch,
   commit: input.commit,
-  syncedAt: input.syncedAt,
 });
 
 export const shortCommit = (value: string): string => value.slice(0, 12);
@@ -86,8 +83,7 @@ export const readOpenLinksUpstreamState = (rootDir: string): OpenLinksUpstreamSt
     parsed.version !== 1 ||
     !isNonEmptyString(parsed.repository) ||
     !isNonEmptyString(parsed.branch) ||
-    !isNonEmptyString(parsed.commit) ||
-    !isNonEmptyString(parsed.syncedAt)
+    !isNonEmptyString(parsed.commit)
   ) {
     throw new Error(`Invalid upstream state file at ${statePath}.`);
   }
@@ -97,7 +93,6 @@ export const readOpenLinksUpstreamState = (rootDir: string): OpenLinksUpstreamSt
     repository: parsed.repository,
     branch: parsed.branch,
     commit: parsed.commit,
-    syncedAt: parsed.syncedAt,
   };
 };
 
@@ -132,7 +127,6 @@ export const resolveOpenLinksRepoDir = (explicitRepoDir?: string): string => {
 export const resolveLatestOpenLinksUpstreamState = ({
   rootDir,
   upstreamRepoDir,
-  syncedAt,
 }: ResolveLatestUpstreamStateInput): OpenLinksUpstreamState => {
   const trackedState = readOpenLinksUpstreamState(rootDir);
   const repoDir = resolveOpenLinksRepoDir(upstreamRepoDir);
@@ -147,7 +141,6 @@ export const resolveLatestOpenLinksUpstreamState = ({
     repository,
     branch,
     commit,
-    syncedAt: syncedAt ?? new Date().toISOString(),
   });
 };
 

@@ -28,7 +28,6 @@ const writeTrackedState = (rootDir: string, commit: string): void => {
         repository: "pRizz/open-links",
         branch: "main",
         commit,
-        syncedAt: "2026-03-17T00:00:00.000Z",
       }),
       null,
       2,
@@ -59,7 +58,6 @@ describe("sync-upstream", () => {
             repository: "pRizz/open-links",
             branch: "main",
             commit: "abc1234567890",
-            syncedAt: "2026-03-18T00:00:00.000Z",
           }),
       },
     );
@@ -86,7 +84,6 @@ describe("sync-upstream", () => {
             repository: "pRizz/open-links",
             branch: "main",
             commit: "def9876543210",
-            syncedAt: "2026-03-18T00:00:00.000Z",
           }),
       },
     );
@@ -119,5 +116,33 @@ describe("sync-upstream", () => {
     expect(result.verificationRequired).toBe(false);
     expect(result.reason).toContain("origin/main could not be resolved");
     expect(readFileSync(getOpenLinksUpstreamStatePath(rootDir), "utf8")).toContain("abc1234567890");
+  });
+
+  test("reads legacy upstream state files that still include syncedAt", () => {
+    const rootDir = createTempRoot();
+    const statePath = getOpenLinksUpstreamStatePath(rootDir);
+    mkdirSync(dirname(statePath), { recursive: true });
+    writeFileSync(
+      statePath,
+      `${JSON.stringify(
+        {
+          version: 1,
+          repository: "pRizz/open-links",
+          branch: "main",
+          commit: "legacy12345678",
+          syncedAt: "2026-03-17T00:00:00.000Z",
+        },
+        null,
+        2,
+      )}\n`,
+      "utf8",
+    );
+
+    expect(readOpenLinksUpstreamState(rootDir)).toEqual({
+      version: 1,
+      repository: "pRizz/open-links",
+      branch: "main",
+      commit: "legacy12345678",
+    });
   });
 });

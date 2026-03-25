@@ -14,7 +14,6 @@ export interface SyncUpstreamInput {
   rootDir: string;
   upstreamRepoDir?: string;
   writeState?: boolean;
-  syncedAt?: string;
 }
 
 export interface SyncUpstreamResult {

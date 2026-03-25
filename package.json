@@ -11,6 +11,7 @@
     "test": "bun test $(find scripts -type f -name '*.test.ts' -print)",
     "validate": "bun run scripts/validate.ts",
     "refresh:landing:external": "bun run scripts/refresh-landing-external.ts",
+    "refresh:people:caches": "bun run scripts/refresh-people-caches.ts",
     "sync:upstream": "bun run scripts/sync-upstream.ts",
     "release:verify": "bun run scripts/release-verify.ts",
     "manage:person": "bun run scripts/manage-person.ts",

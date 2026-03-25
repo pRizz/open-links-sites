@@ -49,58 +49,41 @@ jobs:
       - name: Resolve deploy context
         id: context
         shell: bash
-        run: |
-          mkdir -p .cache
-          bun run scripts/resolve-deploy-context.ts -- --root "$GITHUB_WORKSPACE" --event-name "$GITHUB_EVENT_NAME" | tee .cache/deploy-context-summary.txt
+        run: scripts/github-actions/run-and-capture.sh .cache/deploy-context-summary.txt bun run scripts/resolve-deploy-context.ts -- --root "$GITHUB_WORKSPACE" --event-name "$GITHUB_EVENT_NAME"
 
       - name: Clone upstream open-links
         shell: bash
-        run: |
-          set -euo pipefail
-          upstream_repo_dir="$RUNNER_TEMP/open-links"
-          rm -rf "$upstream_repo_dir"
-          git clone --filter=blob:none --no-tags https://github.com/pRizz/open-links.git "$upstream_repo_dir"
-          git -C "$upstream_repo_dir" checkout --detach "${{ steps.context.outputs.upstream_commit }}"
-          echo "OPEN_LINKS_REPO_DIR=$upstream_repo_dir" >> "$GITHUB_ENV"
+        env:
+          UPSTREAM_REPO_DIR: ${{ runner.temp }}/open-links
+          UPSTREAM_COMMIT: ${{ steps.context.outputs.upstream_commit }}
+        run: scripts/github-actions/clone-upstream-open-links.sh
 
       - name: Install open-links-sites dependencies
         run: bun install --frozen-lockfile
 
       - name: Install upstream open-links dependencies
         shell: bash
-        run: |
-          set -euo pipefail
-          cd "$OPEN_LINKS_REPO_DIR"
-          bun install --frozen-lockfile
+        run: scripts/github-actions/install-upstream-open-links-deps.sh
 
       - name: Resolve changed paths
         if: steps.context.outputs.use_changed_paths == 'true'
         shell: bash
-        run: |
-          if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
-            git ls-files > .cache/changed-paths.txt
-          else
-            git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" > .cache/changed-paths.txt
-          fi
+        env:
+          BASE_SHA: ${{ github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+        run: scripts/github-actions/resolve-changed-paths.sh
 
       - name: Run release verification
         id: release_verify
         shell: bash
         env:
-          OPEN_LINKS_SITES_PUBLIC_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
-        run: |
-          if [[ "${{ steps.context.outputs.use_changed_paths }}" == "true" ]]; then
-            bun run release:verify -- --root "$GITHUB_WORKSPACE" --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" --event-name "$GITHUB_EVENT_NAME" --changed-paths-file .cache/changed-paths.txt | tee .cache/release-verify-summary.txt
-          else
-            bun run release:verify -- --root "$GITHUB_WORKSPACE" --public-origin "$OPEN_LINKS_SITES_PUBLIC_ORIGIN" --event-name "$GITHUB_EVENT_NAME" | tee .cache/release-verify-summary.txt
-          fi
+          PUBLIC_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+          CHANGED_PATHS_FILE: ${{ steps.context.outputs.use_changed_paths == 'true' && '.cache/changed-paths.txt' || '' }}
+        run: scripts/github-actions/run-release-verify.sh
 
       - name: Write workflow summary
         shell: bash
-        run: |
-          cat .cache/deploy-context-summary.txt >> "$GITHUB_STEP_SUMMARY"
-          printf '\n' >> "$GITHUB_STEP_SUMMARY"
-          cat .cache/release-verify-summary.txt >> "$GITHUB_STEP_SUMMARY"
+        run: scripts/github-actions/publish-summary-files.sh .cache/deploy-context-summary.txt .cache/release-verify-summary.txt
 
       - name: Upload Pages artifact
         if: steps.release_verify.outputs.pages_changed == 'true'

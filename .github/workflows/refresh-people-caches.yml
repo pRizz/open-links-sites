@@ -1,12 +1,13 @@
-name: Refresh External OpenLinks
+name: Refresh People Caches
 
 on:
   schedule:
-    - cron: "0 15 * * 1"
+    - cron: "30 10 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: release-main
@@ -47,9 +48,9 @@ jobs:
         shell: bash
         run: scripts/github-actions/install-upstream-open-links-deps.sh
 
-      - name: Refresh external OpenLinks cache
+      - name: Refresh people caches
         shell: bash
-        run: scripts/github-actions/run-and-capture.sh .cache/refresh-external-openlinks-summary.txt bun run refresh:landing:external -- --root "$GITHUB_WORKSPACE"
+        run: scripts/github-actions/run-and-capture.sh .cache/refresh-people-caches-summary.txt bun run refresh:people:caches -- --all --root "$GITHUB_WORKSPACE"
 
       - name: Run check
         shell: bash
@@ -65,23 +66,30 @@ jobs:
           PUBLIC_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: scripts/github-actions/run-release-verify.sh
 
-      - name: Commit and push refreshed landing artifacts
+      - name: Commit and push refreshed cache artifacts
+        id: commit_cache
         shell: bash
-        run: scripts/github-actions/commit-and-push.sh --message "chore(landing): refresh external OpenLinks cache" -- config/landing
+        run: scripts/github-actions/commit-and-push.sh --message "chore(cache): refresh people caches" --output-key pushed -- -A -- ':(glob)people/*/cache/**'
+
+      - name: Trigger Deploy Pages workflow
+        if: success() && steps.commit_cache.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main
 
       - name: Publish workflow summary
         if: always()
         shell: bash
-        run: scripts/github-actions/publish-summary-files.sh .cache/deploy-context-summary.txt .cache/refresh-external-openlinks-summary.txt .cache/check-summary.txt .cache/validate-summary.txt .cache/release-verify-summary.txt
+        run: scripts/github-actions/publish-summary-files.sh .cache/deploy-context-summary.txt .cache/refresh-people-caches-summary.txt .cache/check-summary.txt .cache/validate-summary.txt .cache/release-verify-summary.txt
 
       - name: Upload diagnostics on failure
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: refresh-external-openlinks-diagnostics
+          name: refresh-people-caches-diagnostics
           path: |
             .cache
-            config/landing
             generated/site
+            people/*/cache
           if-no-files-found: ignore
           retention-days: 7
