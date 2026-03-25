@@ -126,7 +126,7 @@ describe("manage-person import", () => {
     expect(links.order).toEqual(["github", "website"]);
   });
 
-  test("import-action: classifies X community urls as simple links during bootstrap", async () => {
+  test("import-action: classifies X community urls as rich links during bootstrap", async () => {
     // Arrange
     const rootDir = createFixtureRoot();
     const { stdout, stderr, stdoutWriter, stderrWriter } = createCapturedWriters();
@@ -190,7 +190,7 @@ describe("manage-person import", () => {
     ).toEqual([
       {
         id: "community",
-        type: "simple",
+        type: "rich",
       },
       {
         id: "website",
