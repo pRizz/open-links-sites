@@ -140,6 +140,15 @@
       "type": "rich",
       "group": "community-partners",
       "enabled": true,
+      "metadata": {
+        "title": "STACI",
+        "description": "Chicago hairstylist. https://www.angieshairstudio.us/ Accepting Bitcoin for payment.",
+        "profileDescription": "Chicago hairstylist. https://www.angieshairstudio.us/ Accepting Bitcoin for payment.",
+        "image": "https://orange-pill-app-dev.s3.amazonaws.com/avatars/b5d546cd-01af-4c37-bd52-a3d64953606c",
+        "profileImage": "https://orange-pill-app-dev.s3.amazonaws.com/avatars/b5d546cd-01af-4c37-bd52-a3d64953606c",
+        "handle": "bitcoinnova",
+        "sourceLabel": "app.cluborange.org"
+      },
       "custom": {
         "import": {
           "kind": "linktree",

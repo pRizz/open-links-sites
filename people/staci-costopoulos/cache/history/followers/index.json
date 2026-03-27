@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-03-27T01:48:05.146Z",
+  "updatedAt": "2026-03-27T08:36:25.829Z",
   "entries": [
     {
       "linkId": "live-with-the-hive-podcast",
@@ -12,7 +12,7 @@
       "csvPath": "history/followers/live-with-the-hive-podcast.csv",
       "latestAudienceCount": 131,
       "latestAudienceCountRaw": "131 subscribers",
-      "latestObservedAt": "2026-03-27T01:48:05.146Z"
+      "latestObservedAt": "2026-03-27T08:36:25.829Z"
     },
     {
       "linkId": "rumble",
@@ -24,7 +24,7 @@
       "csvPath": "history/followers/rumble.csv",
       "latestAudienceCount": 23,
       "latestAudienceCountRaw": "23 Followers",
-      "latestObservedAt": "2026-03-27T01:48:05.146Z"
+      "latestObservedAt": "2026-03-27T08:36:25.829Z"
     },
     {
       "linkId": "paranoid-bitcoin-anarchists",
@@ -36,7 +36,7 @@
       "csvPath": "history/followers/x.csv",
       "latestAudienceCount": 785,
       "latestAudienceCountRaw": "785 Members",
-      "latestObservedAt": "2026-03-27T01:48:05.146Z"
+      "latestObservedAt": "2026-03-27T08:36:25.829Z"
     }
   ]
 }
