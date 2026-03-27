@@ -153,6 +153,10 @@ people/
       profile-avatar.runtime.json
       content-images.json
       content-images.runtime.json
+      history/
+        followers/
+          index.json
+          <platform>.csv
       profile-avatar/
       content-images/
       rich-authenticated/
@@ -165,7 +169,8 @@ These helper artifacts support incremental reruns. They do not replace the canon
 
 ## Cache-Only Refresh
 
-The cache-refresh surface rebuilds helper caches without rerunning the full
+The cache-refresh surface rebuilds helper caches and follower-history analytics
+artifacts without rerunning the full
 `manage:person import` mutation path:
 
 ```bash
@@ -177,10 +182,11 @@ Behavior:
 
 1. The command materializes each selected active person into `generated/<id>/`.
 2. It runs the upstream enrichment/cache steps with a forced refresh.
-3. It syncs only `people/<id>/cache/**` back into the repo.
-4. Disabled or archived people are skipped during `--all` refreshes.
-5. Targeted refreshes require an active person.
-6. The command exits non-zero if any selected person's refresh fails.
+3. It appends the latest per-person follower/subscriber snapshots before validation.
+4. It syncs only `people/<id>/cache/**` back into the repo.
+5. Disabled or archived people are skipped during `--all` refreshes.
+6. Targeted refreshes require an active person.
+7. The command exits non-zero if any selected person's refresh fails.
 
 Safety contract:
 
@@ -263,7 +269,7 @@ The main deploy workflow now also treats that file as build-relevant input:
 
 ## Daily Cache Refresh
 
-Rich-profile cache refresh now has its own daily workflow:
+Rich-profile cache and follower-history analytics refresh now has its own daily workflow:
 
 - `.github/workflows/refresh-people-caches.yml`
 
@@ -272,7 +278,7 @@ That workflow:
 1. checks out this repo plus the pinned upstream `open-links` commit
 2. runs `bun run refresh:people:caches -- --all`
 3. runs `bun run check`, `bun run validate`, and `bun run release:verify`
-4. commits only `people/*/cache/**` when cache artifacts changed
+4. commits only `people/*/cache/**` when cache or follower-history analytics artifacts changed
 5. manually dispatches `deploy.yml` after a successful cache-only push because
    pushes made with `GITHUB_TOKEN` do not trigger downstream workflows
 

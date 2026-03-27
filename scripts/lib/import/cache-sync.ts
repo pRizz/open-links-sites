@@ -138,6 +138,7 @@ export const syncWorkspaceCacheToPerson = (
     [workspaceLayout.dirs.profileAvatar, helperLayout.dirs.profileAvatar],
     [workspaceLayout.dirs.contentImages, helperLayout.dirs.contentImages],
     [workspaceLayout.dirs.richAuthenticated, helperLayout.dirs.richAuthenticated],
+    [workspaceLayout.dirs.followerHistory, helperLayout.dirs.followerHistory],
   ];
 
   for (const [sourcePath, targetPath] of directoryMappings) {

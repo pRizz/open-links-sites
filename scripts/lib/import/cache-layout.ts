@@ -18,6 +18,7 @@ export interface PersonHelperLayout {
     richAuthenticatedCache: string;
     generatedRichMetadata: string;
     richEnrichmentReport: string;
+    followerHistoryIndex: string;
     sourceSnapshot: string;
     lastImportReport: string;
   };
@@ -25,6 +26,7 @@ export interface PersonHelperLayout {
     profileAvatar: string;
     contentImages: string;
     richAuthenticated: string;
+    followerHistory: string;
   };
 }
 
@@ -44,11 +46,13 @@ export interface GeneratedWorkspaceLayout {
     richAuthenticatedCache: string;
     generatedRichMetadata: string;
     richEnrichmentReport: string;
+    followerHistoryIndex: string;
   };
   dirs: {
     profileAvatar: string;
     contentImages: string;
     richAuthenticated: string;
+    followerHistory: string;
   };
 }
 
@@ -70,6 +74,7 @@ export const getPersonHelperLayout = (rootDir: string, personId: string): Person
       richAuthenticatedCache: join(cacheDir, "rich-authenticated-cache.json"),
       generatedRichMetadata: join(cacheDir, "rich-metadata.json"),
       richEnrichmentReport: join(cacheDir, "rich-enrichment-report.json"),
+      followerHistoryIndex: join(cacheDir, "history", "followers", "index.json"),
       sourceSnapshot: join(importsDir, "source-snapshot.json"),
       lastImportReport: join(importsDir, "last-import.json"),
     },
@@ -77,6 +82,7 @@ export const getPersonHelperLayout = (rootDir: string, personId: string): Person
       profileAvatar: join(cacheDir, "profile-avatar"),
       contentImages: join(cacheDir, "content-images"),
       richAuthenticated: join(cacheDir, "rich-authenticated"),
+      followerHistory: join(cacheDir, "history", "followers"),
     },
   };
 };
@@ -108,11 +114,13 @@ export const getGeneratedWorkspaceLayout = (
       richAuthenticatedCache: join(dataCacheDir, "rich-authenticated-cache.json"),
       generatedRichMetadata: join(dataGeneratedDir, "rich-metadata.json"),
       richEnrichmentReport: join(dataGeneratedDir, "rich-enrichment-report.json"),
+      followerHistoryIndex: join(publicDir, "history", "followers", "index.json"),
     },
     dirs: {
       profileAvatar: join(publicCacheDir, "profile-avatar"),
       contentImages: join(publicCacheDir, "content-images"),
       richAuthenticated: join(publicCacheDir, "rich-authenticated"),
+      followerHistory: join(publicDir, "history", "followers"),
     },
   };
 };

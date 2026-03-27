@@ -233,4 +233,71 @@ describe("runUpstreamOpenLinks", () => {
       reason: "no eligible x, medium, or primal rich links were present",
     });
   });
+
+  test("runs sync-follower-history only when explicitly enabled and before validation", async () => {
+    // Arrange
+    const layout = createWorkspace({
+      links: [
+        {
+          id: "github",
+          label: "GitHub",
+          url: "https://github.com/fixture-person",
+          type: "rich",
+          enabled: true,
+        },
+      ],
+    });
+    const calls: Array<Pick<RunUpstreamScriptInput, "stepKey" | "scriptName" | "args">> = [];
+
+    const runUpstreamScript = (input: RunUpstreamScriptInput): UpstreamRunnerStep => {
+      calls.push({
+        stepKey: input.stepKey,
+        scriptName: input.scriptName,
+        args: input.args,
+      });
+
+      return {
+        key: input.stepKey,
+        status: "ran",
+        blocking: false,
+        stdout:
+          input.stepKey === "validate-data"
+            ? JSON.stringify({
+                success: true,
+              })
+            : undefined,
+      };
+    };
+
+    // Act
+    const result = await runUpstreamOpenLinks(
+      {
+        workspace: layout,
+        fullRefresh: true,
+        syncFollowerHistory: true,
+      },
+      {
+        resolveOpenLinksRepoDir: () => "/tmp/open-links",
+        runUpstreamScript,
+      },
+    );
+
+    // Assert
+    expect(result.blockingFailure).toBeUndefined();
+    expect(calls.map((call) => call.stepKey)).toEqual([
+      "enrich-rich-links",
+      "sync-profile-avatar",
+      "sync-content-images",
+      "sync-follower-history",
+      "validate-data",
+    ]);
+    expect(result.steps.map((step) => step.key)).toEqual([
+      "enrich-rich-links",
+      "sync-profile-avatar",
+      "sync-content-images",
+      "public-rich-sync",
+      "sync-follower-history",
+      "validate-data",
+    ]);
+  });
 });

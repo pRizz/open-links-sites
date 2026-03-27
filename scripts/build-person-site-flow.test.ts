@@ -7,6 +7,7 @@ import { resolveOpenLinksRepoDir } from "./lib/build/upstream-site-builder";
 import {
   createBuildSiteTestHarness,
   scaffoldFixture,
+  seedFollowerHistoryFixture,
   seedHermeticFixture,
 } from "./test-support/build-site.fixtures";
 
@@ -171,6 +172,62 @@ describe("build-person-site flow", () => {
       expect(readdirSync(join(result.outputDir, "history", "followers")).sort()).toEqual([
         "index.json",
       ]);
+    },
+    { timeout: 30_000 },
+  );
+
+  test(
+    "publishes per-person follower-history artifacts when helper history exists",
+    async () => {
+      // Arrange
+      const rootDir = createTempRoot();
+      scaffoldFixture(rootDir, "fixture-user", "Fixture User");
+      seedHermeticFixture(rootDir, "fixture-user");
+      seedFollowerHistoryFixture(rootDir, "fixture-user");
+
+      // Act
+      const result = await buildPersonSite({
+        rootDir,
+        personId: "fixture-user",
+        buildTimestamp: "2026-03-17T12:00:00.000Z",
+        publicOrigin: "https://cdn.example.com/apps/links",
+        canonicalOrigin: "https://links.example.com/apps/links",
+      });
+
+      // Assert
+      const historyIndex = JSON.parse(
+        readFileSync(join(result.outputDir, "history", "followers", "index.json"), "utf8"),
+      ) as {
+        entries?: Array<{
+          audienceKind?: string;
+          linkId?: string;
+          canonicalUrl?: string;
+          csvPath?: string;
+          handle?: string;
+          label?: string;
+          latestAudienceCount?: number;
+          latestAudienceCountRaw?: string;
+          latestObservedAt?: string;
+          platform?: string;
+        }>;
+      };
+      expect(historyIndex.entries).toEqual([
+        {
+          audienceKind: "followers",
+          linkId: "fixture-link",
+          canonicalUrl: "https://fixture.example/profile",
+          csvPath: "history/followers/fixture.csv",
+          handle: "fixture",
+          label: "Fixture Link",
+          latestAudienceCount: 7,
+          latestAudienceCountRaw: "7 followers",
+          latestObservedAt: "2026-03-17T12:00:00.000Z",
+          platform: "fixture",
+        },
+      ]);
+      expect(
+        readFileSync(join(result.outputDir, "history", "followers", "fixture.csv"), "utf8"),
+      ).toContain("fixture-link");
     },
     { timeout: 30_000 },
   );

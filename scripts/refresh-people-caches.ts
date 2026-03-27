@@ -16,7 +16,7 @@ type OutputWriter = {
 
 export const buildRefreshPeopleCachesHelpText = (): string =>
   [
-    "Refresh per-person cache artifacts without mutating canonical source files.",
+    "Refresh per-person cache and follower-history analytics artifacts without mutating canonical source files.",
     "",
     "Usage:",
     "  bun run refresh:people:caches -- --person <id-or-name> [--root <path>]",

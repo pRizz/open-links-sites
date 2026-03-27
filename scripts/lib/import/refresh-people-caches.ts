@@ -46,6 +46,7 @@ export interface RefreshPeopleCachesDependencies {
   runUpstreamOpenLinks?: (input: {
     workspace: Awaited<ReturnType<typeof materializePerson>>["layout"];
     fullRefresh: boolean;
+    syncFollowerHistory?: boolean;
   }) => Promise<UpstreamRunnerResult>;
   syncWorkspaceCacheToPerson?: typeof syncWorkspaceCacheToPerson;
 }
@@ -260,6 +261,7 @@ const refreshOnePersonCache = async (
     const upstreamResult = await (dependencies.runUpstreamOpenLinks ?? runUpstreamOpenLinks)({
       workspace: workspace.layout,
       fullRefresh: true,
+      syncFollowerHistory: true,
     });
 
     if (upstreamResult.blockingFailure) {

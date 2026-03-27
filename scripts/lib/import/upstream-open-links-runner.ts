@@ -23,6 +23,7 @@ export interface UpstreamRunnerStep {
     | "sync-content-images"
     | "public-rich-sync"
     | "refresh-generated-rich-metadata"
+    | "sync-follower-history"
     | "validate-data";
   status: RunnerStatus;
   blocking: boolean;
@@ -41,6 +42,7 @@ export interface UpstreamRunnerResult {
 export interface RunUpstreamOpenLinksInput {
   workspace: GeneratedWorkspaceLayout;
   fullRefresh: boolean;
+  syncFollowerHistory?: boolean;
 }
 
 export interface RunUpstreamScriptInput {
@@ -254,6 +256,17 @@ export const runUpstreamOpenLinks = async (
       blocking: false,
       reason: "no eligible x, medium, or primal rich links were present",
     });
+  }
+
+  if (input.syncFollowerHistory) {
+    const followerHistoryStep = runScript("sync-follower-history", "sync-follower-history.ts", []);
+    steps.push(followerHistoryStep);
+    if (followerHistoryStep.status === "failed") {
+      return {
+        steps,
+        blockingFailure: followerHistoryStep,
+      };
+    }
   }
 
   const validateStep = runScript("validate-data", "validate-data.ts", ["--format", "json"]);

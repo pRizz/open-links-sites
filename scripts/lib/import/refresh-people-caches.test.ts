@@ -104,15 +104,19 @@ describe("refreshPeopleCaches", () => {
     });
 
     const processedIds: string[] = [];
+    const syncFollowerHistorySelections: boolean[] = [];
     let refreshCounter = 0;
     const dependencies = {
       materializePerson: async ({ personId }: { personId: string; rootDir: string }) => {
         processedIds.push(personId);
         return createWorkspaceStub(rootDir, personId);
       },
-      runUpstreamOpenLinks: async () => ({
-        steps: [],
-      }),
+      runUpstreamOpenLinks: async ({ syncFollowerHistory }: { syncFollowerHistory?: boolean }) => {
+        syncFollowerHistorySelections.push(syncFollowerHistory === true);
+        return {
+          steps: [],
+        };
+      },
       syncWorkspaceCacheToPerson: ({ personId }: { rootDir: string; personId: string }) => {
         const cachePath = join(rootDir, "people", personId, "cache", "rich-public-cache.json");
         mkdirSync(join(rootDir, "people", personId, "cache"), { recursive: true });
@@ -159,8 +163,10 @@ describe("refreshPeopleCaches", () => {
       },
     ]);
     expect(processedIds).toEqual(["alice-example"]);
+    expect(syncFollowerHistorySelections).toEqual([true]);
 
     processedIds.length = 0;
+    syncFollowerHistorySelections.length = 0;
 
     const allResult = await refreshPeopleCaches(
       {
@@ -180,6 +186,7 @@ describe("refreshPeopleCaches", () => {
       failed: 0,
     });
     expect(processedIds).toEqual(["alice-example", "bob-sample"]);
+    expect(syncFollowerHistorySelections).toEqual([true, true]);
     expect(allResult.entries).toEqual([
       {
         personId: "carol-disabled",
@@ -265,7 +272,7 @@ describe("refreshPeopleCaches", () => {
       {
         materializePerson: async ({ personId }: { personId: string; rootDir: string }) =>
           createWorkspaceStub(rootDir, personId),
-        runUpstreamOpenLinks: async ({ workspace }: { workspace: { outputDir: string } }) => {
+        runUpstreamOpenLinks: async ({ workspace }) => {
           if (workspace.outputDir.endsWith("alice-example")) {
             return {
               steps: [

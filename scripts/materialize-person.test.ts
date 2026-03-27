@@ -85,6 +85,7 @@ const writeImportCacheFixtures = (rootDir: string, personId: string): void => {
   const helperLayout = getPersonHelperLayout(rootDir, personId);
   mkdirSync(helperLayout.dirs.profileAvatar, { recursive: true });
   mkdirSync(helperLayout.dirs.contentImages, { recursive: true });
+  mkdirSync(helperLayout.dirs.followerHistory, { recursive: true });
 
   writeJson(helperLayout.files.profileAvatarManifest, {
     sourceUrl: "https://cdn.example.com/avatar.jpg",
@@ -100,8 +101,35 @@ const writeImportCacheFixtures = (rootDir: string, personId: string): void => {
       },
     },
   });
+  writeJson(helperLayout.files.followerHistoryIndex, {
+    version: 1,
+    updatedAt: "2026-03-17T12:00:00.000Z",
+    entries: [
+      {
+        linkId: "primary-link",
+        label: "Primary Link",
+        platform: "github",
+        handle: "fixture-user",
+        canonicalUrl: "https://example.com/fixture-user",
+        audienceKind: "followers",
+        csvPath: "history/followers/github.csv",
+        latestAudienceCount: 42,
+        latestAudienceCountRaw: "42 followers",
+        latestObservedAt: "2026-03-17T12:00:00.000Z",
+      },
+    ],
+  });
   writeFileSync(join(helperLayout.dirs.profileAvatar, "profile-avatar.jpg"), "avatar");
   writeFileSync(join(helperLayout.dirs.contentImages, "example.jpg"), "image");
+  writeFileSync(
+    join(helperLayout.dirs.followerHistory, "github.csv"),
+    [
+      "observedAt,linkId,platform,handle,canonicalUrl,audienceKind,audienceCount,audienceCountRaw,source",
+      "2026-03-17T12:00:00.000Z,primary-link,github,fixture-user,https://example.com/fixture-user,followers,42,42 followers,manual",
+      "",
+    ].join("\n"),
+    "utf8",
+  );
 };
 
 afterEach(() => {
@@ -165,9 +193,15 @@ describe("materialize-person", () => {
     expect(readFileSync(generatedLayout.files.contentImagesManifest, "utf8")).toBe(
       readFileSync(helperLayout.files.contentImagesManifest, "utf8"),
     );
+    expect(readFileSync(generatedLayout.files.followerHistoryIndex, "utf8")).toBe(
+      readFileSync(helperLayout.files.followerHistoryIndex, "utf8"),
+    );
+    expect(readFileSync(join(generatedLayout.dirs.followerHistory, "github.csv"), "utf8")).toBe(
+      readFileSync(join(helperLayout.dirs.followerHistory, "github.csv"), "utf8"),
+    );
   });
 
-  test("workspace-support: copies upstream schema and policy files into the generated workspace", async () => {
+  test("workspace-support: copies upstream schema and policy files and initializes an empty history root", async () => {
     const rootDir = createTempRoot();
     const upstreamRoot = createUpstreamFixtureRoot();
     process.env.OPEN_LINKS_REPO_DIR = upstreamRoot;
@@ -214,7 +248,7 @@ describe("materialize-person", () => {
     expect(existsSync(remoteCachePolicyPath)).toBe(true);
     expect(existsSync(authenticatedCachePath)).toBe(true);
     expect(existsSync(followerHistoryIndexPath)).toBe(true);
-    expect(existsSync(followerHistoryCsvPath)).toBe(true);
+    expect(existsSync(followerHistoryCsvPath)).toBe(false);
     expect(readFileSync(remoteCacheSchemaPath, "utf8")).toBe(
       readFileSync(join(upstreamRoot, "schema", "remote-cache-policy.schema.json"), "utf8"),
     );
@@ -224,11 +258,10 @@ describe("materialize-person", () => {
     expect(readFileSync(authenticatedCachePath, "utf8")).toBe(
       readFileSync(join(upstreamRoot, "data", "cache", "rich-authenticated-cache.json"), "utf8"),
     );
-    expect(readFileSync(followerHistoryIndexPath, "utf8")).toBe(
-      readFileSync(join(upstreamRoot, "public", "history", "followers", "index.json"), "utf8"),
-    );
-    expect(readFileSync(followerHistoryCsvPath, "utf8")).toBe(
-      readFileSync(join(upstreamRoot, "public", "history", "followers", "github.csv"), "utf8"),
-    );
+    expect(JSON.parse(readFileSync(followerHistoryIndexPath, "utf8"))).toEqual({
+      version: 1,
+      updatedAt: "1970-01-01T00:00:00.000Z",
+      entries: [],
+    });
   });
 });

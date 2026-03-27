@@ -1,4 +1,4 @@
-import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -29,12 +29,21 @@ const syncUpstreamWorkspaceSupportFiles = (outputDir: string): void => {
     join(upstreamRepoDir, "data", "cache", "rich-authenticated-cache.json"),
     join(outputDir, "data", "cache", "rich-authenticated-cache.json"),
   );
-  cpSync(
-    join(upstreamRepoDir, "public", "history", "followers"),
-    join(outputDir, "public", "history", "followers"),
-    {
-      recursive: true,
-    },
+};
+
+const writeEmptyFollowerHistoryIndex = (targetPath: string): void => {
+  writeFileSync(
+    targetPath,
+    `${JSON.stringify(
+      {
+        version: 1,
+        updatedAt: "1970-01-01T00:00:00.000Z",
+        entries: [],
+      },
+      null,
+      2,
+    )}\n`,
+    "utf8",
   );
 };
 
@@ -107,6 +116,7 @@ export const materializePerson = async (
   mkdirSync(layout.dirs.profileAvatar, { recursive: true });
   mkdirSync(layout.dirs.contentImages, { recursive: true });
   mkdirSync(layout.dirs.richAuthenticated, { recursive: true });
+  mkdirSync(layout.dirs.followerHistory, { recursive: true });
   syncUpstreamWorkspaceSupportFiles(outputDir);
 
   for (const fileName of PERSON_REQUIRED_FILES) {
@@ -154,6 +164,7 @@ export const materializePerson = async (
     [helperLayout.dirs.profileAvatar, layout.dirs.profileAvatar],
     [helperLayout.dirs.contentImages, layout.dirs.contentImages],
     [helperLayout.dirs.richAuthenticated, layout.dirs.richAuthenticated],
+    [helperLayout.dirs.followerHistory, layout.dirs.followerHistory],
   ];
 
   for (const [sourcePath, targetPath] of helperDirectoryMappings) {
@@ -167,6 +178,10 @@ export const materializePerson = async (
         throw error;
       }
     }
+  }
+
+  if (!existsSync(layout.files.followerHistoryIndex)) {
+    writeEmptyFollowerHistoryIndex(layout.files.followerHistoryIndex);
   }
 
   return {

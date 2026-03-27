@@ -1,4 +1,4 @@
-name: Refresh People Caches
+name: Refresh People Caches And Analytics
 
 on:
   schedule:
@@ -48,7 +48,7 @@ jobs:
         shell: bash
         run: scripts/github-actions/install-upstream-open-links-deps.sh
 
-      - name: Refresh people caches
+      - name: Refresh people caches and follower-history analytics
         shell: bash
         run: scripts/github-actions/run-and-capture.sh .cache/refresh-people-caches-summary.txt bun run refresh:people:caches -- --all --root "$GITHUB_WORKSPACE"
 
@@ -71,7 +71,7 @@ jobs:
         shell: bash
         run: >-
           scripts/github-actions/commit-and-push.sh
-          --message "chore(cache): refresh people caches"
+          --message "chore(cache): refresh people caches and analytics"
           --output-key pushed
           --
           -A

@@ -93,6 +93,7 @@ describe("manage-person update and enrichment", () => {
     const rootDir = createFixtureRoot();
     const { stdout, stderr, stdoutWriter, stderrWriter } = createCapturedWriters();
     let receivedFullRefresh = false;
+    let receivedSyncFollowerHistory = true;
 
     // Act
     const exitCode = await runManagePerson(
@@ -110,8 +111,9 @@ describe("manage-person update and enrichment", () => {
         stderr: stderrWriter,
         actionHandlers: {
           import: createImportActionHandler({
-            runUpstreamOpenLinks: async ({ workspace, fullRefresh }) => {
+            runUpstreamOpenLinks: async ({ workspace, fullRefresh, syncFollowerHistory }) => {
               receivedFullRefresh = fullRefresh;
+              receivedSyncFollowerHistory = syncFollowerHistory === true;
               mkdirSync(workspace.dirs.profileAvatar, { recursive: true });
               writeJson(workspace.files.generatedRichMetadata, {
                 generatedAt: "2026-03-17T12:00:00.000Z",
@@ -149,6 +151,7 @@ describe("manage-person update and enrichment", () => {
     expect(exitCode).toBe(0);
     expect(stderr.join("")).toBe("");
     expect(receivedFullRefresh).toBe(true);
+    expect(receivedSyncFollowerHistory).toBe(false);
 
     const helperLayout = getPersonHelperLayout(rootDir, "alice-example");
     expect(existsSync(helperLayout.files.generatedRichMetadata)).toBe(true);
