@@ -200,7 +200,7 @@
         "followersCountRaw": "23 Followers"
       },
       "enrichment": {
-        "enabled": false
+        "enabled": true
       },
       "custom": {
         "import": {

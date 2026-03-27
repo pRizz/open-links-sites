@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "updatedAt": "2026-03-27T01:48:05.146Z",
+  "entries": [
+    {
+      "linkId": "live-with-the-hive-podcast",
+      "label": "Live with the Hive Podcast",
+      "platform": "live-with-the-hive-podcast",
+      "handle": "livewiththehive",
+      "canonicalUrl": "https://youtube.com/@livewiththehive?si=tQizrqZ7AVqSBimH&sub_confirmation=1",
+      "audienceKind": "subscribers",
+      "csvPath": "history/followers/live-with-the-hive-podcast.csv",
+      "latestAudienceCount": 131,
+      "latestAudienceCountRaw": "131 subscribers",
+      "latestObservedAt": "2026-03-27T01:48:05.146Z"
+    },
+    {
+      "linkId": "rumble",
+      "label": "RUMBLE",
+      "platform": "rumble",
+      "handle": "c-7752998",
+      "canonicalUrl": "https://rumble.com/c/c-7752998",
+      "audienceKind": "followers",
+      "csvPath": "history/followers/rumble.csv",
+      "latestAudienceCount": 23,
+      "latestAudienceCountRaw": "23 Followers",
+      "latestObservedAt": "2026-03-27T01:48:05.146Z"
+    },
+    {
+      "linkId": "paranoid-bitcoin-anarchists",
+      "label": "Paranoid Bitcoin Anarchists",
+      "platform": "x",
+      "handle": "1871996451812769951",
+      "canonicalUrl": "https://x.com/i/communities/1871996451812769951",
+      "audienceKind": "members",
+      "csvPath": "history/followers/x.csv",
+      "latestAudienceCount": 785,
+      "latestAudienceCountRaw": "785 Members",
+      "latestObservedAt": "2026-03-27T01:48:05.146Z"
+    }
+  ]
+}
