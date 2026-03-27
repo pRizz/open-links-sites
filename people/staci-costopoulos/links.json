@@ -228,7 +228,7 @@
       "enabled": true,
       "payment": {
         "effects": {
-          "enabled": true
+          "enabled": false
         },
         "rails": [
           {
