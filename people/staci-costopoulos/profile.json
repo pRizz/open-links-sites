@@ -29,6 +29,10 @@
     {
       "label": "Apple Podcasts",
       "url": "https://podcasts.apple.com/us/podcast/the-bitcoin-nova-podcast/id1800522855"
+    },
+    {
+      "label": "The Bitcoin Nova YouTube",
+      "url": "https://www.youtube.com/@TheBitcoinNova"
     }
   ],
   "custom": {}

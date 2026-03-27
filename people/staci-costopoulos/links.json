@@ -227,6 +227,9 @@
       "group": "support-contact",
       "enabled": true,
       "payment": {
+        "effects": {
+          "enabled": true
+        },
         "rails": [
           {
             "id": "strike",
@@ -251,22 +254,51 @@
           "sourceUrl": "https://linktr.ee/XSTACI"
         }
       }
+    },
+    {
+      "id": "youtube",
+      "label": "The Bitcoin Nova YouTube",
+      "url": "https://www.youtube.com/@TheBitcoinNova",
+      "type": "rich",
+      "group": "watch-listen",
+      "enabled": true,
+      "custom": {
+        "import": {
+          "kind": "links-list",
+          "importedAt": "2026-03-27T09:25:36.837Z"
+        }
+      }
+    },
+    {
+      "id": "x",
+      "label": "X",
+      "url": "https://x.com/XSTAC1",
+      "type": "rich",
+      "group": "watch-listen",
+      "enabled": true,
+      "icon": "x",
+      "custom": {
+        "import": {
+          "kind": "links-list",
+          "importedAt": "2026-03-27T09:33:52.429Z"
+        }
+      }
     }
   ],
   "groups": [
     {
-      "id": "projects-brands",
-      "label": "Projects & Brands",
-      "order": 0
-    },
-    {
       "id": "watch-listen",
-      "label": "Watch & Listen",
-      "order": 1
+      "label": "Watch, Listen, and Follow",
+      "order": 0
     },
     {
       "id": "community-partners",
       "label": "Community & Partners",
+      "order": 1
+    },
+    {
+      "id": "projects-brands",
+      "label": "Projects & Brands",
       "order": 2
     },
     {
@@ -279,6 +311,8 @@
     "the-bitcoin-nova",
     "home-bitcoin-black-sheep",
     "the-bitcoin-adviser-the-bitcoin-nova",
+    "youtube",
+    "x",
     "live-with-the-hive-podcast",
     "rumble",
     "audible-the-bitcoin-nova-podcast",

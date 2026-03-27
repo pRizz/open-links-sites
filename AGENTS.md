@@ -7,6 +7,10 @@
 - If instructions elsewhere in `AGENTS.md` conflict with `AGENTS.bright-builds.md`, follow the repo-local instructions and treat them as an explicit local exception.
 <!-- coding-and-architecture-requirements-managed:end -->
 
+## Repo-Local Guidance
+
+- Run `bun install` before starting work in this repo so the managed scripts and validators can resolve local dependencies.
+
 ## Cursor Cloud specific instructions
 
 ### Overview

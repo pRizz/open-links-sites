@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-27T08:36:20.130Z",
+  "generatedAt": "2026-03-27T09:34:14.856Z",
   "links": {
     "the-bitcoin-nova": {
       "metadata": {
@@ -162,6 +162,41 @@
         "profileImage": "https://1a-1791.com/video/z8/M/0/K/D/M0KDa.baa.1-TheBitcoinNova-t8kb1o.jpeg",
         "followersCount": 23,
         "followersCountRaw": "23 Followers"
+      }
+    },
+    "youtube": {
+      "metadata": {
+        "title": "Staci | The Bitcoin Nova Podcast",
+        "description": "Staci Costopoulos, a Greek American host exploring Bitcoin, financial sovereignty, and the incentives shaping our world.Through conversations with builders, ...",
+        "image": "https://yt3.googleusercontent.com/CqCI04GRmipZXGnKcmqHZv2fYjWwVUvy2Sum_ygs0MsyWatzNjke8c5IY-l5vnP8CA-01_eZ=s900-c-k-c0x00ffffff-no-rj",
+        "ogImage": "https://yt3.googleusercontent.com/CqCI04GRmipZXGnKcmqHZv2fYjWwVUvy2Sum_ygs0MsyWatzNjke8c5IY-l5vnP8CA-01_eZ=s900-c-k-c0x00ffffff-no-rj",
+        "twitterImage": "https://yt3.googleusercontent.com/CqCI04GRmipZXGnKcmqHZv2fYjWwVUvy2Sum_ygs0MsyWatzNjke8c5IY-l5vnP8CA-01_eZ=s900-c-k-c0x00ffffff-no-rj",
+        "handle": "thebitcoinnova",
+        "sourceLabel": "youtube.com",
+        "enrichmentStatus": "fetched",
+        "enrichmentReason": "metadata_complete",
+        "enrichedAt": "2026-03-27T09:25:36.950Z",
+        "profileImage": "https://yt3.googleusercontent.com/CqCI04GRmipZXGnKcmqHZv2fYjWwVUvy2Sum_ygs0MsyWatzNjke8c5IY-l5vnP8CA-01_eZ=s900-c-k-c0x00ffffff-no-rj",
+        "subscribersCount": 6880,
+        "subscribersCountRaw": "6.88K subscribers"
+      }
+    },
+    "x": {
+      "metadata": {
+        "title": "@XSTAC1 on X",
+        "description": "Posts and updates from @XSTAC1 on X.",
+        "image": "https://unavatar.io/x/XSTAC1",
+        "handle": "xstac1",
+        "sourceLabel": "x.com",
+        "enrichmentStatus": "fetched",
+        "enrichmentReason": "public_cache",
+        "enrichedAt": "2026-03-27T09:33:59.347Z",
+        "profileDescription": "Greek-American Host of @TheBitcoinNova & Live With The Hive Podcasts | https://signup.cluborange.org/co/bitcoinnova",
+        "profileImage": "https://unavatar.io/x/XSTAC1",
+        "followersCount": 5592,
+        "followersCountRaw": "5,592 Followers",
+        "followingCount": 4057,
+        "followingCountRaw": "4,057 Following"
       }
     }
   }

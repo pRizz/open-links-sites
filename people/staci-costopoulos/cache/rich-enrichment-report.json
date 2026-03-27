@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-03-27T08:36:20.130Z",
+  "generatedAt": "2026-03-27T09:34:14.856Z",
   "strict": false,
   "summary": {
-    "total": 12,
-    "fetched": 10,
+    "total": 14,
+    "fetched": 12,
     "partial": 2,
     "failed": 0,
     "skipped": 0
@@ -14,10 +14,9 @@
       "url": "https://bitcoinnova.store/",
       "status": "fetched",
       "reason": "public_cache",
-      "attempts": 2,
-      "durationMs": 176.120583,
-      "statusCode": 304,
-      "message": "Using committed public cache metadata.",
+      "attempts": 0,
+      "durationMs": 0,
+      "message": "Using fresh committed public cache metadata without a network fetch.",
       "remediation": "No action required. Stable public-cache refreshes are explicit; run `bun run enrich:rich:strict:write-cache` when you want to persist fetched public metadata changes.",
       "metadata": {
         "title": "The Bitcoin Nova",
@@ -62,7 +61,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 417.056292,
+      "durationMs": 258.231209,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -76,7 +75,7 @@
         "sourceLabel": "youtube.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-27T08:36:20.130Z",
+        "enrichedAt": "2026-03-27T09:34:14.856Z",
         "profileDescription": "Hive Minded is Staci Costopoulos's Bitcoin roundtable and reaction channel, built around live hangs, sharp commentary, laughter, and group energy with people deep in the Bitcoin space. It extends The Bitcoin Nova ecosystem with raw conversation, community signal, and grassroots connection instead of polished talking points.",
         "profileImage": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj",
         "subscribersCount": 131,
@@ -91,7 +90,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 248.875584,
+      "durationMs": 263.610167,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -104,7 +103,7 @@
         "sourceLabel": "x.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-27T08:36:20.130Z",
+        "enrichedAt": "2026-03-27T09:34:14.856Z",
         "membersCount": 785,
         "membersCountRaw": "785 Members"
       },
@@ -116,7 +115,7 @@
       "status": "fetched",
       "reason": "public_cache",
       "attempts": 2,
-      "durationMs": 225.31062499999996,
+      "durationMs": 156.06054199999994,
       "statusCode": 304,
       "message": "Using committed public cache metadata.",
       "remediation": "No action required. Stable public-cache refreshes are explicit; run `bun run enrich:rich:strict:write-cache` when you want to persist fetched public metadata changes.",
@@ -140,7 +139,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 465.48016700000016,
+      "durationMs": 359.97187500000007,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -153,7 +152,7 @@
         "sourceLabel": "suno.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-27T08:36:20.130Z"
+        "enrichedAt": "2026-03-27T09:34:14.856Z"
       },
       "blocking": false
     },
@@ -163,7 +162,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 197.719333,
+      "durationMs": 99.65112500000009,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -176,7 +175,7 @@
         "sourceLabel": "content.thebitcoinadviser.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-27T08:36:20.130Z"
+        "enrichedAt": "2026-03-27T09:34:14.856Z"
       },
       "blocking": false
     },
@@ -186,7 +185,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 2645.4534160000003,
+      "durationMs": 2068.8590830000003,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -199,7 +198,7 @@
         "sourceLabel": "microseed.io",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-27T08:36:20.130Z"
+        "enrichedAt": "2026-03-27T09:34:14.856Z"
       },
       "blocking": false
     },
@@ -209,7 +208,7 @@
       "status": "partial",
       "reason": "public_cache",
       "attempts": 2,
-      "durationMs": 282.3934589999999,
+      "durationMs": 89.14750000000004,
       "statusCode": 304,
       "message": "Using committed public cache metadata; manual link.metadata fallback remains active for missing preview fields.",
       "remediation": "No action required. Stable public-cache refreshes are explicit; run `bun run enrich:rich:strict:write-cache` when you want to persist fetched public metadata changes.",
@@ -238,7 +237,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 474.6954169999999,
+      "durationMs": 396.71600000000035,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -251,7 +250,7 @@
         "sourceLabel": "audible.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-27T08:36:20.130Z"
+        "enrichedAt": "2026-03-27T09:34:14.856Z"
       },
       "blocking": false
     },
@@ -261,7 +260,7 @@
       "status": "partial",
       "reason": "metadata_missing",
       "attempts": 2,
-      "durationMs": 179.4487080000008,
+      "durationMs": 128.05904200000032,
       "statusCode": 200,
       "message": "No remote preview metadata found; using manual link.metadata fallback.",
       "remediation": "Manual metadata fallback is active. Optional: improve target-site Open Graph/Twitter metadata to clear this warning.",
@@ -272,7 +271,7 @@
         "sourceLabel": "music.amazon.com",
         "enrichmentStatus": "partial",
         "enrichmentReason": "metadata_missing",
-        "enrichedAt": "2026-03-27T08:36:20.130Z"
+        "enrichedAt": "2026-03-27T09:34:14.856Z"
       },
       "blocking": false,
       "manualFallbackUsed": true,
@@ -284,7 +283,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 322.8366669999996,
+      "durationMs": 246.9193749999995,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -297,7 +296,7 @@
         "sourceLabel": "rumble.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-27T08:36:20.130Z",
+        "enrichedAt": "2026-03-27T09:34:14.856Z",
         "profileDescription": "Staci drives Bitcoin education through raw, human centered conversation. Known for translating real world moments into clear, relatable insights on Bitcoin adoption and self custody, she brings clarity without jargon or fear. As host of The Bitcoin Nova Podcast, Staci delivers thoughtful, unfiltered interviews focused on Bitcoin, energy, sovereignty, and the future of money. Her work emphasizes honest dialogue, community engagement, and practical understanding over noise. Staci is also active in grassroots Bitcoin advocacy and regularly supports community discussions and educational spaces.",
         "profileImage": "https://1a-1791.com/video/z8/M/0/K/D/M0KDa.baa.1-TheBitcoinNova-t8kb1o.jpeg",
         "followersCount": 23,
@@ -305,6 +304,64 @@
       },
       "blocking": false,
       "supportedProfilePlatform": "rumble"
+    },
+    {
+      "linkId": "youtube",
+      "url": "https://www.youtube.com/@TheBitcoinNova",
+      "status": "fetched",
+      "reason": "metadata_complete",
+      "attempts": 2,
+      "durationMs": 250.65508299999965,
+      "statusCode": 200,
+      "message": "Preview metadata fetched successfully.",
+      "remediation": "No action required.",
+      "metadata": {
+        "title": "Staci | The Bitcoin Nova Podcast",
+        "description": "Staci Costopoulos, a Greek American host exploring Bitcoin, financial sovereignty, and the incentives shaping our world.Through conversations with builders, ...",
+        "image": "https://yt3.googleusercontent.com/CqCI04GRmipZXGnKcmqHZv2fYjWwVUvy2Sum_ygs0MsyWatzNjke8c5IY-l5vnP8CA-01_eZ=s900-c-k-c0x00ffffff-no-rj",
+        "ogImage": "https://yt3.googleusercontent.com/CqCI04GRmipZXGnKcmqHZv2fYjWwVUvy2Sum_ygs0MsyWatzNjke8c5IY-l5vnP8CA-01_eZ=s900-c-k-c0x00ffffff-no-rj",
+        "twitterImage": "https://yt3.googleusercontent.com/CqCI04GRmipZXGnKcmqHZv2fYjWwVUvy2Sum_ygs0MsyWatzNjke8c5IY-l5vnP8CA-01_eZ=s900-c-k-c0x00ffffff-no-rj",
+        "handle": "thebitcoinnova",
+        "sourceLabel": "youtube.com",
+        "enrichmentStatus": "fetched",
+        "enrichmentReason": "metadata_complete",
+        "enrichedAt": "2026-03-27T09:34:14.856Z",
+        "profileImage": "https://yt3.googleusercontent.com/CqCI04GRmipZXGnKcmqHZv2fYjWwVUvy2Sum_ygs0MsyWatzNjke8c5IY-l5vnP8CA-01_eZ=s900-c-k-c0x00ffffff-no-rj",
+        "subscribersCount": 6880,
+        "subscribersCountRaw": "6.88K subscribers"
+      },
+      "blocking": false,
+      "supportedProfilePlatform": "youtube"
+    },
+    {
+      "linkId": "x",
+      "url": "https://x.com/XSTAC1",
+      "status": "fetched",
+      "reason": "public_cache",
+      "attempts": 0,
+      "durationMs": 0,
+      "message": "Using fresh committed public cache metadata without a network fetch.",
+      "remediation": "No action required. Stable public-cache refreshes are explicit; run `bun run enrich:rich:strict:write-cache` when you want to persist fetched public metadata changes.",
+      "metadata": {
+        "title": "@XSTAC1 on X",
+        "description": "Posts and updates from @XSTAC1 on X.",
+        "image": "https://unavatar.io/x/XSTAC1",
+        "handle": "xstac1",
+        "sourceLabel": "x.com",
+        "enrichmentStatus": "fetched",
+        "enrichmentReason": "public_cache",
+        "enrichedAt": "2026-03-27T09:33:59.347Z",
+        "profileDescription": "Greek-American Host of @TheBitcoinNova & Live With The Hive Podcasts | https://signup.cluborange.org/co/bitcoinnova",
+        "profileImage": "https://unavatar.io/x/XSTAC1",
+        "followersCount": 5592,
+        "followersCountRaw": "5,592 Followers",
+        "followingCount": 4057,
+        "followingCountRaw": "4,057 Following"
+      },
+      "blocking": false,
+      "cacheKey": "x",
+      "cacheCapturedAt": "2026-03-27T09:33:52.530Z",
+      "supportedProfilePlatform": "x"
     }
   ],
   "failureMode": "immediate",
