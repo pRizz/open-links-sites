@@ -8,8 +8,8 @@ import {
   createBuildSiteTestHarness,
   scaffoldFixture,
   seedFollowerHistoryFixture,
-  seedMixedFollowerHistoryFixture,
   seedHermeticFixture,
+  seedMixedFollowerHistoryFixture,
 } from "./test-support/build-site.fixtures";
 
 const { createTempRoot, cleanup } = createBuildSiteTestHarness();
