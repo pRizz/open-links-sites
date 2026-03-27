@@ -8,15 +8,15 @@ This file records that this repository is using the Bright Builds coding and arc
 
 - Source repository: `https://github.com/bright-builds-llc/coding-and-architecture-requirements`
 - Version pin: `main`
-- Exact commit: `1615f58f3934dbb7cebf1e6058ee989569b33ad9`
+- Exact commit: `d1d5aa033a1631b958cf08d0520eba2c0c119fe2`
 - Canonical entrypoint: `https://github.com/bright-builds-llc/coding-and-architecture-requirements/blob/main/standards/index.md`
 - Managed sidecar path: `AGENTS.bright-builds.md`
 - AGENTS integration mode: `append-only managed block`
 - Audit manifest path: `coding-and-architecture-requirements.audit.md`
 - Auto-update: `enabled`
 - Auto-update reason: `trusted repo owner pRizz`
-- Last operation: `install`
-- Last updated (UTC): `2026-03-25T11:10:49Z`
+- Last operation: `update`
+- Last updated (UTC): `2026-03-27T14:26:53Z`
 
 ## Managed files
 
