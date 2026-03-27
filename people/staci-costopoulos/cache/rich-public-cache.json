@@ -4,8 +4,8 @@
     "audible-the-bitcoin-nova-podcast": {
       "linkId": "audible-the-bitcoin-nova-podcast",
       "sourceUrl": "https://www.audible.com/pd/B0DZJV461D?source_code=ASSORAP0511160006&share_location=podcast_show_detail",
-      "capturedAt": "2026-03-27T10:46:04.679Z",
-      "updatedAt": "2026-03-27T10:46:04.679Z",
+      "capturedAt": "2026-03-27T16:55:14.178Z",
+      "updatedAt": "2026-03-27T16:55:14.178Z",
       "metadata": {
         "title": "The Bitcoin Nova Podcast",
         "description": "I&rsquo;m talking everything Bitcoin or any related topics with my 𝕏 communities or anyone that wants to talk Bitcoin! From updates, to speculations, ...",
@@ -18,8 +18,8 @@
     "club-orange": {
       "linkId": "club-orange",
       "sourceUrl": "https://www.cluborange.org/signup?referral=bitcoinnova",
-      "capturedAt": "2026-03-27T10:46:04.679Z",
-      "updatedAt": "2026-03-27T10:46:04.679Z",
+      "capturedAt": "2026-03-27T16:55:14.178Z",
+      "updatedAt": "2026-03-27T16:55:14.178Z",
       "metadata": {
         "title": "Join Club Orange — Connect with 19K+ Bitcoiners",
         "description": "Join 19,000+ Bitcoiners in 71 countries. Get a Club Orange membership starting at $40/year or pay in sats. Find local meetups, events, merchants, and your Bitcoin community. Formerly Orange Pill App.",
@@ -29,13 +29,13 @@
         "sourceLabel": "signup.cluborange.org",
         "profileImage": "https://cdn.prod.website-files.com/6369265d66eb946d6a92ce82/65b33128be4fad42734db544_Bitcoin_Social_Layer.webp"
       },
-      "lastModified": "Tue, 24 Mar 2026 19:02:20 GMT"
+      "lastModified": "Thu, 26 Mar 2026 18:51:30 GMT"
     },
     "home-bitcoin-black-sheep": {
       "linkId": "home-bitcoin-black-sheep",
       "sourceUrl": "https://bitcoinblacksheep.com/",
-      "capturedAt": "2026-03-27T10:46:04.679Z",
-      "updatedAt": "2026-03-27T10:46:04.679Z",
+      "capturedAt": "2026-03-27T16:55:14.178Z",
+      "updatedAt": "2026-03-27T16:55:14.178Z",
       "metadata": {
         "title": "Home - Bitcoin Black Sheep",
         "description": "Bitcoin Black Sheep This isn’t fashion for the masses. It’s a uniform for those who refuse to be led. Bitcoin Black Sheep was born for the ones who never fit the mold. The ones who question everything. The ones who refuse to shrink just to make other people comfortable. This isn’t a brand for everyone....",
@@ -46,8 +46,8 @@
     "home-microseed": {
       "linkId": "home-microseed",
       "sourceUrl": "https://microseed.io/?ref=XSTACI",
-      "capturedAt": "2026-03-27T10:46:04.679Z",
-      "updatedAt": "2026-03-27T10:46:04.679Z",
+      "capturedAt": "2026-03-27T16:55:14.178Z",
+      "updatedAt": "2026-03-27T16:55:14.178Z",
       "metadata": {
         "title": "Home - MicroSeed",
         "description": "Premium Seed Phrase Backup MicroSeed engraves your entire Bitcoin seed phrase on fireproof, waterproof steel or titanium the size of a coin Unlock Security",
@@ -55,13 +55,14 @@
         "ogImage": "https://microseed.io/wp-content/uploads/2025/08/IMG_1276-2-rotated.jpg",
         "twitterImage": "https://microseed.io/wp-content/uploads/2025/08/IMG_1276-2-rotated.jpg",
         "sourceLabel": "microseed.io"
-      }
+      },
+      "lastModified": "Fri, 27 Mar 2026 16:55:55 GMT"
     },
     "live-with-the-hive-podcast": {
       "linkId": "live-with-the-hive-podcast",
       "sourceUrl": "https://www.youtube.com/@livewiththehive/about",
-      "capturedAt": "2026-03-27T10:46:04.679Z",
-      "updatedAt": "2026-03-27T10:46:04.679Z",
+      "capturedAt": "2026-03-27T16:55:14.178Z",
+      "updatedAt": "2026-03-27T16:55:14.178Z",
       "metadata": {
         "title": "Hive Minded",
         "description": "The Hive Minded is created and hosted by Staci Costopoulos, creator of The Bitcoin Nova.The Hive Minded is a Bitcoin hangout. Real conversations, reactions, ...",
@@ -77,24 +78,24 @@
     "paranoid-bitcoin-anarchists": {
       "linkId": "paranoid-bitcoin-anarchists",
       "sourceUrl": "https://x.com/i/communities/1871996451812769951",
-      "capturedAt": "2026-03-27T10:46:04.679Z",
-      "updatedAt": "2026-03-27T10:46:15.937Z",
+      "capturedAt": "2026-03-27T16:55:14.178Z",
+      "updatedAt": "2026-03-27T16:55:21.990Z",
       "metadata": {
         "title": "PARANOID BITCOIN ANARCHISTS",
         "description": "Hold your keys | Run a Node Paranoid: Question everything Bitcoin: Don’t trust, verify. Anarchists: We build, laugh, and ignore conspiring fiat clowns",
         "image": "https://pbs.twimg.com/community_banner_img/1997471355478892544/GydvYqIp?format=jpg&name=orig",
         "ogImage": "https://pbs.twimg.com/community_banner_img/1997471355478892544/GydvYqIp?format=jpg&name=orig",
         "sourceLabel": "x.com",
-        "membersCount": 785,
-        "membersCountRaw": "785 Members"
+        "membersCount": 788,
+        "membersCountRaw": "788 Members"
       },
-      "lastModified": "Fri, 27 Mar 2026 10:47:03 GMT"
+      "lastModified": "Fri, 27 Mar 2026 16:55:52 GMT"
     },
     "satoshoes": {
       "linkId": "satoshoes",
       "sourceUrl": "https://satoshoes.co.uk/?ref=xstac1",
-      "capturedAt": "2026-03-27T10:46:04.679Z",
-      "updatedAt": "2026-03-27T10:46:04.679Z",
+      "capturedAt": "2026-03-27T16:55:14.178Z",
+      "updatedAt": "2026-03-27T16:55:14.178Z",
       "metadata": {
         "title": "Satoshoes | Bitcoin-Themed Sneakers & Apparel — Wear The Message",
         "description": "Bitcoin-inspired sneakers, hoodies and accessories for hodlers and freedom seekers. Unique designs you won't find on the high street. Ships worldwide with full tracking",
@@ -102,13 +103,13 @@
         "ogImage": "http://satoshoes.co.uk/cdn/shop/files/New_Satoshoes_Logo.png?height=628&pad_color=ffffff&v=1764584362&width=1200",
         "sourceLabel": "satoshoes.co.uk"
       },
-      "etag": "\"page_cache:94205477246:IndexController:5ff176c7858f25f098602d2ffc803f81\""
+      "etag": "\"page_cache:94205477246:IndexController:041a53b5932d1d3caa693c12f7887083\""
     },
     "the-bitcoin-adviser-the-bitcoin-nova": {
       "linkId": "the-bitcoin-adviser-the-bitcoin-nova",
       "sourceUrl": "https://content.thebitcoinadviser.com/the-bitcoin-nova",
-      "capturedAt": "2026-03-27T10:46:04.679Z",
-      "updatedAt": "2026-03-27T10:46:04.679Z",
+      "capturedAt": "2026-03-27T16:55:14.178Z",
+      "updatedAt": "2026-03-27T16:55:14.178Z",
       "metadata": {
         "title": "The Bitcoin Adviser - The Bitcoin Nova",
         "description": "Secure your Bitcoin with expert guidance at The Bitcoin Adviser. We help you transition off exchanges, focusing on your unique goals and providing peace of mind for your investments.",
@@ -122,8 +123,8 @@
     "the-bitcoin-nova": {
       "linkId": "the-bitcoin-nova",
       "sourceUrl": "https://bitcoinnova.store/",
-      "capturedAt": "2026-03-27T10:46:04.679Z",
-      "updatedAt": "2026-03-27T10:46:04.679Z",
+      "capturedAt": "2026-03-27T16:55:14.178Z",
+      "updatedAt": "2026-03-27T16:55:14.178Z",
       "metadata": {
         "title": "The Bitcoin Nova",
         "description": "The official home of The Bitcoin Nova. Watch the latest episodes, explore merch, see upcoming speaking events, support Bitcoin-aligned companies, and be part of a growing global community.",
@@ -137,8 +138,8 @@
     "x": {
       "linkId": "x",
       "sourceUrl": "https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Fxstac1&omit_script=true&hide_thread=true&dnt=true",
-      "capturedAt": "2026-03-27T10:46:04.679Z",
-      "updatedAt": "2026-03-27T10:46:44.003Z",
+      "capturedAt": "2026-03-27T16:55:14.178Z",
+      "updatedAt": "2026-03-27T16:55:37.299Z",
       "metadata": {
         "title": "@XSTAC1 on X",
         "description": "Posts and updates from @XSTAC1 on X.",
@@ -146,18 +147,18 @@
         "image": "https://unavatar.io/x/XSTAC1",
         "sourceLabel": "x.com",
         "profileImage": "https://unavatar.io/x/XSTAC1",
-        "followersCount": 5592,
-        "followersCountRaw": "5,592 Followers",
-        "followingCount": 4057,
-        "followingCountRaw": "4,057 Following"
+        "followersCount": 5590,
+        "followersCountRaw": "5,590 Followers",
+        "followingCount": 4058,
+        "followingCountRaw": "4,058 Following"
       },
-      "lastModified": "Fri, 27 Mar 2026 10:46:13 GMT"
+      "lastModified": "Fri, 27 Mar 2026 16:55:19 GMT"
     },
     "xstaci-sweet-biddi-beats-by-thebitcoinnova-suno": {
       "linkId": "xstaci-sweet-biddi-beats-by-thebitcoinnova-suno",
       "sourceUrl": "https://suno.com/playlist/2c53c4e4-e7c0-4772-b2c2-bb1d16c4d2ab",
-      "capturedAt": "2026-03-27T10:46:04.679Z",
-      "updatedAt": "2026-03-27T10:46:04.679Z",
+      "capturedAt": "2026-03-27T16:55:14.178Z",
+      "updatedAt": "2026-03-27T16:55:14.178Z",
       "metadata": {
         "title": "XSTACI Sweet Biddi Beats by @thebitcoinnova | Suno",
         "description": "Suno is building a future where anyone can make great music.",
@@ -170,8 +171,8 @@
     "youtube": {
       "linkId": "youtube",
       "sourceUrl": "https://www.youtube.com/@TheBitcoinNova/about",
-      "capturedAt": "2026-03-27T10:46:04.679Z",
-      "updatedAt": "2026-03-27T10:46:04.679Z",
+      "capturedAt": "2026-03-27T16:55:14.178Z",
+      "updatedAt": "2026-03-27T16:55:14.178Z",
       "metadata": {
         "title": "Staci | The Bitcoin Nova Podcast",
         "description": "Staci Costopoulos, a Greek American host exploring Bitcoin, financial sovereignty, and the incentives shaping our world.Through conversations with builders, ...",
