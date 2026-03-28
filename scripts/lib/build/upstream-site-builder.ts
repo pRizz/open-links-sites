@@ -42,6 +42,8 @@ interface FollowerHistoryIndexPayload {
   entries?: FollowerHistoryIndexEntry[];
 }
 
+const FOLLOWER_HISTORY_LINK_ID_COLUMN_INDEX = 1;
+
 export interface UpstreamWorkspaceSiteBuildInput {
   workspaceDir: string;
   outDir: string;
@@ -164,6 +166,80 @@ const resolveFollowerHistoryRelativePath = (csvPath: string): string | null => {
   return normalizedPath;
 };
 
+const readCsvCell = (line: string, columnIndex: number): string | null => {
+  let currentColumn = 0;
+  let currentValue = "";
+  let insideQuotes = false;
+
+  for (let index = 0; index < line.length; index += 1) {
+    const character = line[index];
+    if (character === '"') {
+      const nextCharacter = line[index + 1];
+      if (insideQuotes && nextCharacter === '"') {
+        currentValue += '"';
+        index += 1;
+        continue;
+      }
+
+      insideQuotes = !insideQuotes;
+      continue;
+    }
+
+    if (character === "," && !insideQuotes) {
+      if (currentColumn === columnIndex) {
+        return currentValue;
+      }
+
+      currentColumn += 1;
+      currentValue = "";
+      continue;
+    }
+
+    currentValue += character;
+  }
+
+  if (currentColumn === columnIndex) {
+    return currentValue;
+  }
+
+  return null;
+};
+
+const filterFollowerHistoryCsvContents = (
+  csvContents: string,
+  allowedLinkIds: ReadonlySet<string>,
+): {
+  contents: string;
+  retainedLinkIds: Set<string>;
+} => {
+  const normalizedContents = csvContents.replaceAll("\r\n", "\n");
+  const lines = normalizedContents.split("\n");
+  const [headerLine = ""] = lines;
+  const filteredLines = [headerLine];
+  const retainedLinkIds = new Set<string>();
+
+  for (const line of lines.slice(1)) {
+    if (line.trim().length === 0) {
+      continue;
+    }
+
+    const linkId = readCsvCell(line, FOLLOWER_HISTORY_LINK_ID_COLUMN_INDEX)?.trim();
+    if (!linkId || !allowedLinkIds.has(linkId)) {
+      continue;
+    }
+
+    filteredLines.push(line);
+    retainedLinkIds.add(linkId);
+  }
+
+  filteredLines.push("");
+
+  return {
+    contents: filteredLines.join("\n"),
+    retainedLinkIds,
+  };
+};
+
 const stageSanitizedFollowerHistory = async (
   workspaceDir: string,
   buildRoot: string,
@@ -190,7 +266,7 @@ const stageSanitizedFollowerHistory = async (
     }
   }
 
-  const copiedCsvPaths = new Set<string>();
+  const allowedLinkIdsByCsvPath = new Map<string, Set<string>>();
   const filteredEntries: FollowerHistoryIndexEntry[] = [];
 
   for (const entry of sourceIndex?.entries ?? []) {
@@ -227,10 +303,14 @@ const stageSanitizedFollowerHistory = async (
     }
 
     filteredEntries.push(entry);
-    copiedCsvPaths.add(relativeCsvPath);
+    const allowedLinkIds = allowedLinkIdsByCsvPath.get(relativeCsvPath) ?? new Set<string>();
+    allowedLinkIds.add(entry.linkId.trim());
+    allowedLinkIdsByCsvPath.set(relativeCsvPath, allowedLinkIds);
   }
 
-  for (const relativeCsvPath of copiedCsvPaths) {
+  const publishedLinkIdsByCsvPath = new Map<string, Set<string>>();
+
+  for (const [relativeCsvPath, allowedLinkIds] of allowedLinkIdsByCsvPath) {
     const sourceCsvPath = path.join(
       workspaceDir,
       ROOT_PUBLIC_DIRECTORY,
@@ -241,8 +321,17 @@ const stageSanitizedFollowerHistory = async (
       ROOT_PUBLIC_DIRECTORY,
       ...relativeCsvPath.split("/"),
     );
+    const filteredCsv = filterFollowerHistoryCsvContents(
+      await readFile(sourceCsvPath, "utf8"),
+      allowedLinkIds,
+    );
+    if (filteredCsv.retainedLinkIds.size === 0) {
+      continue;
+    }
+
     await mkdir(path.dirname(targetCsvPath), { recursive: true });
-    await cp(sourceCsvPath, targetCsvPath, { force: true });
+    await writeFile(targetCsvPath, filteredCsv.contents, "utf8");
+    publishedLinkIdsByCsvPath.set(relativeCsvPath, filteredCsv.retainedLinkIds);
   }
 
   const sanitizedIndex = {
@@ -252,7 +341,18 @@ const stageSanitizedFollowerHistory = async (
       (typeof sourceIndex?.updatedAt === "string" && sourceIndex.updatedAt.trim().length > 0
         ? sourceIndex.updatedAt
         : new Date().toISOString()),
-    entries: filteredEntries,
+    entries: filteredEntries.filter((entry) => {
+      if (typeof entry.linkId !== "string" || typeof entry.csvPath !== "string") {
+        return false;
+      }
+
+      const relativeCsvPath = resolveFollowerHistoryRelativePath(entry.csvPath);
+      if (!relativeCsvPath) {
+        return false;
+      }
+
+      return publishedLinkIdsByCsvPath.get(relativeCsvPath)?.has(entry.linkId.trim()) ?? false;
+    }),
   };
 
   await writeFile(

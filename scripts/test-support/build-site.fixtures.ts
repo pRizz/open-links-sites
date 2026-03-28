@@ -194,3 +194,37 @@ export const seedFollowerHistoryFixture = (rootDir: string, personId: string): v
     "utf8",
   );
 };
+
+export const seedMixedFollowerHistoryFixture = (rootDir: string, personId: string): void => {
+  const helperLayout = getPersonHelperLayout(rootDir, personId);
+  mkdirSync(helperLayout.dirs.followerHistory, { recursive: true });
+
+  writeJson(helperLayout.files.followerHistoryIndex, {
+    version: 1,
+    updatedAt: "2026-03-17T12:00:00.000Z",
+    entries: [
+      {
+        linkId: "fixture-link",
+        label: "Fixture Link",
+        platform: "x",
+        handle: "fixture",
+        canonicalUrl: "https://fixture.example/profile",
+        audienceKind: "followers",
+        csvPath: "history/followers/x.csv",
+        latestAudienceCount: 7,
+        latestAudienceCountRaw: "7 followers",
+        latestObservedAt: "2026-03-17T12:00:00.000Z",
+      },
+    ],
+  });
+  writeFileSync(
+    join(helperLayout.dirs.followerHistory, "x.csv"),
+    [
+      "observedAt,linkId,platform,handle,canonicalUrl,audienceKind,audienceCount,audienceCountRaw,source",
+      "2026-03-17T11:00:00.000Z,fixture-social,x,foreign-x-community,https://social.fixture.example/@fixture,members,17,17 Members,manual",
+      "2026-03-17T12:00:00.000Z,fixture-link,x,fixture,https://fixture.example/profile,followers,7,7 followers,manual",
+      "",
+    ].join("\n"),
+    "utf8",
+  );
+};

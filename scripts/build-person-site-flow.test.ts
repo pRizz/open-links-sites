@@ -9,6 +9,7 @@ import {
   scaffoldFixture,
   seedFollowerHistoryFixture,
   seedHermeticFixture,
+  seedMixedFollowerHistoryFixture,
 } from "./test-support/build-site.fixtures";
 
 const { createTempRoot, cleanup } = createBuildSiteTestHarness();
@@ -228,6 +229,47 @@ describe("build-person-site flow", () => {
       expect(
         readFileSync(join(result.outputDir, "history", "followers", "fixture.csv"), "utf8"),
       ).toContain("fixture-link");
+    },
+    { timeout: 30_000 },
+  );
+
+  test(
+    "filters shared follower-history csv rows down to the published link ids",
+    async () => {
+      // Arrange
+      const rootDir = createTempRoot();
+      scaffoldFixture(rootDir, "fixture-user", "Fixture User");
+      seedHermeticFixture(rootDir, "fixture-user");
+      seedMixedFollowerHistoryFixture(rootDir, "fixture-user");
+
+      // Act
+      const result = await buildPersonSite({
+        rootDir,
+        personId: "fixture-user",
+        buildTimestamp: "2026-03-17T12:00:00.000Z",
+        publicOrigin: "https://cdn.example.com/apps/links",
+        canonicalOrigin: "https://links.example.com/apps/links",
+      });
+
+      // Assert
+      const historyIndex = JSON.parse(
+        readFileSync(join(result.outputDir, "history", "followers", "index.json"), "utf8"),
+      ) as {
+        entries?: Array<{ csvPath?: string; linkId?: string }>;
+      };
+      expect(historyIndex.entries).toHaveLength(1);
+      expect(historyIndex.entries?.[0]).toMatchObject({
+        linkId: "fixture-link",
+        csvPath: "history/followers/x.csv",
+      });
+
+      const publishedCsv = readFileSync(
+        join(result.outputDir, "history", "followers", "x.csv"),
+        "utf8",
+      );
+      expect(publishedCsv).toContain("fixture-link,x,fixture");
+      expect(publishedCsv).not.toContain("fixture-community");
+      expect(publishedCsv).not.toContain("members,3,3 members");
     },
     { timeout: 30_000 },
   );
