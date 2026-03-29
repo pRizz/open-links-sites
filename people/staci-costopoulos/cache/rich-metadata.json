@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-28T10:43:51.658Z",
+  "generatedAt": "2026-03-29T10:45:15.997Z",
   "links": {
     "the-bitcoin-nova": {
       "metadata": {
@@ -11,7 +11,7 @@
         "sourceLabel": "bitcoinnova.store",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "public_cache",
-        "enrichedAt": "2026-03-28T10:42:57.132Z"
+        "enrichedAt": "2026-03-29T10:44:10.318Z"
       }
     },
     "home-bitcoin-black-sheep": {
@@ -22,7 +22,7 @@
         "sourceLabel": "bitcoinblacksheep.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "public_cache",
-        "enrichedAt": "2026-03-28T10:42:57.132Z"
+        "enrichedAt": "2026-03-29T10:44:10.318Z"
       }
     },
     "live-with-the-hive-podcast": {
@@ -36,7 +36,7 @@
         "sourceLabel": "youtube.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-28T10:42:57.132Z",
+        "enrichedAt": "2026-03-29T10:44:10.318Z",
         "profileDescription": "Hive Minded is Staci Costopoulos's Bitcoin roundtable and reaction channel, built around live hangs, sharp commentary, laughter, and group energy with people deep in the Bitcoin space. It extends The Bitcoin Nova ecosystem with raw conversation, community signal, and grassroots connection instead of polished talking points.",
         "profileImage": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj",
         "subscribersCount": 131,
@@ -53,9 +53,9 @@
         "sourceLabel": "x.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-28T10:43:51.658Z",
-        "membersCount": 788,
-        "membersCountRaw": "788 Members"
+        "enrichedAt": "2026-03-29T10:45:15.997Z",
+        "membersCount": 787,
+        "membersCountRaw": "787 Members"
       }
     },
     "satoshoes": {
@@ -67,7 +67,7 @@
         "sourceLabel": "satoshoes.co.uk",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "public_cache",
-        "enrichedAt": "2026-03-28T10:42:57.132Z"
+        "enrichedAt": "2026-03-29T10:44:10.318Z"
       }
     },
     "xstaci-sweet-biddi-beats-by-thebitcoinnova-suno": {
@@ -80,7 +80,7 @@
         "sourceLabel": "suno.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-28T10:42:57.132Z"
+        "enrichedAt": "2026-03-29T10:44:10.318Z"
       }
     },
     "the-bitcoin-adviser-the-bitcoin-nova": {
@@ -93,7 +93,7 @@
         "sourceLabel": "content.thebitcoinadviser.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-28T10:42:57.132Z"
+        "enrichedAt": "2026-03-29T10:44:10.318Z"
       }
     },
     "home-microseed": {
@@ -106,7 +106,7 @@
         "sourceLabel": "microseed.io",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-28T10:42:57.132Z"
+        "enrichedAt": "2026-03-29T10:44:10.318Z"
       }
     },
     "club-orange": {
@@ -119,8 +119,8 @@
         "handle": "bitcoinnova",
         "sourceLabel": "signup.cluborange.org",
         "enrichmentStatus": "fetched",
-        "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-28T10:42:57.132Z",
+        "enrichmentReason": "public_cache",
+        "enrichedAt": "2026-03-29T10:44:10.318Z",
         "profileDescription": "Chicago hairstylist. https://www.angieshairstudio.us/ Accepting Bitcoin for payment.",
         "profileImage": "https://orange-pill-app-dev.s3.amazonaws.com/avatars/b5d546cd-01af-4c37-bd52-a3d64953606c"
       }
@@ -134,8 +134,8 @@
         "twitterImage": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1024,512_CLa%7C1024,512%7C51kpmcJOswL.jpg%7C0,0,1024,512+67,67,376,376_PJAdblSocialShare-Gradientoverlay-twitter-largeasin-0to60,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Medium,TopLeft,490,223_OU01_ZBLISTENING%20ON,483,152,55,450,AudibleSansMd,32,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,929,45.jpg",
         "sourceLabel": "audible.com",
         "enrichmentStatus": "fetched",
-        "enrichmentReason": "public_cache",
-        "enrichedAt": "2026-03-28T10:42:57.132Z"
+        "enrichmentReason": "metadata_complete",
+        "enrichedAt": "2026-03-29T10:44:10.318Z"
       }
     },
     "the-bitcoin-nova-podcast-on-amazon-music": {
@@ -146,7 +146,7 @@
         "sourceLabel": "music.amazon.com",
         "enrichmentStatus": "partial",
         "enrichmentReason": "metadata_missing",
-        "enrichedAt": "2026-03-28T10:42:57.132Z"
+        "enrichedAt": "2026-03-29T10:44:10.318Z"
       }
     },
     "rumble": {
@@ -157,7 +157,7 @@
         "handle": "c-7752998",
         "enrichmentStatus": "failed",
         "enrichmentReason": "fetch_failed",
-        "enrichedAt": "2026-03-28T10:42:57.132Z",
+        "enrichedAt": "2026-03-29T10:44:10.318Z",
         "profileImage": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
         "followersCount": 23,
         "followersCountRaw": "23 Followers"
@@ -174,7 +174,7 @@
         "sourceLabel": "youtube.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-28T10:42:57.132Z",
+        "enrichedAt": "2026-03-29T10:44:10.318Z",
         "profileImage": "https://yt3.googleusercontent.com/CqCI04GRmipZXGnKcmqHZv2fYjWwVUvy2Sum_ygs0MsyWatzNjke8c5IY-l5vnP8CA-01_eZ=s900-c-k-c0x00ffffff-no-rj",
         "subscribersCount": 6880,
         "subscribersCountRaw": "6.88K subscribers"
@@ -189,13 +189,13 @@
         "sourceLabel": "x.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "public_cache",
-        "enrichedAt": "2026-03-28T10:43:32.211Z",
+        "enrichedAt": "2026-03-29T10:44:57.147Z",
         "profileDescription": "Greek-American Host of @TheBitcoinNova & Live With The Hive Podcasts | https://signup.cluborange.org/co/bitcoinnova",
         "profileImage": "https://unavatar.io/x/XSTAC1",
         "followersCount": 5585,
         "followersCountRaw": "5,585 Followers",
-        "followingCount": 4057,
-        "followingCountRaw": "4,057 Following"
+        "followingCount": 4055,
+        "followingCountRaw": "4,055 Following"
       }
     }
   }
