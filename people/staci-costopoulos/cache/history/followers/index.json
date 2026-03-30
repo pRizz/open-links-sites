@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-03-29T10:45:22.349Z",
+  "updatedAt": "2026-03-30T10:51:24.838Z",
   "entries": [
     {
       "linkId": "live-with-the-hive-podcast",
@@ -12,7 +12,7 @@
       "csvPath": "history/followers/live-with-the-hive-podcast.csv",
       "latestAudienceCount": 131,
       "latestAudienceCountRaw": "131 subscribers",
-      "latestObservedAt": "2026-03-29T10:45:22.349Z"
+      "latestObservedAt": "2026-03-30T10:51:24.838Z"
     },
     {
       "linkId": "rumble",
@@ -24,7 +24,7 @@
       "csvPath": "history/followers/rumble.csv",
       "latestAudienceCount": 23,
       "latestAudienceCountRaw": "23 Followers",
-      "latestObservedAt": "2026-03-29T10:45:22.349Z"
+      "latestObservedAt": "2026-03-30T10:51:24.838Z"
     },
     {
       "linkId": "x",
@@ -34,9 +34,9 @@
       "canonicalUrl": "https://x.com/XSTAC1",
       "audienceKind": "followers",
       "csvPath": "history/followers/x.csv",
-      "latestAudienceCount": 5585,
-      "latestAudienceCountRaw": "5,585 Followers",
-      "latestObservedAt": "2026-03-29T10:45:22.349Z"
+      "latestAudienceCount": 5583,
+      "latestAudienceCountRaw": "5,583 Followers",
+      "latestObservedAt": "2026-03-30T10:51:24.838Z"
     },
     {
       "linkId": "youtube",
@@ -48,7 +48,7 @@
       "csvPath": "history/followers/youtube.csv",
       "latestAudienceCount": 6880,
       "latestAudienceCountRaw": "6.88K subscribers",
-      "latestObservedAt": "2026-03-29T10:45:22.349Z"
+      "latestObservedAt": "2026-03-30T10:51:24.838Z"
     }
   ]
 }
