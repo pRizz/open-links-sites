@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-30T10:51:20.027Z",
+  "generatedAt": "2026-03-31T10:47:52.770Z",
   "strict": false,
   "summary": {
     "total": 14,
@@ -15,7 +15,7 @@
       "status": "fetched",
       "reason": "public_cache",
       "attempts": 2,
-      "durationMs": 92.35924599999998,
+      "durationMs": 110.82907,
       "statusCode": 304,
       "message": "Using committed public cache metadata.",
       "remediation": "No action required. Stable public-cache refreshes are explicit; run `bun run enrich:rich:strict:write-cache` when you want to persist fetched public metadata changes.",
@@ -28,11 +28,11 @@
         "sourceLabel": "bitcoinnova.store",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "public_cache",
-        "enrichedAt": "2026-03-30T10:50:22.325Z"
+        "enrichedAt": "2026-03-31T10:46:56.073Z"
       },
       "blocking": false,
       "cacheKey": "the-bitcoin-nova",
-      "cacheCapturedAt": "2026-03-30T10:50:22.325Z"
+      "cacheCapturedAt": "2026-03-31T10:46:56.073Z"
     },
     {
       "linkId": "home-bitcoin-black-sheep",
@@ -50,11 +50,11 @@
         "sourceLabel": "bitcoinblacksheep.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "public_cache",
-        "enrichedAt": "2026-03-30T10:50:22.325Z"
+        "enrichedAt": "2026-03-31T10:46:56.073Z"
       },
       "blocking": false,
       "cacheKey": "home-bitcoin-black-sheep",
-      "cacheCapturedAt": "2026-03-30T10:50:22.325Z"
+      "cacheCapturedAt": "2026-03-31T10:46:56.073Z"
     },
     {
       "linkId": "live-with-the-hive-podcast",
@@ -62,7 +62,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 228.16434099999998,
+      "durationMs": 186.79981499999997,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -76,7 +76,7 @@
         "sourceLabel": "youtube.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-30T10:51:20.027Z",
+        "enrichedAt": "2026-03-31T10:47:52.770Z",
         "profileDescription": "Hive Minded is Staci Costopoulos's Bitcoin roundtable and reaction channel, built around live hangs, sharp commentary, laughter, and group energy with people deep in the Bitcoin space. It extends The Bitcoin Nova ecosystem with raw conversation, community signal, and grassroots connection instead of polished talking points.",
         "profileImage": "https://yt3.googleusercontent.com/jgT_Z5_VUstZ801ghPeNNzQ0MBgznSfiIMJIKLDvp6H-lbBFZ9IMw6awzWxNG3tS8_hJ4fhLGA=s900-c-k-c0x00ffffff-no-rj",
         "subscribersCount": 131,
@@ -91,7 +91,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 254.88503500000002,
+      "durationMs": 145.77910200000008,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -104,7 +104,7 @@
         "sourceLabel": "x.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-30T10:51:20.027Z",
+        "enrichedAt": "2026-03-31T10:47:52.770Z",
         "membersCount": 787,
         "membersCountRaw": "787 Members"
       },
@@ -116,7 +116,7 @@
       "status": "fetched",
       "reason": "public_cache",
       "attempts": 2,
-      "durationMs": 232.471631,
+      "durationMs": 127.00748399999998,
       "statusCode": 304,
       "message": "Using committed public cache metadata.",
       "remediation": "No action required. Stable public-cache refreshes are explicit; run `bun run enrich:rich:strict:write-cache` when you want to persist fetched public metadata changes.",
@@ -128,11 +128,11 @@
         "sourceLabel": "satoshoes.co.uk",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "public_cache",
-        "enrichedAt": "2026-03-30T10:50:22.325Z"
+        "enrichedAt": "2026-03-31T10:46:56.073Z"
       },
       "blocking": false,
       "cacheKey": "satoshoes",
-      "cacheCapturedAt": "2026-03-30T10:50:22.325Z",
+      "cacheCapturedAt": "2026-03-31T10:46:56.073Z",
       "referral": {
         "completeness": "none",
         "originalUrl": "https://satoshoes.co.uk/?ref=xstac1",
@@ -147,7 +147,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 918.4265809999999,
+      "durationMs": 232.1402260000001,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -160,7 +160,7 @@
         "sourceLabel": "suno.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-30T10:51:20.027Z"
+        "enrichedAt": "2026-03-31T10:47:52.770Z"
       },
       "blocking": false
     },
@@ -170,7 +170,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 44.70986099999982,
+      "durationMs": 48.51142200000004,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -183,7 +183,7 @@
         "sourceLabel": "content.thebitcoinadviser.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-30T10:51:20.027Z"
+        "enrichedAt": "2026-03-31T10:47:52.770Z"
       },
       "blocking": false
     },
@@ -193,7 +193,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 1948.277193,
+      "durationMs": 2546.223924,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -206,7 +206,7 @@
         "sourceLabel": "microseed.io",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-30T10:51:20.027Z"
+        "enrichedAt": "2026-03-31T10:47:52.770Z"
       },
       "blocking": false,
       "referral": {
@@ -223,7 +223,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 29.96015299999999,
+      "durationMs": 1111.3090269999998,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -237,7 +237,7 @@
         "sourceLabel": "signup.cluborange.org",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-30T10:51:20.027Z",
+        "enrichedAt": "2026-03-31T10:47:52.770Z",
         "profileDescription": "Chicago hairstylist. https://www.angieshairstudio.us/ Accepting Bitcoin for payment.",
         "profileImage": "https://orange-pill-app-dev.s3.amazonaws.com/avatars/b5d546cd-01af-4c37-bd52-a3d64953606c"
       },
@@ -261,7 +261,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 344.5874279999998,
+      "durationMs": 369.10980199999995,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -274,7 +274,7 @@
         "sourceLabel": "audible.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-30T10:51:20.027Z"
+        "enrichedAt": "2026-03-31T10:47:52.770Z"
       },
       "blocking": false
     },
@@ -284,7 +284,7 @@
       "status": "partial",
       "reason": "metadata_missing",
       "attempts": 2,
-      "durationMs": 24.795681999999942,
+      "durationMs": 44.265018000000055,
       "statusCode": 200,
       "message": "No remote preview metadata found; using manual link.metadata fallback.",
       "remediation": "Manual metadata fallback is active. Optional: improve target-site Open Graph/Twitter metadata to clear this warning.",
@@ -295,7 +295,7 @@
         "sourceLabel": "music.amazon.com",
         "enrichmentStatus": "partial",
         "enrichmentReason": "metadata_missing",
-        "enrichedAt": "2026-03-30T10:51:20.027Z"
+        "enrichedAt": "2026-03-31T10:47:52.770Z"
       },
       "blocking": false,
       "manualFallbackUsed": true,
@@ -307,7 +307,7 @@
       "status": "failed",
       "reason": "fetch_failed",
       "attempts": 2,
-      "durationMs": 354.6253349999997,
+      "durationMs": 347.5785539999997,
       "statusCode": 403,
       "message": "Received HTTP 403",
       "remediation": "Check URL/network availability, provide metadata manually under link.metadata, or disable enrichment for this link.",
@@ -318,7 +318,7 @@
         "handle": "c-7752998",
         "enrichmentStatus": "failed",
         "enrichmentReason": "fetch_failed",
-        "enrichedAt": "2026-03-30T10:51:20.027Z",
+        "enrichedAt": "2026-03-31T10:47:52.770Z",
         "profileImage": "https://m.media-amazon.com/images/I/51kpmcJOswL._SL10_UR1600,800_CR200,50,1200,630_CLa%7C1200,630%7C51kpmcJOswL.jpg%7C0,0,1200,630+82,82,465,465_PJAdblSocialShare-Gradientoverlay-largeasin-0to70,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Large,TopLeft,600,270_OU01_ZBLISTENING%20ON,617,216,52,500,AudibleSansMd,30,255,255,255_PJAdblSocialShare-PodcastIcon-Small,TopLeft,1094,50.jpg",
         "followersCount": 23,
         "followersCountRaw": "23 Followers"
@@ -332,7 +332,7 @@
       "status": "fetched",
       "reason": "metadata_complete",
       "attempts": 2,
-      "durationMs": 226.30149699999947,
+      "durationMs": 235.1125089999996,
       "statusCode": 200,
       "message": "Preview metadata fetched successfully.",
       "remediation": "No action required.",
@@ -346,10 +346,10 @@
         "sourceLabel": "youtube.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "metadata_complete",
-        "enrichedAt": "2026-03-30T10:51:20.027Z",
+        "enrichedAt": "2026-03-31T10:47:52.770Z",
         "profileImage": "https://yt3.googleusercontent.com/CqCI04GRmipZXGnKcmqHZv2fYjWwVUvy2Sum_ygs0MsyWatzNjke8c5IY-l5vnP8CA-01_eZ=s900-c-k-c0x00ffffff-no-rj",
-        "subscribersCount": 6880,
-        "subscribersCountRaw": "6.88K subscribers"
+        "subscribersCount": 6870,
+        "subscribersCountRaw": "6.87K subscribers"
       },
       "blocking": false,
       "supportedProfilePlatform": "youtube"
@@ -371,17 +371,17 @@
         "sourceLabel": "x.com",
         "enrichmentStatus": "fetched",
         "enrichmentReason": "public_cache",
-        "enrichedAt": "2026-03-30T10:51:00.960Z",
+        "enrichedAt": "2026-03-31T10:47:32.797Z",
         "profileDescription": "Greek-American Host of @TheBitcoinNova & Live With The Hive Podcasts | https://signup.cluborange.org/co/bitcoinnova",
         "profileImage": "https://unavatar.io/x/XSTAC1",
-        "followersCount": 5583,
-        "followersCountRaw": "5,583 Followers",
-        "followingCount": 4054,
-        "followingCountRaw": "4,054 Following"
+        "followersCount": 5580,
+        "followersCountRaw": "5,580 Followers",
+        "followingCount": 4061,
+        "followingCountRaw": "4,061 Following"
       },
       "blocking": false,
       "cacheKey": "x",
-      "cacheCapturedAt": "2026-03-30T10:50:22.325Z",
+      "cacheCapturedAt": "2026-03-31T10:46:56.073Z",
       "supportedProfilePlatform": "x"
     }
   ],
