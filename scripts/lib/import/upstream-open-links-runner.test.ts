@@ -62,6 +62,110 @@ afterEach(() => {
 });
 
 describe("runUpstreamOpenLinks", () => {
+  test("preserves committed rich public cache entries during full refresh", async () => {
+    // Arrange
+    const layout = createWorkspace({
+      links: [
+        {
+          id: "rumble",
+          label: "Rumble",
+          url: "https://rumble.com/c/c-7752998",
+          type: "rich",
+          enabled: true,
+        },
+      ],
+    });
+    writeJson(layout.files.richPublicCache, {
+      version: 1,
+      entries: {
+        rumble: {
+          linkId: "rumble",
+          metadata: {
+            title: "The Bitcoin Nova Podcast",
+          },
+        },
+      },
+    });
+
+    const runUpstreamScript = (input: RunUpstreamScriptInput): UpstreamRunnerStep => {
+      if (input.stepKey === "validate-data") {
+        const publicCache = JSON.parse(readFileSync(layout.files.richPublicCache, "utf8")) as {
+          entries?: Record<string, unknown>;
+        };
+
+        return publicCache.entries?.rumble
+          ? {
+              key: input.stepKey,
+              status: "ran",
+              blocking: false,
+              stdout: JSON.stringify({
+                success: true,
+              }),
+            }
+          : {
+              key: input.stepKey,
+              status: "failed",
+              blocking: true,
+              stdout: JSON.stringify({
+                success: false,
+                errors: [
+                  {
+                    source: "data/cache/rich-public-cache.json",
+                    path: "$.entries.rumble",
+                    message: "Stable public cache entry disappeared before validation.",
+                  },
+                ],
+              }),
+            };
+      }
+
+      return {
+        key: input.stepKey,
+        status: "ran",
+        blocking: false,
+      };
+    };
+
+    // Act
+    const result = await runUpstreamOpenLinks(
+      {
+        workspace: layout,
+        fullRefresh: true,
+      },
+      {
+        resolveOpenLinksRepoDir: () => "/tmp/open-links",
+        runUpstreamScript,
+      },
+    );
+
+    // Assert
+    expect(result.blockingFailure).toBeUndefined();
+    expect(
+      JSON.parse(readFileSync(layout.files.richPublicCache, "utf8")) as {
+        version?: number;
+        entries?: Record<
+          string,
+          {
+            linkId?: string;
+            metadata?: {
+              title?: string;
+            };
+          }
+        >;
+      },
+    ).toEqual({
+      entries: {
+        rumble: {
+          linkId: "rumble",
+          metadata: {
+            title: "The Bitcoin Nova Podcast",
+          },
+        },
+      },
+      version: 1,
+    });
+  });
+
   test("reruns enrich-rich-links after public-rich-sync so generated metadata can use refreshed counts", async () => {
     // Arrange
     const layout = createWorkspace({

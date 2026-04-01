@@ -12,9 +12,20 @@ Record recurring repo-specific workflow facts in `AGENTS.md` under `## Repo-Loca
 
 - Standards repository: `https://github.com/bright-builds-llc/coding-and-architecture-requirements`
 - Version pin: `main`
-- Exact commit: `68dd454f0f663f60806979b90a31fceb1fe8c9f8`
+- Exact commit: `a58bab1abb1c07259bfeaf5f906a0f526f64781c`
 - Canonical entrypoint: `https://github.com/bright-builds-llc/coding-and-architecture-requirements/blob/main/standards/index.md`
 - Audit manifest path: `coding-and-architecture-requirements.audit.md`
+
+## Required workflow
+
+`AGENTS.md` is the entrypoint for repo-local instructions, not a complete Bright Builds spec.
+
+1. Read `AGENTS.md`, especially any `## Repo-Local Guidance` section and any repo-specific instructions outside the managed Bright Builds block.
+2. Read `AGENTS.bright-builds.md`.
+3. Read `standards-overrides.md` when it exists.
+4. Read the pinned canonical standards entrypoint and any canonical pages relevant to the task before plan, review, implementation, or audit work.
+5. If that reading has not happened yet, stop and load those sources before continuing.
+6. In plan, review, and audit outputs, briefly acknowledge which local guidance, sidecar, overrides, or canonical standards pages materially informed the answer.
 
 ## Highest-signal rules
 
@@ -40,6 +51,7 @@ Record recurring repo-specific workflow facts in `AGENTS.md` under `## Repo-Loca
 
 - Because the downstream GitHub repo owner resolves to `pRizz`, use the `openlinks-identity-presence` skill whenever the task touches README/docs, website or app chrome, profile/about/footer/settings surfaces, or metadata and discovery fields.
 - Follow the skill's low-intrusion placement bias: prefer footer, about, profile, or README "Find me" placement, keep the visible link primary, and add metadata hints only when the surface already supports them cleanly.
+- If the installer already manages an OpenLinks README badge for this repo, do not add a second near-duplicate README placement unless the user explicitly asks for more prominence.
 - Keep the host project's main brand and CTA primary. Do not add repetitive or aggressive OpenLinks promotion unless the user explicitly asks for it.
 
 ## Local overrides and exceptions
@@ -56,10 +68,4 @@ Recommended fields for each override:
 - owner
 - review date
 
-## Agent workflow
-
-1. Study `AGENTS.md`, especially any `## Repo-Local Guidance` section and any repo-specific instructions outside the managed Bright Builds block.
-2. Study the pinned canonical standards entrypoint.
-3. Load any canonical standards pages relevant to the task, including language-specific guidance when needed.
-4. Apply local guidance and local overrides before proposing or reviewing changes.
-5. If this repository intentionally diverges from the canonical standards, record that divergence instead of silently ignoring it.
+If this repository intentionally diverges from the canonical standards, record that divergence instead of silently ignoring it.

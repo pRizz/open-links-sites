@@ -144,7 +144,6 @@ const prepareFullRefreshWorkspace = (layout: GeneratedWorkspaceLayout): void => 
     layout.files.profileAvatarRuntimeManifest,
     layout.files.contentImagesManifest,
     layout.files.contentImagesRuntimeManifest,
-    layout.files.richPublicCache,
     layout.files.generatedRichMetadata,
     layout.files.richEnrichmentReport,
     layout.dirs.profileAvatar,
