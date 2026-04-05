@@ -12,7 +12,7 @@ const getDefaultOpenLinksCandidates = (): string[] => [
 ];
 const ROOT_FILE_NAMES = ["index.html", "package.json", "tsconfig.json", "vite.config.ts"] as const;
 const SYMLINKED_ROOT_DIRECTORY_NAMES = ["node_modules"] as const;
-const COPIED_ROOT_DIRECTORY_NAMES = ["scripts", "src"] as const;
+const COPIED_ROOT_DIRECTORY_NAMES = ["config", "scripts", "src"] as const;
 const ROOT_DATA_DIRECTORY = "data";
 const ROOT_PUBLIC_DIRECTORY = "public";
 const PUBLIC_CACHE_DIRECTORY = path.join(ROOT_PUBLIC_DIRECTORY, "cache");
@@ -432,7 +432,7 @@ export const runUpstreamWorkspaceSiteBuild = async (
   };
 };
 
-const stageBuildRoot = async (
+export const stageBuildRoot = async (
   repoDir: string,
   workspaceDir: string,
   buildTimestamp?: string,
