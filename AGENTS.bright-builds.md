@@ -12,7 +12,7 @@ Record recurring repo-specific workflow facts in `AGENTS.md` under `## Repo-Loca
 
 - Standards repository: `https://github.com/bright-builds-llc/coding-and-architecture-requirements`
 - Version pin: `main`
-- Exact commit: `afd489893355617a0c8512a4a86928a4b1227f00`
+- Exact commit: `3694c498dde6c69345aed37a930a051794f93465`
 - Canonical entrypoint: `https://github.com/bright-builds-llc/coding-and-architecture-requirements/blob/main/standards/index.md`
 - Audit manifest path: `coding-and-architecture-requirements.audit.md`
 
