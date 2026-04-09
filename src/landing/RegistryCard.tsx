@@ -1,4 +1,5 @@
 /** @jsxImportSource solid-js */
+import { ShineBorder } from "mystic-ui";
 import { Show } from "solid-js";
 
 import {
@@ -11,62 +12,90 @@ import type { LandingRegistryEntry } from "./registry-contract";
 
 export interface RegistryCardProps {
   entry: LandingRegistryEntry;
+  featured?: boolean;
 }
 
-export const RegistryCard = (props: RegistryCardProps) => (
-  <article class="registry-card">
-    <Show when={props.entry.previewImageUrl}>
-      <img
-        class="registry-preview"
-        src={props.entry.previewImageUrl}
-        alt={`${props.entry.displayName} preview`}
-        loading="lazy"
-      />
-    </Show>
-
-    <div class="registry-card-head">
-      <Show
-        when={props.entry.avatarUrl}
-        fallback={
-          <div class="registry-avatar registry-avatar-fallback">
-            {initialsForRegistryEntry(props.entry)}
-          </div>
-        }
-      >
-        <img
-          class="registry-avatar"
-          src={props.entry.avatarUrl}
-          alt={`${props.entry.displayName} avatar`}
-          loading="lazy"
-        />
+export const RegistryCard = (props: RegistryCardProps) => {
+  const cardContent = (
+    <article class={`registry-card${props.featured ? " registry-card-featured" : ""}`}>
+      <Show when={props.featured}>
+        <p class="registry-featured-kicker">Connected OpenLinks site</p>
       </Show>
 
-      <div class="registry-card-copy">
-        <div class="registry-name-row">
-          <p class="registry-name">{props.entry.displayName}</p>
-          <Show when={props.entry.badgeLabel}>
-            <span class="registry-badge">{props.entry.badgeLabel}</span>
-          </Show>
+      <Show when={props.entry.previewImageUrl}>
+        <div class="registry-preview-frame">
+          <img
+            class="registry-preview"
+            src={props.entry.previewImageUrl}
+            alt={`${props.entry.displayName} preview`}
+            loading="lazy"
+          />
         </div>
-        <p class="registry-subtitle">{props.entry.subtitle}</p>
+      </Show>
+
+      <div class="registry-card-head">
+        <Show
+          when={props.entry.avatarUrl}
+          fallback={
+            <div class="registry-avatar registry-avatar-fallback">
+              {initialsForRegistryEntry(props.entry)}
+            </div>
+          }
+        >
+          <img
+            class="registry-avatar"
+            src={props.entry.avatarUrl}
+            alt={`${props.entry.displayName} avatar`}
+            loading="lazy"
+          />
+        </Show>
+
+        <div class="registry-card-copy">
+          <div class="registry-name-row">
+            <p class="registry-name">{props.entry.displayName}</p>
+            <Show when={props.entry.badgeLabel}>
+              <span class="registry-badge">{props.entry.badgeLabel}</span>
+            </Show>
+          </div>
+          <p class="registry-subtitle">{props.entry.subtitle}</p>
+        </div>
       </div>
+
+      <Show when={props.entry.headline}>
+        <p class="registry-headline">{props.entry.headline}</p>
+      </Show>
+
+      <Show when={props.entry.summary}>
+        <p class="registry-summary">{props.entry.summary}</p>
+      </Show>
+
+      <a
+        class="registry-link"
+        href={props.entry.href}
+        target={landingRegistryLinkTarget(props.entry)}
+        rel={landingRegistryLinkRel(props.entry)}
+      >
+        <span>{landingRegistryLinkLabel(props.entry)}</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </article>
+  );
+
+  if (!props.featured) {
+    return <div class="registry-card-shell">{cardContent}</div>;
+  }
+
+  return (
+    <div class="registry-card-shell registry-card-shell-featured">
+      <ShineBorder
+        class="registry-card-shine"
+        borderRadius={28}
+        borderWidth={1}
+        color={["#7cf3ca", "#74c9ff", "#ffe2b0"]}
+        duration={16}
+      >
+        {cardContent}
+      </ShineBorder>
     </div>
-
-    <Show when={props.entry.headline}>
-      <p class="registry-headline">{props.entry.headline}</p>
-    </Show>
-
-    <Show when={props.entry.summary}>
-      <p class="registry-summary">{props.entry.summary}</p>
-    </Show>
-
-    <a
-      class="registry-link"
-      href={props.entry.href}
-      target={landingRegistryLinkTarget(props.entry)}
-      rel={landingRegistryLinkRel(props.entry)}
-    >
-      {landingRegistryLinkLabel(props.entry)}
-    </a>
-  </article>
-);
+  );
+};

@@ -21,7 +21,7 @@
     "build:site": "bun run scripts/build-site.ts",
     "changed:people": "bun run scripts/changed-people.ts",
     "deploy:pages:plan": "bun run scripts/deploy-pages-plan.ts",
-    "lint": "bunx @biomejs/biome check README.md biome.json package.json tsconfig.json landing.html vite.landing.config.ts config people schemas scripts src templates --files-ignore-unknown=true",
+    "lint": "bunx @biomejs/biome check README.md biome.json package.json tsconfig.json tailwind.config.ts postcss.config.cjs landing.html vite.landing.config.ts config people schemas scripts src templates --files-ignore-unknown=true",
     "format": "bunx @biomejs/biome format --write .",
     "check": "bun run typecheck && bun run lint && bun run test"
   },
@@ -30,10 +30,16 @@
     "@types/node": "^25.3.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
+    "autoprefixer": "^10.4.27",
     "bun-types": "^1.3.9",
+    "postcss": "^8.5.9",
     "solid-js": "^1.9.11",
+    "tailwindcss": "^3",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-solid": "^2.11.10"
+  },
+  "dependencies": {
+    "mystic-ui": "github:pRizz/mystic-ui#d36017757708ed01ef2b3b47beb14f294726411c"
   }
 }

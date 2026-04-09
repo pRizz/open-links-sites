@@ -17,5 +17,12 @@
     "types": ["bun-types", "node", "vite/client"],
     "verbatimModuleSyntax": true
   },
-  "include": ["scripts", "schemas", "src", "templates", "vite.landing.config.ts"]
+  "include": [
+    "scripts",
+    "schemas",
+    "src",
+    "templates",
+    "vite.landing.config.ts",
+    "tailwind.config.ts"
+  ]
 }

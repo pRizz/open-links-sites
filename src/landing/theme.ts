@@ -21,10 +21,16 @@ export const readStoredTheme = (): Theme | null => {
 export const resolveTheme = (): Theme => readStoredTheme() ?? "dark";
 
 export const readDocumentTheme = (): Theme =>
-  document.documentElement.dataset.theme === "light" ? "light" : "dark";
+  document.documentElement.dataset.theme === "light"
+    ? "light"
+    : document.documentElement.dataset.theme === "dark" ||
+        document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
 
 export const applyTheme = (theme: Theme) => {
   document.documentElement.dataset.theme = theme;
+  document.documentElement.classList.toggle("dark", theme === "dark");
   document.documentElement.style.colorScheme = theme;
 };
 
