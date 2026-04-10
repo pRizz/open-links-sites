@@ -1,4 +1,4 @@
-# coding-and-architecture-requirements-managed-file: .github/workflows/bright-builds-auto-update.yml
+# bright-builds-rules-managed-file: .github/workflows/bright-builds-auto-update.yml
 # Managed upstream by bright-builds-rules.
 # If this workflow needs a fix, open an upstream PR or issue instead of editing the downstream managed copy.
 name: Bright Builds Auto Update

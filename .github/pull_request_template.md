@@ -1,6 +1,8 @@
 # Pull Request Template
 
-<!-- coding-and-architecture-requirements-managed-file: .github/pull_request_template.md -->
+<!-- bright-builds-rules-managed-file: .github/pull_request_template.md -->
+
+This template is managed upstream by `bright-builds-rules`. If it needs a fix, open an upstream PR or issue instead of editing the downstream managed copy.
 
 ## Summary
 
@@ -12,7 +14,7 @@ Describe the behavior change and why it is needed.
 - [ ] New or changed pure/business logic has unit tests.
 - [ ] Unit tests remain focused on one concern and use clear Arrange / Act / Assert structure.
 - [ ] Any repo-specific exception has been recorded in `standards-overrides.md`.
-- [ ] When plan, review, or audit work relied on Bright Builds guidance, the summary briefly names the local guidance, sidecar, overrides, or canonical standards pages that materially informed it.
+- [ ] When plan, review, or audit work relied on Bright Builds Rules guidance, the summary briefly names the local guidance, sidecar, overrides, or canonical standards pages that materially informed it.
 
 ## Verification
 

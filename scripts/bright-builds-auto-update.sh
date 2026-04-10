@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
-# coding-and-architecture-requirements-managed-file: scripts/bright-builds-auto-update.sh
+# bright-builds-rules-managed-file: scripts/bright-builds-auto-update.sh
+# Managed upstream by bright-builds-rules.
+# If this helper needs a fix, open an upstream PR or issue instead of editing the downstream managed copy.
 set -euo pipefail
 
-audit_path="coding-and-architecture-requirements.audit.md"
+audit_path="bright-builds-rules.audit.md"
+legacy_audit_path="coding-and-architecture-requirements.audit.md"
 update_branch="bright-builds/auto-update"
-commit_message="chore: update Bright Builds requirements"
+commit_message="chore: update Bright Builds Rules"
 github_actions_name="github-actions[bot]"
 github_actions_email="41898282+github-actions[bot]@users.noreply.github.com"
 
@@ -98,6 +101,7 @@ stage_managed_paths() {
 		AGENTS.bright-builds.md \
 		CONTRIBUTING.md \
 		README.md \
+		bright-builds-rules.audit.md \
 		coding-and-architecture-requirements.audit.md \
 		.github/pull_request_template.md \
 		.github/workflows/bright-builds-auto-update.yml \
@@ -162,7 +166,7 @@ create_or_reuse_pr() {
 		--base "$default_branch" \
 		--head "$update_branch" \
 		--title "$commit_message" \
-		--body "Automated Bright Builds requirements update." >/dev/null
+		--body "Automated Bright Builds Rules update." >/dev/null
 
 	note "Opened pull request from ${update_branch} to ${default_branch}"
 }
@@ -170,6 +174,10 @@ create_or_reuse_pr() {
 trap cleanup EXIT
 
 cd "$repo_root"
+
+if [[ ! -f "$audit_path" && -f "$legacy_audit_path" ]]; then
+	audit_path="$legacy_audit_path"
+fi
 
 [[ -f "$audit_path" ]] || die "missing audit manifest: ${audit_path}"
 

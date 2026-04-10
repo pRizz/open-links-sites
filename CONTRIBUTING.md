@@ -1,12 +1,14 @@
 # CONTRIBUTING.md
 
-<!-- coding-and-architecture-requirements-managed-file: CONTRIBUTING.md -->
+<!-- bright-builds-rules-managed-file: CONTRIBUTING.md -->
 
 Use this file as the starting point for a downstream repository's contribution guide.
 
+This file is managed upstream by `bright-builds-rules`. If this managed guidance needs a fix, open an upstream PR or issue instead of editing the downstream copy directly.
+
 ## Default contribution expectations
 
-- Treat `AGENTS.md` as the entrypoint for repo-local instructions, not the complete Bright Builds spec.
+- Treat `AGENTS.md` as the entrypoint for repo-local instructions, not the complete Bright Builds Rules spec.
 - Before plan, review, implementation, or audit work, read local `AGENTS.md`, `AGENTS.bright-builds.md`, `standards-overrides.md` when present, and the pinned canonical standards pages relevant to the task; if that has not happened yet, stop and load them before continuing.
 - Follow the local `AGENTS.md`.
 - Use the pinned version of the central standards repository as the canonical reference.
@@ -25,7 +27,7 @@ Use this file as the starting point for a downstream repository's contribution g
 
 ## Verification expectations
 
-- Before substantive implementation work, fetch remote state first; if the current branch tracks an upstream and the worktree is clean, prefer rebasing onto the latest upstream or the repo's equivalent sync path; if a worktree starts detached, assume the repo default branch, often `main`; resolve any sync conflicts before proceeding, then run the repo's normal bootstrap or dependency-sync step when dependencies or tools may be stale.
+- Before substantive implementation work, sync first: fetch remote state before editing; if the current branch tracks an upstream and the worktree is clean, prefer rebasing onto the latest upstream or the repo's equivalent sync path, such as `git pull --rebase` when local guidance uses it; if a worktree starts detached, assume the repo default branch, often `main`; resolve any sync conflicts before proceeding, then run the repo's normal bootstrap or dependency-sync step when dependencies or tools may be stale.
 - Before committing, run the relevant repo-native verification steps for the changed paths, including Markdown or shell formatter checks when supported tools are already available and local guidance does not define a clearer workflow, and do not commit if they fail.
 - Prefer a repo-owned verify/check/validate/ci command when it exists over reconstructing tool commands by hand.
 - Heavy integration, end-to-end, or external-service suites may stay pre-push or CI-only when local guidance or `standards-overrides.md` documents that choice.
