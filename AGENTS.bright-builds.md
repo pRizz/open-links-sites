@@ -14,7 +14,7 @@ Record recurring repo-specific workflow facts in `AGENTS.md` under `## Repo-Loca
 
 - Standards repository: `https://github.com/bright-builds-llc/bright-builds-rules`
 - Version pin: `main`
-- Exact commit: `fa6cd165d31d6ad20344fcc93a9e1c42b4dbb04f`
+- Exact commit: `f4db3f0193232152698eab291ba8d74c3d5c7fdb`
 - Canonical entrypoint: `https://github.com/bright-builds-llc/bright-builds-rules/blob/main/standards/index.md`
 - Audit manifest path: `bright-builds-rules.audit.md`
 
