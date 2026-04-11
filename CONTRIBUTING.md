@@ -1,10 +1,8 @@
-# CONTRIBUTING.md
+<!-- bright-builds-rules-contributing:begin -->
 
-<!-- bright-builds-rules-managed-file: CONTRIBUTING.md -->
+# Bright Builds Contribution Defaults
 
-Use this file as the starting point for a downstream repository's contribution guide.
-
-This file is managed upstream by `bright-builds-rules`. If this managed guidance needs a fix, open an upstream PR or issue instead of editing the downstream copy directly.
+This managed block is owned upstream by `bright-builds-rules`. If this block needs a fix, open an upstream PR or issue instead of editing the managed text in a downstream repo. Keep repo-local contribution guidance outside this managed block.
 
 ## Default contribution expectations
 
@@ -46,3 +44,5 @@ This file is managed upstream by `bright-builds-rules`. If this managed guidance
 - When plan, review, or audit work relied on these standards, briefly name the local guidance, sidecar, overrides, or canonical standards pages that materially informed the work.
 - Include verification evidence for the changed paths.
 - Note any residual risks or follow-up work.
+
+<!-- bright-builds-rules-contributing:end -->

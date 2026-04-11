@@ -1,7 +1,9 @@
 # open-links-sites
 
 <!-- bright-builds-rules-readme-badges:begin -->
+
 <!-- Managed upstream by bright-builds-rules. If this badge block needs a fix, open an upstream PR or issue instead of editing the downstream managed block. Keep repo-local README content outside this managed badge block. -->
+
 [![GitHub Stars](https://img.shields.io/github/stars/pRizz/open-links-sites)](https://github.com/pRizz/open-links-sites)
 [![License](https://img.shields.io/github/license/pRizz/open-links-sites?style=flat-square)](./LICENSE)
 [![TypeScript 5.9.3](https://img.shields.io/badge/TypeScript-5.9.3-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -9,6 +11,7 @@
 [![Vite 7.3.1](https://img.shields.io/badge/Vite-7.3.1-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
 [![Bright Builds: Rules](https://raw.githubusercontent.com/bright-builds-llc/bright-builds-rules/main/public/badges/bright-builds-rules-flat.svg)](https://github.com/bright-builds-llc/bright-builds-rules)
 [![OpenLinks profile](https://img.shields.io/badge/OpenLinks-profile-0F172A)](https://openlinks.us/)
+
 <!-- bright-builds-rules-readme-badges:end -->
 
 [![OpenLinks Site](https://openlinks.us/badges/openlinks.svg)](https://openlinks.us/)
