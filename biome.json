@@ -12,6 +12,14 @@
   "organizeImports": {
     "enabled": true
   },
+  "overrides": [
+    {
+      "include": ["scripts/bright-builds-check.ts"],
+      "formatter": {
+        "enabled": false
+      }
+    }
+  ],
   "linter": {
     "enabled": true,
     "rules": {

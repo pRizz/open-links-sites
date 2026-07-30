@@ -1,0 +1,107 @@
+@media (min-width: 56rem) {
+  .hero-layout {
+    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.72fr);
+  }
+
+  .support-section,
+  .registry-header,
+  .registry-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .registry-header {
+    align-items: end;
+  }
+
+  .registry-card-shell-featured {
+    grid-column: span 2;
+  }
+
+  .registry-card-featured .registry-preview {
+    aspect-ratio: 21 / 8.5;
+  }
+}
+
+@media (min-width: 76rem) {
+  .registry-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .registry-card-shell-featured {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 42rem) {
+  .shell {
+    width: calc(100% - 2rem);
+  }
+
+  .hero-shell-inner {
+    width: calc(100% - 2rem);
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.4rem, 12vw, 3.4rem);
+  }
+
+  .hero-copy h1 span {
+    display: inline;
+  }
+
+  .hero-copy h1 span + span::before {
+    content: " ";
+  }
+
+  .hero-copy {
+    max-width: 18rem;
+  }
+
+  .hero-detail,
+  .support-column,
+  .registry-empty {
+    max-width: 100%;
+  }
+
+  .hero-detail,
+  .support-column {
+    padding: 1.25rem;
+  }
+
+  .theme-toggle,
+  .hero-primary-button {
+    width: 100%;
+  }
+
+  .hero-actions {
+    align-items: stretch;
+  }
+
+  .hero-spotlight {
+    left: 18%;
+    width: 140%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body *,
+  body *::before,
+  body *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .registry-card-shell:hover {
+    transform: none;
+  }
+
+  .registry-card-shell:hover .registry-preview {
+    transform: none;
+  }
+}

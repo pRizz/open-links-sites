@@ -2,6 +2,8 @@ import { render } from "solid-js/web";
 
 import { App } from "./App";
 import "./styles.css";
+import "./registry.css";
+import "./responsive.css";
 import { initializeTheme } from "./theme";
 
 const root = document.getElementById("app");
